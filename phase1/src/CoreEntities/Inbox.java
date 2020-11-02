@@ -40,6 +40,7 @@ public class Inbox {
         for(Message msg : searchedMessages){
             searchedMsgStr.append(msg.toString() + "\n");
         }
+        if (searchedMsgStr.toString().isEmpty()) return "Search results: 0";
         return searchedMsgStr.toString();
     }
 
