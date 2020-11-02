@@ -1,5 +1,6 @@
 package CoreEntities;
 
+import java.io.Serializable;
 import java.util.UUID;
 import java.lang.String;
 
@@ -9,7 +10,7 @@ enum AccountType {
     Speaker
 }
 
-public class User {
+public class User implements Serializable {
     private UUID uuid;
 
     private String username;

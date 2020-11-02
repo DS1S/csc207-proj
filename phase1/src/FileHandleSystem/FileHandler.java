@@ -1,6 +1,5 @@
 package FileHandleSystem;
 
-
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class FileHandler<T> {
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
 
-        // serialize the Map
+        // serialize the object
         output.writeObject(objects);
         output.close();
     }
@@ -48,5 +47,4 @@ public class FileHandler<T> {
             return new ArrayList<>();
         }
     }
-
 }
