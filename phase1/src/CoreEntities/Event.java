@@ -15,8 +15,8 @@ public class Event implements Serializable {
     private User speaker;
     private int duration;
 
-    public Event(int capacity, String room, LocalTime startTime, String title, User speaker) {
-        this.capacity = capacity;
+    public Event(String room, LocalTime startTime, String title, User speaker) {
+        this.capacity = 2;
         this.attendees = new ArrayList<>();
         this.room = room;
         this.startTime = startTime;
