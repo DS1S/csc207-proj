@@ -8,37 +8,32 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 class EventAccessor {
-    private Schedule mainSchedule;
 
-    public EventAccessor(Schedule schedule) {
-        this.mainSchedule = schedule;
+    public Schedule retrieveEventByTimeInterval(Schedule schedule, LocalTime start, LocalTime end) {
+        return schedule.retrieveEventByTimeInterval(start, end);
     }
 
-    public Schedule retrieveEventByTimeInterval(LocalTime start, LocalTime end) {
-        return mainSchedule.retrieveEventByTimeInterval(start, end);
+    public Schedule retrieveEventBySpeaker(Schedule schedule, UUID speaker) {
+        return schedule.retrieveEventBySpeaker(speaker);
     }
 
-    public Schedule retrieveEventBySpeaker(UUID speaker) {
-        return mainSchedule.retrieveEventBySpeaker(speaker);
+    public Schedule retrieveEventByTitle(Schedule schedule,String title) {
+        return schedule.retrieveEventByTitle(title);
     }
 
-    public Schedule retrieveEventByTitle(String title) {
-        return mainSchedule.retrieveEventByTitle(title);
+    public Schedule retrieveEventByAttendee(Schedule schedule,UUID attendee) {
+        return schedule.retrieveEventByAttendee(attendee);
     }
 
-    public Schedule retrieveEventByAttendee(UUID attendee) {
-        return mainSchedule.retrieveEventByAttendee(attendee);
+    public Schedule retrieveSignupAbleEvents(Schedule schedule,UUID attendee) {
+        return schedule.retrieveSignupAbleEvents(attendee);
     }
 
-    public Schedule retrieveSignupAbleEvents(UUID attendee) {
-        return mainSchedule.retrieveSignupAbleEvents(attendee);
+    public void registerAttendee(Schedule schedule, UUID attendee, int eventNumber) throws IndexOutOfBoundsException {
+        retrieveEventByAttendee(schedule, attendee).retrieveEventByIndex(eventNumber).addAttendee(attendee);
     }
 
-    public void registerAttendee(UUID attendee, int eventNumber) throws IndexOutOfBoundsException {
-        retrieveEventByAttendee(attendee).retrieveEventByIndex(eventNumber).addAttendee(attendee);
-    }
-
-    public void removeAttendee(UUID attendee, int eventNumber) throws IndexOutOfBoundsException {
-        retrieveEventByAttendee(attendee).retrieveEventByIndex(eventNumber).removeAttendee(attendee);
+    public void removeAttendee(Schedule schedule,UUID attendee, int eventNumber) throws IndexOutOfBoundsException {
+        retrieveEventByAttendee(schedule, attendee).retrieveEventByIndex(eventNumber).removeAttendee(attendee);
     }
 }
