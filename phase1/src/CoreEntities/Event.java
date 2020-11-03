@@ -2,20 +2,20 @@ package CoreEntities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.time.LocalTime;
+import java.util.UUID;
 
 public class Event implements Serializable {
     private int capacity;
-    private List<User> attendees;
+    private List<UUID> attendees;
     private String room;
     private LocalTime startTime;
     private String title;
-    private User speaker;
+    private UUID speaker;
     private int duration;
 
-    public Event(int capacity, String room, LocalTime startTime, String title, User speaker, int duration) {
+    public Event(int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
         this.capacity = 2;
         this.attendees = new ArrayList<>();
         this.room = room;
@@ -31,13 +31,13 @@ public class Event implements Serializable {
     
     public boolean atCapacity() { return this.attendees.size() == capacity; }
 
-    public List<User> getAttendees() { return this.attendees; }
+    public List<UUID> getAttendees() { return this.attendees; }
 
-    public void addAttendee(User attendee) { this.attendees.add(attendee); }
+    public void addAttendee(UUID attendee) { this.attendees.add(attendee); }
 
-    public void removeAttendee(User attendee) { this.attendees.remove(attendee); }
+    public void removeAttendee(UUID attendee) { this.attendees.remove(attendee); }
     
-    public boolean checkAttendee(User attendee) { return this.attendees.contains(attendee); }
+    public boolean checkAttendee(UUID attendee) { return this.attendees.contains(attendee); }
 
     public String getRoom() { return this.room; }
 
@@ -53,9 +53,9 @@ public class Event implements Serializable {
 
     public void setTitle(String title) { this.title = title; }
 
-    public User getSpeaker() { return this.speaker; }
+    public UUID getSpeaker() { return this.speaker; }
 
-    public void setSpeaker(User speaker) { this.speaker = speaker; }
+    public void setSpeaker(UUID speaker) { this.speaker = speaker; }
 
     public int getDuration() { return this.duration; }
 

@@ -5,6 +5,7 @@ import CoreEntities.Schedule;
 import CoreEntities.User;
 
 import java.time.LocalTime;
+import java.util.UUID;
 
 class EventAccessor {
     private Schedule mainSchedule;
@@ -17,7 +18,7 @@ class EventAccessor {
         return mainSchedule.retrieveEventByTimeInterval(start, end);
     }
 
-    public Schedule retrieveEventBySpeaker(User speaker) {
+    public Schedule retrieveEventBySpeaker(UUID speaker) {
         return mainSchedule.retrieveEventBySpeaker(speaker);
     }
 
@@ -25,11 +26,19 @@ class EventAccessor {
         return mainSchedule.retrieveEventByTitle(title);
     }
 
-    public Schedule retrieveEventByAttendee(User attendee) {
+    public Schedule retrieveEventByAttendee(UUID attendee) {
         return mainSchedule.retrieveEventByAttendee(attendee);
     }
 
-    public Schedule retrieveSignupAbleEvents(User attendee) {
+    public Schedule retrieveSignupAbleEvents(UUID attendee) {
         return mainSchedule.retrieveSignupAbleEvents(attendee);
+    }
+
+    public void registerAttendee(UUID attendee, int eventNumber) throws IndexOutOfBoundsException {
+        retrieveEventByAttendee(attendee).retrieveEventByIndex(eventNumber).addAttendee(attendee);
+    }
+
+    public void removeAttendee(UUID attendee, int eventNumber) throws IndexOutOfBoundsException {
+        retrieveEventByAttendee(attendee).retrieveEventByIndex(eventNumber).removeAttendee(attendee);
     }
 }

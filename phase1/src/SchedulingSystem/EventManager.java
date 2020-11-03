@@ -2,9 +2,9 @@ package SchedulingSystem;
 
 import CoreEntities.Event;
 import CoreEntities.Schedule;
-import CoreEntities.User;
 
 import java.time.LocalTime;
+import java.util.UUID;
 
 public class EventManager {
     private Schedule mainSchedule;
@@ -15,12 +15,12 @@ public class EventManager {
         this.eventAccessor = new EventAccessor(schedule);
     }
 
-    public void registerAttendee(User attendee, int eventNumber) throws IndexOutOfBoundsException {
-        eventAccessor.retrieveSignupAbleEvents(attendee).retrieveEventByIndex(eventNumber).addAttendee(attendee);
+    public void registerAttendee(UUID attendee, int eventNumber) throws IndexOutOfBoundsException {
+        eventAccessor.registerAttendee(attendee, eventNumber);
     }
 
-    public void removeAttendee(User attendee, int eventNumber) throws IndexOutOfBoundsException {
-        eventAccessor.retrieveEventByAttendee(attendee).retrieveEventByIndex(eventNumber).removeAttendee(attendee);
+    public void removeAttendee(UUID attendee, int eventNumber) throws IndexOutOfBoundsException {
+        eventAccessor.removeAttendee(attendee, eventNumber);
     }
 
     private boolean checkRoomConflict(String room, LocalTime time, int duration) {
@@ -32,7 +32,7 @@ public class EventManager {
         return false;
     }
 
-    private boolean checkSpeakerConflict(User speaker, LocalTime time, int duration) {
+    private boolean checkSpeakerConflict(UUID speaker, LocalTime time, int duration) {
         for (Event event: eventAccessor.retrieveEventByTimeInterval(time, time.plusMinutes(duration))) {
             if (event.getSpeaker().equals(speaker)) {
                 return true;
@@ -41,7 +41,7 @@ public class EventManager {
         return false;
     }
 
-    public void scheduleEvent(int capacity, String room, LocalTime startTime, String title, User speaker, int duration) {
+    public void scheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
         if (!checkRoomConflict(room, startTime, duration) && !checkSpeakerConflict(speaker, startTime, duration)) {
             mainSchedule.addEvent(new Event(capacity, room, startTime, title, speaker, duration));
         }

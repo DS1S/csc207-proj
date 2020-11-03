@@ -35,7 +35,7 @@ public class Schedule implements Iterable<Event> {
         return new Schedule(matchedEvents);
     }
 
-    public Schedule retrieveEventBySpeaker(User speaker) {
+    public Schedule retrieveEventBySpeaker(UUID speaker) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
             if (event.getSpeaker().equals(speaker)) {
@@ -55,7 +55,7 @@ public class Schedule implements Iterable<Event> {
         return new Schedule(matchedEvents);
     }
 
-    public Schedule retrieveEventByAttendee(User attendee) {
+    public Schedule retrieveEventByAttendee(UUID attendee) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
             if (event.checkAttendee(attendee)) {
@@ -65,7 +65,7 @@ public class Schedule implements Iterable<Event> {
         return new Schedule(matchedEvents);
     }
 
-    public Schedule retrieveSignupAbleEvents(User attendee) {
+    public Schedule retrieveSignupAbleEvents(UUID attendee) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
             if (!event.checkAttendee(attendee) && !event.atCapacity()) {
