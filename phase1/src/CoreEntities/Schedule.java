@@ -20,11 +20,15 @@ public class Schedule implements Iterable<Event> {
         events.add(i, event);
     }
 
-    public Schedule retrieveEventByTime(LocalTime time) {
+    public Schedule retrieveEventByTimeInterval(LocalTime start, LocalTime end) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
-            if ((event.getStartTime().isBefore(time) || event.getStartTime().equals(time)) &&
-                    event.getEndTime().isAfter(time)) {
+            if (event.getStartTime().compareTo(start) <= 0 && event.getEndTime().compareTo(start) >= 0
+                    && event.getEndTime().compareTo(end) <= 0) {
+                matchedEvents.add(event);
+            }
+            else if (event.getStartTime().compareTo(start) >= 0 && event.getStartTime().compareTo(end) < 0
+                    && event.getEndTime().compareTo(end) > 0) {
                 matchedEvents.add(event);
             }
         }
@@ -72,7 +76,11 @@ public class Schedule implements Iterable<Event> {
     }
 
     public Event retrieveEventByIndex(int index) throws IndexOutOfBoundsException {
-        return this.events.get(index);
+        return events.get(index);
+    }
+
+    public void removeEventByIndex(int index) throws IndexOutOfBoundsException {
+        events.remove(index);
     }
 
     @Override
