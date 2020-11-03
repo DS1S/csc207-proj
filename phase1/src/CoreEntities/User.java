@@ -4,24 +4,38 @@ import java.io.Serializable;
 import java.util.UUID;
 import java.lang.String;
 
-enum AccountType {
-    Attendee,
-    Organizer,
-    Speaker
-}
+
 
 public class User implements Serializable {
-    private UUID uuid;
+    public enum AccountType {
+        Attendee,
+        Organizer,
+        Speaker
+    }
 
+    private UUID uuid;
     private String username;
     private String password;
-
     private String name;
     private String email;
-
     private AccountType type;
+
+    public User(String username, String password, AccountType type) {
+        this.uuid = UUID.randomUUID();
+        this.username = username;
+        this.password = password;
+        this.type = type;
+    }
 
     boolean validateCredentials(String username, String password) {
         return this.username.equals(username) && this.password.equals(password);
+    }
+
+    public UUID getUUID() {
+        return this.uuid;
+    }
+
+    public String getUsername() {
+        return this.username;
     }
 }
