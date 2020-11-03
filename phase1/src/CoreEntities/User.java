@@ -27,8 +27,8 @@ public class User implements Serializable {
         this.type = type;
     }
 
-    boolean validateCredentials(String username, String password) {
-        return this.username.equals(username) && this.password.equals(password);
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
     }
 
     public UUID getUUID() {
