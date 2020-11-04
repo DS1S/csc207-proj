@@ -1,8 +1,6 @@
 package SchedulingSystem;
 
-import CoreEntities.Event;
 import CoreEntities.Schedule;
-import CoreEntities.User;
 
 import java.time.LocalTime;
 import java.util.UUID;
@@ -17,7 +15,7 @@ class EventAccessor {
         return schedule.retrieveEventBySpeaker(speaker);
     }
 
-    public Schedule retrieveEventByTitle(Schedule schedule,String title) {
+    public Schedule retrieveEventByTitle(Schedule schedule, String title) {
         return schedule.retrieveEventByTitle(title);
     }
 

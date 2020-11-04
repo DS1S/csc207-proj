@@ -6,15 +6,9 @@ import java.time.LocalTime;
 import java.util.UUID;
 
 public class EventManager {
-    private Schedule mainSchedule;
-    private EventAccessor eventAccessor;
-    private EventScheduler eventScheduler;
-
-    public EventManager(Schedule schedule) {
-        this.mainSchedule = schedule;
-        this.eventAccessor = new EventAccessor();
-        this.eventScheduler = new EventScheduler();
-    }
+    private Schedule mainSchedule = new Schedule();
+    private EventAccessor eventAccessor = new EventAccessor();
+    private EventScheduler eventScheduler = new EventScheduler();
 
     public void registerAttendee(UUID attendee, int eventNumber) throws IndexOutOfBoundsException {
         eventAccessor.registerAttendee(mainSchedule, attendee, eventNumber);
@@ -24,8 +18,8 @@ public class EventManager {
         eventAccessor.removeAttendee(mainSchedule, attendee, eventNumber);
     }
 
-    public void scheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
-        eventScheduler.scheduleEvent(mainSchedule, capacity, room, startTime, title, speaker, duration);
+    public void scheduleEvent(String room, LocalTime startTime, String title, UUID speaker) {
+        eventScheduler.scheduleEvent(mainSchedule, 2, room, startTime, title, speaker, 60);
     }
 
     public void cancelEvent(int eventNumber) {

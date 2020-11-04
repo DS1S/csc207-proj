@@ -16,13 +16,13 @@ public class Event implements Serializable {
     private int duration;
 
     public Event(int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
-        this.capacity = 2;
+        this.capacity = capacity;
         this.attendees = new ArrayList<>();
         this.room = room;
         this.startTime = startTime;
         this.title = title;
         this.speaker = speaker;
-        this.duration = 60;
+        this.duration = duration;
     }
 
     public int getCapacity() { return this.capacity; }
