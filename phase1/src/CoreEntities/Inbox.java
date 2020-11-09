@@ -60,5 +60,4 @@ public class Inbox {
 
         return matchedMessages;
     }
-
 }
