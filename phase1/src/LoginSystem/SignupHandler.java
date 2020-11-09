@@ -1,26 +1,26 @@
 package LoginSystem;
 import CoreEntities.User;
 
+class UsernameTakenException extends Exception {}
+class DuplicateUUIDException extends Exception {}
+
 public class SignupHandler {
+    private UserManager um;
 
-    public SignupHandler(){}
+    public SignupHandler(UserManager um) {
+        this.um = um;
+    }
 
-    public boolean SignUp(String username, String password, User.AccountType type, UserManager userManager){
-        if (userManager.getUserWithUsername(username) != null){
-            // TODO: contact presenter
-            System.out.println("Username is Taken!");
-            return false;
+    public void signUp(String username, String password) throws UsernameTakenException, DuplicateUUIDException {
+        if (this.um.getUserWithUsername(username) != null) {
+            throw new UsernameTakenException();
         }
 
-        User u = new User(username, password, type);
-        if (userManager.getUserWithUUID(u.GetUUID()) != null){
-            // TODO: maybe create an exception for this case?
-            System.out.println("ERROR: Duplicate UUID");
-            return false;
+        User u = new User(username, password, User.AccountType.Attendee);
+        if (this.um.getUserWithUUID(u.getUUID()) != null) {
+            throw new DuplicateUUIDException();
         }
-        userManager.addUser(u);
-        // TODO: contact presenter
-        return true;
+        this.um.addUser(u);
     }
 
 }

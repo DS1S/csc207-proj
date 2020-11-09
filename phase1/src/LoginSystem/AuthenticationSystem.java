@@ -1,31 +1,21 @@
 package LoginSystem;
 
-import java.util.UUID;
 import CoreEntities.User;
 
 public class AuthenticationSystem {
-    UserManager userManager;
-    LoginHandler loginHandler;
-    SignupHandler signupHandler;
-
-
-    public AuthenticationSystem(){
-        userManager = new UserManager();
-        loginHandler = new LoginHandler();
-        signupHandler = new SignupHandler();
-    }
+    private LoginHandler loginHandler;
+    private SignupHandler signupHandler;
 
     public AuthenticationSystem(UserManager userManager){
-        this.userManager = userManager;
-        loginHandler = new LoginHandler();
-        signupHandler = new SignupHandler();
+        loginHandler = new LoginHandler(userManager);
+        signupHandler = new SignupHandler(userManager);
     }
 
-    public boolean SignUp(String username, String password, User.AccountType type){
-        return signupHandler.SignUp(username, password, type, userManager);
+    public void signUp(String username, String password) throws UsernameTakenException, DuplicateUUIDException {
+        signupHandler.signUp(username, password);
     }
 
-    public User LogIn(String username, String password){
-        return loginHandler.loginUser(username, password, userManager);
+    public void LogIn(String username, String password) throws InvalidPasswordException, InvalidUsernameException {
+        loginHandler.loginUser(username, password);
     }
 }

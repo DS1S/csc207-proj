@@ -2,24 +2,26 @@ package LoginSystem;
 
 import CoreEntities.User;
 
+class InvalidUsernameException extends  Exception {}
+class InvalidPasswordException extends  Exception {}
+
 public class LoginHandler {
+    private UserManager um;
 
-    public LoginHandler() {}
+    public LoginHandler(UserManager um) {
+        this.um = um;
+    }
 
-    public User loginUser(String username, String password, UserManager userManager) {
-        User u = userManager.getUserWithUsername(username.trim());
+    public void loginUser(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
+        User u = this.um.getUserWithUsername(username.trim());
         if (u == null) {
-            // Should probably contact presenter here or something.
-            System.out.println("Invalid username");
-            return null;
+            throw new InvalidUsernameException();
         }
 
         if (u.checkPassword(password.trim())) {
-            return u;
+            this.um.setLoggedInUser(u);
         } else {
-            // Should probably contact presenter here or something.
-            System.out.println("Invalid password");
-            return null;
+            throw new InvalidPasswordException();
         }
     }
 }
