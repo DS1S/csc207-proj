@@ -10,8 +10,12 @@ import java.util.UUID;
 public class UserManager {
     private Map<UUID, User> users;
 
+    public UserManager(){
+        this.users = new HashMap<UUID, User>();
+    }
+
     public UserManager(List<User> users) throws NullPointerException {
-        this.users = new HashMap<>();
+        this.users = new HashMap<UUID, User>();
         for (User u : users) {
             this.users.put(u.getUUID(), u);
         }
