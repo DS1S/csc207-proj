@@ -15,7 +15,7 @@ public class AuthenticationSystem {
         signupHandler.signUp(username, password);
     }
 
-    public User LogIn(String username, String password){
-        return loginHandler.loginUser(username, password);
+    public void LogIn(String username, String password) throws InvalidPasswordException, InvalidUsernameException {
+        loginHandler.loginUser(username, password);
     }
 }
