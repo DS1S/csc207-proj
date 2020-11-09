@@ -16,8 +16,6 @@ public class User implements Serializable {
     private UUID uuid;
     private String username;
     private String password;
-    private String name;
-    private String email;
     private AccountType type;
 
     public User(String username, String password, AccountType type) {
