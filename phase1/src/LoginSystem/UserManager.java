@@ -27,7 +27,7 @@ public class UserManager {
 
     public void addUsers(List<User> users) {
         for (User u : users) {
-            this.users.put(u.getUUID(), u);
+            addUser(u);
         }
     }
 
