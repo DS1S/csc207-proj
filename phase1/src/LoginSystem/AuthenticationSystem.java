@@ -49,6 +49,8 @@ public class AuthenticationSystem implements IRunnable {
             }
         } else {
             this.authUI.displaySigningUpPage();
+            this.authUI.displayNamePrompt();
+            String name = in.nextLine();
             this.authUI.displayUsernamePrompt();
             String username = in.nextLine();
             this.authUI.displayPasswordPrompt();
