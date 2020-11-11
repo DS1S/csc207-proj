@@ -5,7 +5,7 @@ import CoreEntities.Event;
 import java.time.LocalTime;
 import java.util.UUID;
 
-public class EventScheduler {
+class EventScheduler {
 
     private boolean checkRoomConflict(Schedule schedule, String room, LocalTime time, int duration) {
         for (Event event: schedule.retrieveEventsByTimeInterval(time, time.plusMinutes(duration))) {
