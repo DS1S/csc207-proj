@@ -2,8 +2,8 @@ package CoreEntities.Users;
 
 public class Attendee extends User{
 
-    public Attendee(String username, String password){
-        super(username, password);
+    public Attendee(String name, String username, String password){
+        super(name, username, password);
         setAttendeePermissions();
     }
 

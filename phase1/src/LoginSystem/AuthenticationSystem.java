@@ -9,8 +9,8 @@ public class AuthenticationSystem {
         signupHandler = new SignupHandler(userManager);
     }
 
-    public void signUp(String username, String password) throws UsernameTakenException, DuplicateUUIDException {
-        signupHandler.signUp(username, password);
+    public void signUp(String name, String username, String password) throws UsernameTakenException, DuplicateUUIDException {
+        signupHandler.signUp(name, username, password);
     }
 
     public void LogIn(String username, String password) throws InvalidPasswordException, InvalidUsernameException {

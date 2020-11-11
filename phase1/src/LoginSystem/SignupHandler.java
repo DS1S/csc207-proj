@@ -12,12 +12,12 @@ public class SignupHandler {
         this.um = um;
     }
 
-    public void signUp(String username, String password) throws UsernameTakenException, DuplicateUUIDException {
+    public void signUp(String name, String username, String password) throws UsernameTakenException, DuplicateUUIDException {
         if (this.um.getUserWithUsername(username) != null) {
             throw new UsernameTakenException();
         }
 
-        User u = new Attendee(username, password);
+        User u = new Attendee(name, username, password);
         if (this.um.getUserWithUUID(u.getUUID()) != null) {
             throw new DuplicateUUIDException();
         }

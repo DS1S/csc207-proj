@@ -2,8 +2,8 @@ package CoreEntities.Users;
 
 public class Organizer extends User{
 
-    public Organizer(String username, String password){
-        super(username, password);
+    public Organizer(String name, String username, String password){
+        super(name, username, password);
     }
 
     private void setAttendeePermissions(){

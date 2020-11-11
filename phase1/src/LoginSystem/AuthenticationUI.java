@@ -56,6 +56,8 @@ public class AuthenticationUI {
     public void displaySigningUpPage() {
         System.out.println("Please enter you user details below.");
         Scanner in = new Scanner(System.in);
+        System.out.print("Full Name: ");
+        String name = in.nextLine();
         System.out.print("Username: ");
         String username = in.nextLine();
         System.out.print("Password: ");
@@ -63,7 +65,7 @@ public class AuthenticationUI {
 
         while (true) {
             try {
-                this.as.signUp(username, password);
+                this.as.signUp(name, username, password);
                 break;
             } catch (UsernameTakenException e) {
                 System.out.println("This username is taken, try another one.");
