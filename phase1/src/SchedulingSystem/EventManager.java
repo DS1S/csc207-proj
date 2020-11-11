@@ -1,7 +1,5 @@
 package SchedulingSystem;
 
-import CoreEntities.Schedule;
-
 import java.time.LocalTime;
 import java.util.UUID;
 

@@ -1,4 +1,6 @@
-package CoreEntities;
+package SchedulingSystem;
+
+import CoreEntities.Event;
 
 import java.time.LocalTime;
 import java.util.*;
