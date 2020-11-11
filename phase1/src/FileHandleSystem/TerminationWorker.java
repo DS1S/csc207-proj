@@ -3,19 +3,19 @@ package FileHandleSystem;
 import java.util.List;
 import java.util.Map;
 
-public class TerminationWorker extends Thread{
+public class TerminationWorker<T> extends Thread{
 
-    private Map<String, Manager> filePathForManagers;
+    private T manager;
+    private String filePath;
 
-    public TerminationWorker(Map<String, Manager> filePathForManagers){
-        this.filePathForManagers = filePathForManagers;
+    public TerminationWorker(T manager, String filePath){
+        this.manager = manager;
+        this.filePath = filePath;
     }
 
     @Override
     public void run() {
-        for (String filePath : filePathForManagers){
-            FileSerializer<Manager> managerFileSerializer = new FileSerializer<Manager>(filePath);
-            managerFileSerializer.saveObject(filePathForManagers.get(filePath));
-        }
+        FileSerializer<T> managerFileSerializer = new FileSerializer<T>(filePath);
+        managerFileSerializer.saveObject(manager);
     }
 }
