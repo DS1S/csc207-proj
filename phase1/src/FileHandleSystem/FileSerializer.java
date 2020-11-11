@@ -1,30 +1,35 @@
 package FileHandleSystem;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class FileHandler<T> {
+public class FileSerializer<T> {
 
     private String filePath;
 
-    public FileHandler(String filePath){
+    public FileSerializer(String filePath){
         this.filePath = filePath;
     }
 
-    public void saveCollection(List<T> objects) throws IOException{
-        OutputStream file = new FileOutputStream(filePath);
-        OutputStream buffer = new BufferedOutputStream(file);
-        ObjectOutput output = new ObjectOutputStream(buffer);
+    public void saveCollection(List<T> objects){
+        try{
+            OutputStream file = new FileOutputStream(filePath);
+            OutputStream buffer = new BufferedOutputStream(file);
+            ObjectOutput output = new ObjectOutputStream(buffer);
 
-        // serialize the object
-        output.writeObject(objects);
-        output.close();
+            // serialize the object
+            output.writeObject(objects);
+            output.close();
+        }catch (IOException e){
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Could Not Save Data");
+        }
     }
 
-    public void saveObject(T object) throws IOException{
+    public void saveObject(T object){
         saveCollection(new ArrayList<>(Arrays.asList(object)));
     }
 

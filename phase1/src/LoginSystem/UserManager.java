@@ -9,12 +9,18 @@ import java.util.UUID;
 
 public class UserManager {
     private Map<UUID, User> users;
+    private User loggedInUser;
+
+    public UserManager(){
+        this.users = new HashMap<UUID, User>();
+    }
 
     public UserManager(List<User> users) throws NullPointerException {
-        this.users = new HashMap<>();
+        this.users = new HashMap<UUID, User>();
         for (User u : users) {
             this.users.put(u.getUUID(), u);
         }
+        this.loggedInUser = null;
     }
 
     public void addUser(User u) {
@@ -23,7 +29,7 @@ public class UserManager {
 
     public void addUsers(List<User> users) {
         for (User u : users) {
-            this.users.put(u.getUUID(), u);
+            addUser(u);
         }
     }
 
@@ -38,5 +44,13 @@ public class UserManager {
             }
         }
         return null;
+    }
+
+    public User getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public void setLoggedInUser(User loggedInUser) {
+        this.loggedInUser = loggedInUser;
     }
 }
