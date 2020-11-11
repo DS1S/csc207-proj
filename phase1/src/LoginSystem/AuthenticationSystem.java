@@ -56,7 +56,7 @@ public class AuthenticationSystem implements IRunnable {
             // TODO: fix this after removing exceptions
             while (true) {
                 try {
-                    this.signupHandler.signUp(username, password, "attendee");
+                    this.signupHandler.signUp(name, username, password, "attendee");
                     break;
                 } catch (UsernameTakenException e) {
                     this.authUI.displayError(e.getMessage());

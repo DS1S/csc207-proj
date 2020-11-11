@@ -2,8 +2,8 @@ package CoreEntities.Users;
 
 public class Speaker extends User {
 
-    public Speaker(String username, String password){
-        super(username, password);
+    public Speaker(String name, String username, String password){
+        super(name, username, password);
     }
 
     protected void setPermissions(){

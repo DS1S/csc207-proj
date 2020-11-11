@@ -11,7 +11,7 @@ import java.util.*;
 public class Schedule implements Iterable<Event> {
 
     /** The list of events in the Schedule, sorted chronologically by start time. */
-    private List<Event> events;
+    public List<Event> events;
 
     /** Constructs a new Schedule with an empty list of events. */
     public Schedule() {

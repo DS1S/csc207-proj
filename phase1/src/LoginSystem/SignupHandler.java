@@ -6,7 +6,6 @@ import LoginSystem.Exceptions.DuplicateUUIDException;
 import LoginSystem.Exceptions.InvalidUsertypeException;
 import LoginSystem.Exceptions.UsernameTakenException;
 
-
 public class SignupHandler {
     private UserManager um;
 
@@ -15,16 +14,16 @@ public class SignupHandler {
     }
 
     // TODO: remove unexceptional exceptions
-    public void signUp(String username, String password, String type) throws UsernameTakenException, DuplicateUUIDException, InvalidUsertypeException {
+    public void signUp(String name, String username, String password, String type) throws UsernameTakenException, DuplicateUUIDException, InvalidUsertypeException {
         if (this.um.getUserWithUsername(username) != null) {
             throw new UsernameTakenException();
         }
 
         User u;
         if (type.equals("speaker")) {
-            u = new Speaker(username, password);
+            u = new Speaker(name, username, password);
         } else if (type.equals("attendee")) {
-            u = new Attendee(username, password);
+            u = new Attendee(name, username, password);
         } else {
             throw new InvalidUsertypeException();
         }
