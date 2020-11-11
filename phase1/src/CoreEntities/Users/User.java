@@ -7,7 +7,6 @@ import java.util.UUID;
 import java.lang.String;
 
 
-
 public class User implements Serializable {
 
     private UUID uuid;
@@ -20,7 +19,6 @@ public class User implements Serializable {
         this.username = username;
         this.password = password;
         permissions = new HashMap<>();
-
     }
 
     public boolean checkPassword(String password) {

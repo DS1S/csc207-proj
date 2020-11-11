@@ -6,6 +6,4 @@ public class MessageSystem {
     public MessageSystem(MessageManager messageManager){
         this.messageManager = messageManager;
     }
-
-
 }

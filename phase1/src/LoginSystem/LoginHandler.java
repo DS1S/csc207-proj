@@ -1,9 +1,8 @@
 package LoginSystem;
 
 import CoreEntities.Users.User;
-
-class InvalidUsernameException extends  Exception {}
-class InvalidPasswordException extends  Exception {}
+import LoginSystem.Exceptions.InvalidPasswordException;
+import LoginSystem.Exceptions.InvalidUsernameException;
 
 public class LoginHandler {
     private UserManager um;

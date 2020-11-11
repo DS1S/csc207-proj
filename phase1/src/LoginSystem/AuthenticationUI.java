@@ -30,7 +30,6 @@ public class AuthenticationUI {
     }
 
     public void displayLoginPage() {
-        System.out.println("Please enter you login details below.");
         Scanner in = new Scanner(System.in);
         System.out.print("Username: ");
         String username = in.nextLine();
