@@ -1,10 +1,11 @@
 package LoginSystem;
 
 import LoginSystem.Exceptions.*;
+import coreController.IRunnable;
 
 import java.util.Scanner;
 
-public class AuthenticationSystem implements Runnable {
+public class AuthenticationSystem implements IRunnable {
     private LoginHandler loginHandler;
     private SignupHandler signupHandler;
     private AuthenticationUI authUI;

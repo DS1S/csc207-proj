@@ -1,8 +1,9 @@
 package MessagingSystem;
 import LoginSystem.UserManager;
+import coreController.IRunnable;
 import java.util.UUID;
 
-public class MessageSystem implements Runnable{
+public class MessageSystem implements IRunnable {
     private MessageManager messageManager;
     private UserManager userManager;
 

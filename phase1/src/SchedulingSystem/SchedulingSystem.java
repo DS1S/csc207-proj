@@ -1,6 +1,8 @@
 package SchedulingSystem;
 
-public class SchedulingSystem implements Runnable{
+import coreController.IRunnable;
+
+public class SchedulingSystem implements IRunnable {
     @Override
     public void run() {
     }
