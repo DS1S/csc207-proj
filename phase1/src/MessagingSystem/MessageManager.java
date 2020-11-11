@@ -12,16 +12,16 @@ public class MessageManager {
         this.tempInbox = tempInbox;
     }
 
-    public void sendMessageToIndividual(User recipient, Message msg) {
-        tempInbox.get(recipient.getUUID()).add(msg);
+    public void sendMessageToIndividual(UUID recipient, Message msg) {
+        tempInbox.get(recipient).add(msg);
     }
 
-    public void deleteMessage(User recipient, Message msg) {
-            tempInbox.get(recipient.getUUID()).remove(msg);
+    public void deleteMessage(UUID recipient, Message msg) {
+            tempInbox.get(recipient).remove(msg);
         }
 
-    public void sendMessageToMultiple(List<User> recipients, Message msg){
-        for (User recipient : recipients){
+    public void sendMessageToMultiple(List<UUID> recipients, Message msg){
+        for (UUID recipient : recipients){
             sendMessageToIndividual(recipient, msg);
         }
     }
