@@ -7,7 +7,8 @@ import java.util.UUID;
 import java.lang.String;
 
 
-public class User implements Serializable {
+
+public abstract class User implements Serializable {
 
     private UUID uuid;
     private String username;
@@ -19,6 +20,7 @@ public class User implements Serializable {
         this.username = username;
         this.password = password;
         permissions = new HashMap<>();
+
     }
 
     public boolean checkPassword(String password) {
@@ -36,5 +38,7 @@ public class User implements Serializable {
     public Map<Perms, Boolean> getPermissions(){
         return permissions;
     }
+
+    protected abstract void setPermissions();
 
 }

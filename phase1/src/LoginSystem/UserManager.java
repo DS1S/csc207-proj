@@ -47,6 +47,15 @@ public class UserManager {
         return null;
     }
 
+    public UUID getUUIDWithUsername(String username) {
+        for (User u : this.users.values()) {
+            if (u.getUsername().equals(username)) {
+                return u.getUUID();
+            }
+        }
+        return null;
+    }
+
     public User getLoggedInUser() {
         return loggedInUser;
     }
