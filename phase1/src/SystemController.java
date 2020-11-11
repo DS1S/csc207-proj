@@ -42,7 +42,12 @@ public class SystemController implements IRunnable {
         int option = input.nextInt();
         while (option != subSystems.size() + 1){
             // Walter display the menu here
-            subSystems.get(option).run();
+            if (subSystems.containsKey(option)){
+                subSystems.get(option).run();
+            }
+            else{
+                //Walter print out invalid input
+            }
         }
 
     }
