@@ -1,9 +1,12 @@
 package MessagingSystem;
 import CoreEntities.Users.User;
 import CoreEntities.Message;
+
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.List;
 import java.util.Map;
+import java.time.LocalTime;
 
 public class MessageManager {
     private Map<UUID, List<Message>> tempInbox;
@@ -12,17 +15,18 @@ public class MessageManager {
         this.tempInbox = tempInbox;
     }
 
-    public void sendMessageToIndividual(UUID recipient, Message msg) {
-        tempInbox.get(recipient).add(msg);
+    public void sendMessageToIndividual(UUID sender, UUID recipient, String msg) {
+        Message m = new Message(UUID.randomUUID(), sender, recipient, msg, LocalTime.now());
+        tempInbox.get(recipient).add(m);
     }
 
     public void deleteMessage(UUID recipient, Message msg) {
             tempInbox.get(recipient).remove(msg);
         }
 
-    public void sendMessageToMultiple(List<UUID> recipients, List<Message> msgs){
-        for (int i = 0; i < recipients.size(); i++) {
-            sendMessageToIndividual(recipients.get(i), msgs.get(i));
+    public void sendMessageToMultiple(UUID sender, List<UUID> recipients, String msg){
+        for (UUID recipient : recipients) {
+            sendMessageToIndividual(sender, recipient, msg);
         }
     }
 

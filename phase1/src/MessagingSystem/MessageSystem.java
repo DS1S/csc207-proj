@@ -1,9 +1,7 @@
 package MessagingSystem;
-import CoreEntities.Message;
 import LoginSystem.UserManager;
 import coreUtil.IRunnable;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.List;
@@ -21,12 +19,16 @@ public class MessageSystem implements IRunnable {
     }
 
     public void MessageAPerson(String receiver, String message) {
-        Message m = new Message(UUID.randomUUID(), userManager.getLoggedInUser().getUUID(),
-                userManager.getUUIDWithUsername(receiver), message, LocalTime.now());
-        messageManager.sendMessageToIndividual(userManager.getUUIDWithUsername(receiver), m);
+        messageManager.sendMessageToIndividual(userManager.getLoggedInUser().getUUID(),
+                userManager.getUUIDWithUsername(receiver), message);
     }
 
     public void MessagePeople(List<String> recipients, String message) {
-        ArrayList<Message> temp = new ArrayList<>();
+        ArrayList<UUID> recipientUUIDs = new ArrayList<>();
+        for (String iter : recipients) {
+            recipientUUIDs.add(userManager.getUUIDWithUsername(iter));
+        }
+        messageManager.sendMessageToMultiple(userManager.getLoggedInUser().getUUID(),
+                recipientUUIDs, message);
     }
 }
