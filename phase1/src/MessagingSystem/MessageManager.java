@@ -20,9 +20,9 @@ public class MessageManager {
             tempInbox.get(recipient).remove(msg);
         }
 
-    public void sendMessageToMultiple(List<UUID> recipients, Message msg){
-        for (UUID recipient : recipients){
-            sendMessageToIndividual(recipient, msg);
+    public void sendMessageToMultiple(List<UUID> recipients, List<Message> msgs){
+        for (int i = 0; i < recipients.size(); i++) {
+            sendMessageToIndividual(recipients.get(i), msgs.get(i));
         }
     }
 
