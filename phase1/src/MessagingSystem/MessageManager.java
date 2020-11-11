@@ -1,10 +1,9 @@
 package MessagingSystem;
-import CoreEntities.User;
+import CoreEntities.Users.User;
 import CoreEntities.Message;
 import java.util.UUID;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
 
 public class MessageManager {
     private Map<UUID, List<Message>> tempInbox;

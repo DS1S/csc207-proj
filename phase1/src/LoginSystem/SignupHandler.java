@@ -1,5 +1,6 @@
 package LoginSystem;
-import CoreEntities.User;
+import CoreEntities.Users.Attendee;
+import CoreEntities.Users.User;
 
 class UsernameTakenException extends Exception {}
 class DuplicateUUIDException extends Exception {}
@@ -16,7 +17,7 @@ public class SignupHandler {
             throw new UsernameTakenException();
         }
 
-        User u = new User(username, password, User.AccountType.Attendee);
+        User u = new Attendee(username, password);
         if (this.um.getUserWithUUID(u.getUUID()) != null) {
             throw new DuplicateUUIDException();
         }

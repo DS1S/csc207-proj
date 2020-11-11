@@ -1,4 +1,6 @@
 package CoreEntities;
+import CoreEntities.Users.User;
+
 import java.io.Serializable;
 import java.util.Map;
 import java.util.List;

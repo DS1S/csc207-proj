@@ -1,8 +1,6 @@
 package SchedulingSystem;
 
-import CoreEntities.Event;
 import CoreEntities.Schedule;
-import CoreEntities.User;
 
 import java.time.LocalTime;
 import java.util.UUID;
