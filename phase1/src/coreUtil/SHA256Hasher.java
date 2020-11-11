@@ -1,10 +1,12 @@
-package LoginSystem;
+package coreUtil;
+import coreUtil.Hasher;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 
-public class SHA256Hasher implements Hasher{
+public class SHA256Hasher implements Hasher {
 
     @Override
     public String Hash(String str) throws NoSuchAlgorithmException {

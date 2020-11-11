@@ -1,10 +1,11 @@
 package LoginSystem;
 
 import LoginSystem.Exceptions.*;
+import coreUtil.IRunnable;
 
 import java.util.Scanner;
 
-public class AuthenticationSystem implements Runnable {
+public class AuthenticationSystem implements IRunnable {
     private LoginHandler loginHandler;
     private SignupHandler signupHandler;
     private AuthenticationUI authUI;
@@ -31,6 +32,7 @@ public class AuthenticationSystem implements Runnable {
             String username = in.nextLine();
             this.authUI.displayPasswordPrompt();
             String password = in.nextLine();
+            // TODO: fix this after removing exceptions
             while (true) {
                 try {
                     this.loginHandler.loginUser(username, password);
@@ -51,6 +53,7 @@ public class AuthenticationSystem implements Runnable {
             String username = in.nextLine();
             this.authUI.displayPasswordPrompt();
             String password = in.nextLine();
+            // TODO: fix this after removing exceptions
             while (true) {
                 try {
                     this.signupHandler.signUp(username, password, "attendee");
