@@ -6,7 +6,7 @@ public class Organizer extends User{
         super(username, password);
     }
 
-    private void setAttendeePermissions(){
+    protected void setPermissions(){
         permissions.put(Perms.canBeMessaged, false);
         permissions.put(Perms.canCreateEvent, true);
         permissions.put(Perms.canMessageTalk, false);

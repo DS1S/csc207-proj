@@ -1,4 +1,7 @@
+import FileHandleSystem.FileSerializer;
 import FileHandleSystem.TerminationWorker;
+import LoginSystem.AuthenticationSystem;
+import LoginSystem.UserManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +29,8 @@ public class SystemController implements Runnable{
             once the user exists that it will return to this loop and continue until fully
             exited;
         */
+
+
     }
 
     private void initializeSubSystems(){
@@ -37,7 +42,12 @@ public class SystemController implements Runnable{
     }
 
     private void initializeLoginSystem(){
-
+        String filePath = "../database/UManager.ser";
+        FileSerializer<UserManager> userManagerLoader = new FileSerializer<>(filePath);
+        UserManager uManager = userManagerLoader.loadObject();
+        AuthenticationSystem authenticationSystem = new AuthenticationSystem(uManager);
+        subSystems.put(0, authenticationSystem);
+        managers.put(filePath, uManager);
     }
 
     private void initializeMessageSystem(){
