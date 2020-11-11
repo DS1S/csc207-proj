@@ -49,7 +49,6 @@ public class SystemController implements IRunnable {
                 //Walter print out invalid input
             }
         }
-
     }
 
     private void initializeSubSystems(){
