@@ -1,10 +1,4 @@
-import CoreEntities.Event;
-import CoreEntities.User;
-import FileHandleSystem.FileSerializer;
 import FileHandleSystem.TerminationWorker;
-import LoginSystem.AuthenticationSystem;
-import LoginSystem.AuthenticationUI;
-import LoginSystem.UserManager;
 
 import java.util.HashMap;
 import java.util.Map;

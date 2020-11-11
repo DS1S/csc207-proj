@@ -1,7 +1,5 @@
 package LoginSystem;
 
-import CoreEntities.User;
-
 public class AuthenticationSystem {
     private LoginHandler loginHandler;
     private SignupHandler signupHandler;

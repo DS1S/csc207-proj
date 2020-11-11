@@ -1,6 +1,7 @@
 package LoginSystem;
 
-import CoreEntities.User;
+import CoreEntities.Users.Perms;
+import CoreEntities.Users.User;
 
 import java.util.HashMap;
 import java.util.List;
@@ -52,5 +53,10 @@ public class UserManager {
 
     public void setLoggedInUser(User loggedInUser) {
         this.loggedInUser = loggedInUser;
+    }
+
+    public boolean loggedInHasPermission(Perms permission){
+        Boolean hasPerm = this.loggedInUser.getPermissions().get(permission);
+        return hasPerm;
     }
 }

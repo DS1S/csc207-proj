@@ -1,6 +1,5 @@
 package LoginSystem;
 
-import CoreEntities.User;
 import java.util.Scanner;
 
 public class AuthenticationUI {

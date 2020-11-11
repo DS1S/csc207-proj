@@ -1,4 +1,4 @@
-import CoreEntities.User;
+import CoreEntities.Users.User;
 import FileHandleSystem.FileSerializer;
 import LoginSystem.AuthenticationUI;
 import LoginSystem.AuthenticationSystem;
