@@ -19,7 +19,7 @@ public class MessageSystem implements IRunnable {
     }
 
     public void MessageAPerson(String receiver, String message) {
-        messageManager.sendMessageToIndividual(userManager.getLoggedInUser().getUUID(),
+        messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(),
                 userManager.getUUIDWithUsername(receiver), message);
     }
 
@@ -28,7 +28,7 @@ public class MessageSystem implements IRunnable {
         for (String iter : recipients) {
             recipientUUIDs.add(userManager.getUUIDWithUsername(iter));
         }
-        messageManager.sendMessageToMultiple(userManager.getLoggedInUser().getUUID(),
+        messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(),
                 recipientUUIDs, message);
     }
 }

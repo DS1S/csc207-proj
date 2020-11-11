@@ -56,8 +56,8 @@ public class UserManager {
         return null;
     }
 
-    public User getLoggedInUser() {
-        return loggedInUser;
+    public UUID getLoggedInUserUUID() {
+        return loggedInUser.getUUID();
     }
 
     public void setLoggedInUser(User loggedInUser) {
