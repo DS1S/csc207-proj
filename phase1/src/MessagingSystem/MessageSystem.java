@@ -1,6 +1,12 @@
 package MessagingSystem;
+import CoreEntities.Message;
 import LoginSystem.UserManager;
 import coreUtil.IRunnable;
+
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.UUID;
+import java.util.List;
 
 public class MessageSystem implements IRunnable {
     private MessageManager messageManager;
@@ -14,15 +20,13 @@ public class MessageSystem implements IRunnable {
     public void run() {
     }
 
-    // Methods to do with organizer as sender
-    public void OrganizerMessageAPerson(String receiver, String message) {
-
-
+    public void MessageAPerson(String receiver, String message) {
+        Message m = new Message(UUID.randomUUID(), userManager.getLoggedInUser().getUUID(),
+                userManager.getUUIDWithUsername(receiver), message, LocalTime.now());
+        messageManager.sendMessageToIndividual(userManager.getUUIDWithUsername(receiver), m);
     }
 
-    // Methods to do with attendee as sender
-
-    // Methods to do with speaker as sender
-
-
+    public void MessagePeople(List<String> recipients, String message) {
+        ArrayList<Message> temp = new ArrayList<>();
+    }
 }
