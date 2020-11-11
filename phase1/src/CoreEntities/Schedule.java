@@ -3,15 +3,27 @@ package CoreEntities;
 import java.time.LocalTime;
 import java.util.*;
 
+/**
+ * A schedule: a list of events.
+ */
 public class Schedule implements Iterable<Event> {
+
+    /** The list of events in the Schedule. */
     private List<Event> events;
 
+    /** Constructs a new Schedule with an empty list of events. */
     public Schedule() {
         this.events = new ArrayList<>();
     }
 
+    /** Constructs a new Schedule with a given list of events.
+     * @param events the events in the Schedule
+     */
     public Schedule(List<Event> events) { this.events = events; }
 
+    /** Adds a new Event to the Schedule.
+     * @param event the event to be added
+     */
     public void addEvent(Event event) {
         int i = 0;
         while (events.get(i).getStartTime().isBefore(event.getStartTime())) {
@@ -20,7 +32,13 @@ public class Schedule implements Iterable<Event> {
         events.add(i, event);
     }
 
-    public Schedule retrieveEventByTimeInterval(LocalTime start, LocalTime end) {
+    /**
+     * Returns a
+     * @param start
+     * @param end
+     * @return
+     */
+    public Schedule retrieveEventsByTimeInterval(LocalTime start, LocalTime end) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
             if (event.getStartTime().compareTo(start) <= 0 && event.getEndTime().compareTo(start) >= 0
@@ -35,7 +53,7 @@ public class Schedule implements Iterable<Event> {
         return new Schedule(matchedEvents);
     }
 
-    public Schedule retrieveEventBySpeaker(UUID speaker) {
+    public Schedule retrieveEventsBySpeaker(UUID speaker) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
             if (event.getSpeaker().equals(speaker)) {
@@ -45,7 +63,7 @@ public class Schedule implements Iterable<Event> {
         return new Schedule(matchedEvents);
     }
 
-    public Schedule retrieveEventByTitle(String title) {
+    public Schedule retrieveEventsByTitle(String title) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
             if (event.getTitle().equals(title)) {
@@ -55,7 +73,7 @@ public class Schedule implements Iterable<Event> {
         return new Schedule(matchedEvents);
     }
 
-    public Schedule retrieveEventByAttendee(UUID attendee) {
+    public Schedule retrieveEventsByAttendee(UUID attendee) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
             if (event.checkAttendee(attendee)) {

@@ -9,7 +9,7 @@ import java.util.UUID;
 public class EventScheduler {
 
     private boolean checkRoomConflict(Schedule schedule, String room, LocalTime time, int duration) {
-        for (Event event: schedule.retrieveEventByTimeInterval(time, time.plusMinutes(duration))) {
+        for (Event event: schedule.retrieveEventsByTimeInterval(time, time.plusMinutes(duration))) {
             if (event.getRoom().equals(room)) {
                 return true;
             }
@@ -18,7 +18,7 @@ public class EventScheduler {
     }
 
     private boolean checkSpeakerConflict(Schedule schedule, UUID speaker, LocalTime time, int duration) {
-        for (Event event: schedule.retrieveEventByTimeInterval(time, time.plusMinutes(duration))) {
+        for (Event event: schedule.retrieveEventsByTimeInterval(time, time.plusMinutes(duration))) {
             if (event.getSpeaker().equals(speaker)) {
                 return true;
             }
