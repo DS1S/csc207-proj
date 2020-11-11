@@ -1,4 +1,4 @@
-package coreController;
+package coreUtil;
 
 public interface IRunnable {
     public void run();

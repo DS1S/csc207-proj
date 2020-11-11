@@ -1,4 +1,4 @@
-package LoginSystem;
+package coreUtil;
 
 import java.security.NoSuchAlgorithmException;
 

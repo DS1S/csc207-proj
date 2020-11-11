@@ -1,7 +1,7 @@
 package LoginSystem;
 
 import LoginSystem.Exceptions.*;
-import coreController.IRunnable;
+import coreUtil.IRunnable;
 
 import java.util.Scanner;
 
