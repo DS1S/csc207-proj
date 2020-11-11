@@ -20,7 +20,7 @@ public class Message implements Serializable {
         this.timeSent = timeSent;
     }
 
-    public UUID getSender(Message msg){return msg.sender;}
+    public UUID getSender(Message msg){ return msg.sender; }
 
-    public UUID getRecipient(Message msg){return msg.recipient;}
+    public UUID getRecipient(Message msg){ return msg.recipient; }
 }

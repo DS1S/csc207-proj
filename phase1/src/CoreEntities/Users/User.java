@@ -37,6 +37,8 @@ public abstract class User implements Serializable {
         return this.username;
     }
 
+    public String getName() { return this.name; }
+
     public Map<Perms, Boolean> getPermissions(){
         return permissions;
     }

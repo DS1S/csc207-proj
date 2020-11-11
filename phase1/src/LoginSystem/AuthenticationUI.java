@@ -13,6 +13,8 @@ public class AuthenticationUI {
        System.out.println("Invalid option, please try again: ");
     }
 
+    public void displayNamePrompt() { System.out.print("Full Name: "); }
+
     public void displayUsernamePrompt() {
         System.out.print("Username: ");
     }
@@ -20,6 +22,7 @@ public class AuthenticationUI {
     public void displayPasswordPrompt() {
         System.out.print("Password: ");
     }
+
     public void displayError(String e) {
         System.out.print(e);
     }
