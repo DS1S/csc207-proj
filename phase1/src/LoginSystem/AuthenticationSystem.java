@@ -32,6 +32,7 @@ public class AuthenticationSystem implements IRunnable {
             String username = in.nextLine();
             this.authUI.displayPasswordPrompt();
             String password = in.nextLine();
+            // TODO: fix this after removing exceptions
             while (true) {
                 try {
                     this.loginHandler.loginUser(username, password);
@@ -52,6 +53,7 @@ public class AuthenticationSystem implements IRunnable {
             String username = in.nextLine();
             this.authUI.displayPasswordPrompt();
             String password = in.nextLine();
+            // TODO: fix this after removing exceptions
             while (true) {
                 try {
                     this.signupHandler.signUp(username, password, "attendee");
