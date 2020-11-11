@@ -1,9 +1,8 @@
 package LoginSystem;
 
 import CoreEntities.Users.User;
-
-class InvalidUsernameException extends  Exception {}
-class InvalidPasswordException extends  Exception {}
+import LoginSystem.Exceptions.InvalidPasswordException;
+import LoginSystem.Exceptions.InvalidUsernameException;
 
 public class LoginHandler {
     private UserManager um;
@@ -12,6 +11,7 @@ public class LoginHandler {
         this.um = um;
     }
 
+    // TODO: remove unexceptional exceptions
     public void loginUser(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
         User u = this.um.getUserWithUsername(username.trim());
         if (u == null) {

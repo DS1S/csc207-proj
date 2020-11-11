@@ -33,11 +33,11 @@ public class FileSerializer<T> {
         saveCollection(new ArrayList<>(Arrays.asList(object)));
     }
 
-    public T loadObject() throws ClassNotFoundException{
+    public T loadObject(){
         return loadCollection().get(0);
     }
 
-    public List<T> loadCollection() throws ClassNotFoundException{
+    public List<T> loadCollection(){
         try {
             InputStream file = new FileInputStream(filePath);
             InputStream buffer = new BufferedInputStream(file);
@@ -48,8 +48,11 @@ public class FileSerializer<T> {
             input.close();
             return objects;
 
-        } catch (IOException ex) {
+        } catch (IOException e) {
+            return new ArrayList<>();
+        } catch (ClassNotFoundException e){
             return new ArrayList<>();
         }
+
     }
 }

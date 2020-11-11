@@ -1,12 +1,22 @@
+import CoreEntities.Users.Perms;
+import FileHandleSystem.FileSerializer;
 import FileHandleSystem.TerminationWorker;
+import LoginSystem.AuthenticationSystem;
+import LoginSystem.UserManager;
+import MessagingSystem.MessageManager;
+import MessagingSystem.MessageSystem;
+import SchedulingSystem.EventManager;
+import SchedulingSystem.EventSystem;
+import coreUtil.IRunnable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
-public class SystemController implements Runnable{
+public class SystemController implements IRunnable {
 
     private Map<String, Object> managers = new HashMap<>();
-    private Map<Integer, Runnable> subSystems = new HashMap<>();
+    private Map<Integer, IRunnable> subSystems = new HashMap<>();
 
     public void run(){
         initializeSubSystems();
@@ -26,26 +36,63 @@ public class SystemController implements Runnable{
             once the user exists that it will return to this loop and continue until fully
             exited;
         */
+
+        subSystems.get(0).run();
+        Scanner input = new Scanner(System.in);
+        int option = input.nextInt();
+        while (option != subSystems.size() + 1){
+            // Walter display the menu here
+            if (subSystems.containsKey(option)){
+                subSystems.get(option).run();
+            }
+            else{
+                //Walter print out invalid input
+            }
+        }
     }
 
     private void initializeSubSystems(){
-        initializeLoginSystem();
-        initializeEventSystem();
-        initializeMessageSystem();
+        UserManager userManager = initializeLoginSystem();
+
+        initializeUserCreatorSystem(userManager);
+        initializeMessageSystem(userManager);
+        initializeEventSystem(userManager);
 
         initializeShutDownHook();
     }
 
-    private void initializeLoginSystem(){
-
+    private UserManager initializeLoginSystem(){
+        String filePath = "../database/UManager.ser";
+        FileSerializer<UserManager> userManagerLoader = new FileSerializer<>(filePath);
+        UserManager uManager = userManagerLoader.loadObject();
+        IRunnable authenticationSystem = new AuthenticationSystem(uManager);
+        subSystems.put(0, authenticationSystem);
+        managers.put(filePath, uManager);
+        return uManager;
     }
 
-    private void initializeMessageSystem(){
-
+    private void initializeMessageSystem(UserManager userManager){
+        String filePath = "../database/MSManager.ser";
+        FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
+        MessageManager msManager = messageManagerLoader.loadObject();
+        IRunnable messageSystem = new MessageSystem(msManager, userManager);
+        subSystems.put(subSystems.size() + 1, messageSystem);
+        managers.put(filePath, msManager);
     }
 
-    private void initializeEventSystem(){
+    private void initializeEventSystem(UserManager userManager){
+        String filePath = "../database/ESManager.ser";
+        FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
+        EventManager eventManager = eventManagerLoader.loadObject();
+        IRunnable eventSystem = new EventSystem();
+        subSystems.put(subSystems.size() + 1, eventSystem);
+        managers.put(filePath, eventManager);
+    }
 
+    private void initializeUserCreatorSystem(UserManager userManager){
+        if (userManager.loggedInHasPermission(Perms.canSignUpUser)){
+            //Need UserCreatorSystem
+        }
     }
 
     private void initializeShutDownHook(){

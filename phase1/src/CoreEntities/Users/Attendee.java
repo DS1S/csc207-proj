@@ -1,13 +1,13 @@
 package CoreEntities.Users;
 
-public class Attendee extends User{
+public class Attendee extends User {
 
     public Attendee(String name, String username, String password){
-        super(name, username, password);
-        setAttendeePermissions();
+        super(username, password);
+        setPermissions();
     }
 
-    private void setAttendeePermissions(){
+    protected void setPermissions(){
         permissions.put(Perms.canBeMessaged, true);
         permissions.put(Perms.canCreateEvent, false);
         permissions.put(Perms.canMessageTalk, false);

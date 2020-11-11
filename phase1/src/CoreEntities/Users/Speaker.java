@@ -6,7 +6,7 @@ public class Speaker extends User {
         super(name, username, password);
     }
 
-    private void setAttendeePermissions(){
+    protected void setPermissions(){
         permissions.put(Perms.canBeMessaged, true);
         permissions.put(Perms.canCreateEvent, false);
         permissions.put(Perms.canMessageTalk, true);
