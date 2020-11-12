@@ -2,6 +2,9 @@ package Presenters;
 
 import LoginSystem.UserManager;
 import SchedulingSystem.EventManager;
+
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class EventUI {
@@ -53,5 +56,9 @@ public class EventUI {
 
     public void displayCancelSignUpDouble() {
         System.out.println("----------You are not registered in this event!----------\n\n");
+    }
+
+    public void displayScheduleSuccess() {
+        System.out.println("Your event has been successfully scheduled!\n\n");
     }
 }
