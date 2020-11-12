@@ -107,8 +107,7 @@ public class EventManager {
      *
      * @param attendee the UUID of the attendee to be signed up
      * @param index the index of the Event, relative to the list of the events that the given attendee can sign up to
-     * @throws IndexOutOfBoundsException if the index is negative, or greater than or equal the number of Events that
-     *                                   the attendee can sign up to
+     * @throws IndexOutOfBoundsException if the index is invalid
      */
     public void registerAttendee(UUID attendee, int index) throws IndexOutOfBoundsException {
         eventSignUp.registerAttendee(attendee, mainSchedule, index);
@@ -122,8 +121,7 @@ public class EventManager {
      *
      * @param attendee the UUID of the attendee to be removed
      * @param index the index of the Event, relative to the list of the events that the given attendee is signed up for
-     * @throws IndexOutOfBoundsException if the index is negative, or greater than or equal the number of Events that
-     *                                   the attendee has signed up for
+     * @throws IndexOutOfBoundsException if the index is invalid
      */
     public void removeAttendee(UUID attendee, int index) throws IndexOutOfBoundsException {
         eventSignUp.removeAttendee(attendee, mainSchedule, index);
