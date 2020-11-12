@@ -47,4 +47,11 @@ public class EventUI {
         System.out.println("----------You are already registered in this event!----------\n\n");
     }
 
+    public void displayCancelSignupSuccess() {
+        System.out.println("----------You have successfully unregistered from the event!----------\n\n");
+    }
+
+    public void displayCancelSignUpDouble() {
+        System.out.println("----------You are not registered in this event!----------\n\n");
+    }
 }
