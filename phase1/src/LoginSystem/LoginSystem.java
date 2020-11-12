@@ -4,20 +4,27 @@ import coreUtil.IRunnable;
 
 import java.util.Scanner;
 
-
+/**
+ * A class to handle logging in of users based on input credentials.
+ */
 public class LoginSystem implements IRunnable {
     private final String INVALID_USERNAME = "Invalid Username!";
     private final String INVALID_PASSWORD = "Invalid Password!";
     private UserManager um;
-    AuthenticationUI authUI;
+    private AuthenticationUI authUI;
 
     public LoginSystem(UserManager um){
         this.um = um;
         this.authUI = new AuthenticationUI();
     }
 
-    //returns error string, "" on success.
-    private String loginUser(String username, String password, UserManager um){
+    /**
+     *
+     * @param username the username to check
+     * @param password the password to check
+     * @return empty string if successful, error string otherwise, depending on the error
+     */
+    private String loginUser(String username, String password){
         if (!um.containsUserWithUsername(username.trim())) {
             return INVALID_USERNAME;
         }
@@ -30,6 +37,9 @@ public class LoginSystem implements IRunnable {
         return "";
     }
 
+    /**
+     * Displays the UI, prompts, errors, etc. associated with logging in a user.
+     */
     public void run(){
         Scanner scanner = new Scanner(System.in);
 
@@ -40,8 +50,8 @@ public class LoginSystem implements IRunnable {
         authUI.displayPasswordPrompt();
         String password = scanner.nextLine();
 
-        if (loginUser(username, password, um) != "") {
-            authUI.displayError(loginUser(username, password, um));
+        if (!loginUser(username, password).equals("")) {
+            authUI.displayError(loginUser(username, password));
             run();
         }
         scanner.close();

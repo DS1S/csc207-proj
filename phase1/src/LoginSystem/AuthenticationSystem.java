@@ -31,15 +31,12 @@ public class AuthenticationSystem implements IRunnable {
         }
         scanner.close();
 
-        switch(option) {
-            case(1):
-                loginSystem.run();
-                break;
-
-            case(2):
+        switch (option) {
+            case (1) -> loginSystem.run();
+            case (2) -> {
                 signupSystem.run();
                 run();
-                break;
+            }
         }
     }
 }
