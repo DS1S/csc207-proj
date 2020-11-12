@@ -39,12 +39,21 @@ public class InboxUI {
     public void recipientPrompt(int type) {
         // 1: specific attendee
         // 2: specific speaker
+        // 3: group of attendees
+        // 4: all attendees of event(s)
         switch (type) {
             case 1:
                 System.out.println("Enter the username of the attendee you would like to send this message to.\n");
                 break;
             case 2:
                 System.out.println("Enter the username of the speaker you would like to send this message to.\n");
+                break;
+            case 3:
+                System.out.println("Enter the usernames of the attendees you would like to send the message to.\n");
+                break;
+            case 4:
+                System.out.println("Enter the names of the events for which you would like all attendees to receive" +
+                        "this message.\n");
                 break;
         }
 

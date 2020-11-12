@@ -1,7 +1,6 @@
 package MessagingSystem;
 import SchedulingSystem.EventManager;
 import CoreEntities.Users.Perms;
-import CoreEntities.Users.User;
 import LoginSystem.UserManager;
 import coreUtil.IRunnable;
 import Presenters.InboxUI;
@@ -35,9 +34,7 @@ public class MessageSystem implements IRunnable {
     }
 
     public String MessageAPerson(String receiver, String message) {
-        UUID recipientUUID = userManager.getUUIDWithUsername(receiver);
-        User recipient = userManager.getUserWithUUID(recipientUUID);
-        if (!recipient.getPermissions().get(Perms.canBeMessaged)){
+        if (!userManager.hasPermission(receiver, Perms.canBeMessaged)){
             return CANNOT_MESSAGE_ORGANIZER;
         }
         else {
@@ -48,25 +45,21 @@ public class MessageSystem implements IRunnable {
     }
 
     public String MessagePeople(List<String> recipients, String message) {
-        ArrayList<UUID> recipientUUIDs = new ArrayList<>();
-        ArrayList<User> recipientUsers = new ArrayList<>();
-        for (String iter : recipients) {
-            recipientUUIDs.add(userManager.getUUIDWithUsername(iter));
-        }
-        for (UUID recipientUUID : recipientUUIDs){
-            recipientUsers.add(userManager.getUserWithUUID(recipientUUID));
-        }
-        for (User recipient : recipientUsers){
-            if(!recipient.getPermissions().get(Perms.canBeMessaged)){
+        for (String recipient : recipients){
+            if (!userManager.hasPermission(recipient, Perms.canBeMessaged)){
                 return ONE_IS_AN_ORGANIZER;
             }
+        }
+        ArrayList<UUID> recipientUUIDs = new ArrayList<>();
+        for (String iter : recipients) {
+            recipientUUIDs.add(userManager.getUUIDWithUsername(iter));
         }
         messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(),
                 recipientUUIDs, message);
         return "";
     }
 
-    public String MessageAttendees(List<String> events, String msg) {
+    public String SpeakerMessageAttendees(List<String> events, String msg) {
         if (!userManager.loggedInHasPermission(Perms.canMessageTalk)) {
             return NO_PERMISSION;
         } else {
@@ -78,7 +71,6 @@ public class MessageSystem implements IRunnable {
             messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), attendeeUUIDs, msg);
             return "";
         }
-
     }
 
     @Override
