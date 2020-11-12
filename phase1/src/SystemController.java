@@ -66,8 +66,7 @@ public class SystemController implements IRunnable {
         FileSerializer<UserManager> userManagerLoader = new FileSerializer<>(filePath);
         UserManager uManager = userManagerLoader.loadObject();
         IRunnable authenticationSystem = new AuthenticationSystem(uManager);
-        subSystems.put(0, authenticationSystem);
-        managers.put(filePath, uManager);
+        addSystemAndManager(filePath, authenticationSystem, uManager, 0);
         return uManager;
     }
 
@@ -76,8 +75,7 @@ public class SystemController implements IRunnable {
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
         IRunnable messageSystem = new MessageSystem(msManager, userManager);
-        subSystems.put(subSystems.size() + 1, messageSystem);
-        managers.put(filePath, msManager);
+        addSystemAndManager(filePath, messageSystem, msManager, subSystems.size() + 1);
     }
 
     private void initializeEventSystem(UserManager userManager){
@@ -85,14 +83,18 @@ public class SystemController implements IRunnable {
         FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
         EventManager eventManager = eventManagerLoader.loadObject();
         IRunnable eventSystem = new EventSystem();
-        subSystems.put(subSystems.size() + 1, eventSystem);
-        managers.put(filePath, eventManager);
+        addSystemAndManager(filePath, eventSystem, eventManager, subSystems.size() + 1);
     }
 
     private void initializeUserCreatorSystem(UserManager userManager){
         if (userManager.loggedInHasPermission(Perms.canSignUpUser)){
             //Need UserCreatorSystem
         }
+    }
+
+    private void addSystemAndManager(String filePath, IRunnable sys, Object manager, int index){
+        subSystems.put(index, sys);
+        managers.put(filePath, manager);
     }
 
     private void initializeShutDownHook(){

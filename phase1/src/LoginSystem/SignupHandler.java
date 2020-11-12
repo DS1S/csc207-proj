@@ -15,22 +15,10 @@ public class SignupHandler {
 
     // TODO: remove unexceptional exceptions
     public void signUp(String name, String username, String password, String type) throws UsernameTakenException, DuplicateUUIDException, InvalidUsertypeException {
-        if (this.um.getUserWithUsername(username) != null) {
+        if (this.um.containsUserWithUsername(username)) {
             throw new UsernameTakenException();
         }
 
-        User u;
-        if (type.equals("speaker")) {
-            u = new Speaker(name, username, password);
-        } else if (type.equals("attendee")) {
-            u = new Attendee(name, username, password);
-        } else {
-            throw new InvalidUsertypeException();
-        }
-
-        if (this.um.getUserWithUUID(u.getUUID()) != null) {
-            throw new DuplicateUUIDException();
-        }
-        this.um.addUser(u);
+        this.um.addUser(type, name, username, password);
     }
 }
