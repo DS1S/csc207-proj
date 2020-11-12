@@ -13,7 +13,7 @@ public class LoginHandler {
 
     // TODO: remove unexceptional exceptions
     public void loginUser(String username, String password) throws InvalidUsernameException, InvalidPasswordException {
-        User u = this.um.getUserWithUsername(username.trim());
+        User u = this.um.containsUserWithUsername(username.trim());
         if (u == null) {
             throw new InvalidUsernameException();
         }
