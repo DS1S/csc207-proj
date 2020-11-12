@@ -18,24 +18,20 @@ public class EventUI {
         this.user = user;
     }
 
-    public void displayAllEvents() {
-        System.out.println("----------All Events----------\n\n");
-        System.out.println(eventManager.retrieveAllEvents());
-    }
+    public void displayEvents(List<Map<String, Object>> eventList) {
+        System.out.println("----------Events----------");
+        StringBuilder sb = new StringBuilder();
 
-    public void displayAttendeeEvents() {
-        System.out.println("----------Events you are attending---------\n\n");
-        System.out.println(eventManager.retrieveEventsByAttendee(user));
-    }
+        for (Map<String, Object> event : eventList) {
+            sb.append(event.get("Title")).append("\n");
+            sb.append(userManager.getUsernameWithUUID((UUID)event.get("Speaker"))).append("\n");
+            sb.append(event.get("StartTime")).append(" to ").append(event.get("EndTime")).append("\n");
+            sb.append(event.get("Room")).append("\n");
+            sb.append(event.get("Registered")).append("/").append(event.get("Capacity")).append("\n");
 
-    public void displayEventsBySpeaker(String speakerName) {
-        System.out.println("----------" + speakerName + "'s Events----------\n\n");
-        System.out.println(eventManager.retrieveEventsBySpeaker(userManager.getUUIDWithUsername(speakerName)));
-    }
-
-    public void displaySignupableEvents() {
-        System.out.println("----------Available Events----------\n\n");
-        System.out.println(eventManager.retrieveSignupAbleEvents(user));
+            System.out.println(sb.toString());
+            sb.setLength(0);
+        }
     }
 
     public void displaySignUpFull() {
