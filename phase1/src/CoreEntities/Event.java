@@ -134,16 +134,16 @@ public class Event implements Serializable {
      */
     public void setDuration(int duration) { this.duration = duration; }
 
-    public Map<String, String> extractData() {
-        Map<String, String> data = new HashMap<>();
+    public Map<String, Object> extractData() {
+        Map<String, Object> data = new HashMap<>();
 
         data.put("Title", title);
-        data.put("Speaker", speaker.toString());
-        data.put("StartTime", startTime.toString());
-        data.put("EndTime", getEndTime().toString());
+        data.put("Speaker", speaker);
+        data.put("StartTime", startTime);
+        data.put("EndTime", getEndTime());
         data.put("Room", room);
-        data.put("Registered", Integer.toString(attendees.size()));
-        data.put("Capacity", Integer.toString(capacity));
+        data.put("Registered", attendees.size());
+        data.put("Capacity", capacity);
 
         return data;
     }
