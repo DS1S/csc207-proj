@@ -23,9 +23,7 @@ public class AuthenticationUI {
         System.out.print("Password: ");
     }
 
-    public void displayError(String e) {
-        System.out.print(e);
-    }
+    public void displayError(String e) { System.out.print(e); }
 
     public void displayLoginPage() {
         System.out.print("Enter your credentials below.");
