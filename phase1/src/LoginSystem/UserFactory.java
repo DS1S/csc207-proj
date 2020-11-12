@@ -3,7 +3,6 @@ package LoginSystem;
 import CoreEntities.Users.Attendee;
 import CoreEntities.Users.Speaker;
 import CoreEntities.Users.User;
-import LoginSystem.Exceptions.InvalidUsertypeException;
 
 public class UserFactory {
 
