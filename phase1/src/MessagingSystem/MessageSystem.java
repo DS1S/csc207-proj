@@ -1,6 +1,7 @@
 package MessagingSystem;
 import SchedulingSystem.EventManager;
 import CoreEntities.Users.Perms;
+import CoreEntities.Users.User;
 import LoginSystem.UserManager;
 import coreUtil.IRunnable;
 import Presenters.InboxUI;
@@ -14,6 +15,9 @@ public class MessageSystem implements IRunnable {
     private UserManager userManager;
     private EventManager eventManager;
     private final String NO_PERMISSION = "You do not have permission to do that!";
+    private final String CANNOT_MESSAGE_ORGANIZER = "You can not message an organizer!";
+    private final String ONE_IS_AN_ORGANIZER = "At least one of your recipients is an organizer. You can not message" +
+            "an organizer!";
     private InboxUI inboxUI;
 
     public MessageSystem(MessageManager messageManager, UserManager userManager,
@@ -30,18 +34,36 @@ public class MessageSystem implements IRunnable {
         int option = scanner.nextInt();
     }
 
-    public void MessageAPerson(String receiver, String message) {
-        messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(),
-                userManager.getUUIDWithUsername(receiver), message);
+    public String MessageAPerson(String receiver, String message) {
+        UUID recipientUUID = userManager.getUUIDWithUsername(receiver);
+        User recipient = userManager.getUserWithUUID(recipientUUID);
+        if (!recipient.getPermissions().get(Perms.canBeMessaged)){
+            return CANNOT_MESSAGE_ORGANIZER;
         }
+        else {
+            messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(),
+                    userManager.getUUIDWithUsername(receiver), message);
+            return "";
+        }
+    }
 
-    public void MessagePeople(List<String> recipients, String message) {
+    public String MessagePeople(List<String> recipients, String message) {
         ArrayList<UUID> recipientUUIDs = new ArrayList<>();
+        ArrayList<User> recipientUsers = new ArrayList<>();
         for (String iter : recipients) {
             recipientUUIDs.add(userManager.getUUIDWithUsername(iter));
         }
+        for (UUID recipientUUID : recipientUUIDs){
+            recipientUsers.add(userManager.getUserWithUUID(recipientUUID));
+        }
+        for (User recipient : recipientUsers){
+            if(!recipient.getPermissions().get(Perms.canBeMessaged)){
+                return ONE_IS_AN_ORGANIZER;
+            }
+        }
         messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(),
                 recipientUUIDs, message);
+        return "";
     }
 
     public String MessageAttendees(List<String> events, String msg) {
