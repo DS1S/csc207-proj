@@ -1,73 +1,98 @@
 package LoginSystem;
 
-import LoginSystem.Exceptions.*;
+import CoreEntities.Users.User;
 import coreUtil.IRunnable;
 
 import java.util.Scanner;
 
 public class AuthenticationSystem implements IRunnable {
-    private LoginHandler loginHandler;
-    private SignupHandler signupHandler;
     private AuthenticationUI authUI;
+    private UserManager um;
+    private final String INVALID_USERNAME = "Invalid Username!";
+    private final String INVALID_PASSWORD = "Invalid Password!";
+    private final String TAKEN_USERNAME = "That username is taken!";
+    private final String ATTENDEE_TYPE = "attendee";
 
     public AuthenticationSystem(UserManager userManager){
-        loginHandler = new LoginHandler(userManager);
-        signupHandler = new SignupHandler(userManager);
+        this.um = userManager;
         authUI = new AuthenticationUI();
+    }
+
+    //returns error string, "" on success.
+    private String loginUser(String username, String password){
+        if (!um.containsUserWithUsername(username.trim())) {
+            return INVALID_USERNAME;
+        }
+
+        if (um.checkPasswordWithUUID(um.getUUIDWithUsername(username), password.trim())) {
+            um.setLoggedInUser(um.getUUIDWithUsername(username));
+        } else {
+            return INVALID_PASSWORD;
+        }
+        return "";
+    }
+
+    //returns error string, "" on success.
+    public String signUp(String name, String username, String password, String type){
+        if (this.um.containsUserWithUsername(username)) {
+            return TAKEN_USERNAME;
+        }
+
+        this.um.addUser(type, name, username, password);
+        return "";
+    }
+
+    private void runSignUp(Scanner scanner){
+        // TODO: Clear window?
+        this.authUI.displayLoginPage();
+        this.authUI.displayUsernamePrompt();
+        String username = scanner.nextLine();
+        this.authUI.displayPasswordPrompt();
+        String password = scanner.nextLine();
+
+        if (loginUser(username, password) != "") {
+            authUI.displayError(loginUser(username, password));
+            runSignUp(scanner);
+        }
+    }
+
+    private void runLogin(Scanner scanner){
+        // TODO: Clear window?
+        this.authUI.displaySigningUpPage();
+        this.authUI.displayNamePrompt();
+        String name = scanner.nextLine();
+        this.authUI.displayUsernamePrompt();
+        String username = scanner.nextLine();
+        this.authUI.displayPasswordPrompt();
+        String password = scanner.nextLine();
+
+        String result = signUp(name, username, password, ATTENDEE_TYPE);
+        if (result != ""){
+            authUI.displayError(result);
+            runLogin(scanner);
+        }
     }
 
     @Override
     public void run() {
         this.authUI.displayWelcomePage();
-        Scanner in = new Scanner(System.in);
-        int option = in.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
         while (option != 1 && option != 2) {
             this.authUI.displayOptionError();
-            option = in.nextInt();
+            option = scanner.nextInt();
         }
 
-        if (option == 1) {
-            this.authUI.displayLoginPage();
-            this.authUI.displayUsernamePrompt();
-            String username = in.nextLine();
-            this.authUI.displayPasswordPrompt();
-            String password = in.nextLine();
-            // TODO: fix this after removing exceptions
-            while (true) {
-                try {
-                    this.loginHandler.loginUser(username, password);
-                    break;
-                } catch (InvalidUsernameException e) {
-                    this.authUI.displayError(e.getMessage());
-                    this.authUI.displayUsernamePrompt();
-                    username = in.nextLine();
-                } catch (InvalidPasswordException e) {
-                    this.authUI.displayError(e.getMessage());
-                    this.authUI.displayPasswordPrompt();
-                    password = in.nextLine();
-                }
-            }
-        } else {
-            this.authUI.displaySigningUpPage();
-            this.authUI.displayNamePrompt();
-            String name = in.nextLine();
-            this.authUI.displayUsernamePrompt();
-            String username = in.nextLine();
-            this.authUI.displayPasswordPrompt();
-            String password = in.nextLine();
-            // TODO: fix this after removing exceptions
-            while (true) {
-                try {
-                    this.signupHandler.signUp(name, username, password, "attendee");
-                    break;
-                } catch (UsernameTakenException e) {
-                    this.authUI.displayError(e.getMessage());
-                    this.authUI.displayUsernamePrompt();
-                    username = in.nextLine();
-                } catch (Exception e) {
-                    this.authUI.displayError(e.getMessage());
-                }
-            }
+        switch(option) {
+            case(1):
+                runSignUp(scanner);
+                break;
+
+            case(2):
+                runLogin(scanner);
+                break;
         }
+
+
     }
 }
