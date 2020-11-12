@@ -59,12 +59,11 @@ public class SystemController implements IRunnable {
         return uManager;
     }
 
-    private void initializeMessageSystem(UserManager userManager, EventManager eventManager,
-                                         FriendManager friendManager){
+    private void initializeMessageSystem(UserManager userManager, EventManager eventManager){
         String filePath = "../database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
-        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager, friendManager);
+        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager);
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size() + 1);
     }
 
