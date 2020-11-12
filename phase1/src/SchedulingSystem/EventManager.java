@@ -179,9 +179,8 @@ public class EventManager {
      * @return A list of attendee UUID for a specific event with param title and hosted by speaker.
      */
     public List<UUID> retrieveAttendees(String title, UUID speakerUUID){
-        List<Event> eventsWithTitle = eventFilterer.retrieveEventsByTitle(mainSchedule, title);
-        List<Event> eventsWithTitleAndSpeaker = eventFilterer.retrieveEventsBySpeaker(eventsWithTitle, speakerUUID);
-        return getUUIDSFromEvents(eventsWithTitleAndSpeaker);
+        List<Event> events = eventFilterer.retrieveEventsBySpeakerAndTitle(mainSchedule, speakerUUID, title);
+        return getUUIDSFromEvents(events);
     }
 
     private List<UUID> getUUIDSFromEvents(List<Event> events){
