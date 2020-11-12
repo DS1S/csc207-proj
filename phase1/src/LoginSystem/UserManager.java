@@ -40,6 +40,10 @@ public class UserManager {
         return false;
     }
 
+    public boolean verifyCredential(UUID userID, String password){
+        return this.users.get(userID).checkPassword(password);
+    }
+
     public UUID getUUIDWithUsername(String username) {
         for (User u : this.users.values()) {
             if (u.getUsername().equals(username)) {
