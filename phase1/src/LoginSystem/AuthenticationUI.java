@@ -30,6 +30,6 @@ public class AuthenticationUI {
     }
 
     public void displaySigningUpPage() {
-        System.out.println("Please enter you user details below.");
+        System.out.println("Please enter your user details below.");
     }
 }

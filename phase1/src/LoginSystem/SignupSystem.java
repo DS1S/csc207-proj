@@ -2,18 +2,27 @@ package LoginSystem;
 
 import coreUtil.IRunnable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SignupSystem implements IRunnable {
     private final String TAKEN_USERNAME = "That username is taken!";
     private UserManager um;
-    private String type;
     private AuthenticationUI authUI;
+    private List<String> possibleTypes;
 
     public SignupSystem(UserManager um, String type){
         this.um = um;
-        this.type = type;
         this.authUI = new AuthenticationUI();
+        this.possibleTypes = new ArrayList<String>();
+        this.possibleTypes.add(type);
+    }
+
+    public SignupSystem(UserManager um, List<String> possibleTypes){
+        this.um = um;
+        this.authUI = new AuthenticationUI();
+        this.possibleTypes = possibleTypes;
     }
 
     //returns error string, "" on success.
@@ -26,7 +35,7 @@ public class SignupSystem implements IRunnable {
         return "";
     }
 
-    public void run(){
+    private void create(String type){
         Scanner scanner = new Scanner(System.in);
         // TODO: Clear window?
         this.authUI.displaySigningUpPage();
@@ -41,6 +50,14 @@ public class SignupSystem implements IRunnable {
         if (result != ""){
             authUI.displayError(result);
             run();
+        }
+    }
+
+    public void run(){
+        // TODO: prompt user to select type, cooresponding to possibleTypes index.
+
+        if (possibleTypes.size() == 1){
+            create(possibleTypes[0]);
         }
     }
 }
