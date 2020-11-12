@@ -34,8 +34,8 @@ public class EventManager {
      * Returns the list of extracted data of all the Events in the conference's main schedule.
      * @return the list of extracted data of all the Events in the conference's main schedule
      */
-    public List<Map<String, String>> retrieveAllEvents() {
-        List<Map<String, String>> dataList = new ArrayList<>();
+    public List<Map<String, Object>> retrieveAllEvents() {
+        List<Map<String, Object>> dataList = new ArrayList<>();
         for (Event event: mainSchedule) {
             dataList.add(event.extractData());
         }
@@ -49,8 +49,8 @@ public class EventManager {
      * @param speaker the UUID of the speaker speaking at the Events
      * @return the list of extracted data of Events that are hosted by the given speaker
      */
-    public List<Map<String, String>> retrieveEventsBySpeaker(UUID speaker) {
-        List<Map<String, String>> dataList = new ArrayList<>();
+    public List<Map<String, Object>> retrieveEventsBySpeaker(UUID speaker) {
+        List<Map<String, Object>> dataList = new ArrayList<>();
         for (Event event: eventFilterer.retrieveEventsBySpeaker(mainSchedule, speaker)) {
             dataList.add(event.extractData());
         }
@@ -64,8 +64,8 @@ public class EventManager {
      * @param attendee the UUID of the attendee
      * @return the list of extracted data of Events that the given attendee is attending
      */
-    public List<Map<String, String>> retrieveEventsByAttendee(UUID attendee) {
-        List<Map<String, String>> dataList = new ArrayList<>();
+    public List<Map<String, Object>> retrieveEventsByAttendee(UUID attendee) {
+        List<Map<String, Object>> dataList = new ArrayList<>();
         for (Event event: eventFilterer.retrieveEventsByAttendee(mainSchedule, attendee)) {
             dataList.add(event.extractData());
         }
@@ -79,8 +79,8 @@ public class EventManager {
      * @param attendee the UUID of the attendee
      * @return the list of extracted data of Events that the given attendee can sign up to
      */
-    public List<Map<String, String>> retrieveSignupAbleEvents(UUID attendee) {
-        List<Map<String, String>> dataList = new ArrayList<>();
+    public List<Map<String, Object>> retrieveSignupAbleEvents(UUID attendee) {
+        List<Map<String, Object>> dataList = new ArrayList<>();
         for (Event event: eventFilterer.retrieveSignupAbleEvents(mainSchedule, attendee)) {
             dataList.add(event.extractData());
         }
@@ -139,9 +139,9 @@ public class EventManager {
      * @param duration the duration of the new Event in minutes
      * @return the list of extracted data of Events that conflict with the scheduling of the new Event
      */
-    public List<Map<String, String>> scheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker,
+    public List<Map<String, Object>> scheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker,
                                      int duration) {
-        List<Map<String, String>> dataList = new ArrayList<>();
+        List<Map<String, Object>> dataList = new ArrayList<>();
         for (Event event: eventScheduler.scheduleEvent(mainSchedule, capacity, room, startTime, title, speaker,
                 duration)) {
             dataList.add(event.extractData());
@@ -172,9 +172,9 @@ public class EventManager {
      * @return the string representation of a list of Events that conflict with the rescheduling of the Event
      * @throws IndexOutOfBoundsException if the given index is invalid
      */
-    public List<Map<String, String>> rescheduleEvent(int index, LocalTime newStartTime,
+    public List<Map<String, Object>> rescheduleEvent(int index, LocalTime newStartTime,
                                        int newDuration) throws IndexOutOfBoundsException {
-        List<Map<String, String>> dataList = new ArrayList<>();
+        List<Map<String, Object>> dataList = new ArrayList<>();
         for (Event event: eventScheduler.rescheduleEvent(mainSchedule, index, newStartTime, newDuration)) {
             dataList.add(event.extractData());
         }
