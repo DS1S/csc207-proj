@@ -34,8 +34,8 @@ public class Inbox {
         return inboxStr.toString();
     }
 
-    public String toString(String Criterion, Object value){
-        List<Message> searchedMessages = retrieveMessageByCriterion(Criterion, value);
+    public String toString(String criterion, Object value){
+        List<Message> searchedMessages = retrieveMessageByCriterion(criterion, value);
         StringBuilder searchedMsgStr = new StringBuilder();
         for(Message msg : searchedMessages){
             searchedMsgStr.append(msg.toString() + "\n");

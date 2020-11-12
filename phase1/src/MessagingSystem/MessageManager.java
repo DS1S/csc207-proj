@@ -30,7 +30,18 @@ public class MessageManager {
         tempInbox.get(received.getSender(received)).add(reply);
     }
 
-    public List<Message> getMessages(User user){
-        return tempInbox.get(user.getUUID());
+    public List<Message> getMessages(UUID user){
+        return tempInbox.get(user);
+    }
+
+    public String toString(UUID user) {
+        List<Message> inbox = getMessages(user);
+
+        StringBuilder s = new StringBuilder();
+        for (Message message : inbox) {
+            s.append(message.toString());
+        }
+
+        return s.toString();
     }
 }
