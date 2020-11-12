@@ -1,6 +1,5 @@
 package Presenters;
 
-
 import CoreEntities.Event;
 import CoreEntities.Users.Speaker;
 
@@ -9,16 +8,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class EventUI {
-    private Schedule schedule;
-    private UUID attendee;
-    private List<Event> events;
-    private List<Event> attendeeEvents;
+    private EventManager eventManager;
+    private UUID user;
 
-    public EventUI(Schedule schedule, UUID attendee) {
-        this.attendee = attendee;
+    public EventUI(Schedule schedule, UUID user) {
+        this.user = user;
         this.events = schedule.events;
         //TODO: make these lists of events with re-worked schedule stuffs
-        this.attendeeEvents = schedule.retrieveEventsByAttendee(attendee).events;
+        this.attendeeEvents = schedule.retrieveEventsByAttendee(user).events;
     }
 
     public void displayList(List<Event> eventList) {
@@ -40,7 +37,7 @@ public class EventUI {
     }
 
     public void displayAttendeeEvents() {
-        System.out.println("----------Your Events---------\n\n");
+        System.out.println("----------Events you are attending---------\n\n");
         displayList(attendeeEvents);
     }
 
@@ -57,7 +54,7 @@ public class EventUI {
     }
 
     public void displaySignupableEvents() {
-        List<Event> signupableEvents = schedule.retrieveSignupAbleEvents(attendee).events;
+        List<Event> signupableEvents = schedule.retrieveSignupAbleEvents(user).events;
         System.out.println("----------Available Events----------\n\n");
         displayList(signupableEvents);
     }
