@@ -41,4 +41,8 @@ public class FriendsList implements Serializable{
         currentFriends.get(user.getUUID()).remove(toDelete.getUUID());
     }
 
+    public boolean isFriend(User user, UUID toCheck){
+        return getFriends(user).contains(toCheck);
+    }
+
 }

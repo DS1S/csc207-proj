@@ -70,4 +70,8 @@ public class UserManager {
     public String getUsernameWithUUID(UUID userUUID){
         return users.get(userUUID).getName();
     }
+
+    public User getUserWithUUID(UUID userUUID){
+        return users.get(userUUID);
+    }
 }
