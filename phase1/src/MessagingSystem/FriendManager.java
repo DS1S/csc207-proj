@@ -4,7 +4,6 @@ import java.util.UUID;
 import java.util.List;
 import java.util.ArrayList;
 import CoreEntities.Users.User;
-import CoreEntities.FriendsList;
 import LoginSystem.UserManager;
 
 /* This class has been commented out because it is not needed for phase 1. It is being kept because it may be
