@@ -25,10 +25,10 @@ public class InboxUI {
         // 2: specific speaker
         switch (type) {
             case 1:
-                System.out.println("Enter the full name of the attendee you would like to send this message to.\n");
+                System.out.println("Enter the username of the attendee you would like to send this message to.\n");
                 break;
             case 2:
-                System.out.println("Enter the full name of the speaker you would like to send this message to.\n");
+                System.out.println("Enter the username of the speaker you would like to send this message to.\n");
                 break;
         }
 
