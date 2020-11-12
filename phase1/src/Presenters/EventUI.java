@@ -34,4 +34,17 @@ public class EventUI {
         System.out.println("----------Available Events----------\n\n");
         System.out.println(eventManager.retrieveSignupAbleEvents(user));
     }
+
+    public void displaySignUpFull() {
+        System.out.println("-------This event is full!-------\n\n");
+    }
+
+    public void displaySignupSuccess() {
+        System.out.println("----------You have successfully registered for the event!----------\n\n");
+    }
+
+    public void displaySignUpDouble() {
+        System.out.println("----------You are already registered in this event!----------\n\n");
+    }
+
 }
