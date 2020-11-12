@@ -20,16 +20,6 @@ public class EventManager {
         eventScheduler = new EventScheduler();
     }
 
-//    private String eventsToString(List<Event> events) {
-//        StringBuilder eventsString = new StringBuilder();
-//        int i = 1;
-//        for (Event event : events) {
-//            eventsString.append("Event #").append(i).append(": ").append(event.toString());
-//            i += 1;
-//        }
-//        return eventsString.toString();
-//    }
-
     /**
      * Returns the list of extracted data of all the Events in the conference's main schedule.
      * @return the list of extracted data of all the Events in the conference's main schedule
@@ -104,10 +94,9 @@ public class EventManager {
      *
      * @param attendee the UUID of the attendee to be signed up
      * @param index the index of the Event, relative to the list of the events that the given attendee can sign up to
-     * @throws IndexOutOfBoundsException if the index is invalid
      */
 
-    public void registerAttendee(UUID attendee, int index) throws IndexOutOfBoundsException {
+    public void registerAttendee(UUID attendee, int index) {
         eventSignUp.registerAttendee(attendee, mainSchedule, index);
     }
 
@@ -119,9 +108,8 @@ public class EventManager {
      *
      * @param attendee the UUID of the attendee to be removed
      * @param index the index of the Event, relative to the list of the events that the given attendee is signed up for
-     * @throws IndexOutOfBoundsException if the index is invalid
      */
-    public void removeAttendee(UUID attendee, int index) throws IndexOutOfBoundsException {
+    public void removeAttendee(UUID attendee, int index) {
         eventSignUp.removeAttendee(attendee, mainSchedule, index);
     }
 
@@ -153,9 +141,8 @@ public class EventManager {
      * Removes the Event at the given index from the conference's main schedule.
      *
      * @param index the index of the Event to be removed, relative to the main schedule
-     * @throws IndexOutOfBoundsException if the given index is invalid
      */
-    public void cancelEvent(int index) throws IndexOutOfBoundsException {
+    public void cancelEvent(int index) {
         eventScheduler.cancelEvent(mainSchedule, index);
     }
 
@@ -170,10 +157,9 @@ public class EventManager {
      * @param newStartTime the new start time for the Event
      * @param newDuration the new duration of the Event in minutes
      * @return the string representation of a list of Events that conflict with the rescheduling of the Event
-     * @throws IndexOutOfBoundsException if the given index is invalid
      */
     public List<Map<String, Object>> rescheduleEvent(int index, LocalTime newStartTime,
-                                       int newDuration) throws IndexOutOfBoundsException {
+                                       int newDuration) {
         List<Map<String, Object>> dataList = new ArrayList<>();
         for (Event event: eventScheduler.rescheduleEvent(mainSchedule, index, newStartTime, newDuration)) {
             dataList.add(event.extractData());

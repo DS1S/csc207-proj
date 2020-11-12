@@ -1,14 +1,24 @@
 package SchedulingSystem;
 
+import LoginSystem.UserManager;
 import coreUtil.IRunnable;
 
+import java.time.DateTimeException;
 import java.time.LocalTime;
-import java.util.UUID;
+import java.util.*;
+
 import Presenters.EventUI;
 
 public class EventSystem implements IRunnable {
     private EventManager eventManager;
+    private UserManager userManager;
     private EventUI eventUI;
+
+    EventSystem(EventManager eventManager, UserManager userManager) {
+        this.eventManager = eventManager;
+        this.userManager = userManager;
+        eventUI = new EventUI(userManager);
+    }
 
     @Override
     public void run() {
@@ -65,11 +75,137 @@ public class EventSystem implements IRunnable {
         }
     }
 
-    public void ScheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker,
-                              int duration) {
-        if (eventManager.scheduleEvent(capacity, room, startTime, title, speaker, duration).isEmpty()) {
+    public void scheduleEvent() {
+        Scanner scanner = new Scanner(System.in);
+        eventUI.displayScheduleStart();
+
+        eventUI.displayTitlePrompt();
+        String title = scanner.nextLine();
+
+        eventUI.displaySpeakerPrompt();
+        String username = scanner.nextLine();
+        while (!(userManager.containsUserWithUsername(username))) {
+            eventUI.displayInvalidSpeaker();
+            eventUI.displaySpeakerPrompt();
+            username = scanner.nextLine();
+        }
+        UUID speaker = userManager.getUUIDWithUsername(username);
+
+        eventUI.displayRoomPrompt();
+        String room = scanner.nextLine();
+
+        eventUI.displayCapacityPrompt();
+        Integer capacity = null;
+        while (capacity == null) {
+            try {
+                capacity = scanner.nextInt();
+            }
+            catch (InputMismatchException e) {
+                eventUI.displayInvalidCapacity();
+                eventUI.displayCapacityPrompt();
+            }
+        }
+
+        LocalTime startTime = processTimeInput();
+
+        int duration = processDurationInput();
+
+        List<Map<String, Object>> eventConflicts = eventManager.scheduleEvent(capacity, room, startTime, title, speaker,
+                duration);
+        if (eventConflicts.isEmpty()) {
             eventUI.displayScheduleSuccess();
         }
+        else {
+            eventUI.displayScheduleFailure(eventConflicts);
+        }
     }
-    //others
+
+    public void rescheduleEvent() {
+        Scanner scanner = new Scanner(System.in);
+        eventUI.displayRescheduleStart();
+        List<Map<String, Object>> eventsList = eventManager.retrieveAllEvents();
+        eventUI.displayEvents(eventsList);
+
+        int index = processIndexInput(eventsList);
+
+        LocalTime startTime = processTimeInput();
+
+        int duration = processDurationInput();
+
+        List<Map<String, Object>> eventConflicts = eventManager.rescheduleEvent(index, startTime, duration);
+        if (eventConflicts.isEmpty()) {
+            eventUI.displayRescheduleSuccess();
+        }
+        else {
+            eventUI.displayRescheduleFailure(eventConflicts);
+        }
+    }
+
+    public void cancelEvent() {
+        Scanner scanner = new Scanner(System.in);
+        eventUI.displayCancelStart();
+        List<Map<String, Object>> eventsList = eventManager.retrieveAllEvents();
+        eventUI.displayEvents(eventsList);
+
+        int index = processIndexInput(eventsList);
+
+        eventManager.cancelEvent(index);
+
+        eventUI.displayCancelSuccess();
+    }
+
+    private int processIndexInput(List<Map<String, Object>> eventsList) {
+        Scanner scanner = new Scanner(System.in);
+        eventUI.displayIndexPrompt();
+        Integer index = null;
+        while (index == null) {
+            try {
+                index = scanner.nextInt();
+                if (index <= 0 || index > eventsList.size()) {
+                    index = null;
+                    eventUI.displayInvalidIndex();
+                    eventUI.displayIndexPrompt();
+                }
+            }
+            catch (InputMismatchException e) {
+                eventUI.displayInvalidIndex();
+                eventUI.displayIndexPrompt();
+            }
+        }
+        return index;
+    }
+
+    private LocalTime processTimeInput() {
+        Scanner scanner = new Scanner(System.in);
+        eventUI.displayTimePrompt();
+        LocalTime startTime = null;
+        while (startTime == null) {
+            try {
+                String[] hourAndMinute = scanner.nextLine().split(":");
+                startTime = LocalTime.of(Integer.parseInt(hourAndMinute[0]), Integer.parseInt(hourAndMinute[1]));
+            }
+            catch (ArrayIndexOutOfBoundsException | NumberFormatException | DateTimeException e) {
+                eventUI.displayInvalidTime();
+                eventUI.displayTimePrompt();
+            }
+        }
+        return startTime;
+    }
+
+    private int processDurationInput() {
+        Scanner scanner = new Scanner(System.in);
+        eventUI.displayDurationPrompt();
+        Integer duration = null;
+        while (duration == null) {
+            try {
+                duration = scanner.nextInt();
+            }
+            catch (InputMismatchException e) {
+                eventUI.displayInvalidDuration();
+                eventUI.displayDurationPrompt();
+            }
+        }
+        return duration;
+    }
+
 }

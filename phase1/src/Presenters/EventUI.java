@@ -8,14 +8,10 @@ import java.util.Map;
 import java.util.UUID;
 
 public class EventUI {
-    private EventManager eventManager;
     private UserManager userManager;
-    private UUID user;
 
-    public EventUI(EventManager eventManager, UserManager userManager, UUID user) {
-        this.eventManager = eventManager;
+    public EventUI(UserManager userManager) {
         this.userManager = userManager;
-        this.user = user;
     }
 
     public void displayEvents(List<Map<String, Object>> eventList) {
@@ -54,7 +50,60 @@ public class EventUI {
         System.out.println("----------You are not registered in this event!----------\n\n");
     }
 
+    public void displayIndexPrompt() { System.out.println("Enter the number of the event you wish to select: ");}
+
+    public void displayInvalidIndex() { System.out.println("You have entered an invalid index."); }
+
+    public void displayScheduleStart() { System.out.println("Enter the required information to schedule a new event.\n"); }
+
+    public void displayTitlePrompt() { System.out.println("Title: "); }
+
+    public void displaySpeakerPrompt() { System.out.println("Speaker's Username: "); }
+
+    public void displayInvalidSpeaker() { System.out.println("Invalid input: Speaker with the given username does not exist!"); }
+
+    public void displayRoomPrompt() { System.out.println("Room: "); }
+
+    public void displayCapacityPrompt() { System.out.println("Event Capacity: "); }
+
+    public void displayInvalidCapacity() { System.out.println("Invalid input: Capacity must be a number!"); }
+
+    public void displayTimePrompt() { System.out.println("Start Time (format HH:MM): "); }
+
+    public void displayInvalidTime() { System.out.println("Invalid input: Please use the format HH:MM."); }
+
+    public void displayDurationPrompt() { System.out.println("Duration (in minutes): "); }
+
+    public void displayInvalidDuration() { System.out.println("Invalid input: Duration must be a number!"); }
+
     public void displayScheduleSuccess() {
         System.out.println("Your event has been successfully scheduled!\n\n");
+    }
+
+    public void displayScheduleFailure(List<Map<String, Object>> eventList) {
+        System.out.println("Your event was not scheduled. Your event conflicts with the following existing events:\n");
+        displayEvents(eventList);
+    }
+
+    public void displayRescheduleStart() {
+        System.out.println("Select the event to be rescheduled.");
+        System.out.println("Then, enter the required information to reschedule the event.");
+    }
+
+    public void displayRescheduleSuccess() {
+        System.out.println("Your event has been successfully rescheduled!\n\n");
+    }
+
+    public void displayRescheduleFailure(List<Map<String, Object>> eventList) {
+        System.out.println("Your event was not rescheduled. Your event conflicts with the following existing events:\n");
+        displayEvents(eventList);
+    }
+
+    public void displayCancelStart() {
+        System.out.println("Select the event to be cancelled.");
+    }
+
+    public void displayCancelSuccess() {
+        System.out.println("The selected event has been cancelled.");
     }
 }
