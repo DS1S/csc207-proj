@@ -142,7 +142,7 @@ public class Event implements Serializable {
      */
     @Override
     public String toString() {
-        return '"' + title + "\" by " + speaker + "\n" +
+        return '\"' + title + "\" by " + speaker + "\n" +
                 startTime + " to " + startTime.plusMinutes(duration) + " in " + room;
     }
 }

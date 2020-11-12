@@ -44,6 +44,7 @@ public class MessageManager {
         return inboxStr.toString();
     }
 
+    /*
     public String toString(String Criterion, Object value, UUID userID){
         List<Message> searchedMessages = retrieveMessageByCriterion(Criterion, value, userID);
         StringBuilder searchedMsgStr = new StringBuilder();
@@ -71,4 +72,5 @@ public class MessageManager {
 
         return matchedMessages;
     }
+    */
 }

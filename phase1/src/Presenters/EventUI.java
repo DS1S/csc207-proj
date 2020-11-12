@@ -2,6 +2,7 @@ package Presenters;
 
 import CoreEntities.Event;
 import CoreEntities.Users.Speaker;
+import SchedulingSystem.EventManager;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -11,11 +12,9 @@ public class EventUI {
     private EventManager eventManager;
     private UUID user;
 
-    public EventUI(Schedule schedule, UUID user) {
+    public EventUI(EventManager eventManager, UUID user) {
+        this.eventManager = eventManager;
         this.user = user;
-        this.events = schedule.events;
-        //TODO: make these lists of events with re-worked schedule stuffs
-        this.attendeeEvents = schedule.retrieveEventsByAttendee(user).events;
     }
 
     public void displayList(List<Event> eventList) {
@@ -33,28 +32,28 @@ public class EventUI {
 
     public void displayAllEvents() {
         System.out.println("----------All Events----------\n\n");
-        displayList(events);
+        displayList(eventManager.retrieveAllEvents());
     }
 
     public void displayAttendeeEvents() {
         System.out.println("----------Events you are attending---------\n\n");
-        displayList(attendeeEvents);
+        displayList(eventManager.retrieveEventsByAttendee(user));
     }
 
     public void displayEventsByTimeInterval(LocalTime startTime, LocalTime endTime) {
-        List<Event> timeIntervalEvents = schedule.retrieveEventsByTimeInterval(startTime, endTime).events;
+        List<Event> timeIntervalEvents = eventManager.retrieveEventsByTimeInterval(startTime, endTime);
         System.out.println("----------Events from " + startTime + " to " + endTime + "----------\n\n");
         displayList(timeIntervalEvents);
     }
 
     public void displayEventsBySpeaker(Speaker speaker) {
-        List<Event> speakerEvents = schedule.retrieveEventsBySpeaker(speaker.getUUID()).events;
+        List<Event> speakerEvents = eventManager.retrieveEventsBySpeaker(speaker.getUUID());
         System.out.println("----------" + speaker.getUsername() + "'s Events----------\n\n");
         displayList(speakerEvents);
     }
 
     public void displaySignupableEvents() {
-        List<Event> signupableEvents = schedule.retrieveSignupAbleEvents(user).events;
+        List<Event> signupableEvents = eventManager.retrieveSignupAbleEvents(user);
         System.out.println("----------Available Events----------\n\n");
         displayList(signupableEvents);
     }
