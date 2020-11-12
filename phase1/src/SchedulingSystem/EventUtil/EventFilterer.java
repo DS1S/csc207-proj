@@ -1,4 +1,4 @@
-package SchedulingSystem;
+package SchedulingSystem.EventUtil;
 
 import CoreEntities.Event;
 
@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  * A class for filtering a list of Events by various criteria.
  */
-class EventFilter {
+class EventFilterer {
     /**
      * Returns a new list of the Events in a given list that fall in a specified time interval.
      *

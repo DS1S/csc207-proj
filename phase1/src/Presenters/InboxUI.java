@@ -1,5 +1,7 @@
 package Presenters;
 
+import CoreEntities.Message;
+import CoreEntities.Users.User;
 import MessagingSystem.MessageManager;
 import java.util.UUID;
 

@@ -40,8 +40,9 @@ public class UserManager {
         return false;
     }
 
-    public boolean verifyCredential(UUID userID, String password){
-        return this.users.get(userID).checkPassword(password);
+    //precon: uuid exists
+    public boolean checkPasswordWithUUID(UUID id, String password){
+        return users.get(id).checkPassword(password);
     }
 
     public UUID getUUIDWithUsername(String username) {

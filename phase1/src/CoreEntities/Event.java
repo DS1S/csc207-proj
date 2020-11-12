@@ -142,7 +142,8 @@ public class Event implements Serializable {
      */
     @Override
     public String toString() {
-        return '\"' + title + "\" by " + speaker + "\n" +
-                startTime + " to " + startTime.plusMinutes(duration) + " in " + room;
+        return '"' + title + "\" by " + speaker + "\n" +
+                startTime + " to " + startTime.plusMinutes(duration) + " in " + room + "\n" +
+                attendees.size() + "/" + capacity + " participants\n\n";
     }
 }
