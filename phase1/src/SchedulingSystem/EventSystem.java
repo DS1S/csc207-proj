@@ -19,14 +19,29 @@ public class EventSystem implements IRunnable {
     }
 
     //signup
-    public void SignUpforEvent(int index, UUID attendee) {
+    public void SignUpforEvent(int index, UUID attendee, String title, UUID speakerUUID) {
         if (eventManager.isEventatCapacity(index)) {
             eventUI.displaySignUpFull();
         }
         else {
-            if (attendee in eventManager)
+            if (eventManager.retrieveAttendees(title, speakerUUID).contains(attendee)) {
+                eventUI.displaySignUpDouble();
+            }
+            else {
+                eventManager.registerAttendee(attendee,index);
+                eventUI.displaySignupSuccess();
+            }
         }
     }
     //cancel
+    public void CancelSignUpforEvent(int index, UUID attendee, String title, UUID speakerUUID) {
+        if (eventManager.retrieveAttendees(title, speakerUUID).contains(attendee)) {
+            eventManager.removeAttendee(attendee, index);
+            eventUI.displayCancelSignupSuccess();
+        } else {
+            eventUI.displayCancelSignUpDouble();
+        }
+    }
+
     //others
 }
