@@ -1,4 +1,4 @@
-package SchedulingSystem;
+package SchedulingSystem.EventUtil;
 
 import CoreEntities.Event;
 

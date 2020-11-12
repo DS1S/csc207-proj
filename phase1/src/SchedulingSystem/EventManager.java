@@ -1,6 +1,9 @@
 package SchedulingSystem;
 
 import CoreEntities.Event;
+import SchedulingSystem.EventUtil.EventFilterer;
+import SchedulingSystem.EventUtil.EventScheduler;
+import SchedulingSystem.EventUtil.EventSignUp;
 
 import java.time.LocalTime;
 import java.util.List;

@@ -1,6 +1,7 @@
-package SchedulingSystem;
+package SchedulingSystem.EventUtil;
 
 import CoreEntities.Event;
+import SchedulingSystem.EventUtil.EventFilterer;
 
 import java.util.List;
 import java.util.UUID;
