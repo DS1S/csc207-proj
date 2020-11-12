@@ -8,13 +8,13 @@ import java.util.UUID;
 /**
  * A class for signing up attendees to Events in a schedule of events.
  */
-class EventSignUpManager {
+class EventSignUp {
 
     /** An EventFilter for filtering a list of Events by various criteria. */
     private EventFilter eventFilter;
 
-    /** Constructs a new EventSignUpManager */
-    EventSignUpManager() { eventFilter = new EventFilter(); }
+    /** Constructs a new EventSignUp */
+    EventSignUp() { eventFilter = new EventFilter(); }
 
     /**
      * Register the given attendee for the Event at the specified index, relative to the events that the attendee
