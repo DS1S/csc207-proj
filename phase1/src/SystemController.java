@@ -7,7 +7,6 @@ import LoginSystem.SignupSystem;
 import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
 import MessagingSystem.MessageSystem;
-import MessagingSystem.FriendManager;
 import Presenters.MainMenuUI;
 import SchedulingSystem.EventManager;
 import SchedulingSystem.EventSystem;

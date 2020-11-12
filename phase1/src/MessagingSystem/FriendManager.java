@@ -7,6 +7,11 @@ import CoreEntities.Users.User;
 import CoreEntities.FriendsList;
 import LoginSystem.UserManager;
 
+/* This class has been commented out because it is not needed for phase 1. It is being kept because it may be
+useful in phase 2.
+ */
+
+/*
 public class FriendManager {
     private UserManager userManager;
     private Map<UUID, FriendsList> friendLists;
@@ -69,3 +74,4 @@ public class FriendManager {
         userFriendList.acceptRequest(userManager.getUserWithUUID(toAccept), user);
     }
 }
+*/

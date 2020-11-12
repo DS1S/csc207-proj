@@ -6,7 +6,11 @@ import java.util.Map;
 import java.util.List;
 import java.util.UUID;
 
+/* This class has been commented out because it is not needed for phase 1. It is being kept because it may be
+useful in phase 2.
+ */
 
+/*
 public class FriendsList implements Serializable{
     private Map<UUID, List<UUID>> currentFriends;
     private Map<UUID, List<UUID>> pendingRequests;
@@ -46,3 +50,4 @@ public class FriendsList implements Serializable{
     }
 
 }
+*/
