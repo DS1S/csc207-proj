@@ -47,7 +47,7 @@ public class SignupSystem implements IRunnable {
         String password = scanner.nextLine();
 
         String result = signUp(name, username, password, type);
-        if (result != ""){
+        if (result.equals("")){
             authUI.displayError(result);
             run();
         }
