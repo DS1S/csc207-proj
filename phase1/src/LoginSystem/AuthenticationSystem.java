@@ -38,6 +38,7 @@ public class AuthenticationSystem implements IRunnable {
 
             case(2):
                 signupSystem.run();
+                run();
                 break;
         }
     }
