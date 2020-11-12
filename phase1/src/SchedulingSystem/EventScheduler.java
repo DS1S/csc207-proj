@@ -118,6 +118,7 @@ class EventScheduler {
 
         if (conflictingEvents.isEmpty()) {
             event.setStartTime(newStartTime);
+            event.setDuration(newDuration);
         }
 
         return conflictingEvents;
