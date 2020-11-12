@@ -15,7 +15,7 @@ public class Event implements Serializable {
     /** The maximum capacity of this Event. */
     private int capacity;
 
-    /** The list of attendees of this Event. */
+    /** The list of UUIDs of the attendees of this Event. */
     private List<UUID> attendees;
 
     /** The room in which this Event takes place. */
@@ -27,10 +27,10 @@ public class Event implements Serializable {
     /** The title of this Event. */
     private String title;
 
-    /** The speaker of this Event. */
+    /** The UUID of the speaker of this Event. */
     private UUID speaker;
 
-    /** The duration of this Event. */
+    /** The duration of this Event in minutes. */
     private int duration;
 
     /**
@@ -39,8 +39,8 @@ public class Event implements Serializable {
      * @param room the room
      * @param startTime the start time
      * @param title the title
-     * @param speaker the speaker
-     * @param duration the duration
+     * @param speaker the UUID of the speaker
+     * @param duration the duration in minutes
      */
     public Event(int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
         this.capacity = capacity;
@@ -57,12 +57,6 @@ public class Event implements Serializable {
      * @return the capacity
      */
     public int getCapacity() { return this.capacity; }
-
-    /**
-     * Sets this Event's capacity to capacity.
-     * @param capacity the new capacity
-     */
-    public void setCapacity(int capacity) { this.capacity = capacity; }
 
     /**
      * Returns true iff the Event is at capacity.
@@ -101,12 +95,6 @@ public class Event implements Serializable {
     public String getRoom() { return this.room; }
 
     /**
-     * Sets this Event's room to room.
-     * @param room the new room
-     */
-    public void setRoom(String room) { this.room = room; }
-
-    /**
      * Returns this Event's start time.
      * @return the start time
      */
@@ -131,25 +119,13 @@ public class Event implements Serializable {
     public String getTitle() { return this.title; }
 
     /**
-     * Sets this Event's title to title.
-     * @param title the new title
-     */
-    public void setTitle(String title) { this.title = title; }
-
-    /**
-     * Returns this Event's speaker.
+     * Returns the UUID of this Event's speaker.
      * @return the speaker
      */
     public UUID getSpeaker() { return this.speaker; }
 
     /**
-     * Sets this Event's speaker to speaker.
-     * @param speaker the new speaker
-     */
-    public void setSpeaker(UUID speaker) { this.speaker = speaker; }
-
-    /**
-     * Returns this Event's duration.
+     * Returns this Event's duration in minutes.
      * @return the duration
      */
     public int getDuration() { return this.duration; }

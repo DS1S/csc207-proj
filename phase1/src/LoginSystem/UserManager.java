@@ -16,35 +16,32 @@ public class UserManager {
         this.users = new HashMap<UUID, User>();
     }
 
-    public UserManager(List<User> users) throws NullPointerException {
-        this.users = new HashMap<UUID, User>();
-        for (User u : users) {
-            this.users.put(u.getUUID(), u);
-        }
-        this.loggedInUser = null;
-    }
+    public void addUser(String type, String username, String password, String name) {
+        UserFactory userCreator = new UserFactory();
+        User u = null;
 
-    public void addUser(User u) {
+        do {
+            u = userCreator.buildUser(type, username, password, name);
+        }while(containsUserWithUUID(u.getUUID()));
+
         this.users.put(u.getUUID(), u);
     }
 
-    public void addUsers(List<User> users) {
-        for (User u : users) {
-            addUser(u);
-        }
+    public boolean containsUserWithUUID(UUID id) {
+        return users.containsKey(id);
     }
 
-    public User getUserWithUUID(UUID id) {
-        return this.users.get(id);
-    }
-
-    public User getUserWithUsername(String username) {
+    public boolean containsUserWithUsername(String username) {
         for (User u : this.users.values()) {
             if (u.getUsername().equals(username)) {
-                return u;
+                return true;
             }
         }
-        return null;
+        return false;
+    }
+
+    public boolean verifyCredential(UUID userID, String password){
+        return this.users.get(userID).checkPassword(password);
     }
 
     public UUID getUUIDWithUsername(String username) {
@@ -56,12 +53,12 @@ public class UserManager {
         return null;
     }
 
-    public User getLoggedInUser() {
-        return loggedInUser;
+    public UUID getLoggedInUserUUID() {
+        return loggedInUser.getUUID();
     }
 
-    public void setLoggedInUser(User loggedInUser) {
-        this.loggedInUser = loggedInUser;
+    public void setLoggedInUser(UUID userID) {
+        this.loggedInUser = this.users.get(userID);
     }
 
     public boolean loggedInHasPermission(Perms permission){
