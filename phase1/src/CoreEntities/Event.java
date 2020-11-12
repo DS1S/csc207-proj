@@ -1,10 +1,8 @@
 package CoreEntities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.time.LocalTime;
-import java.util.UUID;
 
 /**
  * An Event with capacity, attendees, room, start time, title, speaker
@@ -136,14 +134,17 @@ public class Event implements Serializable {
      */
     public void setDuration(int duration) { this.duration = duration; }
 
-    /**
-     * Returns the string representation of the Event.
-     * @return the string representation of the Event
-     */
-    @Override
-    public String toString() {
-        return '"' + title + "\" by " + speaker + "\n" +
-                startTime + " to " + startTime.plusMinutes(duration) + " in " + room + "\n" +
-                attendees.size() + "/" + capacity + " participants\n\n";
+    public Map<String, String> extractData() {
+        Map<String, String> data = new HashMap<>();
+
+        data.put("Title", title);
+        data.put("Speaker", speaker.toString());
+        data.put("StartTime", startTime.toString());
+        data.put("EndTime", getEndTime().toString());
+        data.put("Room", room);
+        data.put("Registered", Integer.toString(attendees.size()));
+        data.put("Capacity", Integer.toString(capacity));
+
+        return data;
     }
 }

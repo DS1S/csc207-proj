@@ -56,23 +56,6 @@ class EventFilterer {
     }
 
     /**
-     * Returns a new list of the Events in a given list that have the specified title.
-     *
-     * @param events the original list of Events to be filtered
-     * @param title the title of the Events
-     * @return a new list of Events that have the given title
-     */
-    public List<Event> retrieveEventsByTitle(List<Event> events, String title) {
-        List<Event> matchedEvents = new ArrayList<>();
-        for (Event event: events) {
-            if (event.getTitle().equals(title)) {
-                matchedEvents.add(event);
-            }
-        }
-        return matchedEvents;
-    }
-
-    /**
      * Returns a new list of the Events in a given list that the specified attendee is attending.
      *
      * @param events the original list of Events to be filtered

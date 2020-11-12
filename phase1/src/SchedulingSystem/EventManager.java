@@ -3,9 +3,7 @@ package SchedulingSystem;
 import CoreEntities.Event;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * A class that manages the Events in a schedule of events.
@@ -22,66 +20,71 @@ public class EventManager {
         eventScheduler = new EventScheduler();
     }
 
-    private String eventsToString(List<Event> events) {
-        StringBuilder eventsString = new StringBuilder();
-        int i = 1;
-        for (Event event : events) {
-            eventsString.append("Event #").append(i).append(": ").append(event.toString());
-            i += 1;
-        }
-        return eventsString.toString();
-    }
+//    private String eventsToString(List<Event> events) {
+//        StringBuilder eventsString = new StringBuilder();
+//        int i = 1;
+//        for (Event event : events) {
+//            eventsString.append("Event #").append(i).append(": ").append(event.toString());
+//            i += 1;
+//        }
+//        return eventsString.toString();
+//    }
 
     /**
-     * Returns the string representation of the list of all the Events in the conference's main schedule.
-     * @return the string representation of all the Events in the conference's main schedule
+     * Returns the list of extracted data of all the Events in the conference's main schedule.
+     * @return the list of extracted data of all the Events in the conference's main schedule
      */
-    public String retrieveAllEvents() {
-        return eventsToString(this.mainSchedule);
+    public List<Map<String, String>> retrieveAllEvents() {
+        List<Map<String, String>> dataList = new ArrayList<>();
+        for (Event event: mainSchedule) {
+            dataList.add(event.extractData());
+        }
+        return dataList;
     }
 
     /**
-     * Returns the string representation of a new list of the Events in the conference's main schedule that are
+     * Returns the list of extracted data of the Events in the conference's main schedule that are
      * hosted by the given speaker.
      *
      * @param speaker the UUID of the speaker speaking at the Events
-     * @return the string representation of a new list of Events that are hosted by the given speaker
+     * @return the list of extracted data of Events that are hosted by the given speaker
      */
-    public String retrieveEventsBySpeaker(UUID speaker) {
-        return eventsToString(eventFilterer.retrieveEventsBySpeaker(mainSchedule, speaker));
+    public List<Map<String, String>> retrieveEventsBySpeaker(UUID speaker) {
+        List<Map<String, String>> dataList = new ArrayList<>();
+        for (Event event: eventFilterer.retrieveEventsBySpeaker(mainSchedule, speaker)) {
+            dataList.add(event.extractData());
+        }
+        return dataList;
     }
 
     /**
-     * Returns the string representation of a new list of the Events in the conference's main schedule that have the
-     * given title.
-     *
-     * @param title the title of the Events
-     * @return the string representation of a new list of Events that have the given title
-     */
-    public String retrieveEventsByTitle(String title) {
-        return eventsToString(eventFilterer.retrieveEventsByTitle(mainSchedule, title));
-    }
-
-    /**
-     * Returns the string representation of a new list of the Events in the conference's main schedule that the given
+     * Returns the list of extracted data of the Events in the conference's main schedule that the given
      * attendee is attending.
      *
      * @param attendee the UUID of the attendee
-     * @return the string representation of a new list of Events that the given attendee is attending
+     * @return the list of extracted data of Events that the given attendee is attending
      */
-    public String retrieveEventsByAttendee(UUID attendee) {
-        return eventsToString(eventFilterer.retrieveEventsByAttendee(mainSchedule, attendee));
+    public List<Map<String, String>> retrieveEventsByAttendee(UUID attendee) {
+        List<Map<String, String>> dataList = new ArrayList<>();
+        for (Event event: eventFilterer.retrieveEventsByAttendee(mainSchedule, attendee)) {
+            dataList.add(event.extractData());
+        }
+        return dataList;
     }
 
     /**
-     * Returns the string representation of a new list of the Events in the conference's main schedule that the given
+     * Returns the list of extracted data of the Events in the conference's main schedule that the given
      * attendee can sign up to.
      *
      * @param attendee the UUID of the attendee
-     * @return the string representation of a new list of Events that the given attendee can sign up to
+     * @return the list of extracted data of Events that the given attendee can sign up to
      */
-    public String retrieveSignupAbleEvents(UUID attendee) {
-        return eventsToString(eventFilterer.retrieveSignupAbleEvents(mainSchedule, attendee));
+    public List<Map<String, String>> retrieveSignupAbleEvents(UUID attendee) {
+        List<Map<String, String>> dataList = new ArrayList<>();
+        for (Event event: eventFilterer.retrieveSignupAbleEvents(mainSchedule, attendee)) {
+            dataList.add(event.extractData());
+        }
+        return dataList;
     }
 
     /**
@@ -123,7 +126,7 @@ public class EventManager {
     }
 
     /**
-     * Returns the string representation of the list of Events from the conference's main schedule that conflict with
+     * Returns the list of extracted data of Events from the conference's main schedule that conflict with
      * the scheduling of a new Event with the given details.
      *
      * Adds the new Event to the conference's main schedule iff there are no conflicting Events.
@@ -134,12 +137,16 @@ public class EventManager {
      * @param title the title of the new Event
      * @param speaker the UUID of the speaker of the new Event
      * @param duration the duration of the new Event in minutes
-     * @return the string representation of a list of Events that conflict with the scheduling of the new Event
+     * @return the list of extracted data of Events that conflict with the scheduling of the new Event
      */
-    public String scheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker,
+    public List<Map<String, String>> scheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker,
                                      int duration) {
-        return eventsToString(eventScheduler.scheduleEvent(mainSchedule, capacity, room, startTime, title, speaker,
-                duration));
+        List<Map<String, String>> dataList = new ArrayList<>();
+        for (Event event: eventScheduler.scheduleEvent(mainSchedule, capacity, room, startTime, title, speaker,
+                duration)) {
+            dataList.add(event.extractData());
+        }
+        return dataList;
     }
 
     /**
@@ -153,7 +160,7 @@ public class EventManager {
     }
 
     /**
-     * Returns the string representation of the list of Events from the conference's main schedule that conflict with
+     * Returns the list of extracted data of Events from the conference's main schedule that conflict with
      * the rescheduling of the at the specified index.
      *
      * Reschedules the Event so that it has start time newStartTime and duration newDuration iff there are no
@@ -165,9 +172,13 @@ public class EventManager {
      * @return the string representation of a list of Events that conflict with the rescheduling of the Event
      * @throws IndexOutOfBoundsException if the given index is invalid
      */
-    public String rescheduleEvent(int index, LocalTime newStartTime,
+    public List<Map<String, String>> rescheduleEvent(int index, LocalTime newStartTime,
                                        int newDuration) throws IndexOutOfBoundsException {
-        return eventsToString(eventScheduler.rescheduleEvent(mainSchedule, index, newStartTime, newDuration));
+        List<Map<String, String>> dataList = new ArrayList<>();
+        for (Event event: eventScheduler.rescheduleEvent(mainSchedule, index, newStartTime, newDuration)) {
+            dataList.add(event.extractData());
+        }
+        return dataList;
     }
 
     /**
