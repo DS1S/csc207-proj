@@ -2,6 +2,7 @@ import CoreEntities.Users.Perms;
 import FileHandleSystem.FileSerializer;
 import FileHandleSystem.TerminationWorker;
 import LoginSystem.AuthenticationSystem;
+import LoginSystem.SignupSystem;
 import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
 import MessagingSystem.MessageSystem;
@@ -22,22 +23,6 @@ public class SystemController implements IRunnable {
 
     public void run(){
         initializeSubSystems();
-
-        //TODO
-        /*
-        We need to essentially control the main menu from here, this will be the main loop
-        all other subsystems will run within here until program terminates.
-
-        Authenticate the user via authentication system;
-        Add only the systems the user is allowed to access into subSystems;
-        This can be done by adding some method that check if a user has a required permission.
-
-        while(user is logged in):
-            Present menu for all different systems; Might vary based on permissions
-            Cycle between user's choice then run the required system;
-            once the user exists that it will return to this loop and continue until fully
-            exited;
-        */
 
         subSystems.get(0).run();
         Scanner input = new Scanner(System.in);
@@ -91,7 +76,8 @@ public class SystemController implements IRunnable {
 
     private void initializeUserCreatorSystem(UserManager userManager){
         if (userManager.loggedInHasPermission(Perms.canSignUpUser)){
-            //Need UserCreatorSystem
+            IRunnable signUpSystem = new SignupSystem(userManager, "speaker");
+            subSystems.put(subSystems.size() + 1, signUpSystem);
         }
     }
 

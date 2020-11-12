@@ -13,10 +13,10 @@ import java.util.UUID;
 class EventScheduler {
 
     /** An EventFilter for filtering a list of Events by various criteria. */
-    private EventFilter eventFilter;
+    private final EventFilterer eventFilter;
 
     /** Constructs a new EventScheduler. */
-    EventScheduler() { eventFilter = new EventFilter(); }
+    EventScheduler() { eventFilter = new EventFilterer(); }
 
     /**
      * Returns a new list of the Events in a given list that are in the specified room during the specified interval.

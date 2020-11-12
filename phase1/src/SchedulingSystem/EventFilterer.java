@@ -108,4 +108,15 @@ class EventFilterer {
         }
         return matchedEvents;
     }
+
+
+    public List<Event> retrieveEventsBySpeakerAndTitle(List<Event> events, UUID speaker, String title){
+        List<Event> matchedEvents = new ArrayList<>();
+        for (Event event: events) {
+            if (event.getTitle().equals(title) && event.getSpeaker().equals(speaker)) {
+                matchedEvents.add(event);
+            }
+        }
+        return matchedEvents;
+    }
 }
