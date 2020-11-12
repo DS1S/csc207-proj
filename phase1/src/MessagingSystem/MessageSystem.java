@@ -15,18 +15,14 @@ public class MessageSystem implements IRunnable {
     private MessageManager messageManager;
     private UserManager userManager;
     private EventManager eventManager;
-    private FriendManager friendManager;
     private final String NO_PERMISSION = "You do not have permission to do that!";
-    private final String NOT_A_FRIEND = "This user is not on your friends list!";
-    private final String ONE_NOT_FRIEND = "At least one intended recipient is not on your friends list!";
     private InboxUI inboxUI;
 
     public MessageSystem(MessageManager messageManager, UserManager userManager,
-                         EventManager eventManager, FriendManager friendManager) {
+                         EventManager eventManager) {
         this.messageManager = messageManager;
         this.userManager = userManager;
         this.eventManager = eventManager;
-        this.friendManager = friendManager;
     }
 
     @Override
