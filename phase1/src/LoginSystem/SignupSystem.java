@@ -47,17 +47,25 @@ public class SignupSystem implements IRunnable {
         String password = scanner.nextLine();
 
         String result = signUp(name, username, password, type);
-        if (result != ""){
+        if (result.equals("")){
             authUI.displayError(result);
             run();
         }
     }
 
     public void run(){
+        // TODO: Clear window?
         // TODO: prompt user to select type, cooresponding to possibleTypes index.
+        int input = 0; // TODO: Take input
+        if (input >= possibleTypes.size()){
+            //invalid type (out of bounds)
+            // TODO: display error
+            run();
+        }
+        create(possibleTypes.get(0));
 
         if (possibleTypes.size() == 1){
-            create(possibleTypes[0]);
+            create(possibleTypes.get(0));
         }
     }
 }
