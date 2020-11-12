@@ -1,6 +1,8 @@
 package SchedulingSystem;
 
 import coreUtil.IRunnable;
+
+import java.time.LocalTime;
 import java.util.UUID;
 import Presenters.EventUI;
 
@@ -63,5 +65,11 @@ public class EventSystem implements IRunnable {
         }
     }
 
+    public void ScheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker,
+                              int duration) {
+        if (eventManager.scheduleEvent(capacity, room, startTime, title, speaker, duration).isEmpty()) {
+            eventUI.displayScheduleSuccess();
+        }
+    }
     //others
 }
