@@ -32,6 +32,27 @@ public class EventUI {
         }
     }
 
+    public void displayScheduleOptions() {
+        System.out.println("What would you like to do?\n");
+        System.out.println("1. View all events.");
+        System.out.println("2. Schedule a new event.");
+        System.out.println("3. Reschedule an existing event.");
+        System.out.println("4. Cancel an existing event.");
+    }
+
+    public void displaySignupOptions() {
+        System.out.println("What would you like to do?\n");
+        System.out.println("1. View all events.");
+        System.out.println("2. Sign up for an event.");
+        System.out.println("3. View events you have signed up for.");
+    }
+
+    public void displaySpeakerOptions() {
+        System.out.println("What would you like to do?\n");
+        System.out.println("1. View all events.");
+        System.out.println("2. View events you are speaking at.");
+    }
+
     public void displaySignUpFull() {
         System.out.println("-------This event is full!-------\n\n");
     }

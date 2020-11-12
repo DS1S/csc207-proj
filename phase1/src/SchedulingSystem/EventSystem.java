@@ -19,6 +19,45 @@ public class EventSystem implements IRunnable {
 
     @Override
     public void run() {
+        Perms[] possiblePerms = {canSchedule, canSignUpEvent, canSpeakAtTalk};
+        Scanner scanner = new Scanner(System.in);
+
+        if (userManager.loggedInHasPermission(canSchedule)) {
+            eventUI.displayScheduleOptions();
+            int index = processIndexInput(4);
+            switch (index) {
+                case(1):
+                    eventUI.displayEvents(eventManager.retrieveAllEvents());
+                case(2):
+                    scheduleEvent();
+                case(3):
+                    rescheduleEvent();
+                case(4):
+                    cancelEvent();
+            }
+        }
+        else if (userManager.loggedInHasPermission(canSignUpEvent)) {
+            eventUI.displaySignupOptions();
+            int index = processIndexInput(3);
+            switch (index) {
+                case(1):
+                    eventUI.displayEvents(eventManager.retrieveAllEvents());
+                case(2):
+                    SignUpforEvent();
+                case(3):
+                    eventUI.displayEvents(eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID()));
+            }
+        }
+        else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
+            eventUI.displaySpeakerOptions();
+            int index = processIndexInput(2);
+            switch (index) {
+                case(1):
+                    eventUI.displayEvents(eventManager.retrieveAllEvents());
+                case(2):
+                    eventUI.displayEvents(eventManager.retrieveEventsBySpeaker(userManager.getLoggedInUserUUID()));
+            }
+        }
     }
 
     @Override
@@ -123,7 +162,7 @@ public class EventSystem implements IRunnable {
         List<Map<String, Object>> eventsList = eventManager.retrieveAllEvents();
         eventUI.displayEvents(eventsList);
 
-        int index = processIndexInput(eventsList);
+        int index = processIndexInput(eventsList.size());
 
         LocalTime startTime = processTimeInput();
 
@@ -144,21 +183,21 @@ public class EventSystem implements IRunnable {
         List<Map<String, Object>> eventsList = eventManager.retrieveAllEvents();
         eventUI.displayEvents(eventsList);
 
-        int index = processIndexInput(eventsList);
+        int index = processIndexInput(eventsList.size());
 
         eventManager.cancelEvent(index);
 
         eventUI.displayCancelSuccess();
     }
 
-    private int processIndexInput(List<Map<String, Object>> eventsList) {
+    private int processIndexInput(int max) {
         Scanner scanner = new Scanner(System.in);
         eventUI.displayIndexPrompt();
         Integer index = null;
         while (index == null) {
             try {
                 index = scanner.nextInt();
-                if (index <= 0 || index > eventsList.size()) {
+                if (index <= 0 || index > max) {
                     index = null;
                     eventUI.displayInvalidIndex();
                     eventUI.displayIndexPrompt();
