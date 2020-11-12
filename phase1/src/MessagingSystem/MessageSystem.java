@@ -1,8 +1,6 @@
 package MessagingSystem;
 import SchedulingSystem.EventManager;
 import CoreEntities.Users.Perms;
-import CoreEntities.Users.User;
-import CoreEntities.FriendsList;
 import LoginSystem.UserManager;
 import coreUtil.IRunnable;
 import Presenters.InboxUI;
