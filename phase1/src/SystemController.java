@@ -5,6 +5,7 @@ import LoginSystem.AuthenticationSystem;
 import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
 import MessagingSystem.MessageSystem;
+import Presenters.MainMenuUI;
 import SchedulingSystem.EventManager;
 import SchedulingSystem.EventSystem;
 import coreUtil.IRunnable;
@@ -17,6 +18,7 @@ public class SystemController implements IRunnable {
 
     private Map<String, Object> managers = new HashMap<>();
     private Map<Integer, IRunnable> subSystems = new HashMap<>();
+    private MainMenuUI mainMenu;
 
     public void run(){
         initializeSubSystems();
@@ -41,12 +43,13 @@ public class SystemController implements IRunnable {
         Scanner input = new Scanner(System.in);
         int option = input.nextInt();
         while (option != subSystems.size() + 1){
-            // Walter display the menu here
+            mainMenu.displayMainMenu(subSystems);
+
             if (subSystems.containsKey(option)){
                 subSystems.get(option).run();
             }
             else if (option != subSystems.size() + 1){
-                //Walter print out invalid input
+                mainMenu.displayInvalidInput(subSystems);
             }
         }
     }
