@@ -40,7 +40,6 @@ public class UserManager {
         return false;
     }
 
-    //precon: uuid exists
     public boolean checkPasswordWithUUID(UUID id, String password){
         return users.get(id).checkPassword(password);
     }
@@ -71,7 +70,4 @@ public class UserManager {
         return users.get(userUUID).getName();
     }
 
-    public User getUserWithUUID(UUID userUUID){
-        return users.get(userUUID);
-    }
 }
