@@ -43,22 +43,6 @@ public class EventManager {
     }
 
     /**
-     * Returns the string representation of a new list of the Events in the conference's main schedule that fall in
-     * a given time interval.
-     *
-     * All the Events in the new list either:
-     *  - have a start time at or before start, and an end time at or after start and at or before end, or
-     *  - have a start time at or after start and before end, and an end time after end
-     *
-     * @param start the start time of the interval
-     * @param end the end time of the interval
-     * @return the string representation of a new list of Events that fall in a given time interval
-     */
-    public String retrieveEventsByTimeInterval(LocalTime start, LocalTime end) {
-        return eventsToString(eventFilterer.retrieveEventsByTimeInterval(mainSchedule, start, end));
-    }
-
-    /**
      * Returns the string representation of a new list of the Events in the conference's main schedule that are
      * hosted by the given speaker.
      *
