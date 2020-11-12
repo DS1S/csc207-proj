@@ -45,7 +45,7 @@ public class SystemController implements IRunnable {
             if (subSystems.containsKey(option)){
                 subSystems.get(option).run();
             }
-            else{
+            else if (option != subSystems.size() + 1){
                 //Walter print out invalid input
             }
         }

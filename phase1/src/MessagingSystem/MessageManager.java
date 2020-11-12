@@ -2,6 +2,7 @@ package MessagingSystem;
 import CoreEntities.Users.User;
 import CoreEntities.Message;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.List;
@@ -34,7 +35,40 @@ public class MessageManager {
         tempInbox.get(received.getSender(received)).add(reply);
     }
 
-    public List<Message> getMessages(User user){
-        return tempInbox.get(user.getUUID());
+    public String toString(UUID userID){
+        StringBuilder inboxStr = new StringBuilder();
+        List<Message> inbox = tempInbox.get(userID);
+        for(Message msg : inbox){
+            inboxStr.append(msg.toString() + "\n");
+        }
+        return inboxStr.toString();
+    }
+
+    public String toString(String Criterion, Object value, UUID userID){
+        List<Message> searchedMessages = retrieveMessageByCriterion(Criterion, value, userID);
+        StringBuilder searchedMsgStr = new StringBuilder();
+        for(Message msg : searchedMessages){
+            searchedMsgStr.append(msg.toString() + "\n");
+        }
+        if (searchedMsgStr.toString().isEmpty()) return "Search results: 0";
+        return searchedMsgStr.toString();
+    }
+
+    private List<Message> retrieveMessageByCriterion(String criterion, Object value, UUID userID) {
+        List<Message> matchedMessages = new ArrayList<>();
+        List<Message> inbox = tempInbox.get(userID);
+        try{
+            for (Message msg : inbox){
+                Class<?> msgType = msg.getClass();
+                Method desiredMethod = msgType.getMethod("get"+criterion);
+                if(desiredMethod.invoke(msgType).equals(value)){
+                    matchedMessages.add(msg);
+                }
+            }
+        } catch (ReflectiveOperationException e) {
+            return new ArrayList<>();
+        }
+
+        return matchedMessages;
     }
 }
