@@ -2,6 +2,9 @@ package LoginSystem;
 
 import java.util.Scanner;
 
+/**
+ * UI class for printing various prompts and errors to the screen as needed.
+ */
 public class AuthenticationUI {
     public void displayWelcomePage() {
         System.out.println("        TECH CONFERENCE SYSTEM");
