@@ -31,4 +31,9 @@ public class MessageSystem implements IRunnable {
         messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(),
                 recipientUUIDs, message);
     }
+
+    @Override
+    public String toString() {
+        return "Messaging";
+    }
 }

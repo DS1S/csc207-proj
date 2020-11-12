@@ -3,8 +3,6 @@ package Presenters;
 import CoreEntities.Message;
 import CoreEntities.Users.User;
 import MessagingSystem.MessageManager;
-
-import java.util.List;
 import java.util.UUID;
 
 public class InboxUI {
