@@ -11,12 +11,12 @@ import java.util.UUID;
  */
 public class EventManager {
     private List<Event> mainSchedule;
-    private EventFilter eventFilter;
+    private EventFilterer eventFilterer;
     private EventSignUp eventSignUp;
     private EventScheduler eventScheduler;
 
     EventManager() {
-        eventFilter = new EventFilter();
+        eventFilterer = new EventFilterer();
         eventSignUp = new EventSignUp();
         eventScheduler = new EventScheduler();
     }
@@ -52,7 +52,7 @@ public class EventManager {
      * @return the string representation of a new list of Events that fall in a given time interval
      */
     public String retrieveEventsByTimeInterval(LocalTime start, LocalTime end) {
-        return eventsToString(eventFilter.retrieveEventsByTimeInterval(mainSchedule, start, end));
+        return eventsToString(eventFilterer.retrieveEventsByTimeInterval(mainSchedule, start, end));
     }
 
     /**
@@ -63,7 +63,7 @@ public class EventManager {
      * @return the string representation of a new list of Events that are hosted by the given speaker
      */
     public String retrieveEventsBySpeaker(UUID speaker) {
-        return eventsToString(eventFilter.retrieveEventsBySpeaker(mainSchedule, speaker));
+        return eventsToString(eventFilterer.retrieveEventsBySpeaker(mainSchedule, speaker));
     }
 
     /**
@@ -74,7 +74,7 @@ public class EventManager {
      * @return the string representation of a new list of Events that have the given title
      */
     public String retrieveEventsByTitle(String title) {
-        return eventsToString(eventFilter.retrieveEventsByTitle(mainSchedule, title));
+        return eventsToString(eventFilterer.retrieveEventsByTitle(mainSchedule, title));
     }
 
     /**
@@ -85,7 +85,7 @@ public class EventManager {
      * @return the string representation of a new list of Events that the given attendee is attending
      */
     public String retrieveEventsByAttendee(UUID attendee) {
-        return eventsToString(eventFilter.retrieveEventsByAttendee(mainSchedule, attendee));
+        return eventsToString(eventFilterer.retrieveEventsByAttendee(mainSchedule, attendee));
     }
 
     /**
@@ -96,7 +96,7 @@ public class EventManager {
      * @return the string representation of a new list of Events that the given attendee can sign up to
      */
     public String retrieveSignupAbleEvents(UUID attendee) {
-        return eventsToString(eventFilter.retrieveSignupAbleEvents(mainSchedule, attendee));
+        return eventsToString(eventFilterer.retrieveSignupAbleEvents(mainSchedule, attendee));
     }
 
     /**

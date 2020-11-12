@@ -92,7 +92,5 @@ public class AuthenticationSystem implements IRunnable {
                 runLogin(scanner);
                 break;
         }
-
-
     }
 }

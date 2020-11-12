@@ -1,6 +1,5 @@
 package Presenters;
 
-import CoreEntities.Inbox;
 import CoreEntities.Message;
 import CoreEntities.Users.User;
 import MessagingSystem.MessageManager;
