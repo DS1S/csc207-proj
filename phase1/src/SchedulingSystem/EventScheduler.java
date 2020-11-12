@@ -1,4 +1,4 @@
-package SchedulingSystem.EventUtil;
+package SchedulingSystem;
 
 import CoreEntities.Event;
 
@@ -13,10 +13,10 @@ import java.util.UUID;
 class EventScheduler {
 
     /** An EventFilter for filtering a list of Events by various criteria. */
-    private EventFilterer eventFilterer;
+    private EventFilter eventFilter;
 
     /** Constructs a new EventScheduler. */
-    EventScheduler() { eventFilterer = new EventFilterer(); }
+    EventScheduler() { eventFilter = new EventFilter(); }
 
     /**
      * Returns a new list of the Events in a given list that are in the specified room during the specified interval.
@@ -29,7 +29,7 @@ class EventScheduler {
      */
     private List<Event> getRoomConflicts(List<Event> events, String room, LocalTime start, LocalTime end) {
         List<Event> conflictingEvents = new ArrayList<>();
-        for (Event event: eventFilterer.retrieveEventsByTimeInterval(events, start, end)) {
+        for (Event event: eventFilter.retrieveEventsByTimeInterval(events, start, end)) {
             if (event.getRoom().equals(room)) {
                 conflictingEvents.add(event);
             }
@@ -49,7 +49,7 @@ class EventScheduler {
      */
     private List<Event> getSpeakerConflicts(List<Event> events, UUID speaker, LocalTime start, LocalTime end) {
         List<Event> conflictingEvents = new ArrayList<>();
-        for (Event event: eventFilterer.retrieveEventsByTimeInterval(events, start, end)) {
+        for (Event event: eventFilter.retrieveEventsByTimeInterval(events, start, end)) {
             if (event.getSpeaker().equals(speaker)) {
                 conflictingEvents.add(event);
             }
@@ -118,6 +118,7 @@ class EventScheduler {
 
         if (conflictingEvents.isEmpty()) {
             event.setStartTime(newStartTime);
+            event.setDuration(newDuration);
         }
 
         return conflictingEvents;
