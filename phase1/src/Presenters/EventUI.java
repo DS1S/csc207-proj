@@ -12,8 +12,7 @@ public class EventUI {
     private UserManager userManager;
     private UUID user;
 
-    public EventUI(EventManager eventManager, UserManager userManager, UUID user) {
-        this.eventManager = eventManager;
+    public EventUI(UserManager userManager, UUID user) {
         this.userManager = userManager;
         this.user = user;
     }
