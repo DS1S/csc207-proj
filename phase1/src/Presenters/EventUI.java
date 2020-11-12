@@ -22,12 +22,12 @@ public class EventUI {
         System.out.println("----------Events----------");
         StringBuilder sb = new StringBuilder();
 
-        for (Map<String, Object> event : eventList) {
-            sb.append(event.get("Title")).append("\n");
-            sb.append(userManager.getUsernameWithUUID((UUID)event.get("Speaker"))).append("\n");
-            sb.append(event.get("StartTime")).append(" to ").append(event.get("EndTime")).append("\n");
-            sb.append(event.get("Room")).append("\n");
-            sb.append(event.get("Registered")).append("/").append(event.get("Capacity")).append("\n");
+        for (Map<String, Object> data : eventList) {
+            sb.append(data.get("Title")).append("\n");
+            sb.append(userManager.getUsernameWithUUID((UUID)data.get("Speaker"))).append("\n");
+            sb.append(data.get("StartTime")).append(" to ").append(data.get("EndTime")).append("\n");
+            sb.append(data.get("Room")).append("\n");
+            sb.append(data.get("Registered")).append("/").append(data.get("Capacity")).append("\n");
 
             System.out.println(sb.toString());
             sb.setLength(0);
