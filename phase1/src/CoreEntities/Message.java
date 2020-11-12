@@ -22,9 +22,13 @@ public class Message implements Serializable {
         this.timeSent = timeSent;
     }
 
-    public UUID getSender(Message msg){ return msg.sender; }
+    public UUID getSender() {
+        return sender;
+    }
 
-    public UUID getRecipient(Message msg){ return msg.recipient; }
+    public UUID getRecipient(){
+        return recipient;
+    }
 
 
     public Map<String, Object> extractData() {

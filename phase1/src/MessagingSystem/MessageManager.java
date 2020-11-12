@@ -33,7 +33,7 @@ public class MessageManager {
     }
 
     public void replyToMessage(Message received, Message reply){
-        tempInbox.get(received.getSender(received)).add(reply);
+        tempInbox.get(received.getSender()).add(reply);
     }
 
 
