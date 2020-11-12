@@ -8,7 +8,6 @@ public class Speaker extends User {
 
     protected void setPermissions(){
         permissions.put(Perms.canBeMessaged, true);
-        permissions.put(Perms.canCreateEvent, false);
         permissions.put(Perms.canMessageTalk, true);
         permissions.put(Perms.canSchedule, false);
         permissions.put(Perms.canSignUpEvent, false);

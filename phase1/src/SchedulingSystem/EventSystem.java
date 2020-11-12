@@ -1,5 +1,6 @@
 package SchedulingSystem;
 
+import CoreEntities.Users.Perms;
 import LoginSystem.UserManager;
 import coreUtil.IRunnable;
 
@@ -9,16 +10,12 @@ import java.util.*;
 
 import Presenters.EventUI;
 
+import static CoreEntities.Users.Perms.*;
+
 public class EventSystem implements IRunnable {
     private EventManager eventManager;
     private UserManager userManager;
     private EventUI eventUI;
-
-    EventSystem(EventManager eventManager, UserManager userManager) {
-        this.eventManager = eventManager;
-        this.userManager = userManager;
-        eventUI = new EventUI(userManager);
-    }
 
     @Override
     public void run() {
