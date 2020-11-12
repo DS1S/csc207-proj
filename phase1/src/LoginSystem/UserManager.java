@@ -70,4 +70,9 @@ public class UserManager {
         return users.get(userUUID).getName();
     }
 
+    public boolean hasPermission(String username, Perms permission){
+        UUID userUUID = getUUIDWithUsername(username);
+        return this.users.get(userUUID).getPermissions().get(permission);
+    }
+
 }
