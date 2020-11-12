@@ -3,7 +3,6 @@ package Presenters;
 
 import CoreEntities.Event;
 import CoreEntities.Users.Speaker;
-import SchedulingSystem.Schedule;
 
 import java.time.LocalTime;
 import java.util.List;
