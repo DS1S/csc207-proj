@@ -13,7 +13,7 @@ import java.util.UUID;
 class EventScheduler {
 
     /** An EventFilter for filtering a list of Events by various criteria. */
-    private EventFilterer eventFilter;
+    private final EventFilterer eventFilter;
 
     /** Constructs a new EventScheduler. */
     EventScheduler() { eventFilter = new EventFilterer(); }

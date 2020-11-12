@@ -3,6 +3,7 @@ package SchedulingSystem;
 import CoreEntities.Event;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -157,5 +158,36 @@ public class EventManager {
     public String rescheduleEvent(int index, LocalTime newStartTime,
                                        int newDuration) throws IndexOutOfBoundsException {
         return eventsToString(eventScheduler.rescheduleEvent(mainSchedule, index, newStartTime, newDuration));
+    }
+
+    /**
+     * Returns the list of all UUIDs of attendees attending any of a speakers talk.
+     *
+     * @param speakerUUID UUID of speaker
+     * @return A list of attendee UUID for all talks the speaker hosts
+     */
+    public List<UUID> retrieveAttendees(UUID speakerUUID){
+        List<Event> events = eventFilterer.retrieveEventsBySpeaker(mainSchedule, speakerUUID);
+        return getUUIDSFromEvents(events);
+    }
+
+    /**
+     * Returns the list of all UUIDs of attendees attending a specific event.
+     *
+     * @param speakerUUID UUID of speaker
+     * @param title title of a talk
+     * @return A list of attendee UUID for a specific event with param title and hosted by speaker.
+     */
+    public List<UUID> retrieveAttendees(String title, UUID speakerUUID){
+        List<Event> events = eventFilterer.retrieveEventsBySpeakerAndTitle(mainSchedule, speakerUUID, title);
+        return getUUIDSFromEvents(events);
+    }
+
+    private List<UUID> getUUIDSFromEvents(List<Event> events){
+        List<UUID> attendeeIDS = new ArrayList<>();
+        for (Event event : events){
+            attendeeIDS.addAll(event.getAttendees());
+        }
+        return attendeeIDS;
     }
 }
