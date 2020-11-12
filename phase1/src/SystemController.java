@@ -6,6 +6,7 @@ import LoginSystem.SignupSystem;
 import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
 import MessagingSystem.MessageSystem;
+import MessagingSystem.FriendManager;
 import Presenters.MainMenuUI;
 import SchedulingSystem.EventManager;
 import SchedulingSystem.EventSystem;
@@ -58,11 +59,12 @@ public class SystemController implements IRunnable {
         return uManager;
     }
 
-    private void initializeMessageSystem(UserManager userManager, EventManager eventManager){
+    private void initializeMessageSystem(UserManager userManager, EventManager eventManager,
+                                         FriendManager friendManager){
         String filePath = "../database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
-        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager);
+        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager, friendManager);
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size() + 1);
     }
 
