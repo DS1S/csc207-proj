@@ -110,6 +110,14 @@ class EventFilterer {
     }
 
 
+    /**
+     * Returns a new list of the Events in a given list that have the specified title and speaker.
+     *
+     * @param events the original list of Events to be filtered
+     * @param speaker the UUID of the speaker
+     * @param title the title of the Events
+     * @return List of events that match criteria of Speaker and title.
+     */
     public List<Event> retrieveEventsBySpeakerAndTitle(List<Event> events, UUID speaker, String title){
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
