@@ -16,6 +16,10 @@ public class FriendManager {
         this.friendLists = friendLists;
     }
 
+    public FriendsList getFriendsList(User user){
+        return friendLists.get(user.getUUID());
+    }
+
     public void addFriendsList(UUID userId, FriendsList listToAdd){
         friendLists.put(userId, listToAdd);
     }
