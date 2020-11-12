@@ -1,5 +1,7 @@
 package CoreEntities;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.lang.String;
 import java.time.LocalTime;
@@ -24,16 +26,16 @@ public class Message implements Serializable {
 
     public UUID getRecipient(Message msg){ return msg.recipient; }
 
-    @Override
-    public String toString() {
-        StringBuilder s = new StringBuilder();
 
-        //TODO: GET USER NAMES INSTEAD OF UUIDS
-        s.append("From: " + sender + "\n");
-        s.append("To: " + recipient + "\n");
-        s.append(timeSent);
-        s.append(body);
+    public Map<String, Object> extractData() {
+        Map<String, Object> messageData = new HashMap<>();
 
-        return s.toString();
+        messageData.put("msgID", msgId);
+        messageData.put("sender", sender);
+        messageData.put("recipient", recipient);
+        messageData.put("body", body);
+        messageData.put("timeSent", timeSent);
+
+        return messageData;
     }
 }

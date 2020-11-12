@@ -1,3 +1,4 @@
+import CoreEntities.Event;
 import CoreEntities.Users.Perms;
 import FileHandleSystem.FileSerializer;
 import FileHandleSystem.TerminationWorker;
@@ -42,9 +43,10 @@ public class SystemController implements IRunnable {
 
     private void initializeSubSystems(){
         UserManager userManager = initializeLoginSystem();
+        EventManager eventManager = initializeEventSystem(userManager);
 
         initializeUserCreatorSystem(userManager);
-        initializeMessageSystem(userManager);
+        initializeMessageSystem(userManager, eventManager);
         initializeEventSystem(userManager);
 
         initializeShutDownHook();
@@ -59,21 +61,21 @@ public class SystemController implements IRunnable {
         return uManager;
     }
 
-    private void initializeMessageSystem(UserManager userManager, EventManager eventManager,
-                                         FriendManager friendManager){
+    private void initializeMessageSystem(UserManager userManager, EventManager eventManager){
         String filePath = "../database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
-        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager, friendManager);
+        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager);
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size() + 1);
     }
 
-    private void initializeEventSystem(UserManager userManager){
+    private EventManager initializeEventSystem(UserManager userManager){
         String filePath = "../database/ESManager.ser";
         FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
         EventManager eventManager = eventManagerLoader.loadObject();
         IRunnable eventSystem = new EventSystem();
         addSystemAndManager(filePath, eventSystem, eventManager, subSystems.size() + 1);
+        return eventManager;
     }
 
     private void initializeUserCreatorSystem(UserManager userManager){

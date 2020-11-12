@@ -35,16 +35,20 @@ public class MessageManager {
         tempInbox.get(received.getSender(received)).add(reply);
     }
 
-    public String toString(UUID userID){
-        StringBuilder inboxStr = new StringBuilder();
+
+    public List<Map<String, Object>> getInboxData(UUID userID){
         List<Message> inbox = tempInbox.get(userID);
-        for(Message msg : inbox){
-            inboxStr.append(msg.toString() + "\n");
+        List<Map<String, Object>> inboxData = new ArrayList<>();
+        for (Message message : inbox){
+            inboxData.add(message.extractData());
         }
-        return inboxStr.toString();
+        return inboxData;
     }
 
+
     /*
+    Potential use in phase 2
+
     public String toString(String Criterion, Object value, UUID userID){
         List<Message> searchedMessages = retrieveMessageByCriterion(Criterion, value, userID);
         StringBuilder searchedMsgStr = new StringBuilder();

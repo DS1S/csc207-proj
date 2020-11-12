@@ -31,7 +31,7 @@ public class MessageSystem implements IRunnable {
 
     @Override
     public void run() {
-        this.inboxUI.displayInbox();
+        //this.inboxUI.displayInbox();
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
     }
@@ -86,9 +86,10 @@ public class MessageSystem implements IRunnable {
             return "";
         }
 
-        @Override
-        public String toString;(); {
-            return "Messaging";
-        }
+    }
+
+    @Override
+    public String toString(){
+        return "Messaging";
     }
 }

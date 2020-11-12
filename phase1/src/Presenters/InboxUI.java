@@ -2,20 +2,36 @@ package Presenters;
 
 import CoreEntities.Message;
 import CoreEntities.Users.User;
+import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
+
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class InboxUI {
-    private MessageManager messageManager;
-    private UUID user;
+    private UserManager userManager;
 
-    public InboxUI(MessageManager messageManager, UUID user) {
-        this.messageManager = messageManager;
-        this.user = user;
+    public InboxUI(UserManager userManager) {
+        this.userManager = userManager;
     }
 
-    public void displayInbox() {
-        System.out.println(messageManager.toString(user));
+    public void displayInbox(List<Map<String, Object>> inboxData) {
+
+        for(Map<String, Object> data : inboxData){
+            StringBuilder sb = new StringBuilder();
+            String recipient = userManager.getUsernameWithUUID((UUID) data.get("recipient"));
+            String sender    = userManager.getUsernameWithUUID((UUID) data.get("sender"));
+            data.remove("recipient");
+            data.remove("sender");
+            sb.append("From: " + sender + " To " + recipient + "\n");
+            data.forEach((s, o) -> {
+                sb.append(data.get(s).toString() + "\n");
+            });
+            System.out.println(sb);
+            System.out.println("------------------------------------------------------");
+        }
+
         //TODO: functionality for going back
         System.out.println("Press ENTER to go back");
     }
