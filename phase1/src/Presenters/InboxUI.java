@@ -41,7 +41,6 @@ public class InboxUI {
         // 2: specific speaker
         // 3: group of attendees
         // 4: all attendees of event(s)
-        // 5: all speakers of event
         switch (type) {
             case 1:
                 System.out.println("Enter the username of the attendee you would like to send this message to.\n");
@@ -54,10 +53,6 @@ public class InboxUI {
                 break;
             case 4:
                 System.out.println("Enter the names of the events for which you would like all attendees to receive" +
-                        "this message.\n");
-                break;
-            case 5:
-                System.out.println("Enter the name of the event for which you would like all speakers to receive" +
                         "this message.\n");
                 break;
         }
