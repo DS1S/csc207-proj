@@ -17,9 +17,14 @@ public class EventSystem implements IRunnable {
     private UserManager userManager;
     private EventUI eventUI;
 
+    public EventSystem(EventManager eventManager, UserManager userManager) {
+        this.eventManager = eventManager;
+        this.userManager = userManager;
+        this.eventUI = new EventUI(userManager);
+    }
+
     @Override
     public void run() {
-        Perms[] possiblePerms = {canSchedule, canSignUpEvent, canSpeakAtTalk};
         Scanner scanner = new Scanner(System.in);
 
         if (userManager.loggedInHasPermission(canSchedule)) {
