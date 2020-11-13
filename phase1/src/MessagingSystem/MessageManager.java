@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.time.LocalTime;
 
-
+/**
+ * Class to manage messages
+ */
 public class MessageManager {
     private Map<UUID, List<Message>> tempInbox;
 
@@ -17,26 +19,57 @@ public class MessageManager {
         this.tempInbox = tempInbox;
     }
 
+    /**
+     * Send a message to recipient by appending it to his list of messages.
+     *
+     * @param sender the UUID of the sender.
+     * @param recipient the UUID of the recipient
+     * @param msg A string which is the body of the message.
+     */
     public void sendMessageToIndividual(UUID sender, UUID recipient, String msg) {
         Message m = new Message(UUID.randomUUID(), sender, recipient, msg, LocalTime.now());
         tempInbox.get(recipient).add(m);
     }
 
+    /**
+     * Unsends or deletes a message from recipient's list of messages.
+     *
+     * @param recipient the UUID of the recipient
+     * @param msg The message object to delete
+     */
     public void deleteMessage(UUID recipient, Message msg) {
-            tempInbox.get(recipient).remove(msg);
-        }
+        tempInbox.get(recipient).remove(msg);
+    }
 
+    /**
+     * Convenience method to send a message to multiple people at once
+     *
+     * @param sender the UUID of the sender.
+     * @param recipients A list of UUIDs of the recipients
+     * @param msg A string which is the body of the message.
+     */
     public void sendMessageToMultiple(UUID sender, List<UUID> recipients, String msg){
         for (UUID recipient : recipients) {
             sendMessageToIndividual(sender, recipient, msg);
         }
     }
 
+    /**
+     * 'Reply' to a message by appending it to its sender's list of messages
+     *
+     * @param received The message object to reply to
+     * @param reply The message object to reply with
+     */
     public void replyToMessage(Message received, Message reply){
         tempInbox.get(received.getSender()).add(reply);
     }
 
-
+    /**
+     * A method to get all a user's messages and parse them into a generic format for the caller.
+     *
+     * @param userID the UUID of the user whose messages are desired
+     * @return A list of message representations (maps) with all message info
+     */
     public List<Map<String, Object>> getInboxData(UUID userID){
         List<Message> inbox = tempInbox.get(userID);
         List<Map<String, Object>> inboxData = new ArrayList<>();
