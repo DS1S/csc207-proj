@@ -144,6 +144,58 @@ public class MessageSystem implements IRunnable {
     }
 
     /**
+     * Allows an organizer to message all attendees in the system user manager.
+     * @param msg body of the message
+     * @return no permission string if the user is not an organizer, else empty string
+     */
+    public String OrganizerMessageAttendees(String msg) {
+        if (!userManager.loggedInHasPermission(Perms.canSchedule)) {
+            return NO_PERMISSION;
+        } else {
+            List<UUID> userUUIDs = userManager.getUUIDs();
+            List<UUID> attendeeUUIDs = new ArrayList<>();
+            for (UUID id : userUUIDs) {
+                String username = userManager.getUsernameWithUUID(id);
+                if (userManager.hasPermission(username, Perms.canSignUpEvent)) {
+                    attendeeUUIDs.add(id);
+                }
+            }
+            for (UUID attendeeId : attendeeUUIDs) {
+                messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), attendeeId,
+                        msg);
+            }
+            return "";
+        }
+    }
+
+    /**
+     * Allows an organizer to message all speakers in the system user manager.
+     * @param msg body of the message
+     * @return no permission if the user is not an organizer, else empty string
+     */
+    public String OrganizerMessageSpeakers(String msg){
+        if (!userManager.loggedInHasPermission(Perms.canSchedule)){
+            return NO_PERMISSION;
+        }
+        else{
+            List<UUID> userUUIDs = userManager.getUUIDs();
+            List<UUID> speakerUUIDs = new ArrayList<>();
+            for (UUID id : userUUIDs){
+                String username = userManager.getUsernameWithUUID(id);
+                if (userManager.hasPermission(username, Perms.canMessageTalk)){
+                    speakerUUIDs.add(id);
+                }
+            }
+            for (UUID speakerId : speakerUUIDs){
+                messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(),
+                        speakerId, msg);
+            }
+            return "";
+
+        }
+    }
+
+    /**
      * An override of the built-in toString method.
      * @return the string "Messaging"
      */
