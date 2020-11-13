@@ -4,10 +4,8 @@ import CoreEntities.Users.Perms;
 import LoginSystem.UserManager;
 import coreUtil.IRunnable;
 import Presenters.InboxUI;
-import java.util.ArrayList;
-import java.util.UUID;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class MessageSystem implements IRunnable {
     private MessageManager messageManager;
@@ -28,9 +26,36 @@ public class MessageSystem implements IRunnable {
 
     @Override
     public void run() {
-        //this.inboxUI.displayInbox();
+        UUID t = this.userManager.getLoggedInUserUUID();
+        this.inboxUI.displayInbox(this.messageManager.getInboxData(t));
+
+        // TODO: reply to message prompt here
+
+        ArrayList<Integer> allowedOptions = new ArrayList<>();
+        this.inboxUI.displayRecipientPrompt(1);
+        allowedOptions.add(1);
+        if (this.userManager.loggedInHasPermission(Perms.canMessageTalk)) {
+            this.inboxUI.displayRecipientPrompt(2);
+            allowedOptions.add(2);
+        }
+
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
+        if (option == 1) {
+            String usernames = scanner.nextLine();
+            this.inboxUI.displayBodyPrompt();
+            String message = scanner.nextLine();
+            String e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
+            // TODO: handle error here
+        } else if (allowedOptions.contains(option) && option == 2) {
+            String events = scanner.nextLine();
+            this.inboxUI.displayBodyPrompt();
+            String message = scanner.nextLine();
+            String e = this.SpeakerMessageAttendees(Arrays.asList(events.split(",")), message);
+            // TODO: handle error here
+        } else {
+            // TODO: invalid option error
+        }
     }
 
     public String MessageAPerson(String receiver, String message) {

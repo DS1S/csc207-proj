@@ -17,7 +17,6 @@ public class InboxUI {
     }
 
     public void displayInbox(List<Map<String, Object>> inboxData) {
-
         for(Map<String, Object> data : inboxData){
             StringBuilder sb = new StringBuilder();
             String recipient = userManager.getUsernameWithUUID((UUID) data.get("recipient"));
@@ -36,52 +35,17 @@ public class InboxUI {
         System.out.println("Press ENTER to go back");
     }
 
-    public void recipientPrompt(int type) {
-        // 1: specific attendee
-        // 2: specific speaker
-        // 3: group of attendees
-        // 4: all attendees of event(s)
-        switch (type) {
-            case 1:
-                System.out.println("Enter the username of the attendee you would like to send this message to.\n");
-                break;
-            case 2:
-                System.out.println("Enter the username of the speaker you would like to send this message to.\n");
-                break;
-            case 3:
-                System.out.println("Enter the usernames of the attendees you would like to send the message to.\n");
-                break;
-            case 4:
-                System.out.println("Enter the names of the events for which you would like all attendees to receive" +
-                        "this message.\n");
-                break;
+    public void displayRecipientPrompt(int type) {
+        if (type == 1) {
+            System.out.println("Enter the username(s) of the attendee(s)/speaker(s) you would like to send this message to.\n");
         }
-
+        if (type == 2) {
+            System.out.println("Enter the names of the events for which you would like all attendees to receive this message.\n");
+        }
     }
 
-    public void bodyPrompt(int type) {
-        // 1: message to specific person
-        // 2: announcement to every attendee
-        // 3: announcement to every attendee in a talk
-        // 4: announcement to attendees in multiple talks
-        // 5: announcement to every speaker
-        switch (type) {
-            case 1:
-                System.out.print("Write your message: ");
-                break;
-            case 2:
-                System.out.print("Make an announcement to all attendees: ");
-                break;
-            case 3:
-                System.out.print("Make an announcement to the attendees of your talk: ");
-                break;
-            case 4:
-                System.out.print("Make an announcement to the attendees of your chosen talks: ");
-                break;
-            case 5:
-                System.out.print("Make an announcement to every speaker: ");
-                break;
-        }
+    public void displayBodyPrompt() {
+        System.out.print("Write your message: ");
     }
 
     public void sentPrompt() {
