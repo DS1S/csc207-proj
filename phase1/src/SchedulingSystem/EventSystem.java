@@ -1,6 +1,5 @@
 package SchedulingSystem;
 
-import CoreEntities.Users.Perms;
 import LoginSystem.UserManager;
 import coreUtil.IRunnable;
 
@@ -12,17 +11,28 @@ import Presenters.EventUI;
 
 import static CoreEntities.Users.Perms.*;
 
+/**
+ * A class that allows the user to perform event related actions.
+ */
 public class EventSystem implements IRunnable {
     private EventManager eventManager;
     private UserManager userManager;
     private EventUI eventUI;
 
+    /**
+     * Constructs a new EventSystem that uses the given event manager and user manager.
+     * @param eventManager the event manager used by the EventSystem
+     * @param userManager the user manager used by the EventSystem
+     */
     public EventSystem(EventManager eventManager, UserManager userManager) {
         this.eventManager = eventManager;
         this.userManager = userManager;
         this.eventUI = new EventUI(userManager);
     }
 
+    /**
+     * Displays UI and allows the user to select and perform event related actions.
+     */
     @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
@@ -90,6 +100,10 @@ public class EventSystem implements IRunnable {
         }
     }
 
+    /**
+     * Returns a string representation of this EventSystem.
+     * @return a string representation of this EventSystem
+     */
     @Override
     public String toString() {
         return "Events";
@@ -99,7 +113,6 @@ public class EventSystem implements IRunnable {
      * Call the EventUI presenter to show message that the user has successfully registered
      * Adds the new attendee to the Event.
      */
-
     public void SignUpforEvent() {
         List<Map<String, Object>> eventList = eventManager.retrieveSignupAbleEvents(userManager.getLoggedInUserUUID());
         eventUI.displayEvents(eventList);
@@ -113,7 +126,6 @@ public class EventSystem implements IRunnable {
      * Call the EventUI presenter to show message that the user has successfully unregistered
      * Cancel the attendee to the registered Event.
      */
-
     public void CancelSignUpforEvent() {
         List<Map<String, Object>> eventList = eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID());
         eventUI.displayEvents(eventList);
@@ -123,6 +135,10 @@ public class EventSystem implements IRunnable {
         eventUI.displayCancelSignupSuccess();
     }
 
+    /**
+     * Displays UI that prompts for information required to schedule a new event. Schedules the
+     * new event based on user input.
+     */
     public void scheduleEvent() {
         Scanner scanner = new Scanner(System.in);
         eventUI.displayScheduleStart();
@@ -169,6 +185,10 @@ public class EventSystem implements IRunnable {
         scanner.close();
     }
 
+    /**
+     * Displays UI that prompts for information required to reschedule an existing event. Reschedules the
+     * event based on user input.
+     */
     public void rescheduleEvent() {
         Scanner scanner = new Scanner(System.in);
         eventUI.displayRescheduleStart();
@@ -191,6 +211,10 @@ public class EventSystem implements IRunnable {
         scanner.close();
     }
 
+    /**
+     * Displays UI that prompts for information required to cancel an existing event. Cancels the
+     * event based on user input.
+     */
     public void cancelEvent() {
         Scanner scanner = new Scanner(System.in);
         eventUI.displayCancelStart();
