@@ -45,8 +45,9 @@ public class EventUI {
         System.out.println("What would you like to do?\n");
         System.out.println("1. View all events.");
         System.out.println("2. Sign up for an event.");
-        System.out.println("3. View events you have signed up for.");
-        System.out.println("4. Return to main menu.");
+        System.out.println("3. Cancel a registered event.");
+        System.out.println("4. View events you have signed up for.");
+        System.out.println("5. Return to main menu.");
     }
 
     public void displaySpeakerOptions() {
@@ -74,6 +75,10 @@ public class EventUI {
 
     public void displayCancelSignUpDouble() {
         System.out.println("----------You are not registered in this event!----------\n\n");
+    }
+
+    public void displayEnterIndexEvent() {
+        System.out.println("----------Please select an event number that you want to register!----------\n\n");
     }
 
     public void displayIndexPrompt() { System.out.println("Enter the number of the option you wish to select: ");}

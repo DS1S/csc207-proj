@@ -51,15 +51,17 @@ public class EventSystem implements IRunnable {
             mainLoop:
             while (true) {
                 eventUI.displaySignupOptions();
-                int index = processIndexInput(4);
+                int index = processIndexInput(5);
                 switch (index) {
                     case (1):
                         eventUI.displayEvents(eventManager.retrieveAllEvents());
                     case (2):
                         SignUpforEvent();
                     case (3):
-                        eventUI.displayEvents(eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID()));
+                        CancelSignUpforEvent();
                     case (4):
+                        eventUI.displayEvents(eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID()));
+                    case (5):
                         scanner.close();
                         break mainLoop;
                 }
@@ -89,49 +91,31 @@ public class EventSystem implements IRunnable {
     }
 
     /**
-     * Call the EventUI presenter to show message to use whether the use has successfully registered to an event or not
-     * Adds the new attendee to the Event iff there are no conflicting problems (Double-Booking or Full).
-     *
-     * @param attendee the UUID of the attendee to be removed
-     * @param index the index of the Event, relative to the list of the events that the given attendee is signed up for
-     * @param title the title of the new Event
-     * @param speakerUUID the UUID of the speaker of the new Event
+     * Call the EventUI presenter to show message that the user has successfully registered
+     * Adds the new attendee to the Event.
      */
 
-    public void SignUpforEvent(int index, UUID attendee, String title, UUID speakerUUID) {
-        if (eventManager.isEventatCapacity(index)) {
-            eventUI.displaySignUpFull();
-        }
-        else {
-            if (eventManager.retrieveAttendees(title, speakerUUID).contains(attendee)) {
-                eventUI.displaySignUpDouble();
-            }
-            else {
-                eventManager.registerAttendee(attendee,index);
-                eventUI.displaySignupSuccess();
-            }
-        }
+    public void SignUpforEvent() {
+        List<Map<String, Object>> eventList = eventManager.retrieveSignupAbleEvents(userManager.getLoggedInUserUUID());
+        eventUI.displayEvents(eventList);
+        eventUI.displayEnterIndexEvent();
+        int index = processIndexInput(eventList.size());
+        eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
+        eventUI.displaySignupSuccess();
     }
 
     /**
-     * Call the EventUI presenter to show message to use whether the use has successfully unregistered
-     * to an event or not
-     *
-     * Adds the new attendee to the Event iff there are no conflicting problems. (Already Cancel)
-     *
-     * @param attendee the UUID of the attendee to be removed
-     * @param index the index of the Event, relative to the list of the events that the given attendee is signed up for
-     * @param title the title of the new Event
-     * @param speakerUUID the UUID of the speaker of the new Event
+     * Call the EventUI presenter to show message that the user has successfully unregistered
+     * Cancel the attendee to the registered Event.
      */
 
-    public void CancelSignUpforEvent(int index, UUID attendee, String title, UUID speakerUUID) {
-        if (eventManager.retrieveAttendees(title, speakerUUID).contains(attendee)) {
-            eventManager.removeAttendee(attendee, index);
-            eventUI.displayCancelSignupSuccess();
-        } else {
-            eventUI.displayCancelSignUpDouble();
-        }
+    public void CancelSignUpforEvent() {
+        List<Map<String, Object>> eventList = eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID());
+        eventUI.displayEvents(eventList);
+        eventUI.displayEnterIndexEvent();
+        int index = processIndexInput(eventList.size());
+        eventManager.removeAttendee(userManager.getLoggedInUserUUID(), index);
+        eventUI.displayCancelSignupSuccess();
     }
 
     public void scheduleEvent() {
