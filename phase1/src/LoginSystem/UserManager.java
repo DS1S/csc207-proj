@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.ArrayList;
 
 public class UserManager {
     private Map<UUID, User> users;
@@ -73,6 +74,10 @@ public class UserManager {
     public boolean hasPermission(String username, Perms permission){
         UUID userUUID = getUUIDWithUsername(username);
         return this.users.get(userUUID).getPermissions().get(permission);
+    }
+
+    public List<UUID> getUUIDs(){
+        return new ArrayList<>(this.users.keySet());
     }
 
 }
