@@ -38,6 +38,7 @@ public class EventUI {
         System.out.println("2. Schedule a new event.");
         System.out.println("3. Reschedule an existing event.");
         System.out.println("4. Cancel an existing event.");
+        System.out.println("5. Return to main menu.");
     }
 
     public void displaySignupOptions() {
@@ -45,12 +46,14 @@ public class EventUI {
         System.out.println("1. View all events.");
         System.out.println("2. Sign up for an event.");
         System.out.println("3. View events you have signed up for.");
+        System.out.println("4. Return to main menu.");
     }
 
     public void displaySpeakerOptions() {
         System.out.println("What would you like to do?\n");
         System.out.println("1. View all events.");
         System.out.println("2. View events you are speaking at.");
+        System.out.println("3. Return to main menu.");
     }
 
     public void displaySignUpFull() {
@@ -73,7 +76,7 @@ public class EventUI {
         System.out.println("----------You are not registered in this event!----------\n\n");
     }
 
-    public void displayIndexPrompt() { System.out.println("Enter the number of the event you wish to select: ");}
+    public void displayIndexPrompt() { System.out.println("Enter the number of the option you wish to select: ");}
 
     public void displayInvalidIndex() { System.out.println("You have entered an invalid index."); }
 

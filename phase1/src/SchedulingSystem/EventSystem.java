@@ -23,39 +23,62 @@ public class EventSystem implements IRunnable {
         Scanner scanner = new Scanner(System.in);
 
         if (userManager.loggedInHasPermission(canSchedule)) {
-            eventUI.displayScheduleOptions();
-            int index = processIndexInput(4);
-            switch (index) {
-                case(1):
-                    eventUI.displayEvents(eventManager.retrieveAllEvents());
-                case(2):
-                    scheduleEvent();
-                case(3):
-                    rescheduleEvent();
-                case(4):
-                    cancelEvent();
+
+            mainLoop:
+            while (true) {
+                eventUI.displayScheduleOptions();
+                int index = processIndexInput(5);
+                switch (index) {
+                    case (1):
+                        eventUI.displayEvents(eventManager.retrieveAllEvents());
+                        break;
+                    case (2):
+                        scheduleEvent();
+                        break;
+                    case (3):
+                        rescheduleEvent();
+                        break;
+                    case (4):
+                        cancelEvent();
+                        break;
+                    case(5):
+                        scanner.close();
+                        break mainLoop;
+                }
             }
         }
         else if (userManager.loggedInHasPermission(canSignUpEvent)) {
-            eventUI.displaySignupOptions();
-            int index = processIndexInput(3);
-            switch (index) {
-                case(1):
-                    eventUI.displayEvents(eventManager.retrieveAllEvents());
-                case(2):
-                    SignUpforEvent();
-                case(3):
-                    eventUI.displayEvents(eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID()));
+            mainLoop:
+            while (true) {
+                eventUI.displaySignupOptions();
+                int index = processIndexInput(4);
+                switch (index) {
+                    case (1):
+                        eventUI.displayEvents(eventManager.retrieveAllEvents());
+                    case (2):
+                        SignUpforEvent();
+                    case (3):
+                        eventUI.displayEvents(eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID()));
+                    case (4):
+                        scanner.close();
+                        break mainLoop;
+                }
             }
         }
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
-            eventUI.displaySpeakerOptions();
-            int index = processIndexInput(2);
-            switch (index) {
-                case(1):
-                    eventUI.displayEvents(eventManager.retrieveAllEvents());
-                case(2):
-                    eventUI.displayEvents(eventManager.retrieveEventsBySpeaker(userManager.getLoggedInUserUUID()));
+            mainLoop:
+            while (true) {
+                eventUI.displaySpeakerOptions();
+                int index = processIndexInput(3);
+                switch (index) {
+                    case (1):
+                        eventUI.displayEvents(eventManager.retrieveAllEvents());
+                    case (2):
+                        eventUI.displayEvents(eventManager.retrieveEventsBySpeaker(userManager.getLoggedInUserUUID()));
+                    case(3):
+                        scanner.close();
+                        break mainLoop;
+                }
             }
         }
     }
@@ -154,6 +177,7 @@ public class EventSystem implements IRunnable {
         else {
             eventUI.displayScheduleFailure(eventConflicts);
         }
+        scanner.close();
     }
 
     public void rescheduleEvent() {
@@ -175,6 +199,7 @@ public class EventSystem implements IRunnable {
         else {
             eventUI.displayRescheduleFailure(eventConflicts);
         }
+        scanner.close();
     }
 
     public void cancelEvent() {
@@ -188,6 +213,8 @@ public class EventSystem implements IRunnable {
         eventManager.cancelEvent(index);
 
         eventUI.displayCancelSuccess();
+
+        scanner.close();
     }
 
     private int processIndexInput(int max) {
@@ -208,6 +235,7 @@ public class EventSystem implements IRunnable {
                 eventUI.displayIndexPrompt();
             }
         }
+        scanner.close();
         return index;
     }
 
@@ -225,6 +253,7 @@ public class EventSystem implements IRunnable {
                 eventUI.displayTimePrompt();
             }
         }
+        scanner.close();
         return startTime;
     }
 
@@ -241,6 +270,7 @@ public class EventSystem implements IRunnable {
                 eventUI.displayDurationPrompt();
             }
         }
+        scanner.close();
         return duration;
     }
 
