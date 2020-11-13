@@ -119,33 +119,6 @@ public class MessageSystem implements IRunnable {
     }
 
     /**
-     * Allows an organizer to message all attendees in the user manager.
-     * @param msg body of the message
-     * @return a string indicating that the user does not have permission to send the message if they are
-     * not an organizer, else empty string
-     */
-    public String OrganizerMessageAttendees(String msg){
-        if (!userManager.loggedInHasPermission(Perms.canSchedule)){
-            return NO_PERMISSION;
-        }
-        else{
-            List<UUID> userUUIDs = userManager.getUUIDs();
-            List<UUID> attendeeUUIDs = new ArrayList<>();
-            for (UUID id : userUUIDs){
-                String username = userManager.getUsernameWithUUID(id);
-                if (userManager.hasPermission(username, Perms.canSignUpEvent)){
-                    attendeeUUIDs.add(id);
-                }
-            }
-            for (UUID attendeeId : attendeeUUIDs){
-                messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), attendeeId,
-                        msg);
-            }
-            return "";
-        }
-    }
-
-    /**
      * An override of the built-in toString method.
      * @return the string "Messaging"
      */
