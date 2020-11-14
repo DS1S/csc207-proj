@@ -38,7 +38,7 @@ public class EventSignUpSystem extends EventSubSystem {
         List<Map<String, Object>> eventList = eventManager.retrieveAllEvents();
         int index = processEvents(eventList);
 
-        if(index != -1){
+        if(index != -1) {
             eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
             eventUI.displaySignupSuccess();
         }
