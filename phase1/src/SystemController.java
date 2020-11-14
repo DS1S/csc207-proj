@@ -1,4 +1,3 @@
-import CoreEntities.Event;
 import CoreEntities.Users.Perms;
 import FileHandleSystem.FileSerializer;
 import FileHandleSystem.TerminationWorker;
@@ -8,8 +7,8 @@ import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
 import MessagingSystem.MessageSystem;
 import Presenters.MainMenuUI;
-import SchedulingSystem.EventManager;
-import SchedulingSystem.EventSystem;
+import EventSystem.Managers.EventManager;
+import EventSystem.EventSystem;
 import coreUtil.IRunnable;
 
 import java.util.HashMap;
@@ -18,8 +17,8 @@ import java.util.Scanner;
 
 public class SystemController implements IRunnable {
 
-    private Map<String, Object> managers = new HashMap<>();
-    private Map<Integer, IRunnable> subSystems = new HashMap<>();
+    private final Map<String, Object> managers = new HashMap<>();
+    private final Map<Integer, IRunnable> subSystems = new HashMap<>();
     private MainMenuUI mainMenu;
 
     public void run(){

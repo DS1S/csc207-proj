@@ -1,6 +1,7 @@
-package SchedulingSystem;
+package EventSystem.Managers;
 
 import CoreEntities.Event;
+import EventSystem.EventSystem;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

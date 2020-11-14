@@ -1,5 +1,5 @@
 package MessagingSystem;
-import SchedulingSystem.EventManager;
+import EventSystem.Managers.EventManager;
 import CoreEntities.Users.Perms;
 import LoginSystem.UserManager;
 import coreUtil.IRunnable;

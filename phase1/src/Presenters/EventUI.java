@@ -1,7 +1,6 @@
 package Presenters;
 
 import LoginSystem.UserManager;
-import SchedulingSystem.EventManager;
 
 import java.util.List;
 import java.util.Map;
