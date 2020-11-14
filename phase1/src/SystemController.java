@@ -68,7 +68,7 @@ public class SystemController implements IRunnable {
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
         IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager);
-        addSystemAndManager(filePath, messageSystem, msManager, subSystems.size() + 1);
+        addSystemAndManager(filePath, messageSystem, msManager, subSystems.size());
     }
 
     private EventManager initializeEventSystem(UserManager userManager){
@@ -76,14 +76,14 @@ public class SystemController implements IRunnable {
         FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
         EventManager eventManager = eventManagerLoader.loadObject();
         IRunnable eventSystem = new EventSystem(eventManager, userManager);
-        addSystemAndManager(filePath, eventSystem, eventManager, subSystems.size() + 1);
+        addSystemAndManager(filePath, eventSystem, eventManager, subSystems.size());
         return eventManager;
     }
 
     private void initializeUserCreatorSystem(UserManager userManager){
         if (userManager.loggedInHasPermission(Perms.canSignUpUser)){
             IRunnable signUpSystem = new SignupSystem(userManager, "speaker");
-            subSystems.put(subSystems.size() + 1, signUpSystem);
+            subSystems.put(subSystems.size(), signUpSystem);
         }
     }
 

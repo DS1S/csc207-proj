@@ -9,7 +9,7 @@ public class MainMenuUI {
     public MainMenuUI() { }
 
     public void displayOptions(Map<Integer, IRunnable> subsystems) {
-        for (int i = 1; i <= subsystems.size(); i++) {
+        for (int i = 1; i < subsystems.size(); i++) {
             System.out.println(i + ": " + subsystems.get(i).toString());
         }
     }
