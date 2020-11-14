@@ -1,5 +1,6 @@
 package EventSystem;
 
+import CoreEntities.Event;
 import EventSystem.Managers.EventManager;
 import EventSystem.subsytems.EventSignUpSystem;
 import EventSystem.subsytems.EventSubSystem;
@@ -20,6 +21,12 @@ public class EventSystem implements IRunnable {
     private EventManager eventManager;
     private UserManager userManager;
     private EventUI eventUI;
+
+    public EventSystem(EventManager eventManager, UserManager userManager){
+        this.eventManager = eventManager;
+        this.userManager = userManager;
+        this.eventUI = new EventUI(this.userManager);
+    }
 
     @Override
     public void run() {

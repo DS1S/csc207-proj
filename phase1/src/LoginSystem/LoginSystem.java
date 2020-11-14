@@ -8,10 +8,9 @@ import java.util.Scanner;
  * A class to handle logging in of users based on input credentials.
  */
 public class LoginSystem implements IRunnable {
-    private final String INVALID_USERNAME = "Invalid Username!";
-    private final String INVALID_PASSWORD = "Invalid Password!";
-    private UserManager um;
-    private AuthenticationUI authUI;
+    private final UserManager um;
+    private final AuthenticationUI authUI;
+    private final Scanner scanner = new Scanner(System.in);
 
     public LoginSystem(UserManager um){
         this.um = um;
@@ -26,12 +25,14 @@ public class LoginSystem implements IRunnable {
      */
     private String loginUser(String username, String password){
         if (!um.containsUserWithUsername(username.trim())) {
+            String INVALID_USERNAME = "Invalid Username!";
             return INVALID_USERNAME;
         }
 
         if (um.checkPasswordWithUUID(um.getUUIDWithUsername(username), password.trim())) {
             um.setLoggedInUser(um.getUUIDWithUsername(username));
         } else {
+            String INVALID_PASSWORD = "Invalid Password!";
             return INVALID_PASSWORD;
         }
         return "";
@@ -41,19 +42,18 @@ public class LoginSystem implements IRunnable {
      * Displays the UI, prompts, errors, etc. associated with logging in a user.
      */
     public void run(){
-        Scanner scanner = new Scanner(System.in);
 
-        // TODO: Clear window?
-        authUI.displayLoginPage();
-        authUI.displayUsernamePrompt();
-        String username = scanner.nextLine();
-        authUI.displayPasswordPrompt();
-        String password = scanner.nextLine();
-
-        if (!loginUser(username, password).equals("")) {
-            authUI.displayError(loginUser(username, password));
-            run();
+        String response = "";
+        while (!response.isEmpty()){
+            authUI.displayLoginPage();
+            authUI.displayUsernamePrompt();
+            String username = scanner.nextLine();
+            authUI.displayPasswordPrompt();
+            String password = scanner.nextLine();
+            response = loginUser(username, password);
+            if (response.isEmpty()) authUI.displayError(response);
         }
+
         scanner.close();
     }
 }

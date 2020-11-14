@@ -3,6 +3,7 @@ package LoginSystem;
 import coreUtil.IRunnable;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,10 +11,10 @@ import java.util.Scanner;
  * A class which handles the creation of new Users of allowed types.
  */
 public class SignupSystem implements IRunnable {
-    private final String TAKEN_USERNAME = "That username is taken!";
-    private UserManager um;
-    private AuthenticationUI authUI;
-    private List<String> possibleTypes;
+    private final UserManager um;
+    private final AuthenticationUI authUI;
+    private final List<String> possibleTypes;
+    private final Scanner scanner = new Scanner(System.in);
 
     public SignupSystem(UserManager um, String type){
         this.um = um;
@@ -28,18 +29,9 @@ public class SignupSystem implements IRunnable {
         this.possibleTypes = possibleTypes;
     }
 
-    //returns error string, "" on success.
-
-    /**
-     *
-     * @param name the user's name
-     * @param username the user's username
-     * @param password the user's password
-     * @param type a string representing the type of this user.
-     * @return empty string on success, error message otherwise, based on type of error.
-     */
-    public String signUp(String name, String username, String password, String type){
+    private String signUp(String name, String username, String password, String type){
         if (this.um.containsUserWithUsername(username)) {
+            String TAKEN_USERNAME = "That username is taken!";
             return TAKEN_USERNAME;
         }
 
@@ -47,29 +39,34 @@ public class SignupSystem implements IRunnable {
         return "";
     }
 
-    /**
-     * Displays UI and prompts for creating a user of a particular type.
-     * Recursively runs until it receives valid input
-     *
-     * @param type a string representing the type of the user to create
-     */
-    private void create(String type){
-        Scanner scanner = new Scanner(System.in);
-        // TODO: Clear window?
-        this.authUI.displaySigningUpPage();
-        this.authUI.displayNamePrompt();
-        String name = scanner.nextLine();
-        this.authUI.displayUsernamePrompt();
-        String username = scanner.nextLine();
-        this.authUI.displayPasswordPrompt();
-        String password = scanner.nextLine();
 
-        String result = signUp(name, username, password, type);
-        if (!result.equals("")){
-            authUI.displayError(result);
-            // TODO: Maybe not recurse lol
-            create(type);
+    private void create(String type){
+
+        String result = "";
+        while(!result.isEmpty()){
+            this.authUI.displaySigningUpPage();
+
+            this.authUI.displayNamePrompt();
+            String name = askForString("Name");
+
+            this.authUI.displayUsernamePrompt();
+            String username = askForString("Username");
+
+            this.authUI.displayPasswordPrompt();
+            String password = askForString("Password");
+
+            result = signUp(name, username, password, type);
+            if (!result.isEmpty()) authUI.displayError(result);
         }
+    }
+
+    private String askForString(String attribute){
+        String string = "";
+        while (string.isEmpty()){
+            string = scanner.nextLine();
+            if (string.isEmpty()) authUI.displayError(attribute + " is empty, please input a " + attribute + "!");
+        }
+        return string;
     }
 
     /**
@@ -77,18 +74,18 @@ public class SignupSystem implements IRunnable {
      * Also runs recursively until valid input.
      */
     public void run(){
-        // TODO: Clear window?
-        // TODO: prompt user to select type, corresponding to possibleTypes index.
-        int input = 0; // TODO: Take input
-        if (input >= possibleTypes.size()){
-            //invalid type (out of bounds)
-            // TODO: display error
-            run();
-        }
-        create(possibleTypes.get(0));
 
-        if (possibleTypes.size() == 1){
-            create(possibleTypes.get(0));
+        int option = 0;
+        while(option <= 0 || option > possibleTypes.size()){
+            authUI.displayUserTypes(possibleTypes);
+            try{
+                option = scanner.nextInt();
+                if (option <= 0 || option > possibleTypes.size()) authUI.displayError("Invalid option, try again!");
+            }
+            catch (InputMismatchException e){
+                authUI.displayError("Invalid option, try again!");
+            }
         }
+        create(possibleTypes.get(option - 1));
     }
 }

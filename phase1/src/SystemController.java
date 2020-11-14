@@ -12,6 +12,7 @@ import EventSystem.EventSystem;
 import coreUtil.IRunnable;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -19,21 +20,24 @@ public class SystemController implements IRunnable {
 
     private final Map<String, Object> managers = new HashMap<>();
     private final Map<Integer, IRunnable> subSystems = new HashMap<>();
-    private MainMenuUI mainMenu;
+    private final MainMenuUI mainMenu = new MainMenuUI();
 
     public void run(){
         initializeSubSystems();
 
         subSystems.get(0).run();
         Scanner input = new Scanner(System.in);
-        int option = input.nextInt();
+        int option = 0;
         while (option != subSystems.size() + 1){
             mainMenu.displayMainMenu(subSystems);
 
-            if (subSystems.containsKey(option)){
-                subSystems.get(option).run();
+            try{
+                option = input.nextInt();
+                if (subSystems.containsKey(option)){
+                    subSystems.get(option).run();
+                }
             }
-            else if (option != subSystems.size() + 1){
+            catch (InputMismatchException e){
                 mainMenu.displayInvalidInput(subSystems);
             }
         }

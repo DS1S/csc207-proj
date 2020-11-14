@@ -1,5 +1,6 @@
 package LoginSystem;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -34,5 +35,12 @@ public class AuthenticationUI {
 
     public void displaySigningUpPage() {
         System.out.println("Please enter your user details below.");
+    }
+
+    public void displayUserTypes(List<String> types){
+        System.out.println("Choose a user type to create: ");
+        for (int i = 0; i < types.size(); i++){
+            System.out.println((i + 1) + ": " + types.get(i));
+        }
     }
 }

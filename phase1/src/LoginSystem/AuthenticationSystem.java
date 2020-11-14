@@ -1,43 +1,49 @@
 package LoginSystem;
 
-import CoreEntities.Users.User;
 import coreUtil.IRunnable;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AuthenticationSystem implements IRunnable {
-    private AuthenticationUI authUI;
-    private UserManager um;
-    private LoginSystem loginSystem;
-    private SignupSystem signupSystem;
-
-    private final String ATTENDEE_TYPE = "attendee";
+    private final AuthenticationUI authUI;
+    private final LoginSystem loginSystem;
+    private final SignupSystem signupSystem;
+    private Scanner scanner = new Scanner(System.in);
 
     public AuthenticationSystem(UserManager userManager){
-        this.um = userManager;
         authUI = new AuthenticationUI();
-        loginSystem = new LoginSystem(um);
-        signupSystem = new SignupSystem(um, ATTENDEE_TYPE);
+        loginSystem = new LoginSystem(userManager);
+
+        String ATTENDEE_TYPE = "attendee";
+        signupSystem = new SignupSystem(userManager, ATTENDEE_TYPE);
     }
 
     @Override
     public void run() {
-        this.authUI.displayWelcomePage();
-        Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
+        int option = 0;
         while (option != 1 && option != 2) {
-            this.authUI.displayOptionError();
-            option = scanner.nextInt();
+            this.authUI.displayWelcomePage();
+            try{
+                option = scanner.nextInt();
+                processInput(option);
+            }
+            catch (InputMismatchException e){
+                this.authUI.displayOptionError();
+            }
         }
-        scanner.close();
+    }
 
-        switch (option) {
+    private void processInput(int input){
+        switch (input) {
             case (1):
+                scanner.close();
                 loginSystem.run();
                 break;
             case (2):
+                scanner.close();
                 signupSystem.run();
-                run();
+                loginSystem.run();
                 break;
         }
     }
