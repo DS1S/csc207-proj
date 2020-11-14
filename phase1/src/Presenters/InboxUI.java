@@ -31,8 +31,10 @@ public class InboxUI {
             System.out.println("------------------------------------------------------");
         }
 
-        //TODO: functionality for going back
-        System.out.println("Press ENTER to go back");
+        if (inboxData.size() == 0) { System.out.println("Your inbox is empty! :("); }
+
+        // TODO: functionality for this
+        System.out.println("If you would like to send a message, press 1. If you want to go back, press 2.");
     }
 
     public void displayRecipientPrompt(int type) {
