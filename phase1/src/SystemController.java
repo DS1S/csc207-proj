@@ -71,7 +71,7 @@ public class SystemController implements IRunnable {
         String filePath = "../database/ESManager.ser";
         FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
         EventManager eventManager = eventManagerLoader.loadObject();
-        IRunnable eventSystem = new EventSystem();
+        IRunnable eventSystem = new EventSystem(eventManager, userManager);
         addSystemAndManager(filePath, eventSystem, eventManager, subSystems.size() + 1);
         return eventManager;
     }
