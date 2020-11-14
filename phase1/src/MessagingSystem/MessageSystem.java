@@ -67,20 +67,42 @@ public class MessageSystem implements IRunnable {
 
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
+        while (option != 1 && option != 2) {
+            this.inboxUI.bodyErrors(4);
+            option = scanner.nextInt();
+        }
         if (option == 1) {
+            this.inboxUI.displayRecipientPrompt(1);
             String usernames = scanner.nextLine();
             this.inboxUI.displayBodyPrompt();
             String message = scanner.nextLine();
             String e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
-            // TODO: handle error here
+            while (!e.equals("")) {
+                if (e.equals("UDE")) {
+                    this.inboxUI.bodyErrors(1);
+                    this.inboxUI.displayRecipientPrompt(1);
+                    usernames = scanner.nextLine();
+                    e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
+                }
+                else {
+                    this.inboxUI.bodyErrors(2);
+                    this.inboxUI.displayRecipientPrompt(1);
+                    usernames = scanner.nextLine();
+                    e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
+                }
+            }
+            this.inboxUI.sentPrompt();
         } else if (allowedOptions.contains(option) && option == 2) {
+            this.inboxUI.displayRecipientPrompt(2);
             String events = scanner.nextLine();
             this.inboxUI.displayBodyPrompt();
             String message = scanner.nextLine();
             String e = this.SpeakerMessageAttendees(Arrays.asList(events.split(",")), message);
-            // TODO: handle error here
-        } else {
-            // TODO: invalid option error
+            if (!e.equals("")) {
+                this.inboxUI.bodyErrors(3);
+            } else {
+                this.inboxUI.sentPrompt();
+            }
         }
     }
 
@@ -88,11 +110,15 @@ public class MessageSystem implements IRunnable {
      * Sends a message to a user with the information below if the recipient is not an organizer.
      * @param receiver username of the intended recipient
      * @param message body of the message
-     * @return a no permission string if the intended recipient is an organizer, else empty string
+     * @return a no permission string if the intended recipient is an organizer, a User Doesn't Exist string if the
+     * username doesn't exist, else empty string
      */
     public String MessageAPerson(String receiver, String message) {
         if (!userManager.hasPermission(receiver, Perms.canBeMessaged)){
             return CANNOT_MESSAGE_ORGANIZER;
+        }
+        else if (userManager.getUUIDWithUsername(receiver) == null) {
+            return "UDE";
         }
         else {
             messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(),
@@ -106,7 +132,7 @@ public class MessageSystem implements IRunnable {
      * @param recipients list of usernames of the intended recipients
      * @param message body of the message
      * @return a string indicating that one recipient is an organizer if one of the recipients is an
-     * organizer, else empty string
+     * organizer, a User Doesn't Exist string if at least one username doesn't exist, else empty string
      */
     public String MessagePeople(List<String> recipients, String message) {
         for (String recipient : recipients){
@@ -118,9 +144,14 @@ public class MessageSystem implements IRunnable {
         for (String iter : recipients) {
             recipientUUIDs.add(userManager.getUUIDWithUsername(iter));
         }
-        messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(),
-                recipientUUIDs, message);
-        return "";
+        if (recipientUUIDs.contains(null)) {
+            return "UDE";
+        }
+        else {
+            messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(),
+                    recipientUUIDs, message);
+            return "";
+        }
     }
 
     /**

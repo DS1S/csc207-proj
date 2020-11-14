@@ -39,7 +39,7 @@ public class InboxUI {
 
     public void displayRecipientPrompt(int type) {
         if (type == 1) {
-            System.out.println("Enter the username(s) of the attendee(s)/speaker(s) you would like to send this message to.\n");
+            System.out.println("Enter the username(s) of the attendee(s)/speaker(s) you would like to send this message to. (Comma separated)\n");
         }
         if (type == 2) {
             System.out.println("Enter the names of the events for which you would like all attendees to receive this message.\n");
@@ -53,5 +53,20 @@ public class InboxUI {
     public void sentPrompt() {
         //TODO: functionality for continuing
         System.out.println("Message sent! Press ENTER to continue.");
+    }
+
+    public void bodyErrors(int type) {
+        if (type == 1) {
+            System.out.println("At least one of the usernames doesn't exist\n");
+        }
+        if (type == 2) {
+            System.out.println("Organizers cannot be messaged\n");
+        }
+        if (type == 3) {
+            System.out.println("You don't have permission to message a talk\n");
+        }
+        if (type == 4) {
+            System.out.println("Enter a valid option\n");
+        }
     }
 }
