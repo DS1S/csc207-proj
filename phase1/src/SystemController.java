@@ -27,7 +27,7 @@ public class SystemController implements IRunnable {
 
         Scanner input = new Scanner(System.in);
         int option = 0;
-        while (option != subSystems.size() + 1){
+        while (option != subSystems.size()){
             mainMenu.displayMainMenu(subSystems);
 
             try{

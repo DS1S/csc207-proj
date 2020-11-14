@@ -30,18 +30,18 @@ public class EventSystem implements IRunnable {
 
     @Override
     public void run() {
+        EventSubSystem subsystem = null;
         if (userManager.loggedInHasPermission(canSchedule)) {
-            EventSubSystem schedulingSystem = new ScheduleSystem(eventManager, userManager, eventUI, 5);
-            schedulingSystem.run();
+            subsystem = new ScheduleSystem(eventManager, userManager, eventUI, 5);
         }
         else if (userManager.loggedInHasPermission(canSignUpEvent)) {
-            EventSubSystem eventSignUpSystem = new EventSignUpSystem(eventManager, userManager, eventUI, 5);
-            eventSignUpSystem.run();
+            subsystem = new EventSignUpSystem(eventManager, userManager, eventUI, 5);
         }
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
-            EventSubSystem eventViewerSystem = new EventViewerSystem(eventManager, userManager, eventUI, 3);
-            eventViewerSystem.run();
+            subsystem = new EventViewerSystem(eventManager, userManager, eventUI, 3);
         }
+
+        subsystem.run();
     }
 
     @Override

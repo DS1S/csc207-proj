@@ -1,8 +1,5 @@
 package FileHandleSystem;
 
-import java.util.List;
-import java.util.Map;
-
 public class TerminationWorker<T> extends Thread{
 
     private T manager;
