@@ -55,7 +55,5 @@ public class LoginSystem implements IRunnable {
             System.out.println(response);
             if (response.isEmpty()) authUI.displayError(response);
         }
-
-        scanner.close();
     }
 }

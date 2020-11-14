@@ -38,8 +38,10 @@ public class SystemController implements IRunnable {
             }
             catch (InputMismatchException e){
                 mainMenu.displayInvalidInput(subSystems);
+                input.nextLine();
             }
         }
+        input.close();
     }
 
     private void initializeSubSystems(){

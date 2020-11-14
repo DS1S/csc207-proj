@@ -35,7 +35,7 @@ public class SignupSystem implements IRunnable {
             return TAKEN_USERNAME;
         }
 
-        this.um.addUser(type, name, username, password);
+        this.um.addUser(type, username, password, name);
         return "";
     }
 
@@ -81,9 +81,11 @@ public class SignupSystem implements IRunnable {
             try{
                 option = scanner.nextInt();
                 if (option <= 0 || option > possibleTypes.size()) authUI.displayError("Invalid option, try again!");
+                scanner.nextLine();
             }
             catch (InputMismatchException e){
                 authUI.displayError("Invalid option, try again!");
+                scanner.nextLine();
             }
         }
         create(possibleTypes.get(option - 1));
