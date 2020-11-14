@@ -12,6 +12,7 @@ public class MainMenuUI {
         for (int i = 1; i < subsystems.size(); i++) {
             System.out.println(i + ": " + subsystems.get(i).toString());
         }
+        System.out.println(subsystems.size() + ": Exit");
     }
 
     public void displayMainMenu(Map<Integer, IRunnable> subsystems) {
