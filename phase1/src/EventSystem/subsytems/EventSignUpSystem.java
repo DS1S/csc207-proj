@@ -25,12 +25,16 @@ public class EventSignUpSystem extends EventSubSystem {
         switch (index) {
             case (1):
                 eventUI.displayEvents(eventManager.retrieveAllEvents());
+                break;
             case (2):
                 SignUpForEvent();
+                break;
             case (3):
                 CancelSignUpForEvent();
+                break;
             case (4):
                 eventUI.displayEvents(eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID()));
+                break;
         }
     }
 
