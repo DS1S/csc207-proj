@@ -25,20 +25,26 @@ public class EventUI {
      * @param eventList the list of extracted event data for the events to be displayed
      */
     public void displayEvents(List<Map<String, Object>> eventList) {
-        System.out.println("----------Events----------");
-        StringBuilder sb = new StringBuilder();
-        int i = 1;
-        for (Map<String, Object> data : eventList) {
-            i += 1;
-            sb.append("Event " + i + "\n");
-            sb.append(data.get("Title") + "\n");
-            sb.append(userManager.getUsernameWithUUID((UUID)data.get("Speaker")) + "\n");
-            sb.append(data.get("StartTime") + " to " + data.get("EndTime") + "\n");
-            sb.append(data.get("Room") + "\n");
-            sb.append(data.get("Registered") + "/" + data.get("Capacity") + "\n");
-            System.out.println(sb);
-            System.out.println("----------------------------------");
-            sb.setLength(0);
+
+        if (eventList.isEmpty()){
+            System.out.println("There are no events scheduled");
+        }
+        else {
+            System.out.println("----------Events----------");
+            StringBuilder sb = new StringBuilder();
+            int i = 1;
+            for (Map<String, Object> data : eventList) {
+                i += 1;
+                sb.append("Event " + i + "\n");
+                sb.append(data.get("Title") + "\n");
+                sb.append(userManager.getUsernameWithUUID((UUID)data.get("Speaker")) + "\n");
+                sb.append(data.get("StartTime") + " to " + data.get("EndTime") + "\n");
+                sb.append(data.get("Room") + "\n");
+                sb.append(data.get("Registered") + "/" + data.get("Capacity") + "\n");
+                System.out.println(sb);
+                System.out.println("----------------------------------");
+                sb.setLength(0);
+            }
         }
     }
 

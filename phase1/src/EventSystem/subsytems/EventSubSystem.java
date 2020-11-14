@@ -35,7 +35,6 @@ public abstract class EventSubSystem implements IRunnable {
             option = optionProcessor.processInput();
             processMainSignInput(option);
         }while(option != numOptions);
-        input.close();
     }
 
     protected abstract void displayOptions();

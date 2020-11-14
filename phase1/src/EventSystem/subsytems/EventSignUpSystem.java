@@ -35,21 +35,30 @@ public class EventSignUpSystem extends EventSubSystem {
     }
 
     private void SignUpForEvent() {
-        int index = processEvents();
-        eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
-        eventUI.displaySignupSuccess();
+        List<Map<String, Object>> eventList = eventManager.retrieveAllEvents();
+        int index = processEvents(eventList);
+
+        if(index != -1){
+            eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
+            eventUI.displaySignupSuccess();
+        }
     }
 
     private void CancelSignUpForEvent() {
-        int index = processEvents();
-        eventManager.removeAttendee(userManager.getLoggedInUserUUID(), index);
-        eventUI.displayCancelSignupSuccess();
+        List<Map<String, Object>> eventList = eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID());
+        int index = processEvents(eventList);
+
+        if (index != -1){
+            eventManager.removeAttendee(userManager.getLoggedInUserUUID(), index);
+            eventUI.displayCancelSignupSuccess();
+        }
     }
 
-    private int processEvents(){
-        List<Map<String, Object>> eventList = eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID());
-        IndexProcessor<Integer> eventProcessor = new EventIndexProcessor(input, eventUI, eventList.size());
-        eventUI.displayEvents(eventList);
+    private int processEvents(List<Map<String, Object>> eventsData){
+        if (eventsData.isEmpty()) return -1;
+
+        IndexProcessor<Integer> eventProcessor = new EventIndexProcessor(input, eventUI, eventsData.size());
+        eventUI.displayEvents(eventsData);
         eventUI.displayEnterIndexEvent();
         return eventProcessor.processInput();
     }
