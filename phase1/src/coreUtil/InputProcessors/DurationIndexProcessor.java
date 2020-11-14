@@ -24,7 +24,6 @@ public class DurationIndexProcessor extends IndexProcessor<Integer> {
             }
             catch (InputMismatchException e) {
                 eventUI.displayInvalidDuration();
-                eventUI.displayDurationPrompt();
             }
         }
         return duration;

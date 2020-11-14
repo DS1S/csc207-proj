@@ -1,22 +1,20 @@
 package MessagingSystem;
-import CoreEntities.Users.User;
 import CoreEntities.Message;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.UUID;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.time.LocalTime;
 
 /**
  * Class to manage messages
  */
 public class MessageManager {
-    private Map<UUID, List<Message>> tempInbox;
+    private final Map<UUID, List<Message>> inboxes;
 
-    public MessageManager(Map<UUID, List<Message>> tempInbox) {
-        this.tempInbox = tempInbox;
+    public MessageManager(List<UUID> userIDs) {
+        inboxes = new HashMap<>();
+        for (UUID id : userIDs){
+            inboxes.put(id, new ArrayList<>());
+        }
     }
 
     /**
@@ -28,7 +26,7 @@ public class MessageManager {
      */
     public void sendMessageToIndividual(UUID sender, UUID recipient, String msg) {
         Message m = new Message(UUID.randomUUID(), sender, recipient, msg, LocalTime.now());
-        tempInbox.get(recipient).add(m);
+        inboxes.get(recipient).add(m);
     }
 
     /**
@@ -38,7 +36,7 @@ public class MessageManager {
      * @param msg The message object to delete
      */
     public void deleteMessage(UUID recipient, Message msg) {
-        tempInbox.get(recipient).remove(msg);
+        inboxes.get(recipient).remove(msg);
     }
 
     /**
@@ -61,7 +59,7 @@ public class MessageManager {
      * @param reply The message object to reply with
      */
     public void replyToMessage(Message received, Message reply){
-        tempInbox.get(received.getSender()).add(reply);
+        inboxes.get(received.getSender()).add(reply);
     }
 
     /**
@@ -71,7 +69,7 @@ public class MessageManager {
      * @return A list of message representations (maps) with all message info
      */
     public List<Map<String, Object>> getInboxData(UUID userID){
-        List<Message> inbox = tempInbox.get(userID);
+        List<Message> inbox = inboxes.get(userID);
         List<Map<String, Object>> inboxData = new ArrayList<>();
         for (Message message : inbox){
             inboxData.add(message.extractData());

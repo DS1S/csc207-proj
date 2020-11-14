@@ -15,7 +15,6 @@ public class TimeIndexProcessor extends IndexProcessor<LocalTime> {
         this.eventUI = eventUI;
     }
 
-
     @Override
     public LocalTime processInput() {
         LocalTime startTime = null;
