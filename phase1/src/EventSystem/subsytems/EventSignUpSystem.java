@@ -25,12 +25,16 @@ public class EventSignUpSystem extends EventSubSystem {
         switch (index) {
             case (1):
                 eventUI.displayEvents(eventManager.retrieveAllEvents());
+                break;
             case (2):
                 SignUpForEvent();
+                break;
             case (3):
                 CancelSignUpForEvent();
+                break;
             case (4):
                 eventUI.displayEvents(eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID()));
+                break;
         }
     }
 
@@ -39,8 +43,13 @@ public class EventSignUpSystem extends EventSubSystem {
         int index = processEvents(eventList);
 
         if(index != -1){
-            eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
-            eventUI.displaySignupSuccess();
+            if (!eventManager.isEventatCapacity(index)){
+                eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
+                eventUI.displaySignupSuccess();
+            }
+            else{
+                eventUI.displaySignUpFull();
+            }
         }
     }
 

@@ -29,6 +29,7 @@ public class EventIndexProcessor extends IndexProcessor<Integer> {
             }
             catch (InputMismatchException e){
                 eventUI.displayInvalidIndex();
+                scanner.nextLine();
             }
 
         }while(option <= 0 || option > max);

@@ -20,8 +20,10 @@ public class EventViewerSystem extends EventSubSystem {
         switch (index) {
             case (1):
                 eventUI.displayEvents(eventManager.retrieveAllEvents());
+                break;
             case (2):
                 eventUI.displayEvents(eventManager.retrieveEventsBySpeaker(userManager.getLoggedInUserUUID()));
+                break;
         }
     }
 }
