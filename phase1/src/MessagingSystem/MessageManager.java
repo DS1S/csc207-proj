@@ -1,13 +1,14 @@
 package MessagingSystem;
 import CoreEntities.Message;
 
+import java.io.Serializable;
 import java.util.*;
 import java.time.LocalTime;
 
 /**
  * Class to manage messages
  */
-public class MessageManager {
+public class MessageManager implements Serializable {
     private final Map<UUID, List<Message>> inboxes;
 
     public MessageManager(List<UUID> userIDs) {

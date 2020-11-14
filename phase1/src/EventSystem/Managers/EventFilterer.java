@@ -3,6 +3,7 @@ package EventSystem.Managers;
 import CoreEntities.Event;
 import EventSystem.EventSystem;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.UUID;
 /**
  * A class for filtering a list of Events by various criteria.
  */
-class EventFilterer {
+class EventFilterer implements Serializable {
     /**
      * Returns a new list of the Events in a given list that fall in a specified time interval.
      *

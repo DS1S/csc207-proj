@@ -25,7 +25,6 @@ public class SystemController implements IRunnable {
     public void run(){
         initializeSubSystems();
 
-        subSystems.get(0).run();
         Scanner input = new Scanner(System.in);
         int option = 0;
         while (option != subSystems.size() + 1){
@@ -47,15 +46,16 @@ public class SystemController implements IRunnable {
         UserManager userManager = initializeLoginSystem();
         EventManager eventManager = initializeEventSystem(userManager);
 
-        initializeUserCreatorSystem(userManager);
         initializeMessageSystem(userManager, eventManager);
-        initializeEventSystem(userManager);
-
         initializeShutDownHook();
+
+        subSystems.get(0).run();
+        initializeUserCreatorSystem(userManager);
+
     }
 
     private UserManager initializeLoginSystem(){
-        String filePath = "../database/UManager.ser";
+        String filePath = "phase1/database/UManager.ser";
         FileSerializer<UserManager> userManagerLoader = new FileSerializer<>(filePath);
         UserManager uManager = userManagerLoader.loadObject();
         IRunnable authenticationSystem = new AuthenticationSystem(uManager);
@@ -64,7 +64,7 @@ public class SystemController implements IRunnable {
     }
 
     private void initializeMessageSystem(UserManager userManager, EventManager eventManager){
-        String filePath = "../database/MSManager.ser";
+        String filePath = "phase1/database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
         IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager);
@@ -72,7 +72,7 @@ public class SystemController implements IRunnable {
     }
 
     private EventManager initializeEventSystem(UserManager userManager){
-        String filePath = "../database/ESManager.ser";
+        String filePath = "phase1/database/ESManager.ser";
         FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
         EventManager eventManager = eventManagerLoader.loadObject();
         IRunnable eventSystem = new EventSystem(eventManager, userManager);

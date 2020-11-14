@@ -30,6 +30,8 @@ public class AuthenticationSystem implements IRunnable {
             }
             catch (InputMismatchException e){
                 this.authUI.displayOptionError();
+                scanner.nextLine();
+
             }
         }
     }
@@ -37,11 +39,9 @@ public class AuthenticationSystem implements IRunnable {
     private void processInput(int input){
         switch (input) {
             case (1):
-                scanner.close();
                 loginSystem.run();
                 break;
             case (2):
-                scanner.close();
                 signupSystem.run();
                 loginSystem.run();
                 break;

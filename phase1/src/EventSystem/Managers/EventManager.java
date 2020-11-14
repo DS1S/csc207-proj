@@ -3,19 +3,21 @@ package EventSystem.Managers;
 import CoreEntities.Event;
 import EventSystem.EventSystem;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.*;
 
 /**
  * A class that manages the Events in a schedule of events.
  */
-public class EventManager {
+public class EventManager implements Serializable {
     private List<Event> mainSchedule;
     private EventFilterer eventFilterer;
     private EventSignUp eventSignUp;
     private EventScheduler eventScheduler;
 
-    EventManager() {
+    public EventManager() {
+        mainSchedule = new ArrayList<>();
         eventFilterer = new EventFilterer();
         eventSignUp = new EventSignUp();
         eventScheduler = new EventScheduler();

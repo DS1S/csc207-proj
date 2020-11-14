@@ -4,13 +4,14 @@ import CoreEntities.Event;
 import EventSystem.EventSystem;
 import EventSystem.Managers.EventFilterer;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 /**
  * A class for signing up attendees to Events in a schedule of events.
  */
-class EventSignUp {
+class EventSignUp implements Serializable {
 
     /** An EventFilterer for filtering a list of Events by various criteria. */
     private EventFilterer eventFilterer;

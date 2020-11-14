@@ -1,6 +1,7 @@
 package LoginSystem;
 
 import CoreEntities.Users.Attendee;
+import CoreEntities.Users.Organizer;
 import CoreEntities.Users.Speaker;
 import CoreEntities.Users.User;
 
@@ -22,6 +23,9 @@ public class UserFactory {
             return new Speaker(name, username, password);
         } else if (userType.equals("attendee")) {
             return new Attendee(name, username, password);
+        }
+        else if (userType.equals("organizer")){
+            return new Organizer(name, username, password);
         }
         return null;
     }

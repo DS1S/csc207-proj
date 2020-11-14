@@ -4,6 +4,7 @@ import CoreEntities.Event;
 import EventSystem.EventSystem;
 import EventSystem.Managers.EventFilterer;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.UUID;
 /**
  * A class for adding new Events to a schedule of events.
  */
-class EventScheduler {
+class EventScheduler implements Serializable {
 
     /** An EventFilter for filtering a list of Events by various criteria. */
     private final EventFilterer eventFilter;

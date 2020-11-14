@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class LoginSystem implements IRunnable {
     private final UserManager um;
     private final AuthenticationUI authUI;
-    private final Scanner scanner = new Scanner(System.in);
 
     public LoginSystem(UserManager um){
         this.um = um;
@@ -43,7 +42,9 @@ public class LoginSystem implements IRunnable {
      */
     public void run(){
 
-        String response = "";
+        Scanner scanner = new Scanner(System.in);
+
+        String response = "?";
         while (!response.isEmpty()){
             authUI.displayLoginPage();
             authUI.displayUsernamePrompt();
@@ -51,6 +52,7 @@ public class LoginSystem implements IRunnable {
             authUI.displayPasswordPrompt();
             String password = scanner.nextLine();
             response = loginUser(username, password);
+            System.out.println(response);
             if (response.isEmpty()) authUI.displayError(response);
         }
 

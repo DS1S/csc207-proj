@@ -3,13 +3,14 @@ package LoginSystem;
 import CoreEntities.Users.Perms;
 import CoreEntities.Users.User;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.ArrayList;
 
-public class UserManager {
+public class UserManager implements Serializable {
     private Map<UUID, User> users;
     private User loggedInUser;
 
@@ -19,10 +20,10 @@ public class UserManager {
 
     public void addUser(String type, String username, String password, String name) {
         UserFactory userCreator = new UserFactory();
-        User u = null;
+        User u;
 
         do {
-            u = userCreator.buildUser(type, username, password, name);
+            u = userCreator.buildUser(type, name, username, password);
         }while(containsUserWithUUID(u.getUUID()));
 
         this.users.put(u.getUUID(), u);
@@ -63,8 +64,7 @@ public class UserManager {
     }
 
     public boolean loggedInHasPermission(Perms permission){
-        Boolean hasPerm = this.loggedInUser.getPermissions().get(permission);
-        return hasPerm;
+        return this.loggedInUser.getPermissions().get(permission);
     }
 
     public String getUsernameWithUUID(UUID userUUID){

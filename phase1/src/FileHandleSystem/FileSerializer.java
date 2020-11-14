@@ -25,6 +25,7 @@ public class FileSerializer<T> {
             output.writeObject(objects);
             output.close();
         }catch (IOException e){
+            Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
             Logger.getAnonymousLogger().log(Level.SEVERE, "Could Not Save Data");
         }
     }

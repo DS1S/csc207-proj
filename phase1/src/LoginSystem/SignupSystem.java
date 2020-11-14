@@ -42,7 +42,7 @@ public class SignupSystem implements IRunnable {
 
     private void create(String type){
 
-        String result = "";
+        String result = "?";
         while(!result.isEmpty()){
             this.authUI.displaySigningUpPage();
 
