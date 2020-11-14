@@ -33,7 +33,6 @@ public class EventUI {
             StringBuilder sb = new StringBuilder();
             int i = 1;
             for (Map<String, Object> data : eventList) {
-                i += 1;
                 sb.append("Event " + i + "\n");
                 sb.append(data.get("Title") + "\n");
                 sb.append(userManager.getUsernameWithUUID((UUID)data.get("Speaker")) + "\n");
@@ -43,6 +42,7 @@ public class EventUI {
                 System.out.println(sb);
                 System.out.println("----------------------------------");
                 sb.setLength(0);
+                i += 1;
             }
         }
     }
