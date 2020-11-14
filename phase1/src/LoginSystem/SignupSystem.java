@@ -16,7 +16,7 @@ public class SignupSystem implements IRunnable {
     private final List<String> possibleTypes;
     private final Scanner scanner = new Scanner(System.in);
 
-    public SignupSystem(UserManager um, String type){
+    public SignupSystem(UserManager um, String type) {
         this.um = um;
         this.authUI = new AuthenticationUI();
         this.possibleTypes = new ArrayList<String>();
@@ -40,8 +40,7 @@ public class SignupSystem implements IRunnable {
     }
 
 
-    private void create(String type){
-
+    private void create(String type) {
         String result = "?";
         while(!result.isEmpty()){
             this.authUI.displaySigningUpPage();
@@ -60,7 +59,7 @@ public class SignupSystem implements IRunnable {
         }
     }
 
-    private String askForString(String attribute){
+    private String askForString(String attribute) {
         String string = "";
         while (string.isEmpty()){
             string = scanner.nextLine();
@@ -73,7 +72,7 @@ public class SignupSystem implements IRunnable {
      * Prompts user to select type of user to create based on permissions, then calls create() to handle the rest.
      * Also runs recursively until valid input.
      */
-    public void run(){
+    public void run() {
 
         int option = 0;
         while(option <= 0 || option > possibleTypes.size()){
@@ -89,5 +88,10 @@ public class SignupSystem implements IRunnable {
             }
         }
         create(possibleTypes.get(option - 1));
+    }
+
+    @Override
+    public String toString() {
+        return "User Creation";
     }
 }

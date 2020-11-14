@@ -18,13 +18,13 @@ public class UserFactory {
      * @param password The user's password
      * @return a User object if the userType is valid, null otherwise.
      */
-    public User buildUser(String userType, String name, String username, String password){
+    public User buildUser(String userType, String name, String username, String password) {
         if (userType.equals("speaker")) {
             return new Speaker(name, username, password);
         } else if (userType.equals("attendee")) {
             return new Attendee(name, username, password);
         }
-        else if (userType.equals("organizer")){
+        else if (userType.equals("organizer")) {
             return new Organizer(name, username, password);
         }
         return null;
