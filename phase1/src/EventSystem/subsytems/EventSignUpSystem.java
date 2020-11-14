@@ -43,8 +43,10 @@ public class EventSignUpSystem extends EventSubSystem {
         int index = processEvents(eventList);
 
         if(index != -1){
-            eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
-            eventUI.displaySignupSuccess();
+            if(eventManager.isEventatCapacity(index)){
+                eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
+                eventUI.displaySignupSuccess();
+            }
         }
     }
 
