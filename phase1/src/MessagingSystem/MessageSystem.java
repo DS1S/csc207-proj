@@ -47,6 +47,7 @@ public class MessageSystem implements IRunnable {
         this.messageManager = messageManager;
         this.userManager = userManager;
         this.eventManager = eventManager;
+        this.inboxUI = new InboxUI(userManager);
     }
 
     @Override

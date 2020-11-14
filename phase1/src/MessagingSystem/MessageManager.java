@@ -69,12 +69,14 @@ public class MessageManager implements Serializable {
      * @param userID the UUID of the user whose messages are desired
      * @return A list of message representations (maps) with all message info
      */
-    public List<Map<String, Object>> getInboxData(UUID userID){
+    public List<Map<String, Object>> getInboxData(UUID userID) {
         List<Message> inbox = inboxes.get(userID);
         List<Map<String, Object>> inboxData = new ArrayList<>();
+
         for (Message message : inbox){
             inboxData.add(message.extractData());
         }
+
         return inboxData;
     }
 

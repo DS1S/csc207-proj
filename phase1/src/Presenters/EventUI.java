@@ -25,7 +25,6 @@ public class EventUI {
      * @param eventList the list of extracted event data for the events to be displayed
      */
     public void displayEvents(List<Map<String, Object>> eventList) {
-
         if (eventList.isEmpty()){
             System.out.println("There are no events scheduled");
         }
@@ -185,7 +184,6 @@ public class EventUI {
      */
     public void displayScheduleFailure(List<Map<String, Object>> eventList) {
         System.out.println("Your event was not scheduled. Your event conflicts with the following existing events:\n");
-        displayEvents(eventList);
     }
 
     /**
@@ -209,7 +207,6 @@ public class EventUI {
      */
     public void displayRescheduleFailure(List<Map<String, Object>> eventList) {
         System.out.println("Your event was not rescheduled. Your event conflicts with the following existing events:\n");
-        displayEvents(eventList);
     }
 
     /**
