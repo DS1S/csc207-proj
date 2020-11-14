@@ -11,6 +11,11 @@ public class EventViewerSystem extends EventSubSystem {
     }
 
     @Override
+    protected void displayOptions() {
+        eventUI.displaySpeakerOptions();
+    }
+
+    @Override
     protected void processMainSignInput(int index) {
         switch (index) {
             case (1):

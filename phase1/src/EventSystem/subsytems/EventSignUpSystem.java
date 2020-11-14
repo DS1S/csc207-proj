@@ -16,6 +16,11 @@ public class EventSignUpSystem extends EventSubSystem {
         super(eventManager, userManager, eventUI, numOptions);
     }
 
+    @Override
+    protected void displayOptions() {
+        eventUI.displaySignupOptions();
+    }
+
     protected void processMainSignInput(int index){
         switch (index) {
             case (1):

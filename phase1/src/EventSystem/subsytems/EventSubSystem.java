@@ -31,12 +31,14 @@ public abstract class EventSubSystem implements IRunnable {
     public void run() {
         int option = 0;
         do{
-            eventUI.displaySignupOptions();
+            displayOptions();
             option = optionProcessor.processInput();
             processMainSignInput(option);
         }while(option != numOptions);
         input.close();
     }
+
+    protected abstract void displayOptions();
 
     protected abstract void processMainSignInput(int index);
 }

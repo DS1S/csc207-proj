@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class EventIndexProcessor extends IndexProcessor<Integer> {
 
-    private EventUI eventUI;
-    private int max;
+    private final EventUI eventUI;
+    private final int max;
 
     public EventIndexProcessor(Scanner scanner, EventUI eventUI, int max){
         super(scanner);
@@ -23,7 +23,7 @@ public class EventIndexProcessor extends IndexProcessor<Integer> {
             eventUI.displayIndexPrompt();
             try{
                 option = scanner.nextInt();
-                if(option < 0 || option > max){
+                if(option <= 0 || option > max){
                     eventUI.displayInvalidIndex();
                 }
             }
@@ -31,7 +31,7 @@ public class EventIndexProcessor extends IndexProcessor<Integer> {
                 eventUI.displayInvalidIndex();
             }
 
-        }while(option < 0 || option > max);
+        }while(option <= 0 || option > max);
 
         return option;
     }

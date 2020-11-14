@@ -17,6 +17,10 @@ public class ScheduleSystem extends EventSubSystem{
         super(eventManager, userManager, eventUI, numOptions);
     }
 
+    @Override
+    protected void displayOptions() {
+        eventUI.displayScheduleOptions();
+    }
 
     @Override
     protected void processMainSignInput(int index) {
