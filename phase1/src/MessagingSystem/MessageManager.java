@@ -6,11 +6,14 @@ import java.util.*;
 import java.time.LocalTime;
 
 /**
- * Class to manage messages
- */
+ * Class to manage messages.*/
 public class MessageManager implements Serializable {
+    /** A map from user UUIDs to the corresponding user's inbox.*/
     private final Map<UUID, List<Message>> inboxes;
 
+    /** Constructs a new message manager with the information below.
+     * @param userIDs a list of user UUIDs
+     */
     public MessageManager(List<UUID> userIDs) {
         inboxes = new HashMap<>();
         for (UUID id : userIDs){
@@ -20,7 +23,6 @@ public class MessageManager implements Serializable {
 
     /**
      * Send a message to recipient by appending it to his list of messages.
-     *
      * @param sender the UUID of the sender.
      * @param recipient the UUID of the recipient
      * @param msg A string which is the body of the message.
@@ -32,8 +34,7 @@ public class MessageManager implements Serializable {
 
 
     /**
-     * Convenience method to send a message to multiple people at once
-     *
+     * Convenience method to send a message to multiple people at once.
      * @param sender the UUID of the sender.
      * @param recipients A list of UUIDs of the recipients
      * @param msg A string which is the body of the message.
@@ -44,17 +45,25 @@ public class MessageManager implements Serializable {
         }
     }
 
+    /**
+     * Returns true if a user has an inbox in inboxes, false otherwise.
+     * @param userID UUID of the user
+     * @return true if user has an inbox, else false
+     */
     public boolean userHasInbox(UUID userID){
         return inboxes.containsKey(userID);
     }
 
+    /**
+     * Maps the given UUID to an empty list in inboxes.
+     * @param userID UUID of the user
+     */
     public void addBlankInbox(UUID userID){
         inboxes.put(userID, new ArrayList<>());
     }
 
     /**
      * A method to get all a user's messages and parse them into a generic format for the caller.
-     *
      * @param userID the UUID of the user whose messages are desired
      * @return A list of message representations (maps) with all message info
      */
