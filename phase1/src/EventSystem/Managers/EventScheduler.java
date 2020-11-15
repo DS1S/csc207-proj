@@ -15,21 +15,11 @@ import java.util.UUID;
  */
 class EventScheduler implements Serializable {
 
-    /** An EventFilter for filtering a list of Events by various criteria. */
     private final EventFilterer eventFilter;
 
     /** Constructs a new EventScheduler. */
     EventScheduler() { eventFilter = new EventFilterer(); }
 
-    /**
-     * Returns a new list of the Events in a given list that are in the specified room during the specified interval.
-     *
-     * @param events the original list of Events
-     * @param room the room
-     * @param start the start time of the interval
-     * @param end the end time of the interval
-     * @return a new list of Events that are in the specified room during the specified interval
-     */
     private List<Event> getRoomConflicts(List<Event> events, String room, LocalTime start, LocalTime end) {
         List<Event> conflictingEvents = new ArrayList<>();
         for (Event event: eventFilter.retrieveEventsByTimeInterval(events, start, end)) {
@@ -40,16 +30,6 @@ class EventScheduler implements Serializable {
         return conflictingEvents;
     }
 
-    /**
-     * Returns a new list of the Events in a given list that are hosted by the specified speaker during the specified
-     * interval.
-     *
-     * @param events the original list of Events
-     * @param speaker the UUID of the speaker
-     * @param start the start time of the interval
-     * @param end the end time of the interval
-     * @return a new list of Events that are in the specified room during the specified interval
-     */
     private List<Event> getSpeakerConflicts(List<Event> events, UUID speaker, LocalTime start, LocalTime end) {
         List<Event> conflictingEvents = new ArrayList<>();
         for (Event event: eventFilter.retrieveEventsByTimeInterval(events, start, end)) {
