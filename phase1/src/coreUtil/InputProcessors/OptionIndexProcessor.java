@@ -1,18 +1,19 @@
 package coreUtil.InputProcessors;
 
 import Presenters.EventUI;
+import Presenters.OptionUI;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class EventIndexProcessor extends IndexProcessor<Integer> {
+public class OptionIndexProcessor extends IndexProcessor<Integer> {
 
-    private final EventUI eventUI;
+    private final OptionUI optionUI;
     private final int max;
 
-    public EventIndexProcessor(Scanner scanner, EventUI eventUI, int max){
+    public OptionIndexProcessor(Scanner scanner, int max){
         super(scanner);
-        this.eventUI = eventUI;
+        this.optionUI = new OptionUI();
         this.max = max;
     }
 
@@ -20,15 +21,15 @@ public class EventIndexProcessor extends IndexProcessor<Integer> {
     public Integer processInput() {
         int option = 0;
         do{
-            eventUI.displayIndexPrompt();
+            optionUI.displayIndexPrompt();
             try{
                 option = scanner.nextInt();
                 if(option <= 0 || option > max){
-                    eventUI.displayInvalidIndex();
+                    optionUI.displayInvalidIndex();
                 }
             }
             catch (InputMismatchException e){
-                eventUI.displayInvalidIndex();
+                optionUI.displayInvalidIndex();
                 scanner.nextLine();
             }
 

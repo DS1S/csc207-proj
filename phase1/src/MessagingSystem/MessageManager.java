@@ -30,15 +30,6 @@ public class MessageManager implements Serializable {
         inboxes.get(recipient).add(m);
     }
 
-    /**
-     * Unsends or deletes a message from recipient's list of messages.
-     *
-     * @param recipient the UUID of the recipient
-     * @param msg The message object to delete
-     */
-    public void deleteMessage(UUID recipient, Message msg) {
-        inboxes.get(recipient).remove(msg);
-    }
 
     /**
      * Convenience method to send a message to multiple people at once
@@ -53,14 +44,12 @@ public class MessageManager implements Serializable {
         }
     }
 
-    /**
-     * 'Reply' to a message by appending it to its sender's list of messages
-     *
-     * @param received The message object to reply to
-     * @param reply The message object to reply with
-     */
-    public void replyToMessage(Message received, Message reply){
-        inboxes.get(received.getSender()).add(reply);
+    public boolean userHasInbox(UUID userID){
+        return inboxes.containsKey(userID);
+    }
+
+    public void addBlankInbox(UUID userID){
+        inboxes.put(userID, new ArrayList<>());
     }
 
     /**

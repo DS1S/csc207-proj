@@ -48,12 +48,10 @@ public class SystemController implements IRunnable {
         UserManager userManager = initializeLoginSystem();
         EventManager eventManager = initializeEventSystem(userManager);
 
-        initializeMessageSystem(userManager, eventManager);
-        initializeShutDownHook();
-
         subSystems.get(0).run();
         initializeUserCreatorSystem(userManager);
-
+        initializeMessageSystem(userManager, eventManager);
+        initializeShutDownHook();
     }
 
     private UserManager initializeLoginSystem(){
@@ -70,6 +68,8 @@ public class SystemController implements IRunnable {
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
         IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager);
+        if(!msManager.userHasInbox(userManager.getLoggedInUserUUID()))
+            msManager.addBlankInbox(userManager.getLoggedInUserUUID());
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size());
     }
 

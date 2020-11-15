@@ -7,6 +7,7 @@ import EventSystem.subsytems.EventSubSystem;
 import EventSystem.subsytems.EventViewerSystem;
 import EventSystem.subsytems.ScheduleSystem;
 import LoginSystem.UserManager;
+import Main.SubSystem;
 import coreUtil.IRunnable;
 
 import java.time.DateTimeException;
@@ -30,7 +31,7 @@ public class EventSystem implements IRunnable {
 
     @Override
     public void run() {
-        EventSubSystem subsystem = null;
+        SubSystem subsystem = null;
         if (userManager.loggedInHasPermission(canSchedule)) {
             subsystem = new ScheduleSystem(eventManager, userManager, eventUI, 5);
         }
@@ -40,7 +41,6 @@ public class EventSystem implements IRunnable {
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
             subsystem = new EventViewerSystem(eventManager, userManager, eventUI, 3);
         }
-
         subsystem.run();
     }
 

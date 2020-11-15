@@ -1,11 +1,20 @@
 package MessagingSystem;
 import EventSystem.Managers.EventManager;
 import CoreEntities.Users.Perms;
+import EventSystem.subsytems.EventSignUpSystem;
+import EventSystem.subsytems.EventViewerSystem;
+import EventSystem.subsytems.ScheduleSystem;
 import LoginSystem.UserManager;
+import Main.SubSystem;
+import MessagingSystem.SubSystems.AdvancedMessageSubSystem;
+import MessagingSystem.SubSystems.BaseMessageSubSystem;
+import MessagingSystem.SubSystems.SpeakerMessageSubSystem;
 import coreUtil.IRunnable;
 import Presenters.InboxUI;
 
 import java.util.*;
+
+import static CoreEntities.Users.Perms.*;
 
 /**
  * A messaging system with a message manager, a user manager, an event manager, a no permission string,
@@ -14,13 +23,13 @@ import java.util.*;
  */
 public class MessageSystem implements IRunnable {
     /** The message manager used by the system. */
-    private MessageManager messageManager;
+    private final MessageManager messageManager;
 
     /** The user manager used by the system. */
-    private UserManager userManager;
+    private final UserManager userManager;
 
     /** The event manager used by the system. */
-    private EventManager eventManager;
+    private final EventManager eventManager;
 
     /** The string used to indicate that the user does not have permission to perform an action. */
     private final String NO_PERMISSION = "You do not have permission to do that!";
@@ -34,7 +43,7 @@ public class MessageSystem implements IRunnable {
             "an organizer!";
 
     /** The inbox UI used by the system. */
-    private InboxUI inboxUI;
+    private final InboxUI inboxUI;
 
     /**
      * Constructs a new messaging system with the information below.
@@ -52,59 +61,71 @@ public class MessageSystem implements IRunnable {
 
     @Override
     public void run() {
-        UUID t = this.userManager.getLoggedInUserUUID();
-        this.inboxUI.displayInbox(this.messageManager.getInboxData(t));
-
-        // TODO: reply to message prompt here
-
-        ArrayList<Integer> allowedOptions = new ArrayList<>();
-        this.inboxUI.displayRecipientPrompt(1);
-        allowedOptions.add(1);
-        if (this.userManager.loggedInHasPermission(Perms.canMessageTalk)) {
-            this.inboxUI.displayRecipientPrompt(2);
-            allowedOptions.add(2);
+        SubSystem subsystem = null;
+        if (userManager.loggedInHasPermission(canSignUpEvent)) {
+            subsystem = new BaseMessageSubSystem(userManager, messageManager, 3);
         }
-
-        Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        while (option != 1 && option != 2) {
-            this.inboxUI.bodyErrors(4);
-            option = scanner.nextInt();
+        else if (userManager.loggedInHasPermission(canSchedule)) {
+            subsystem = new AdvancedMessageSubSystem(userManager, messageManager, 5);
         }
-        if (option == 1) {
-            this.inboxUI.displayRecipientPrompt(1);
-            String usernames = scanner.nextLine();
-            this.inboxUI.displayBodyPrompt();
-            String message = scanner.nextLine();
-            String e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
-            while (!e.equals("")) {
-                if (e.equals("UDE")) {
-                    this.inboxUI.bodyErrors(1);
-                    this.inboxUI.displayRecipientPrompt(1);
-                    usernames = scanner.nextLine();
-                    e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
-                }
-                else {
-                    this.inboxUI.bodyErrors(2);
-                    this.inboxUI.displayRecipientPrompt(1);
-                    usernames = scanner.nextLine();
-                    e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
-                }
-            }
-            this.inboxUI.sentPrompt();
-        } else if (allowedOptions.contains(option) && option == 2) {
-            this.inboxUI.displayRecipientPrompt(2);
-            String events = scanner.nextLine();
-            this.inboxUI.displayBodyPrompt();
-            String message = scanner.nextLine();
-            String e = this.SpeakerMessageAttendees(Arrays.asList(events.split(",")), message);
-            if (!e.equals("")) {
-                this.inboxUI.bodyErrors(3);
-            } else {
-                this.inboxUI.sentPrompt();
-            }
+        else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
+            subsystem = new SpeakerMessageSubSystem(userManager, messageManager, 4, eventManager);
         }
+        subsystem.run();
     }
+
+    //    @Override
+//    public void run() {
+//        UUID t = this.userManager.getLoggedInUserUUID();
+//
+//        ArrayList<Integer> allowedOptions = new ArrayList<>();
+//        this.inboxUI.displayRecipientPrompt(1);
+//        allowedOptions.add(1);
+//        if (this.userManager.loggedInHasPermission(Perms.canMessageTalk)) {
+//            this.inboxUI.displayRecipientPrompt(2);
+//            allowedOptions.add(2);
+//        }
+//
+//        Scanner scanner = new Scanner(System.in);
+//        int option = scanner.nextInt();
+//        while (option != 1 && option != 2) {
+//            this.inboxUI.bodyErrors(4);
+//            option = scanner.nextInt();
+//        }
+//        if (option == 1) {
+//            this.inboxUI.displayRecipientPrompt(1);
+//            String usernames = scanner.nextLine();
+//            this.inboxUI.displayBodyPrompt();
+//            String message = scanner.nextLine();
+//            String e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
+//            while (!e.equals("")) {
+//                if (e.equals("UDE")) {
+//                    this.inboxUI.bodyErrors(1);
+//                    this.inboxUI.displayRecipientPrompt(1);
+//                    usernames = scanner.nextLine();
+//                    e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
+//                }
+//                else {
+//                    this.inboxUI.bodyErrors(2);
+//                    this.inboxUI.displayRecipientPrompt(1);
+//                    usernames = scanner.nextLine();
+//                    e = this.MessagePeople(Arrays.asList(usernames.split(",")), message);
+//                }
+//            }
+//            this.inboxUI.sentPrompt();
+//        } else if (allowedOptions.contains(option) && option == 2) {
+//            this.inboxUI.displayRecipientPrompt(2);
+//            String events = scanner.nextLine();
+//            this.inboxUI.displayBodyPrompt();
+//            String message = scanner.nextLine();
+//            String e = this.SpeakerMessageAttendees(Arrays.asList(events.split(",")), message);
+//            if (!e.equals("")) {
+//                this.inboxUI.bodyErrors(3);
+//            } else {
+//                this.inboxUI.sentPrompt();
+//            }
+//        }
+//    }
 
     /**
      * Sends a message to a user with the information below if the recipient is not an organizer.
@@ -114,10 +135,10 @@ public class MessageSystem implements IRunnable {
      * username doesn't exist, else empty string
      */
     public String MessageAPerson(String receiver, String message) {
-        if (!userManager.hasPermission(receiver, Perms.canBeMessaged)){
-            return CANNOT_MESSAGE_ORGANIZER;
-        }
-        else if (userManager.getUUIDWithUsername(receiver) == null) {
+        //if (!userManager.hasPermission(receiver, Perms.canBeMessaged)){
+        //    return CANNOT_MESSAGE_ORGANIZER;
+        //}
+        if (userManager.getUUIDWithUsername(receiver) == null) {
             return "UDE";
         }
         else {
@@ -136,9 +157,9 @@ public class MessageSystem implements IRunnable {
      */
     public String MessagePeople(List<String> recipients, String message) {
         for (String recipient : recipients){
-            if (!userManager.hasPermission(recipient, Perms.canBeMessaged)){
-                return ONE_IS_AN_ORGANIZER;
-            }
+            //if (!userManager.hasPermission(recipient, Perms.canBeMessaged)){
+            //    return ONE_IS_AN_ORGANIZER;
+            //}
         }
         ArrayList<UUID> recipientUUIDs = new ArrayList<>();
         for (String iter : recipients) {
@@ -188,9 +209,9 @@ public class MessageSystem implements IRunnable {
             List<UUID> attendeeUUIDs = new ArrayList<>();
             for (UUID id : userUUIDs) {
                 String username = userManager.getUsernameWithUUID(id);
-                if (userManager.hasPermission(username, Perms.canSignUpEvent)) {
-                    attendeeUUIDs.add(id);
-                }
+                //if (userManager.hasPermission(username, Perms.canSignUpEvent)) {
+                //    attendeeUUIDs.add(id);
+                //}
             }
             for (UUID attendeeId : attendeeUUIDs) {
                 messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), attendeeId,
@@ -214,9 +235,9 @@ public class MessageSystem implements IRunnable {
             List<UUID> speakerUUIDs = new ArrayList<>();
             for (UUID id : userUUIDs){
                 String username = userManager.getUsernameWithUUID(id);
-                if (userManager.hasPermission(username, Perms.canMessageTalk)){
-                    speakerUUIDs.add(id);
-                }
+                //if (userManager.hasPermission(username, Perms.canMessageTalk)){
+                //    speakerUUIDs.add(id);
+                //}
             }
             for (UUID speakerId : speakerUUIDs){
                 messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(),

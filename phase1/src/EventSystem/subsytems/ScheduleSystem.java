@@ -4,7 +4,7 @@ import EventSystem.Managers.EventManager;
 import LoginSystem.UserManager;
 import Presenters.EventUI;
 import coreUtil.InputProcessors.DurationIndexProcessor;
-import coreUtil.InputProcessors.EventIndexProcessor;
+import coreUtil.InputProcessors.OptionIndexProcessor;
 import coreUtil.InputProcessors.IndexProcessor;
 import coreUtil.InputProcessors.TimeIndexProcessor;
 
@@ -124,20 +124,11 @@ public class ScheduleSystem extends EventSubSystem{
     private int setupEventList(){
         List<Map<String, Object>> eventsList = eventManager.retrieveAllEvents();
         eventUI.displayEvents(eventsList);
-        IndexProcessor<Integer> eventProcessor = new EventIndexProcessor(input,eventUI, eventsList.size());
+        IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsList.size());
         if(!eventsList.isEmpty()){
             eventUI.displayCancelStart();
             return eventProcessor.processInput();
         }
         return 0;
-    }
-
-    private String askForString(String attribute) {
-        String string = "";
-        while (string.isEmpty()){
-            string = input.nextLine();
-            if (string.isEmpty()) eventUI.displayError(attribute + " is invalid, please input a " + attribute + "!");
-        }
-        return string;
     }
 }

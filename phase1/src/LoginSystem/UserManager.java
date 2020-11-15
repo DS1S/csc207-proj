@@ -68,12 +68,11 @@ public class UserManager implements Serializable {
     }
 
     public String getUsernameWithUUID(UUID userUUID){
-        return users.get(userUUID).getName();
+        return users.get(userUUID).getUsername();
     }
 
-    public boolean hasPermission(String username, Perms permission){
-        UUID userUUID = getUUIDWithUsername(username);
-        return this.users.get(userUUID).getPermissions().get(permission);
+    public boolean hasPermission(UUID userID, Perms permission){
+        return this.users.get(userID).getPermissions().get(permission);
     }
 
     public List<UUID> getUUIDs(){

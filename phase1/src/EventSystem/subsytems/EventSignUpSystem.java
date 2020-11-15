@@ -3,10 +3,9 @@ package EventSystem.subsytems;
 import EventSystem.Managers.EventManager;
 import LoginSystem.UserManager;
 import Presenters.EventUI;
-import coreUtil.InputProcessors.EventIndexProcessor;
+import coreUtil.InputProcessors.OptionIndexProcessor;
 import coreUtil.InputProcessors.IndexProcessor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +63,7 @@ public class EventSignUpSystem extends EventSubSystem {
     private int processEvents(List<Map<String, Object>> eventsData){
         eventUI.displayEvents(eventsData);
         if(!eventsData.isEmpty()){
-            IndexProcessor<Integer> eventProcessor = new EventIndexProcessor(input, eventUI, eventsData.size());
+            IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsData.size());
             eventUI.displayEnterIndexEvent();
             return eventProcessor.processInput();
         }
