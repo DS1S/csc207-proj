@@ -1,3 +1,5 @@
+package Main;
+
 import CoreEntities.Users.Perms;
 import FileHandleSystem.FileSerializer;
 import FileHandleSystem.TerminationWorker;

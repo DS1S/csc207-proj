@@ -32,8 +32,8 @@ class EventFilterer implements Serializable {
                     && event.getEndTime().compareTo(end) <= 0) {
                 matchedEvents.add(event);
             }
-            else if (event.getStartTime().compareTo(start) >= 0 && event.getStartTime().compareTo(end) < 0
-                    && event.getEndTime().compareTo(end) > 0) {
+            else if (event.getStartTime().compareTo(start) >= 0 && event.getStartTime().compareTo(end) <= 0
+                    && event.getEndTime().compareTo(end) >= 0) {
                 matchedEvents.add(event);
             }
         }
