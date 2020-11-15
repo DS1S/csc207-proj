@@ -134,6 +134,12 @@ public class Event implements Serializable {
      */
     public void setDuration(int duration) { this.duration = duration; }
 
+    /**
+     * Returns the details about this event as a map.
+     *
+     * The map maps the name of each attribute to the attribute.
+     * @return the details about this event as a map
+     */
     public Map<String, Object> extractData() {
         Map<String, Object> data = new HashMap<>();
 
