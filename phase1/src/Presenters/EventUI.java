@@ -164,12 +164,12 @@ public class EventUI {
     /**
      * Displays a message prompting the user for the event's duration.
      */
-    public void displayDurationPrompt() { System.out.println("Duration (in minutes): "); }
+    public void displayDurationPrompt() { System.out.println("Duration (in minutes 1-180): "); }
 
     /**
      * Displays a message informing the user that they have entered an invalid duration.
      */
-    public void displayInvalidDuration() { System.out.println("Invalid input: Duration must be a number!"); }
+    public void displayInvalidDuration() { System.out.println("Invalid Duration!"); }
 
     /**
      * Displays a message informing the user that they have successfully scheduled an event.
@@ -184,6 +184,7 @@ public class EventUI {
      */
     public void displayScheduleFailure(List<Map<String, Object>> eventList) {
         System.out.println("Your event was not scheduled. Your event conflicts with the following existing events:\n");
+        displayEvents(eventList);
     }
 
     /**
@@ -207,6 +208,7 @@ public class EventUI {
      */
     public void displayRescheduleFailure(List<Map<String, Object>> eventList) {
         System.out.println("Your event was not rescheduled. Your event conflicts with the following existing events:\n");
+        displayEvents(eventList);
     }
 
     /**
@@ -222,4 +224,6 @@ public class EventUI {
     public void displayCancelSuccess() {
         System.out.println("The selected event has been cancelled.");
     }
+
+    public void displayError(String s){System.out.println(s);}
 }

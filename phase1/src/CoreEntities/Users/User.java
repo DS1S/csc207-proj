@@ -22,7 +22,6 @@ public abstract class User implements Serializable {
         this.username = username;
         this.password = password;
         permissions = new HashMap<>();
-
     }
 
     public boolean checkPassword(String password) {

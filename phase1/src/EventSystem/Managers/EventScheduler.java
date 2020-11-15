@@ -76,8 +76,8 @@ class EventScheduler implements Serializable {
      */
     public List<Event> scheduleEvent(List<Event> events, int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
         List<Event> conflictingEvents = new ArrayList<>();
-        conflictingEvents.addAll(getRoomConflicts(events, room, startTime, startTime.plusMinutes(duration)));
-        conflictingEvents.addAll(getSpeakerConflicts(events, speaker, startTime, startTime.plusMinutes(duration)));
+        conflictingEvents.addAll(getRoomConflicts(events, room, startTime.plusMinutes(1), startTime.plusMinutes(duration-1)));
+        conflictingEvents.addAll(getSpeakerConflicts(events, speaker, startTime.plusMinutes(1), startTime.plusMinutes(duration-1)));
 
         if (conflictingEvents.isEmpty()) {
             events.add(new Event(capacity, room, startTime, title, speaker, duration));
@@ -118,12 +118,33 @@ class EventScheduler implements Serializable {
         List<Event> conflictingEvents = new ArrayList<>();
         conflictingEvents.addAll(getRoomConflicts(events, event.getRoom(), newStartTime, newStartTime.plusMinutes(newDuration)));
         conflictingEvents.addAll(getSpeakerConflicts(events, event.getSpeaker(), newStartTime, newStartTime.plusMinutes(newDuration)));
+        removeDuplicateConflictedEvents(conflictingEvents);
 
         if (conflictingEvents.isEmpty()) {
             event.setStartTime(newStartTime);
             event.setDuration(newDuration);
         }
+        else if(conflictingEvents.size() == 1){
+            if (conflictingEvents.get(0).equals(event)){
+                event.setStartTime(newStartTime);
+                event.setDuration(newDuration);
+                conflictingEvents.remove(0);
+            }
+        }
 
         return conflictingEvents;
+    }
+
+    private void removeDuplicateConflictedEvents(List<Event> events){
+        List<Integer> dupPositions = new ArrayList<>();
+        for(int i = 0; i < events.size() - 1; i++){
+            for(int j = i + 1; j < events.size(); j++){
+                if (events.get(i).equals(events.get(j))) dupPositions.add(j);
+            }
+        }
+
+        for (int dupPos: dupPositions){
+            events.remove(dupPos);
+        }
     }
 }

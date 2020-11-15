@@ -33,7 +33,7 @@ public class EventIndexProcessor extends IndexProcessor<Integer> {
             }
 
         }while(option <= 0 || option > max);
-
+        scanner.nextLine();
         return option;
     }
 

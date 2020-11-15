@@ -6,6 +6,7 @@ import Presenters.EventUI;
 import coreUtil.InputProcessors.EventIndexProcessor;
 import coreUtil.InputProcessors.IndexProcessor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class EventSignUpSystem extends EventSubSystem {
 
     private void SignUpForEvent() {
         List<Map<String, Object>> eventList = eventManager.retrieveAllEvents();
-        int index = processEvents(eventList);
+        int index = processEvents(eventList) - 1;
 
         if(index != -1){
             if(!eventManager.isEventatCapacity(index)){
@@ -52,7 +53,7 @@ public class EventSignUpSystem extends EventSubSystem {
 
     private void CancelSignUpForEvent() {
         List<Map<String, Object>> eventList = eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID());
-        int index = processEvents(eventList);
+        int index = processEvents(eventList) - 1;
 
         if (index != -1){
             eventManager.removeAttendee(userManager.getLoggedInUserUUID(), index);
@@ -61,11 +62,12 @@ public class EventSignUpSystem extends EventSubSystem {
     }
 
     private int processEvents(List<Map<String, Object>> eventsData){
-        if (eventsData.isEmpty()) return -1;
-
-        IndexProcessor<Integer> eventProcessor = new EventIndexProcessor(input, eventUI, eventsData.size());
         eventUI.displayEvents(eventsData);
-        eventUI.displayEnterIndexEvent();
-        return eventProcessor.processInput();
+        if(!eventsData.isEmpty()){
+            IndexProcessor<Integer> eventProcessor = new EventIndexProcessor(input, eventUI, eventsData.size());
+            eventUI.displayEnterIndexEvent();
+            return eventProcessor.processInput();
+        }
+        return 0;
     }
 }

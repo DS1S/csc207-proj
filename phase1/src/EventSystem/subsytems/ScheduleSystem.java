@@ -47,10 +47,10 @@ public class ScheduleSystem extends EventSubSystem{
         eventUI.displayScheduleStart();
 
         eventUI.displayTitlePrompt();
-        String title = input.nextLine();
+        String title = askForString("Title");
 
         eventUI.displaySpeakerPrompt();
-        String username = input.nextLine();
+        String username = askForString("Speaker");
         while (!(userManager.containsUserWithUsername(username))) {
             eventUI.displayInvalidSpeaker();
             eventUI.displaySpeakerPrompt();
@@ -59,19 +59,22 @@ public class ScheduleSystem extends EventSubSystem{
         UUID speaker = userManager.getUUIDWithUsername(username);
 
         eventUI.displayRoomPrompt();
-        String room = input.nextLine();
+        String room = askForString("Room");
 
         eventUI.displayCapacityPrompt();
         Integer capacity = null;
-        while (capacity == null) {
+        while (capacity == null || capacity <= 0) {
             try {
                 capacity = input.nextInt();
+                if (capacity <= 0) eventUI.displayInvalidCapacity();
             }
             catch (InputMismatchException e) {
                 eventUI.displayInvalidCapacity();
                 eventUI.displayCapacityPrompt();
+                input.nextLine();
             }
         }
+        input.nextLine();
 
         LocalTime startTime = timeProcessor.processInput();
 
@@ -92,33 +95,49 @@ public class ScheduleSystem extends EventSubSystem{
 
         IndexProcessor<LocalTime> timeProcessor = new TimeIndexProcessor(input, eventUI);
         IndexProcessor<Integer> durationProcessor = new DurationIndexProcessor(input, eventUI);
-        int index = setupEventList();
+        int index = setupEventList() - 1;
 
-        LocalTime startTime = timeProcessor.processInput();
+        if(index != -1){
+            LocalTime startTime = timeProcessor.processInput();
 
-        int duration = durationProcessor.processInput();
+            int duration = durationProcessor.processInput();
 
-        List<Map<String, Object>> eventConflicts = eventManager.rescheduleEvent(index, startTime, duration);
-        if (eventConflicts.isEmpty()) {
-            eventUI.displayRescheduleSuccess();
+            List<Map<String, Object>> eventConflicts = eventManager.rescheduleEvent(index, startTime, duration);
+            if (eventConflicts.isEmpty()) {
+                eventUI.displayRescheduleSuccess();
+            }
+            else {
+                eventUI.displayRescheduleFailure(eventConflicts);
+            }
         }
-        else {
-            eventUI.displayRescheduleFailure(eventConflicts);
-        }
-
     }
 
     private void cancelEvent() {
-        int index = setupEventList();
-        eventManager.cancelEvent(index);
-        eventUI.displayCancelSuccess();
+        int index = setupEventList() - 1;
+
+        if(index != -1){
+            eventManager.cancelEvent(index);
+            eventUI.displayCancelSuccess();
+        }
     }
 
     private int setupEventList(){
-        eventUI.displayCancelStart();
         List<Map<String, Object>> eventsList = eventManager.retrieveAllEvents();
         eventUI.displayEvents(eventsList);
         IndexProcessor<Integer> eventProcessor = new EventIndexProcessor(input,eventUI, eventsList.size());
-        return eventProcessor.processInput();
+        if(!eventsList.isEmpty()){
+            eventUI.displayCancelStart();
+            return eventProcessor.processInput();
+        }
+        return 0;
+    }
+
+    private String askForString(String attribute) {
+        String string = "";
+        while (string.isEmpty()){
+            string = input.nextLine();
+            if (string.isEmpty()) eventUI.displayError(attribute + " is invalid, please input a " + attribute + "!");
+        }
+        return string;
     }
 }

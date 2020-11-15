@@ -17,13 +17,15 @@ public class DurationIndexProcessor extends IndexProcessor<Integer> {
     @Override
     public Integer processInput() {
         Integer duration = null;
-        while (duration == null) {
+        while (duration == null || duration <= 0 || duration > 180) {
             eventUI.displayDurationPrompt();
             try {
                 duration = scanner.nextInt();
+                if (duration <= 0 || duration > 180) eventUI.displayInvalidDuration();
             }
             catch (InputMismatchException e) {
                 eventUI.displayInvalidDuration();
+                scanner.nextLine();
             }
         }
         return duration;
