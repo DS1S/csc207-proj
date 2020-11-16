@@ -14,11 +14,9 @@ import java.util.UUID;
  */
 class EventFilterer implements Serializable {
     /**
-     * Returns a new list of the Events in a given list that fall in a specified time interval.
+     * Returns a new list of the Events in a given list that overlap with a specified time interval.
      *
-     * All the Events in the new list either:
-     *  - have a start time at or before start, and an end time at or after start and at or before end, or
-     *  - have a start time at or after start and before end, and an end time after end
+     * The end points of the interval are not included.
      *
      * @param events the original list of Events to be filtered
      * @param start the start time of the interval
@@ -28,12 +26,7 @@ class EventFilterer implements Serializable {
     public List<Event> retrieveEventsByTimeInterval(List<Event> events, LocalTime start, LocalTime end) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
-            if (event.getStartTime().compareTo(start) <= 0 && event.getEndTime().compareTo(start) >= 0
-                    && event.getEndTime().compareTo(end) <= 0) {
-                matchedEvents.add(event);
-            }
-            else if (event.getStartTime().compareTo(start) >= 0 && event.getStartTime().compareTo(end) < 0
-                    && event.getEndTime().compareTo(end) > 0) {
+            if (!(event.getStartTime().compareTo(end) >= 0 || event.getEndTime().compareTo(start) <= 0)) {
                 matchedEvents.add(event);
             }
         }

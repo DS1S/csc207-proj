@@ -18,11 +18,19 @@ import Presenters.EventUI;
 
 import static CoreEntities.Users.Perms.*;
 
+/**
+ * An EventSystem that allows the user to perform actions related to the sign up and scheduling of Events.
+ */
 public class EventSystem implements IRunnable {
     private EventManager eventManager;
     private UserManager userManager;
     private EventUI eventUI;
 
+    /**
+     * Constructs a new EventSystem with the given information.
+     * @param eventManager the EventManager that will be used by the EventSystem
+     * @param userManager the UserManager that will be used by the EventSystem
+     */
     public EventSystem(EventManager eventManager, UserManager userManager){
         this.eventManager = eventManager;
         this.userManager = userManager;
