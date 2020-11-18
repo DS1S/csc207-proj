@@ -3,7 +3,7 @@ package CoreEntities.Users;
 /**
  * Enumeration Set for user permissions.
  */
-public enum Perms {
+public enum PERMS {
     canSchedule,
     canMessageTalk,
     canSignUpUser,

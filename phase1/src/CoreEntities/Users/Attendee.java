@@ -17,11 +17,11 @@ public class Attendee extends User {
     }
 
     protected void setPermissions() {
-        permissions.put(Perms.canBeMessaged, true);
-        permissions.put(Perms.canMessageTalk, false);
-        permissions.put(Perms.canSchedule, false);
-        permissions.put(Perms.canSignUpEvent, true);
-        permissions.put(Perms.canSignUpUser, false);
-        permissions.put(Perms.canSpeakAtTalk, false);
+        permissions.put(PERMS.canBeMessaged, true);
+        permissions.put(PERMS.canMessageTalk, false);
+        permissions.put(PERMS.canSchedule, false);
+        permissions.put(PERMS.canSignUpEvent, true);
+        permissions.put(PERMS.canSignUpUser, false);
+        permissions.put(PERMS.canSpeakAtTalk, false);
     }
 }

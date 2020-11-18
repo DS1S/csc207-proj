@@ -1,6 +1,6 @@
 package MessagingSystem.SubSystems;
 
-import CoreEntities.Users.Perms;
+import CoreEntities.Users.PERMS;
 import LoginSystem.UserManager;
 import Main.SubSystem;
 import MessagingSystem.MessageManager;
@@ -74,7 +74,7 @@ public abstract class MessageSubSystem extends SubSystem {
         }
 
         for (UUID recipient : recipientUUIDs){
-            if (!userManager.hasPermission(recipient, Perms.canBeMessaged)){
+            if (!userManager.hasPermission(recipient, PERMS.canBeMessaged)){
                 inboxUI.displayError("One or more recipients are not able to be messaged! " +
                                         "Please Try to send again.");
                 recipientUUIDs.add(null);

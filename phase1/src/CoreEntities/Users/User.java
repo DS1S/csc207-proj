@@ -21,7 +21,7 @@ public abstract class User implements Serializable {
     private String name;
     private String username;
     private String password;
-    protected Map<Perms, Boolean> permissions;
+    protected Map<PERMS, Boolean> permissions;
 
     /**
      * Creates a User Object
@@ -73,7 +73,7 @@ public abstract class User implements Serializable {
      * PERMS Enum.
      * @return The mapping of permissions for the user.
      */
-    public Map<Perms, Boolean> getPermissions(){
+    public Map<PERMS, Boolean> getPermissions(){
         return permissions;
     }
 

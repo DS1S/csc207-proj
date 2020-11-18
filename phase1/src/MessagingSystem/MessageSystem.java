@@ -7,7 +7,7 @@ import MessagingSystem.SubSystems.BaseMessageSubSystem;
 import MessagingSystem.SubSystems.SpeakerMessageSubSystem;
 import coreUtil.IRunnable;
 import Presenters.InboxUI;
-import static CoreEntities.Users.Perms.*;
+import static CoreEntities.Users.PERMS.*;
 
 /**
  * A messaging system with a message manager, a user manager, an event manager, and an inbox UI.

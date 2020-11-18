@@ -1,22 +1,16 @@
 package EventSystem;
 
-import CoreEntities.Event;
 import EventSystem.Managers.EventManager;
 import EventSystem.subsytems.EventSignUpSystem;
-import EventSystem.subsytems.EventSubSystem;
 import EventSystem.subsytems.EventViewerSystem;
 import EventSystem.subsytems.ScheduleSystem;
 import LoginSystem.UserManager;
 import Main.SubSystem;
 import coreUtil.IRunnable;
 
-import java.time.DateTimeException;
-import java.time.LocalTime;
-import java.util.*;
-
 import Presenters.EventUI;
 
-import static CoreEntities.Users.Perms.*;
+import static CoreEntities.Users.PERMS.*;
 
 /**
  * An EventSystem that allows the user to perform actions related to the sign up and scheduling of Events.

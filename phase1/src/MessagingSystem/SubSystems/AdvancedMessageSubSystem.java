@@ -1,6 +1,6 @@
 package MessagingSystem.SubSystems;
 
-import CoreEntities.Users.Perms;
+import CoreEntities.Users.PERMS;
 import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
 
@@ -43,15 +43,15 @@ public class AdvancedMessageSubSystem extends MessageSubSystem {
 
     private void processMessageAllAttendees(){
         String message = processMessageBody();
-        messageUserWithPerm(message, Perms.canSpeakAtTalk);
+        messageUserWithPerm(message, PERMS.canSpeakAtTalk);
     }
 
     private void processMessageAllSpeakers(){
         String message = processMessageBody();
-        messageUserWithPerm(message, Perms.canSignUpEvent);
+        messageUserWithPerm(message, PERMS.canSignUpEvent);
     }
 
-    private void messageUserWithPerm(String message, Perms perm){
+    private void messageUserWithPerm(String message, PERMS perm){
         List<UUID> userUUIDs = userManager.getUUIDs();
         List<UUID> targetUUIDs = new ArrayList<>();
         for (UUID id : userUUIDs) {

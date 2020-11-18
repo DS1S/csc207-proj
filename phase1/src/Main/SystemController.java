@@ -1,6 +1,6 @@
 package Main;
 
-import CoreEntities.Users.Perms;
+import CoreEntities.Users.PERMS;
 import FileHandleSystem.FileSerializer;
 import FileHandleSystem.TerminationWorker;
 import LoginSystem.AuthenticationSystem;
@@ -91,7 +91,7 @@ public class SystemController implements IRunnable {
     }
 
     private void initializeUserCreatorSystem(UserManager userManager){
-        if (userManager.loggedInHasPermission(Perms.canSignUpUser)){
+        if (userManager.loggedInHasPermission(PERMS.canSignUpUser)){
             IRunnable signUpSystem = new SignupSystem(userManager, "speaker");
             subSystems.put(subSystems.size(), signUpSystem);
         }

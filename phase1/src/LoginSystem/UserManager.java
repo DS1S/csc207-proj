@@ -1,6 +1,6 @@
 package LoginSystem;
 
-import CoreEntities.Users.Perms;
+import CoreEntities.Users.PERMS;
 import CoreEntities.Users.User;
 
 import java.io.Serializable;
@@ -112,7 +112,7 @@ public class UserManager implements Serializable {
      * @param permission Permission Key to check the user has.
      * @return True IFF the user has the permission.
      */
-    public boolean loggedInHasPermission(Perms permission){
+    public boolean loggedInHasPermission(PERMS permission){
         return this.loggedInUser.getPermissions().get(permission);
     }
 
@@ -140,7 +140,7 @@ public class UserManager implements Serializable {
      * @param permission The permission key to check.
      * @return True IFF the User has the permission.
      */
-    public boolean hasPermission(UUID userID, Perms permission){
+    public boolean hasPermission(UUID userID, PERMS permission){
         return this.users.get(userID).getPermissions().get(permission);
     }
 

@@ -17,11 +17,11 @@ public class Speaker extends User {
     }
 
     protected void setPermissions(){
-        permissions.put(Perms.canBeMessaged, true);
-        permissions.put(Perms.canMessageTalk, true);
-        permissions.put(Perms.canSchedule, false);
-        permissions.put(Perms.canSignUpEvent, false);
-        permissions.put(Perms.canSignUpUser, false);
-        permissions.put(Perms.canSpeakAtTalk, true);
+        permissions.put(PERMS.canBeMessaged, true);
+        permissions.put(PERMS.canMessageTalk, true);
+        permissions.put(PERMS.canSchedule, false);
+        permissions.put(PERMS.canSignUpEvent, false);
+        permissions.put(PERMS.canSignUpUser, false);
+        permissions.put(PERMS.canSpeakAtTalk, true);
     }
 }
