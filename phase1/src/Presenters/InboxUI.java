@@ -1,21 +1,27 @@
 package Presenters;
-
-import CoreEntities.Message;
-import CoreEntities.Users.User;
 import LoginSystem.UserManager;
-import MessagingSystem.MessageManager;
-
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * An InboxUI class that extends ErrorUI.*/
 public class InboxUI extends ErrorUI {
     private UserManager userManager;
 
+    /**
+     * Constructs a new instance of InboxUI using the given parameters.
+     * @param userManager the user manager used by the UI
+     */
     public InboxUI(UserManager userManager) {
         this.userManager = userManager;
     }
 
+    /**
+     * Displays the user's inbox and a message indicating that their inbox is empty if their inbox is
+     * empty.
+     * @param inboxData the user's inbox data
+     */
     public void displayInbox(List<Map<String, Object>> inboxData) {
 
         int i = 1;
@@ -40,12 +46,18 @@ public class InboxUI extends ErrorUI {
         if (inboxData.size() == 0) { System.out.println("Your inbox is empty! :("); }
     }
 
+    /**
+     * Displays the messaging options available on the menu of an attendee type user.
+     */
     public void displayAttendingMenuOptions(){
         displayBaseInboxOptions();
         System.out.println("2. Send Message.");
         displayExitOption(3);
     }
 
+    /**
+     * Displays the messaging options available on the menu of a speaker type user.
+     */
     public void displayTalkSpeakerMenuOptions(){
         displayBaseInboxOptions();
         System.out.println("2. Reply to Attendee.");
@@ -53,6 +65,9 @@ public class InboxUI extends ErrorUI {
         displayExitOption(4);
     }
 
+    /**
+     * Displays the messaging options available on the menu of an organizer type user.
+     */
     public void displaySchedulerMenuOptions(){
         displayBaseInboxOptions();
         System.out.println("2. Send Message.");
@@ -61,18 +76,30 @@ public class InboxUI extends ErrorUI {
         displayExitOption(5);
     }
 
+    /**
+     * Prompts the user to write their message.
+     */
     public void displayBodyPrompt() {
         System.out.print("Write your message: ");
     }
 
+    /**
+     * Prompts the user to indicate the message's intended recipeint(s).
+     */
     public void displayUserPrompt() {
         System.out.print("Enter Recipient(s), comma separated:");
     }
 
+    /**
+     * Informs the user that their message was successfully sent.
+     */
     public void sentPrompt() {
         System.out.println("Message sent!");
     }
 
+    /**
+     * Prompts the user to enter talk(s).
+     */
     public void talksPrompt() {System.out.println("Enter Talks: ");}
 
     private void displayBaseInboxOptions(){
