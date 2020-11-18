@@ -22,27 +22,13 @@ import static CoreEntities.Users.Perms.*;
  * and an inbox UI.
  */
 public class MessageSystem implements IRunnable {
-    /** The message manager used by the system. */
     private final MessageManager messageManager;
-
-    /** The user manager used by the system. */
     private final UserManager userManager;
-
-    /** The event manager used by the system. */
     private final EventManager eventManager;
-
-    /** The string used to indicate that the user does not have permission to perform an action. */
     private final String NO_PERMISSION = "You do not have permission to do that!";
-
-    /** The string used to indicate that the user can not message an organizer. */
     private final String CANNOT_MESSAGE_ORGANIZER = "You can not message an organizer!";
-
-    /** The string used to indicate that one of the user's intended recipients is an organizer who can
-     * not be messaged. */
     private final String ONE_IS_AN_ORGANIZER = "At least one of your recipients is an organizer. You can not message" +
             "an organizer!";
-
-    /** The inbox UI used by the system. */
     private final InboxUI inboxUI;
 
     /**
