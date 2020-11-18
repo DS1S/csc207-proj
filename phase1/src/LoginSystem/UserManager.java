@@ -126,6 +126,15 @@ public class UserManager implements Serializable {
     }
 
     /**
+     * Get the name of a user with a UUID
+     * @param userUUID The UUID of the User
+     * @return Return the name of the User.
+     */
+    public String getNameWithUUID(UUID userUUID){
+        return users.get(userUUID).getName();
+    }
+
+    /**
      * Check if the a user with UUID userID as permission key <permission>
      * @param userID The UUID of the User to check.
      * @param permission The permission key to check.

@@ -35,10 +35,10 @@ public class EventUI {
             for (Map<String, Object> data : eventList) {
                 sb.append("Event " + i + "\n");
                 sb.append("\"" + data.get("Title") + "\"" + "\n");
-                sb.append("Hosted by: " + userManager.getUsernameWithUUID((UUID)data.get("Speaker")) + "\n");
+                sb.append("Hosted by: " + userManager.getNameWithUUID((UUID)data.get("Speaker")) + "\n");
                 sb.append(data.get("StartTime") + " to " + data.get("EndTime") + "\n");
                 sb.append("Room: " + data.get("Room") + "\n");
-                sb.append(data.get("Registered") + "/" + data.get("Capacity") + "spots filled" + "\n");
+                sb.append(data.get("Registered") + "/" + data.get("Capacity") + " spots filled" + "\n");
                 System.out.println(sb);
                 System.out.println("----------------------------------");
                 sb.setLength(0);
