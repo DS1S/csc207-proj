@@ -7,7 +7,7 @@ import CoreEntities.Users.User;
 import LoginSystem.UserManager;
 
 /* This class has been commented out because it is not needed for phase 1. It is being kept because it may be
-useful in phase 2.
+useful in phase 2. Javadocs have not been added since the class is not in use.
  */
 
 /*
