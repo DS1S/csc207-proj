@@ -99,7 +99,7 @@ public class EventUI {
      * Displays a message prompting the user to select an event.
      */
     public void displayEnterIndexEvent() {
-        System.out.println("Please enter the number of the event you would like to select.");
+        System.out.println("Please enter the number of the event you would like to select.\n (e.g. to select Event 1, enter 1.)");
     }
 
     /**

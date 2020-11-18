@@ -40,6 +40,7 @@ public class DurationIndexProcessor extends IndexProcessor<Integer> {
                 scanner.nextLine();
             }
         }
+        scanner.nextLine();
         return duration;
     }
 }
