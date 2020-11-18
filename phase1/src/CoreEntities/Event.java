@@ -10,12 +10,12 @@ import java.time.LocalTime;
  */
 public class Event implements Serializable {
 
-    private int capacity;
-    private List<UUID> attendees;
-    private String room;
+    private final int capacity;
+    private final List<UUID> attendees;
+    private final String room;
     private LocalTime startTime;
-    private String title;
-    private UUID speaker;
+    private final String title;
+    private final UUID speaker;
     private int duration;
 
     /**
