@@ -11,8 +11,18 @@ import coreUtil.InputProcessors.TimeIndexProcessor;
 import java.time.LocalTime;
 import java.util.*;
 
+/**
+ * A subsystem of the EventSystem that allows the user to perform actions related to the scheduling of Events.
+ */
 public class ScheduleSystem extends EventSubSystem{
 
+    /**
+     * Constructs a new ScheduleSystem with the given information.
+     * @param eventManager the EventManager that will be used by the ScheduleSystem
+     * @param userManager the UserManager that will be used by the ScheduleSystem
+     * @param eventUI the EventUI that will be used by the ScheduleSystem
+     * @param numOptions the number of menu options given by the ScheduleSystem
+     */
     public ScheduleSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions){
         super(eventManager, userManager, eventUI, numOptions);
     }

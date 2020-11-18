@@ -9,9 +9,18 @@ import coreUtil.InputProcessors.IndexProcessor;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * A subsystem of the EventSystem that allows the user to perform actions related to the sign up of Events.
+ */
 public class EventSignUpSystem extends EventSubSystem {
 
+    /**
+     * Constructs a new EventSignUpSystem with the given information.
+     * @param eventManager the EventManager that will be used by the EventSignUpSystem
+     * @param userManager the UserManager that will be used by the EventSignUpSystem
+     * @param eventUI the EventUI that will be used by the EventSignUpSystem
+     * @param numOptions the number of menu options given by the EventSignUpSystem
+     */
     public EventSignUpSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions){
         super(eventManager, userManager, eventUI, numOptions);
     }

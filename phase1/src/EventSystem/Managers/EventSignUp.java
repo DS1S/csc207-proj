@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 class EventSignUp implements Serializable {
 
-    /** An EventFilterer for filtering a list of Events by various criteria. */
     private EventFilterer eventFilterer;
 
     /** Constructs a new EventSignUp */
