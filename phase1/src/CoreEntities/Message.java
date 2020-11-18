@@ -11,19 +11,10 @@ import java.io.Serializable;
  * A message with a message id, a sender UUID, a recipient UUID, a body and a timestamp.
  */
 public class Message implements Serializable {
-    /** The id of the message. */
     private UUID msgId;
-
-    /** The UUID of the sender of the message. */
     private UUID sender;
-
-    /** The UUID of the recipient of the message. */
     private UUID recipient;
-
-    /** The body of the message. */
     private String body;
-
-    /** The time at which the message is sent. */
     private LocalTime timeSent;
 
     /**
@@ -40,14 +31,6 @@ public class Message implements Serializable {
         this.recipient = recipient;
         this.body = body;
         this.timeSent = timeSent;
-    }
-
-    /**
-     * Returns the UUID of the message sender.
-     * @return message sender UUID
-     */
-    public UUID getSender() {
-        return sender;
     }
 
     /**
