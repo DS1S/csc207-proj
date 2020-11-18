@@ -81,40 +81,26 @@ public class EventUI {
         System.out.println("3. Return to main menu.");
     }
 
-    public void displaySignUpFull() {
-        System.out.println("-------This event is full!-------\n\n");
-    }
-
     /**
      * Displays a message informing the user that they have successfully registered for an event.
      */
     public void displaySignupSuccess() {
-        System.out.println("----------You have successfully registered for the event!----------\n\n");
+        System.out.println("You have successfully registered for the event!\n\n");
     }
 
     /**
      * Displays a message informing the user that they have successfully unregistered for an event.
      */
     public void displayCancelSignupSuccess() {
-        System.out.println("----------You have successfully unregistered from the event!----------\n\n");
+        System.out.println("You have successfully unregistered from the event!\n\n");
     }
 
     /**
      * Displays a message prompting the user to select an event.
      */
     public void displayEnterIndexEvent() {
-        System.out.println("----------Please select an event number that you want to register!----------\n\n");
+        System.out.println("Please select an event number that you want to register!\n\n");
     }
-
-    /**
-     * Displays a message prompting the user to select an option.
-     */
-    public void displayIndexPrompt() { System.out.println("Enter the number of the option you wish to select: ");}
-
-    /**
-     * Displays a message informing the user that they have entered an invalid number.
-     */
-    public void displayInvalidIndex() { System.out.println("You have entered an invalid number."); }
 
     /**
      * Displays a message informing the user that they have started to schedule a new event.
