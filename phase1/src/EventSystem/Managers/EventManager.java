@@ -89,7 +89,6 @@ public class EventManager implements Serializable {
      * @param attendee the UUID of the attendee to be signed up
      * @param index the index of the Event, relative to the list of the events that the given attendee can sign up to
      */
-
     public void registerAttendee(UUID attendee, int index) {
         eventSignUp.registerAttendee(attendee, mainSchedule, index);
     }
@@ -160,17 +159,6 @@ public class EventManager implements Serializable {
             dataList.add(event.extractData());
         }
         return dataList;
-    }
-
-    /**
-     * Returns the list of all UUIDs of attendees attending any of a speakers talk.
-     *
-     * @param speakerUUID UUID of speaker
-     * @return A list of attendee UUID for all talks the speaker hosts
-     */
-    public List<UUID> retrieveAttendees(UUID speakerUUID){
-        List<Event> events = eventFilterer.retrieveEventsBySpeaker(mainSchedule, speakerUUID);
-        return getUUIDSFromEvents(events);
     }
 
     /**
