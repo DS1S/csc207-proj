@@ -45,6 +45,9 @@ public class MessageSystem implements IRunnable {
         this.inboxUI = new InboxUI(userManager);
     }
 
+    /**
+     * Implements the run method from the IRunnable interface in order to run this System
+     */
     @Override
     public void run() {
         SubSystem subsystem = null;

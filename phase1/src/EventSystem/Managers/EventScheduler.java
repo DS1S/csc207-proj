@@ -22,7 +22,8 @@ class EventScheduler implements Serializable {
 
     private List<Event> getRoomConflicts(List<Event> events, String room, LocalTime start, LocalTime end) {
         List<Event> conflictingEvents = new ArrayList<>();
-        for (Event event: eventFilter.retrieveEventsByTimeInterval(events, start, end)) {
+        List<Event> filteredEvents = eventFilter.retrieveEventsByTimeInterval(events, start, end);
+        for (Event event: filteredEvents) {
             if (event.getRoom().equals(room)) {
                 conflictingEvents.add(event);
             }
@@ -32,7 +33,8 @@ class EventScheduler implements Serializable {
 
     private List<Event> getSpeakerConflicts(List<Event> events, UUID speaker, LocalTime start, LocalTime end) {
         List<Event> conflictingEvents = new ArrayList<>();
-        for (Event event: eventFilter.retrieveEventsByTimeInterval(events, start, end)) {
+        List<Event> filteredEvents = eventFilter.retrieveEventsByTimeInterval(events, start, end);
+        for (Event event: filteredEvents) {
             if (event.getSpeaker().equals(speaker)) {
                 conflictingEvents.add(event);
             }
@@ -56,8 +58,8 @@ class EventScheduler implements Serializable {
      */
     public List<Event> scheduleEvent(List<Event> events, int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
         List<Event> conflictingEvents = new ArrayList<>();
-        conflictingEvents.addAll(getRoomConflicts(events, room, startTime.plusMinutes(1), startTime.plusMinutes(duration-1)));
-        conflictingEvents.addAll(getSpeakerConflicts(events, speaker, startTime.plusMinutes(1), startTime.plusMinutes(duration-1)));
+        conflictingEvents.addAll(getRoomConflicts(events, room, startTime, startTime.plusMinutes(duration-1)));
+        conflictingEvents.addAll(getSpeakerConflicts(events, speaker, startTime, startTime.plusMinutes(duration-1)));
 
         if (conflictingEvents.isEmpty()) {
             events.add(new Event(capacity, room, startTime, title, speaker, duration));
