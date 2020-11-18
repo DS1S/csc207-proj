@@ -9,11 +9,21 @@ import coreUtil.InputProcessors.OptionIndexProcessor;
 
 import java.util.*;
 
+/**
+ * A subsystem of the MessageSystem that allows the user to perform actions related to a Speaker sending messages.
+ */
 public class SpeakerMessageSubSystem extends MessageSubSystem {
 
     private OptionUI optionUI;
     private EventManager eventManager;
 
+    /**
+     * Creates an object of SpeakerMessageSubSystem
+     * @param userManager a UserManager object that is already instantiated at the point this is instantiated
+     * @param messageManager a MessageManager object that is already instantiated at the point this is instantiated
+     * @param numOptions number of options in the menu
+     * @param eventManager a EventManager object that is already instantiated at the point this is instantiated
+     */
     public SpeakerMessageSubSystem(UserManager userManager, MessageManager messageManager, int numOptions,
                                    EventManager eventManager) {
         super(userManager, messageManager, numOptions);
