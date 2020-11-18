@@ -98,7 +98,6 @@ public class ScheduleSystem extends EventSubSystem{
         else {
             eventUI.displayScheduleFailure(eventConflicts);
         }
-
     }
 
     private void rescheduleEvent() {
