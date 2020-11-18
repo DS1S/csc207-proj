@@ -38,10 +38,10 @@ public class CapacityIndexProcessor extends IndexProcessor<Integer> {
             catch (InputMismatchException e) {
                 eventUI.displayInvalidCapacity();
                 eventUI.displayCapacityPrompt();
-                scanner.nextInt();
+                scanner.nextLine();
             }
         }
-        scanner.nextInt();
+        scanner.nextLine();
         return capacity;
     }
 }
