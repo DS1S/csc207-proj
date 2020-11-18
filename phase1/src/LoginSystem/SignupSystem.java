@@ -16,6 +16,11 @@ public class SignupSystem implements IRunnable {
     private final List<String> possibleTypes;
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Constructs a SignupSystem using the given UserManager and for the type.
+     * @param um the UserManager to work with.
+     * @param type the type this Signup system is allowed to use.
+     */
     public SignupSystem(UserManager um, String type) {
         this.um = um;
         this.authUI = new AuthenticationUI();
@@ -23,6 +28,11 @@ public class SignupSystem implements IRunnable {
         this.possibleTypes.add(type);
     }
 
+    /**
+     * Same as the previous constructor, but allows a list of types.
+     * @param um same as before.
+     * @param possibleTypes the list of allowed types.
+     */
     public SignupSystem(UserManager um, List<String> possibleTypes){
         this.um = um;
         this.authUI = new AuthenticationUI();
@@ -38,7 +48,6 @@ public class SignupSystem implements IRunnable {
         this.um.addUser(type, username, password, name);
         return "";
     }
-
 
     private void create(String type) {
         String result = "?";
@@ -90,6 +99,10 @@ public class SignupSystem implements IRunnable {
         create(possibleTypes.get(option - 1));
     }
 
+    /**
+     * A string representation of this class.
+     * @return the string representation.
+     */
     @Override
     public String toString() {
         return "User Creation";

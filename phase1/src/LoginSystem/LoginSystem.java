@@ -11,13 +11,17 @@ public class LoginSystem implements IRunnable {
     private final UserManager um;
     private final AuthenticationUI authUI;
 
+    /**
+     * Constructs a LoginSystem to use the given UserManager.
+     * @param um the UserManager to work with.
+     */
     public LoginSystem(UserManager um){
         this.um = um;
         this.authUI = new AuthenticationUI();
     }
 
     /**
-     *
+     * Handles the logging in of users.
      * @param username the username to check
      * @param password the password to check
      * @return empty string if successful, error string otherwise, depending on the error
