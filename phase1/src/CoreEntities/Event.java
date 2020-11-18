@@ -10,25 +10,12 @@ import java.time.LocalTime;
  */
 public class Event implements Serializable {
 
-    /** The maximum capacity of this Event. */
     private int capacity;
-
-    /** The list of UUIDs of the attendees of this Event. */
     private List<UUID> attendees;
-
-    /** The room in which this Event takes place. */
     private String room;
-
-    /** The start time of this Event. */
     private LocalTime startTime;
-
-    /** The title of this Event. */
     private String title;
-
-    /** The UUID of the speaker of this Event. */
     private UUID speaker;
-
-    /** The duration of this Event in minutes. */
     private int duration;
 
     /**
