@@ -34,11 +34,11 @@ public class EventUI {
             int i = 1;
             for (Map<String, Object> data : eventList) {
                 sb.append("Event " + i + "\n");
-                sb.append(data.get("Title") + "\n");
-                sb.append(userManager.getUsernameWithUUID((UUID)data.get("Speaker")) + "\n");
+                sb.append("\"" + data.get("Title") + "\"" + "\n");
+                sb.append("Hosted by: " + userManager.getUsernameWithUUID((UUID)data.get("Speaker")) + "\n");
                 sb.append(data.get("StartTime") + " to " + data.get("EndTime") + "\n");
-                sb.append(data.get("Room") + "\n");
-                sb.append(data.get("Registered") + "/" + data.get("Capacity") + "\n");
+                sb.append("Room: " + data.get("Room") + "\n");
+                sb.append(data.get("Registered") + "/" + data.get("Capacity") + "spots filled" + "\n");
                 System.out.println(sb);
                 System.out.println("----------------------------------");
                 sb.setLength(0);
@@ -99,7 +99,7 @@ public class EventUI {
      * Displays a message prompting the user to select an event.
      */
     public void displayEnterIndexEvent() {
-        System.out.println("Please select an event number that you want to register!\n\n");
+        System.out.println("Please enter the number of the event you would like to select.");
     }
 
     /**
@@ -210,6 +210,4 @@ public class EventUI {
     public void displayCancelSuccess() {
         System.out.println("The selected event has been cancelled.");
     }
-
-    public void displayError(String s){System.out.println(s);}
 }
