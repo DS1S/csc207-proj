@@ -7,14 +7,26 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * A class which handles serializing of classes into .ser files.
+ * @param <T> the type to serialize.
+ */
 public class FileSerializer<T> {
 
     private String filePath;
 
+    /**
+     * Constructs a FileSerializer with type T and filepath to write/read
+     * @param filePath the filepath to write to or read from
+     */
     public FileSerializer(String filePath){
         this.filePath = filePath;
     }
 
+    /**
+     * Serializes and then saves a collection of objects of type T.
+     * @param objects the list of objects to serialize and save.
+     */
     public void saveCollection(List<T> objects){
         try{
             OutputStream file = new FileOutputStream(filePath);
@@ -30,14 +42,26 @@ public class FileSerializer<T> {
         }
     }
 
+    /**
+     * Same as saveCollection, but does so for a single object.
+     * @param object the objects to serialize and save.
+     */
     public void saveObject(T object){
         saveCollection(new ArrayList<>(Arrays.asList(object)));
     }
 
+    /**
+     * Deserialize and load an object from the filepath of type T.
+     * @return the loaded object
+     */
     public T loadObject(){
         return loadCollection().get(0);
     }
 
+    /**
+     * Same as loadObject, but does so with a collection
+     * @return the list of loaded objects.
+     */
     public List<T> loadCollection(){
         try {
             InputStream file = new FileInputStream(filePath);

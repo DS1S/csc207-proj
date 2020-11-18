@@ -124,8 +124,9 @@ public class EventManager implements Serializable {
     public List<Map<String, Object>> scheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker,
                                      int duration) {
         List<Map<String, Object>> dataList = new ArrayList<>();
-        for (Event event: eventScheduler.scheduleEvent(mainSchedule, capacity, room, startTime, title, speaker,
-                duration)) {
+        List<Event> response = eventScheduler.scheduleEvent(mainSchedule, capacity, room, startTime, title, speaker,
+                                duration);
+        for (Event event: response) {
             dataList.add(event.extractData());
         }
         return dataList;
