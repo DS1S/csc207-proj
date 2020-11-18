@@ -8,7 +8,6 @@ import java.time.LocalTime;
 /**
  * Class to manage messages.*/
 public class MessageManager implements Serializable {
-    /** A map from user UUIDs to the corresponding user's inbox.*/
     private final Map<UUID, List<Message>> inboxes;
 
     /** Constructs a new message manager with the information below.
