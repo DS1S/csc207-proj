@@ -6,17 +6,28 @@ import coreUtil.InputProcessors.IndexProcessor;
 
 import java.util.Scanner;
 
+/**
+ * Represents an abstract Subsystem.
+ */
 public abstract class SubSystem  implements IRunnable {
 
     private int numOptions;
     private IndexProcessor<Integer> indexProcessor;
     protected Scanner input = new Scanner(System.in);
 
+    /**
+     * Constructs a subsystem with a number of options and an IndexProcessor to handle them.
+     * @param numOptions the number of options accepted by this system.
+     * @param indexProcessor the IndexProcessor to handle them.
+     */
     public SubSystem(int numOptions, IndexProcessor<Integer> indexProcessor){
         this.numOptions = numOptions;
         this.indexProcessor = indexProcessor;
     }
 
+    /**
+     * Runs a subsystem by asking for the required number of options and processing them.
+     */
     @Override
     public void run() {
         int option = 0;
