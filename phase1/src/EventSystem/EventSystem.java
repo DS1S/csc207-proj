@@ -37,6 +37,9 @@ public class EventSystem implements IRunnable {
         this.eventUI = new EventUI(this.userManager);
     }
 
+    /**
+     * Implements the run method from the IRunnable interface in order to run this System.
+     */
     @Override
     public void run() {
         SubSystem subsystem = null;
@@ -52,6 +55,10 @@ public class EventSystem implements IRunnable {
         subsystem.run();
     }
 
+    /**
+     * An override of the built-in toString method.
+     * @return the string "Events"
+     */
     @Override
     public String toString() {
         return "Events";
