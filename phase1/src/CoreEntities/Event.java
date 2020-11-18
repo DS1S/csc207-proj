@@ -10,25 +10,12 @@ import java.time.LocalTime;
  */
 public class Event implements Serializable {
 
-    /** The maximum capacity of this Event. */
     private int capacity;
-
-    /** The list of UUIDs of the attendees of this Event. */
     private List<UUID> attendees;
-
-    /** The room in which this Event takes place. */
     private String room;
-
-    /** The start time of this Event. */
     private LocalTime startTime;
-
-    /** The title of this Event. */
     private String title;
-
-    /** The UUID of the speaker of this Event. */
     private UUID speaker;
-
-    /** The duration of this Event in minutes. */
     private int duration;
 
     /**
@@ -49,12 +36,6 @@ public class Event implements Serializable {
         this.speaker = speaker;
         this.duration = duration;
     }
-
-    /**
-     * Returns this Event's capacity.
-     * @return the capacity
-     */
-    public int getCapacity() { return this.capacity; }
 
     /**
      * Returns true iff the Event is at capacity.
@@ -121,12 +102,6 @@ public class Event implements Serializable {
      * @return the speaker
      */
     public UUID getSpeaker() { return this.speaker; }
-
-    /**
-     * Returns this Event's duration in minutes.
-     * @return the duration
-     */
-    public int getDuration() { return this.duration; }
 
     /**
      * Sets this Event's duration to duration.

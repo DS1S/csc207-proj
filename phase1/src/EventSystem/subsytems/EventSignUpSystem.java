@@ -48,14 +48,12 @@ public class EventSignUpSystem extends EventSubSystem {
     }
 
     private void SignUpForEvent() {
-        List<Map<String, Object>> eventList = eventManager.retrieveAllEvents();
+        List<Map<String, Object>> eventList = eventManager.retrieveSignupAbleEvents(userManager.getLoggedInUserUUID());
         int index = processEvents(eventList) - 1;
 
         if(index != -1){
-            if(!eventManager.isEventatCapacity(index)){
-                eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
-                eventUI.displaySignupSuccess();
-            }
+            eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
+            eventUI.displaySignupSuccess();
         }
     }
 

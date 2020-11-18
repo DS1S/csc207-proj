@@ -6,15 +6,27 @@ import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.Scanner;
 
+/**
+ * A class which handles asking a user for a valid time code of form xx:xx
+ */
 public class TimeIndexProcessor extends IndexProcessor<LocalTime> {
 
     EventUI eventUI;
 
+    /**
+     * Constructs a TimeIndexProcessor which uses scanner to ask for input and displays prompts in eventUI.
+     * @param scanner the Scanner to use for input
+     * @param eventUI the EventUI to display prompts on
+     */
     public TimeIndexProcessor(Scanner scanner, EventUI eventUI){
         super(scanner);
         this.eventUI = eventUI;
     }
 
+    /**
+     * Asks the user for a time string until they return a valid time code.
+     * @return the valid time input by the user.
+     */
     @Override
     public LocalTime processInput() {
         LocalTime startTime = null;

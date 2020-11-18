@@ -81,15 +81,6 @@ public class EventManager implements Serializable {
     }
 
     /**
-     * Returns True if there is an available spot in an Event
-     * @param index the index of the Event, relative to the list of the events that the given attendee can sign up to
-     * @return whether the event is at capacity or not
-     */
-    public boolean isEventatCapacity(int index){
-        return mainSchedule.get(index).atCapacity();
-    }
-
-    /**
      * Sign up the given attendee for the Event at the given index.
      *
      * Note that this index is relative to the list of the events in the conference's main schedule that
