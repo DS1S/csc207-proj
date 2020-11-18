@@ -19,7 +19,20 @@ and it kind of felt wrong to just pass strings everywhere to just have them syst
 presenters for phase 1 on piazza as just a collection of methods that would print out dialogues.
 We did try to extend some UI with each other when there was commonality like display error from ErrorUI.
 
-Nevertheless, these are the following steps required to run our program.
+Also, when it comes to entering rooms into the system for organizers, we only enter the room names and the capacity
+of the event at the time of scheduling. We didn't see the need for having other than just primitives for rooms in the spec
+for phase1. We do maintain all the required checks in order for room, speaker, and capacity conflicts. We did notice however
+the change in phase 2 that implies the need for room entities and a room manager/system. In hindsight it would've been
+better to implement those systems in phase1 for phase2, but they were unpredicted and as a result left out of our design.
+We assumed that when scheduling the organizers would select capable rooms and their capacities which would correlate to
+the room size. For instance how in acorn, section sizes (prior to covid) were relative to the lecture hall capacity.
+
+Lastly,
+For when organizers schedule the events, we leave it to them when they want to schedule between 00:00 - 23:59. We don't
+restrict the times, as we assume they are competent enough schedule properly since they are organizers of the event.
+
+
+Without further ado, these are the following steps required to run our program.
 
 Steps to run:
     1. Enter the coreUtil Package
