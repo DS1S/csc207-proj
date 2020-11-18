@@ -5,8 +5,14 @@ import FileHandleSystem.FileSerializer;
 import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
 
+/**
+ * A helper class to aid in testing.
+ */
 public class ModelCreator {
-
+    /**
+     * A helper class to reset the 'database' of the serialized UserManager, EventManager and MessageManager to a uniform state for testing purposes.
+     * @param args the command line arguments.
+     */
     public static void main(String[] args) {
         UserManager userManager = new UserManager();
         userManager.addUser("attendee", "user1", "pass1", "Daniel");

@@ -38,12 +38,6 @@ public class Event implements Serializable {
     }
 
     /**
-     * Returns this Event's capacity.
-     * @return the capacity
-     */
-    public int getCapacity() { return this.capacity; }
-
-    /**
      * Returns true iff the Event is at capacity.
      * @return whether the Event is at capacity
      */
@@ -108,12 +102,6 @@ public class Event implements Serializable {
      * @return the speaker
      */
     public UUID getSpeaker() { return this.speaker; }
-
-    /**
-     * Returns this Event's duration in minutes.
-     * @return the duration
-     */
-    public int getDuration() { return this.duration; }
 
     /**
      * Sets this Event's duration to duration.
