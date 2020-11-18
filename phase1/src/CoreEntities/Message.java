@@ -34,14 +34,6 @@ public class Message implements Serializable {
     }
 
     /**
-     * Returns the UUID of the message sender.
-     * @return message sender UUID
-     */
-    public UUID getSender() {
-        return sender;
-    }
-
-    /**
      * Returns the UUID of the message recipient.
      * @return message recipient UUID
      */
