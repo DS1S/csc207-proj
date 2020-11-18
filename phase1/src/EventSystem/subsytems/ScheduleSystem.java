@@ -98,6 +98,7 @@ public class ScheduleSystem extends EventSubSystem{
 
         IndexProcessor<LocalTime> timeProcessor = new TimeIndexProcessor(input, eventUI);
         IndexProcessor<Integer> durationProcessor = new DurationIndexProcessor(input, eventUI);
+        eventUI.displayRescheduleStart();
         int index = setupEventList() - 1;
 
         if(index != -1){
@@ -119,6 +120,7 @@ public class ScheduleSystem extends EventSubSystem{
         int index = setupEventList() - 1;
 
         if(index != -1){
+            eventUI.displayCancelStart();
             eventManager.cancelEvent(index);
             eventUI.displayCancelSuccess();
         }
@@ -129,7 +131,7 @@ public class ScheduleSystem extends EventSubSystem{
         eventUI.displayEvents(eventsList);
         IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsList.size());
         if(!eventsList.isEmpty()){
-            eventUI.displayCancelStart();
+            eventUI.displayEnterIndexEvent();
             return eventProcessor.processInput();
         }
         return 0;
