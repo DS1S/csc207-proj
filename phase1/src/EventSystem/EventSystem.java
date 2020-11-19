@@ -32,7 +32,8 @@ public class EventSystem implements IRunnable {
     }
 
     /**
-     * Implements the run method from the IRunnable interface in order to run this System.
+     * Runs this System, displaying prompts, UI, errors etc. that allow the user to perform actions related to the
+     * sign up and scheduling of Events.
      */
     @Override
     public void run() {
