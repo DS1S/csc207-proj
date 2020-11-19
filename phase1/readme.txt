@@ -46,7 +46,7 @@ Without further ado, these are the following steps required to run our program:
     2. Open up Migration package
     3. Run ModelCreator (This class just rebuilds the ser files with default data) its not intended to be
             part of our actual "program" so please don't mark it as such. Its main is separated so we
-            dont rebuild the data each time on run.
+            don't rebuild the data each time on run.
     4. Next, head to the Main Package in src, and run the main method for TechConferenceMain
     5. As seen in the ModelCreator Class there are three default users u can select to login in with.
             1. user1 pass1 - attendee
@@ -60,5 +60,13 @@ Without further ado, these are the following steps required to run our program:
         exits with a status code 0. Otherwise, the shutdown hooks won't properly run.
         We did this instead of constantly saving because we'd rather only do it once instead
         of constantly writing to the files after each small change.
+
+        A case in which you want to use the exit button on the left side of the terminal is midway through signup.
+        If you are in the process of signing up, there is not exit button until u log in so after u create your user,
+        if u want to terminate before logging in, use the exit button on the left hand side of the terminal.
+
+If anything is not working, please don't hesitate to reach out to our technical support line (group email us). 24/7 Service, always smiling
+and willing to help the customer no matter the issue :) We also provide on-site support, however, you have to buy the
+technician lunch.
 
 Enjoy! ;)
