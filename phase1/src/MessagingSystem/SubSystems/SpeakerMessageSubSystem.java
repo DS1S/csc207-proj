@@ -99,8 +99,8 @@ public class SpeakerMessageSubSystem extends MessageSubSystem {
     private int processMessages(List<Map<String, Object>> messagesData) {
         inboxUI.displayInbox(messagesData);
         if(!messagesData.isEmpty()) {
-            IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, messagesData.size());
-            return eventProcessor.processInput();
+            IndexProcessor<Integer> optionIndexProcessor = new OptionIndexProcessor(input, messagesData.size());
+            return optionIndexProcessor.processInput();
         }
         return 0;
     }
