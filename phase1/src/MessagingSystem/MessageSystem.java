@@ -38,16 +38,16 @@ public class MessageSystem implements IRunnable {
     @Override
     public void run() {
         SubSystem subsystem = null;
-        if (userManager.loggedInHasPermission(canSignUpEvent)) {
-            subsystem = new BaseMessageSubSystem(userManager, messageManager, 3);
-        }
-        else if (userManager.loggedInHasPermission(canSchedule)) {
+
+        if (userManager.loggedInHasPermission(canSchedule)) {
             subsystem = new AdvancedMessageSubSystem(userManager, messageManager, 5);
         }
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
             subsystem = new SpeakerMessageSubSystem(userManager, messageManager, 4, eventManager);
         }
-        assert subsystem != null;
+
+        //allocate a default message system
+        if(subsystem == null) subsystem = new BaseMessageSubSystem(userManager, messageManager, 3);
         subsystem.run();
     }
 
