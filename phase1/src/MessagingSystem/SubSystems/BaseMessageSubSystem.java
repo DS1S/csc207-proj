@@ -18,11 +18,18 @@ public class BaseMessageSubSystem extends MessageSubSystem {
         super(userManager, messageManager, numOptions);
     }
 
+    /**
+     * Displays the options in the messaging page.
+     */
     @Override
     protected void displayOptions() {
         inboxUI.displayAttendingMenuOptions();
     }
 
+    /**
+     * Processes an integer input in the messaging page.
+     * @param index The input to be processed.
+     */
     @Override
     protected void processMainSignInput(int index) {
         processBaseInput(index);

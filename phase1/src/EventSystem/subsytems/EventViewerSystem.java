@@ -20,11 +20,19 @@ public class EventViewerSystem extends EventSubSystem {
         super(eventManager, userManager, eventUI, numOptions);
     }
 
+    /**
+     * Tells the event UI to display event options for speakers.
+     */
     @Override
     protected void displayOptions() {
         eventUI.displaySpeakerOptions();
     }
 
+    /**
+     * Processes an integer input in the event viewing page.
+     * @param index The inout to be processed. 1 allows for viewing of all events. 2 allows for
+     *              displaying the events run by the user (assuming they are a speaker).
+     */
     @Override
     protected void processMainSignInput(int index) {
         switch (index) {

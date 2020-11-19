@@ -77,6 +77,9 @@ public abstract class User implements Serializable {
         return permissions;
     }
 
+    /**
+     * Sets the permissions of a User by updating the permissions map.
+     */
     protected abstract void setPermissions();
 
 }

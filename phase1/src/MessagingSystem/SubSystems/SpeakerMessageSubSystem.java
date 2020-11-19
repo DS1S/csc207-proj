@@ -31,11 +31,20 @@ public class SpeakerMessageSubSystem extends MessageSubSystem {
         this.eventManager = eventManager;
     }
 
+    /**
+     * Tells the inbox UI to display options in the speaker messaging page.
+     */
     @Override
     protected void displayOptions() {
         inboxUI.displayTalkSpeakerMenuOptions();
     }
 
+    /**
+     * Processes an integer input in the speaker's messaging page.
+     * @param index The input to be processed. 1 allows for displaying all messages to the speaker.
+     *              2 allows for replying to an attendee. 3 allows for making an announcement to the
+     *              speaker's talk(s).
+     */
     @Override
     protected void processMainSignInput(int index) {
         switch (index) {

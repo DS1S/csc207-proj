@@ -38,10 +38,22 @@ public abstract class SubSystem  implements IRunnable {
         }while(option != numOptions);
     }
 
+    /**
+     * Displays the options for the subsystem.
+     */
     protected abstract void displayOptions();
 
+    /**
+     * Processes an integer input in the subsystem.
+     * @param index The input to be processed.
+     */
     protected abstract void processMainSignInput(int index);
 
+    /**
+     * Asks the user for an input and checks if the input is valid.
+     * @param attribute The attribute the user is asked for.
+     * @return Whatever the user inputted.
+     */
     protected String askForString(String attribute) {
         ErrorUI errorUI = new ErrorUI();
         String string = "";

@@ -23,11 +23,19 @@ public class AdvancedMessageSubSystem extends MessageSubSystem {
         super(userManager, messageManager, numOptions);
     }
 
+    /**
+     * Tells the inbox UI to display options for organizers.
+     */
     @Override
     protected void displayOptions() {
         inboxUI.displaySchedulerMenuOptions();
     }
 
+    /**
+     * Processes an integer input in the organizer's messaging subsystem.
+     * @param index The input to be processed. 3 allows for messaging all attendees. 4 allows
+     *              for messaging all speakers.
+     */
     @Override
     protected void processMainSignInput(int index) {
         processBaseInput(index);

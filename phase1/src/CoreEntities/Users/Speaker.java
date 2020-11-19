@@ -16,6 +16,10 @@ public class Speaker extends User {
         setPermissions();
     }
 
+    /**
+     * Sets the permissions of a speaker. Speakers can be messaged, message everyone in their
+     * talk(s), and can speak at a talk.
+     */
     protected void setPermissions() {
         permissions.put(PERMS.canBeMessaged, true);
         permissions.put(PERMS.canMessageTalk, true);

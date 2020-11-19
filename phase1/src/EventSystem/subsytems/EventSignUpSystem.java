@@ -25,11 +25,19 @@ public class EventSignUpSystem extends EventSubSystem {
         super(eventManager, userManager, eventUI, numOptions);
     }
 
+    /**
+     * Tells the event UI to display options for signing up for events.
+     */
     @Override
     protected void displayOptions() {
         eventUI.displaySignupOptions();
     }
 
+    /**
+     * Processes an integer input in the event sign up page.
+     * @param index The input to be processed. 1 allows for event viewing, 2 allows for event sign up,
+     *              3 allows a user to cancel registration, and 4 allows the user to view signed up events.
+     */
     protected void processMainSignInput(int index) {
         switch (index) {
             case (1):

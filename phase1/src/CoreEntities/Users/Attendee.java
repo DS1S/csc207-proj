@@ -16,6 +16,10 @@ public class Attendee extends User {
         setPermissions();
     }
 
+    /**
+     * Sets the permissions of an Attendee. Attendees can be messaged and are able to
+     * sign up for events.
+     */
     protected void setPermissions() {
         permissions.put(PERMS.canBeMessaged, true);
         permissions.put(PERMS.canMessageTalk, false);

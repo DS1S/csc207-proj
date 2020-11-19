@@ -24,11 +24,20 @@ public class ScheduleSystem extends EventSubSystem{
         super(eventManager, userManager, eventUI, numOptions);
     }
 
+    /**
+     * Tells the event UI to display event options for organizers.
+     */
     @Override
     protected void displayOptions() {
         eventUI.displayScheduleOptions();
     }
 
+    /**
+     * Processes an integer input in the event viewing page.
+     * @param index The input to be processed. 1 allows for viewing of all events. 2 allows for
+     *              scheduling of events. 3 allows for rescheduling events. 4 allows for cancellation
+     *              of events.
+     */
     @Override
     protected void processMainSignInput(int index) {
         switch (index) {

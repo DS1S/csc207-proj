@@ -31,6 +31,11 @@ public abstract class MessageSubSystem extends SubSystem {
         this.inboxUI = new InboxUI(userManager);
     }
 
+    /**
+     * Processes an integer input in any messaging page.
+     * @param option The input to be processed. 1 allows for displaying all messages to the logged in user.
+     *               2 allows for sending a message.
+     */
     protected void processBaseInput(int option) {
         switch (option) {
             case(1):
@@ -42,6 +47,10 @@ public abstract class MessageSubSystem extends SubSystem {
         }
     }
 
+    /**
+     * Processes a message body when the user composes a message.
+     * @return The user's input.
+     */
     protected String processMessageBody() {
         inboxUI.displayBodyPrompt();
         return askForString("Message");
