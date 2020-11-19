@@ -32,7 +32,8 @@ public class EventSystem implements IRunnable {
     }
 
     /**
-     * Implements the run method from the IRunnable interface in order to run this System.
+     * Runs this System, displaying prompts, UI, errors etc. that allow the user to perform actions related to the
+     * sign up and scheduling of Events.
      */
     @Override
     public void run() {
@@ -46,8 +47,12 @@ public class EventSystem implements IRunnable {
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
             subsystem = new EventViewerSystem(eventManager, userManager, eventUI, 3);
         }
-        assert subsystem != null;
-        subsystem.run();
+
+        //By Default if user does not have access to effect events, just display to them all events at the conference.
+        if (subsystem == null){
+            eventUI.displayEvents(eventManager.retrieveAllEvents());
+        }
+        else subsystem.run();
     }
 
     /**

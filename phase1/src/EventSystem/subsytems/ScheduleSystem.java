@@ -13,6 +13,8 @@ import java.util.*;
  */
 public class ScheduleSystem extends EventSubSystem{
 
+    private List<Map<String, Object>> eventsData;
+
     /**
      * Constructs a new ScheduleSystem with the given information.
      * @param eventManager the EventManager that will be used by the ScheduleSystem
@@ -20,8 +22,9 @@ public class ScheduleSystem extends EventSubSystem{
      * @param eventUI the EventUI that will be used by the ScheduleSystem
      * @param numOptions the number of menu options given by the ScheduleSystem
      */
-    public ScheduleSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
+    public ScheduleSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions){
         super(eventManager, userManager, eventUI, numOptions);
+        this.eventsData = eventManager.retrieveAllEvents();
     }
 
     /**
@@ -96,6 +99,7 @@ public class ScheduleSystem extends EventSubSystem{
         List<Map<String, Object>> eventConflicts = eventManager.scheduleEvent(capacity, room, startTime, title, speaker,
                 duration);
         if (eventConflicts.isEmpty()) {
+            eventsData = eventManager.retrieveAllEvents();
             eventUI.displayScheduleSuccess();
         }
         else {
@@ -108,9 +112,9 @@ public class ScheduleSystem extends EventSubSystem{
         IndexProcessor<LocalTime> timeProcessor = new TimeIndexProcessor(input, eventUI);
         IndexProcessor<Integer> durationProcessor = new DurationIndexProcessor(input, eventUI);
         eventUI.displayRescheduleStart();
-        int index = setupEventList() - 1;
+        int index = processEvents(eventsData) - 1;
 
-        if(index != -1) {
+        if(index != -1){
             LocalTime startTime = timeProcessor.processInput();
 
             int duration = durationProcessor.processInput();
@@ -126,23 +130,12 @@ public class ScheduleSystem extends EventSubSystem{
     }
 
     private void cancelEvent() {
-        int index = setupEventList() - 1;
+        int index = processEvents(eventsData) - 1;
 
-        if(index != -1) {
+        if(index != -1){
             eventUI.displayCancelStart();
             eventManager.cancelEvent(index);
             eventUI.displayCancelSuccess();
         }
-    }
-
-    private int setupEventList() {
-        List<Map<String, Object>> eventsList = eventManager.retrieveAllEvents();
-        eventUI.displayEvents(eventsList);
-        IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsList.size());
-        if(!eventsList.isEmpty()) {
-            eventUI.displayEnterIndexEvent();
-            return eventProcessor.processInput();
-        }
-        return 0;
     }
 }

@@ -74,14 +74,4 @@ public class EventSignUpSystem extends EventSubSystem {
             eventUI.displayCancelSignupSuccess();
         }
     }
-
-    private int processEvents(List<Map<String, Object>> eventsData) {
-        eventUI.displayEvents(eventsData);
-        if(!eventsData.isEmpty()) {
-            IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsData.size());
-            eventUI.displayEnterIndexEvent();
-            return eventProcessor.processInput();
-        }
-        return 0;
-    }
 }

@@ -4,9 +4,12 @@ import EventSystem.Managers.EventManager;
 import LoginSystem.UserManager;
 import Main.SubSystem;
 import Presenters.EventUI;
+import coreUtil.InputProcessors.IndexProcessor;
 import coreUtil.InputProcessors.OptionIndexProcessor;
 
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -33,5 +36,15 @@ public abstract class EventSubSystem extends SubSystem {
         this.userManager = userManager;
         this.eventUI = eventUI;
         this.numOptions = numOptions;
+    }
+
+    protected int processEvents(List<Map<String, Object>> eventsData){
+        eventUI.displayEvents(eventsData);
+        if(!eventsData.isEmpty()){
+            IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsData.size());
+            eventUI.displayEnterIndexEvent();
+            return eventProcessor.processInput();
+        }
+        return 0;
     }
 }
