@@ -96,7 +96,7 @@ class EventFilterer implements Serializable {
      * @param title the title of the Events
      * @return List of events that match criteria of Speaker and title.
      */
-    public List<Event> retrieveEventsBySpeakerAndTitle(List<Event> events, UUID speaker, String title){
+    public List<Event> retrieveEventsBySpeakerAndTitle(List<Event> events, UUID speaker, String title) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
             if (event.getTitle().equals(title) && event.getSpeaker().equals(speaker)) {

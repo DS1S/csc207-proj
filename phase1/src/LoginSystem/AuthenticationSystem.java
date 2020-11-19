@@ -19,7 +19,7 @@ public class AuthenticationSystem implements IRunnable {
      * Creates a new AuthenticationSystem to use the input UserManager to do it's duties.
      * @param userManager the UserManager to work with.
      */
-    public AuthenticationSystem(UserManager userManager){
+    public AuthenticationSystem(UserManager userManager) {
         authUI = new AuthenticationUI();
         loginSystem = new LoginSystem(userManager);
 
@@ -39,7 +39,7 @@ public class AuthenticationSystem implements IRunnable {
                 option = scanner.nextInt();
                 processInput(option);
             }
-            catch (InputMismatchException e){
+            catch (InputMismatchException e) {
                 this.authUI.displayOptionError();
                 scanner.nextLine();
 
@@ -47,11 +47,7 @@ public class AuthenticationSystem implements IRunnable {
         }
     }
 
-    /**
-     * Processes the user's input once it's verified.
-     * @param input the verified input of the user.
-     */
-    private void processInput(int input){
+    private void processInput(int input) {
         switch (input) {
             case (1):
                 loginSystem.run();

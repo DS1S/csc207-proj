@@ -20,7 +20,7 @@ public abstract class SubSystem  implements IRunnable {
      * @param numOptions the number of options accepted by this system.
      * @param indexProcessor the IndexProcessor to handle them.
      */
-    public SubSystem(int numOptions, IndexProcessor<Integer> indexProcessor){
+    public SubSystem(int numOptions, IndexProcessor<Integer> indexProcessor) {
         this.numOptions = numOptions;
         this.indexProcessor = indexProcessor;
     }
@@ -30,14 +30,13 @@ public abstract class SubSystem  implements IRunnable {
      */
     @Override
     public void run() {
-        int option = 0;
+        int option;
         do{
             displayOptions();
             option = indexProcessor.processInput();
             processMainSignInput(option);
         }while(option != numOptions);
     }
-
 
     protected abstract void displayOptions();
 
@@ -46,7 +45,7 @@ public abstract class SubSystem  implements IRunnable {
     protected String askForString(String attribute) {
         ErrorUI errorUI = new ErrorUI();
         String string = "";
-        while (string.isEmpty()){
+        while (string.isEmpty()) {
             string = input.nextLine();
             if (string.isEmpty()) errorUI.displayError(attribute + " is invalid, please input a " + attribute + "!");
         }

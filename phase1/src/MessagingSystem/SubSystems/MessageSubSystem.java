@@ -24,15 +24,15 @@ public abstract class MessageSubSystem extends SubSystem {
      * @param messageManager a MessageManager object that is already instantiated at the point this is instantiated
      * @param numOptions number of options in the menu
      */
-    public MessageSubSystem(UserManager userManager, MessageManager messageManager, int numOptions){
+    public MessageSubSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
         super(numOptions, new OptionIndexProcessor(new Scanner(System.in), numOptions));
         this.userManager = userManager;
         this.messageManager = messageManager;
         this.inboxUI = new InboxUI(userManager);
     }
 
-    protected void processBaseInput(int option){
-        switch (option){
+    protected void processBaseInput(int option) {
+        switch (option) {
             case(1):
                 inboxUI.displayInbox(messageManager.getInboxData(userManager.getLoggedInUserUUID()));
                 break;
@@ -42,13 +42,12 @@ public abstract class MessageSubSystem extends SubSystem {
         }
     }
 
-    protected String processMessageBody(){
+    protected String processMessageBody() {
         inboxUI.displayBodyPrompt();
-        String message = askForString("Message");
-        return message;
+        return askForString("Message");
     }
 
-    private void processSendMessage(){
+    private void processSendMessage() {
         List<UUID> recipients;
         do {
             inboxUI.displayUserPrompt();
@@ -60,7 +59,7 @@ public abstract class MessageSubSystem extends SubSystem {
         inboxUI.sentPrompt();
     }
 
-    private List<UUID> askForUsernames(){
+    private List<UUID> askForUsernames() {
         String usernames = askForString("User(s)");
         String[] recipients = usernames.split(",");
         ArrayList<UUID> recipientUUIDs = new ArrayList<>();
@@ -73,8 +72,8 @@ public abstract class MessageSubSystem extends SubSystem {
             return  recipientUUIDs;
         }
 
-        for (UUID recipient : recipientUUIDs){
-            if (!userManager.hasPermission(recipient, PERMS.canBeMessaged)){
+        for (UUID recipient : recipientUUIDs) {
+            if (!userManager.hasPermission(recipient, PERMS.canBeMessaged)) {
                 inboxUI.displayError("One or more recipients are not able to be messaged! " +
                                         "Please Try to send again.");
                 recipientUUIDs.add(null);

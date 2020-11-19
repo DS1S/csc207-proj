@@ -106,8 +106,8 @@ class EventScheduler implements Serializable {
             event.setStartTime(newStartTime);
             event.setDuration(newDuration);
         }
-        else if(conflictingEvents.size() == 1){
-            if (conflictingEvents.get(0).equals(event)){
+        else if(conflictingEvents.size() == 1) {
+            if (conflictingEvents.get(0).equals(event)) {
                 event.setStartTime(newStartTime);
                 event.setDuration(newDuration);
                 conflictingEvents.remove(0);
@@ -117,15 +117,15 @@ class EventScheduler implements Serializable {
         return conflictingEvents;
     }
 
-    private void removeDuplicateConflictedEvents(List<Event> events){
+    private void removeDuplicateConflictedEvents(List<Event> events) {
         List<Integer> dupPositions = new ArrayList<>();
-        for(int i = 0; i < events.size() - 1; i++){
-            for(int j = i + 1; j < events.size(); j++){
+        for(int i = 0; i < events.size() - 1; i++) {
+            for(int j = i + 1; j < events.size(); j++) {
                 if (events.get(i).equals(events.get(j))) dupPositions.add(j);
             }
         }
 
-        for (int dupPos: dupPositions){
+        for (int dupPos: dupPositions) {
             events.remove(dupPos);
         }
     }

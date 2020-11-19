@@ -9,7 +9,7 @@ public class ErrorUI {
      * Displays an error to the user.
      * @param s error that is displayed
      */
-    public void displayError(String s){
+    public void displayError(String s) {
         System.out.println(s);
     }
 }

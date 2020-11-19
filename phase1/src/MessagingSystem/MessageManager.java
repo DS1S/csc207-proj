@@ -15,7 +15,7 @@ public class MessageManager implements Serializable {
      */
     public MessageManager(List<UUID> userIDs) {
         inboxes = new HashMap<>();
-        for (UUID id : userIDs){
+        for (UUID id : userIDs) {
             inboxes.put(id, new ArrayList<>());
         }
     }
@@ -38,7 +38,7 @@ public class MessageManager implements Serializable {
      * @param recipients A list of UUIDs of the recipients
      * @param msg A string which is the body of the message.
      */
-    public void sendMessageToMultiple(UUID sender, List<UUID> recipients, String msg){
+    public void sendMessageToMultiple(UUID sender, List<UUID> recipients, String msg) {
         for (UUID recipient : recipients) {
             sendMessageToIndividual(sender, recipient, msg);
         }
@@ -49,7 +49,7 @@ public class MessageManager implements Serializable {
      * @param userID UUID of the user
      * @return true if user has an inbox, else false
      */
-    public boolean userHasInbox(UUID userID){
+    public boolean userHasInbox(UUID userID) {
         return inboxes.containsKey(userID);
     }
 
@@ -57,7 +57,7 @@ public class MessageManager implements Serializable {
      * Maps the given UUID to an empty list in inboxes.
      * @param userID UUID of the user
      */
-    public void addBlankInbox(UUID userID){
+    public void addBlankInbox(UUID userID) {
         inboxes.put(userID, new ArrayList<>());
     }
 
@@ -70,7 +70,7 @@ public class MessageManager implements Serializable {
         List<Message> inbox = inboxes.get(userID);
         List<Map<String, Object>> inboxData = new ArrayList<>();
 
-        for (Message message : inbox){
+        for (Message message : inbox) {
             inboxData.add(message.extractData());
         }
 
@@ -81,10 +81,10 @@ public class MessageManager implements Serializable {
     /*
     Potential use in phase 2
 
-    public String toString(String Criterion, Object value, UUID userID){
+    public String toString(String Criterion, Object value, UUID userID) {
         List<Message> searchedMessages = retrieveMessageByCriterion(Criterion, value, userID);
         StringBuilder searchedMsgStr = new StringBuilder();
-        for(Message msg : searchedMessages){
+        for(Message msg : searchedMessages) {
             searchedMsgStr.append(msg.toString() + "\n");
         }
         if (searchedMsgStr.toString().isEmpty()) return "Search results: 0";
@@ -95,10 +95,10 @@ public class MessageManager implements Serializable {
         List<Message> matchedMessages = new ArrayList<>();
         List<Message> inbox = tempInbox.get(userID);
         try{
-            for (Message msg : inbox){
+            for (Message msg : inbox) {
                 Class<?> msgType = msg.getClass();
                 Method desiredMethod = msgType.getMethod("get"+criterion);
-                if(desiredMethod.invoke(msgType).equals(value)){
+                if(desiredMethod.invoke(msgType).equals(value)) {
                     matchedMessages.add(msg);
                 }
             }

@@ -18,7 +18,7 @@ public class TimeIndexProcessor extends IndexProcessor<LocalTime> {
      * @param scanner the Scanner to use for input
      * @param eventUI the EventUI to display prompts on
      */
-    public TimeIndexProcessor(Scanner scanner, EventUI eventUI){
+    public TimeIndexProcessor(Scanner scanner, EventUI eventUI) {
         super(scanner);
         this.eventUI = eventUI;
     }

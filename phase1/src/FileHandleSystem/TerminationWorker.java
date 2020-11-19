@@ -14,7 +14,7 @@ public class TerminationWorker<T> extends Thread{
      * @param manager the type to save.
      * @param filePath the filepath to save to.
      */
-    public TerminationWorker(T manager, String filePath){
+    public TerminationWorker(T manager, String filePath) {
         this.manager = manager;
         this.filePath = filePath;
     }
@@ -24,7 +24,7 @@ public class TerminationWorker<T> extends Thread{
      */
     @Override
     public void run() {
-        FileSerializer<T> managerFileSerializer = new FileSerializer<T>(filePath);
+        FileSerializer<T> managerFileSerializer = new FileSerializer<>(filePath);
         managerFileSerializer.saveObject(manager);
     }
 }

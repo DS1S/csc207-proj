@@ -38,7 +38,7 @@ public class SpeakerMessageSubSystem extends MessageSubSystem {
 
     @Override
     protected void processMainSignInput(int index) {
-        switch (index){
+        switch (index) {
             case(1):
                 processBaseInput(index);
                 break;
@@ -51,8 +51,8 @@ public class SpeakerMessageSubSystem extends MessageSubSystem {
         }
     }
 
-    private void processMessageToTalks(){
-        if (eventManager.retrieveEventsBySpeaker(userManager.getLoggedInUserUUID()).isEmpty()){
+    private void processMessageToTalks() {
+        if (eventManager.retrieveEventsBySpeaker(userManager.getLoggedInUserUUID()).isEmpty()) {
             inboxUI.displayError("You aren't hosting any talks!");
         }
         else{
@@ -64,7 +64,7 @@ public class SpeakerMessageSubSystem extends MessageSubSystem {
         }
     }
 
-    private void sendMessageToTalks(List<String> events, String msg){
+    private void sendMessageToTalks(List<String> events, String msg) {
         List<UUID> attendeeUUIDs = new ArrayList<>();
         for (String event : events) {
             List<UUID> eventUUIDs = eventManager.retrieveAttendees(event, userManager.getLoggedInUserUUID());
@@ -75,11 +75,11 @@ public class SpeakerMessageSubSystem extends MessageSubSystem {
         messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), attendeeUUIDs, msg);
     }
 
-    private void replyToAttendee(){
+    private void replyToAttendee() {
         List<Map<String, Object>> messagesData = messageManager.getInboxData(userManager.getLoggedInUserUUID());
         int index = processMessages(messagesData) - 1;
 
-        if(index != -1){
+        if(index != -1) {
             UUID replierUUID = (UUID)messagesData.get(index).get("sender");
             String message = processMessageBody();
             messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), replierUUID, message);
@@ -87,9 +87,9 @@ public class SpeakerMessageSubSystem extends MessageSubSystem {
         }
     }
 
-    private int processMessages(List<Map<String, Object>> messagesData){
+    private int processMessages(List<Map<String, Object>> messagesData) {
         inboxUI.displayInbox(messagesData);
-        if(!messagesData.isEmpty()){
+        if(!messagesData.isEmpty()) {
             IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, messagesData.size());
             return eventProcessor.processInput();
         }

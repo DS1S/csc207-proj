@@ -31,7 +31,7 @@ public class AdvancedMessageSubSystem extends MessageSubSystem {
     @Override
     protected void processMainSignInput(int index) {
         processBaseInput(index);
-        switch (index){
+        switch (index) {
             case(3):
                 processMessageAllAttendees();
                 break;
@@ -41,17 +41,17 @@ public class AdvancedMessageSubSystem extends MessageSubSystem {
         }
     }
 
-    private void processMessageAllAttendees(){
+    private void processMessageAllAttendees() {
         String message = processMessageBody();
         messageUserWithPerm(message, PERMS.canSpeakAtTalk);
     }
 
-    private void processMessageAllSpeakers(){
+    private void processMessageAllSpeakers() {
         String message = processMessageBody();
         messageUserWithPerm(message, PERMS.canSignUpEvent);
     }
 
-    private void messageUserWithPerm(String message, PERMS perm){
+    private void messageUserWithPerm(String message, PERMS perm) {
         List<UUID> userUUIDs = userManager.getUUIDs();
         List<UUID> targetUUIDs = new ArrayList<>();
         for (UUID id : userUUIDs) {

@@ -16,28 +16,20 @@ public class LoginSystem implements IRunnable {
      * Constructs a LoginSystem to use the given UserManager.
      * @param um the UserManager to work with.
      */
-    public LoginSystem(UserManager um){
+    public LoginSystem(UserManager um) {
         this.um = um;
         this.authUI = new AuthenticationUI();
     }
 
-    /**
-     * Handles the logging in of users.
-     * @param username the username to check
-     * @param password the password to check
-     * @return empty string if successful, error string otherwise, depending on the error
-     */
-    private String loginUser(String username, String password){
+    private String loginUser(String username, String password) {
         if (!um.containsUserWithUsername(username.trim())) {
-            String INVALID_USERNAME = "Invalid Username!";
-            return INVALID_USERNAME;
+            return "Invalid Username!";
         }
 
         if (um.checkPasswordWithUUID(um.getUUIDWithUsername(username), password.trim())) {
             um.setLoggedInUser(um.getUUIDWithUsername(username));
         } else {
-            String INVALID_PASSWORD = "Invalid Password!";
-            return INVALID_PASSWORD;
+            return "Invalid Password!";
         }
         return "";
     }
@@ -45,12 +37,11 @@ public class LoginSystem implements IRunnable {
     /**
      * Displays the UI, prompts, errors, etc. associated with logging in a user.
      */
-    public void run(){
-
+    public void run() {
         Scanner scanner = new Scanner(System.in);
 
         String response = "?";
-        while (!response.isEmpty()){
+        while (!response.isEmpty()) {
             authUI.displayLoginPage();
             authUI.displayUsernamePrompt();
             String username = scanner.nextLine();

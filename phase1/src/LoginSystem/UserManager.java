@@ -21,7 +21,7 @@ public class UserManager implements Serializable {
     /**
      * Constructs an empty UserManager.
      */
-    public UserManager(){
+    public UserManager() {
         this.users = new HashMap<>();
     }
 
@@ -73,7 +73,7 @@ public class UserManager implements Serializable {
      * @param password The password to check with that UUID.
      * @return True IFF the user with UUID id has that password.
      */
-    public boolean checkPasswordWithUUID(UUID id, String password){
+    public boolean checkPasswordWithUUID(UUID id, String password) {
         return users.get(id).checkPassword(password);
     }
 
@@ -112,7 +112,7 @@ public class UserManager implements Serializable {
      * @param permission Permission Key to check the user has.
      * @return True IFF the user has the permission.
      */
-    public boolean loggedInHasPermission(PERMS permission){
+    public boolean loggedInHasPermission(PERMS permission) {
         return this.loggedInUser.getPermissions().get(permission);
     }
 
@@ -121,7 +121,7 @@ public class UserManager implements Serializable {
      * @param userUUID The UUID of the User
      * @return Return the Username of the User.
      */
-    public String getUsernameWithUUID(UUID userUUID){
+    public String getUsernameWithUUID(UUID userUUID) {
         return users.get(userUUID).getUsername();
     }
 
@@ -130,7 +130,7 @@ public class UserManager implements Serializable {
      * @param userUUID The UUID of the User
      * @return Return the name of the User.
      */
-    public String getNameWithUUID(UUID userUUID){
+    public String getNameWithUUID(UUID userUUID) {
         return users.get(userUUID).getName();
     }
 
@@ -140,7 +140,7 @@ public class UserManager implements Serializable {
      * @param permission The permission key to check.
      * @return True IFF the User has the permission.
      */
-    public boolean hasPermission(UUID userID, PERMS permission){
+    public boolean hasPermission(UUID userID, PERMS permission) {
         return this.users.get(userID).getPermissions().get(permission);
     }
 
@@ -148,7 +148,7 @@ public class UserManager implements Serializable {
      * Gets all the stored User UUID's.
      * @return List of UUID stored in UserManager.
      */
-    public List<UUID> getUUIDs(){
+    public List<UUID> getUUIDs() {
         return new ArrayList<>(this.users.keySet());
     }
 

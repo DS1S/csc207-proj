@@ -25,14 +25,15 @@ public class EventSystem implements IRunnable {
      * @param eventManager the EventManager that will be used by the EventSystem
      * @param userManager the UserManager that will be used by the EventSystem
      */
-    public EventSystem(EventManager eventManager, UserManager userManager){
+    public EventSystem(EventManager eventManager, UserManager userManager) {
         this.eventManager = eventManager;
         this.userManager = userManager;
         this.eventUI = new EventUI(this.userManager);
     }
 
     /**
-     * Implements the run method from the IRunnable interface in order to run this System.
+     * Runs this System, displaying prompts, UI, errors etc. that allow the user to perform actions related to the
+     * sign up and scheduling of Events.
      */
     @Override
     public void run() {
@@ -46,6 +47,7 @@ public class EventSystem implements IRunnable {
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
             subsystem = new EventViewerSystem(eventManager, userManager, eventUI, 3);
         }
+        assert subsystem != null;
         subsystem.run();
     }
 

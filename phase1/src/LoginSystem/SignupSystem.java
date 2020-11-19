@@ -25,7 +25,7 @@ public class SignupSystem implements IRunnable {
     public SignupSystem(UserManager um, String type) {
         this.um = um;
         this.authUI = new AuthenticationUI();
-        this.possibleTypes = new ArrayList<String>();
+        this.possibleTypes = new ArrayList<>();
         this.possibleTypes.add(type);
     }
 
@@ -34,16 +34,15 @@ public class SignupSystem implements IRunnable {
      * @param um same as before.
      * @param possibleTypes the list of allowed types.
      */
-    public SignupSystem(UserManager um, List<String> possibleTypes){
+    public SignupSystem(UserManager um, List<String> possibleTypes) {
         this.um = um;
         this.authUI = new AuthenticationUI();
         this.possibleTypes = possibleTypes;
     }
 
-    private String signUp(String name, String username, String password, String type){
+    private String signUp(String name, String username, String password, String type) {
         if (this.um.containsUserWithUsername(username)) {
-            String TAKEN_USERNAME = "That username is taken!";
-            return TAKEN_USERNAME;
+            return "That username is taken!";
         }
 
         this.um.addUser(type, username, password, name);
@@ -52,7 +51,7 @@ public class SignupSystem implements IRunnable {
 
     private void create(String type) {
         String result = "?";
-        while(!result.isEmpty()){
+        while(!result.isEmpty()) {
             this.authUI.displaySigningUpPage();
 
             this.authUI.displayNamePrompt();
@@ -71,7 +70,7 @@ public class SignupSystem implements IRunnable {
 
     private String askForString(String attribute) {
         String string = "";
-        while (string.isEmpty()){
+        while (string.isEmpty()) {
             string = scanner.nextLine();
             if (string.isEmpty()) authUI.displayError(attribute + " is empty, please input a " + attribute + "!");
         }
@@ -85,14 +84,14 @@ public class SignupSystem implements IRunnable {
     public void run() {
 
         int option = 0;
-        while(option <= 0 || option > possibleTypes.size()){
+        while(option <= 0 || option > possibleTypes.size()) {
             authUI.displayUserTypes(possibleTypes);
             try{
                 option = scanner.nextInt();
                 if (option <= 0 || option > possibleTypes.size()) authUI.displayError("Invalid option, try again!");
                 scanner.nextLine();
             }
-            catch (InputMismatchException e){
+            catch (InputMismatchException e) {
                 authUI.displayError("Invalid option, try again!");
                 scanner.nextLine();
             }
