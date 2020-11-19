@@ -19,7 +19,7 @@ public class FileSerializer<T> {
      * Constructs a FileSerializer with type T and filepath to write/read
      * @param filePath the filepath to write to or read from
      */
-    public FileSerializer(String filePath){
+    public FileSerializer(String filePath) {
         this.filePath = filePath;
     }
 
@@ -27,7 +27,7 @@ public class FileSerializer<T> {
      * Serializes and then saves a collection of objects of type T.
      * @param objects the list of objects to serialize and save.
      */
-    public void saveCollection(List<T> objects){
+    public void saveCollection(List<T> objects) {
         try{
             OutputStream file = new FileOutputStream(filePath);
             OutputStream buffer = new BufferedOutputStream(file);
@@ -36,7 +36,7 @@ public class FileSerializer<T> {
             // serialize the object
             output.writeObject(objects);
             output.close();
-        }catch (IOException e){
+        }catch (IOException e) {
             Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
             Logger.getAnonymousLogger().log(Level.SEVERE, "Could Not Save Data");
         }
@@ -46,7 +46,7 @@ public class FileSerializer<T> {
      * Same as saveCollection, but does so for a single object.
      * @param object the objects to serialize and save.
      */
-    public void saveObject(T object){
+    public void saveObject(T object) {
         saveCollection(new ArrayList<>(Arrays.asList(object)));
     }
 
@@ -54,7 +54,7 @@ public class FileSerializer<T> {
      * Deserialize and load an object from the filepath of type T.
      * @return the loaded object
      */
-    public T loadObject(){
+    public T loadObject() {
         return loadCollection().get(0);
     }
 
@@ -62,7 +62,7 @@ public class FileSerializer<T> {
      * Same as loadObject, but does so with a collection
      * @return the list of loaded objects.
      */
-    public List<T> loadCollection(){
+    public List<T> loadCollection() {
         try {
             InputStream file = new FileInputStream(filePath);
             InputStream buffer = new BufferedInputStream(file);
@@ -73,9 +73,7 @@ public class FileSerializer<T> {
             input.close();
             return objects;
 
-        } catch (IOException e) {
-            return new ArrayList<>();
-        } catch (ClassNotFoundException e){
+        } catch (IOException | ClassNotFoundException e) {
             return new ArrayList<>();
         }
 

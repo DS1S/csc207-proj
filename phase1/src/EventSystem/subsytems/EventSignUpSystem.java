@@ -21,7 +21,7 @@ public class EventSignUpSystem extends EventSubSystem {
      * @param eventUI the EventUI that will be used by the EventSignUpSystem
      * @param numOptions the number of menu options given by the EventSignUpSystem
      */
-    public EventSignUpSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions){
+    public EventSignUpSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(eventManager, userManager, eventUI, numOptions);
     }
 
@@ -30,7 +30,7 @@ public class EventSignUpSystem extends EventSubSystem {
         eventUI.displaySignupOptions();
     }
 
-    protected void processMainSignInput(int index){
+    protected void processMainSignInput(int index) {
         switch (index) {
             case (1):
                 eventUI.displayEvents(eventManager.retrieveAllEvents());
@@ -51,7 +51,7 @@ public class EventSignUpSystem extends EventSubSystem {
         List<Map<String, Object>> eventList = eventManager.retrieveSignupAbleEvents(userManager.getLoggedInUserUUID());
         int index = processEvents(eventList) - 1;
 
-        if(index != -1){
+        if(index != -1) {
             eventManager.registerAttendee(userManager.getLoggedInUserUUID(),index);
             eventUI.displaySignupSuccess();
         }
@@ -61,15 +61,15 @@ public class EventSignUpSystem extends EventSubSystem {
         List<Map<String, Object>> eventList = eventManager.retrieveEventsByAttendee(userManager.getLoggedInUserUUID());
         int index = processEvents(eventList) - 1;
 
-        if (index != -1){
+        if (index != -1) {
             eventManager.removeAttendee(userManager.getLoggedInUserUUID(), index);
             eventUI.displayCancelSignupSuccess();
         }
     }
 
-    private int processEvents(List<Map<String, Object>> eventsData){
+    private int processEvents(List<Map<String, Object>> eventsData) {
         eventUI.displayEvents(eventsData);
-        if(!eventsData.isEmpty()){
+        if(!eventsData.isEmpty()) {
             IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsData.size());
             eventUI.displayEnterIndexEvent();
             return eventProcessor.processInput();

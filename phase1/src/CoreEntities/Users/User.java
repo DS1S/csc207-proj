@@ -73,7 +73,7 @@ public abstract class User implements Serializable {
      * PERMS Enum.
      * @return The mapping of permissions for the user.
      */
-    public Map<PERMS, Boolean> getPermissions(){
+    public Map<PERMS, Boolean> getPermissions() {
         return permissions;
     }
 

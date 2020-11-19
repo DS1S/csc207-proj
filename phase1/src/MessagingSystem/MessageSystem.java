@@ -47,6 +47,7 @@ public class MessageSystem implements IRunnable {
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
             subsystem = new SpeakerMessageSubSystem(userManager, messageManager, 4, eventManager);
         }
+        assert subsystem != null;
         subsystem.run();
     }
 
@@ -55,7 +56,7 @@ public class MessageSystem implements IRunnable {
      * @return the string "Messaging"
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "Messaging";
     }
 }

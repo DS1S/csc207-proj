@@ -30,21 +30,21 @@ public class SystemController implements IRunnable {
     /**
      * Runs all the subsystems by switching between the MainMenuUI and the each subsystem depending on what the user inputs.
      */
-    public void run(){
+    public void run() {
         initializeSubSystems();
 
         Scanner input = new Scanner(System.in);
         int option = 0;
-        while (option != subSystems.size()){
+        while (option != subSystems.size()) {
             mainMenu.displayMainMenu(subSystems);
 
             try{
                 option = input.nextInt();
-                if (subSystems.containsKey(option)){
+                if (subSystems.containsKey(option)) {
                     subSystems.get(option).run();
                 }
             }
-            catch (InputMismatchException e){
+            catch (InputMismatchException e) {
                 mainMenu.displayInvalidInput(subSystems);
                 input.nextLine();
             }
@@ -52,7 +52,7 @@ public class SystemController implements IRunnable {
         input.close();
     }
 
-    private void initializeSubSystems(){
+    private void initializeSubSystems() {
         UserManager userManager = initializeLoginSystem();
         EventManager eventManager = initializeEventSystem(userManager);
 
@@ -62,7 +62,7 @@ public class SystemController implements IRunnable {
         initializeShutDownHook();
     }
 
-    private UserManager initializeLoginSystem(){
+    private UserManager initializeLoginSystem() {
         String filePath = "phase1/database/UManager.ser";
         FileSerializer<UserManager> userManagerLoader = new FileSerializer<>(filePath);
         UserManager uManager = userManagerLoader.loadObject();
@@ -71,7 +71,7 @@ public class SystemController implements IRunnable {
         return uManager;
     }
 
-    private void initializeMessageSystem(UserManager userManager, EventManager eventManager){
+    private void initializeMessageSystem(UserManager userManager, EventManager eventManager) {
         String filePath = "phase1/database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
@@ -81,7 +81,7 @@ public class SystemController implements IRunnable {
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size());
     }
 
-    private EventManager initializeEventSystem(UserManager userManager){
+    private EventManager initializeEventSystem(UserManager userManager) {
         String filePath = "phase1/database/ESManager.ser";
         FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
         EventManager eventManager = eventManagerLoader.loadObject();
@@ -90,19 +90,19 @@ public class SystemController implements IRunnable {
         return eventManager;
     }
 
-    private void initializeUserCreatorSystem(UserManager userManager){
-        if (userManager.loggedInHasPermission(PERMS.canSignUpUser)){
+    private void initializeUserCreatorSystem(UserManager userManager) {
+        if (userManager.loggedInHasPermission(PERMS.canSignUpUser)) {
             IRunnable signUpSystem = new SignupSystem(userManager, "speaker");
             subSystems.put(subSystems.size(), signUpSystem);
         }
     }
 
-    private void addSystemAndManager(String filePath, IRunnable sys, Object manager, int index){
+    private void addSystemAndManager(String filePath, IRunnable sys, Object manager, int index) {
         subSystems.put(index, sys);
         managers.put(filePath, manager);
     }
 
-    private void initializeShutDownHook(){
+    private void initializeShutDownHook() {
         managers.forEach((s, o) -> {
             TerminationWorker<Object> objSaver = new TerminationWorker<>(o, s);
             Runtime.getRuntime().addShutdownHook(objSaver);

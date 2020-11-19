@@ -25,7 +25,7 @@ public class EventSystem implements IRunnable {
      * @param eventManager the EventManager that will be used by the EventSystem
      * @param userManager the UserManager that will be used by the EventSystem
      */
-    public EventSystem(EventManager eventManager, UserManager userManager){
+    public EventSystem(EventManager eventManager, UserManager userManager) {
         this.eventManager = eventManager;
         this.userManager = userManager;
         this.eventUI = new EventUI(this.userManager);
@@ -46,6 +46,7 @@ public class EventSystem implements IRunnable {
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
             subsystem = new EventViewerSystem(eventManager, userManager, eventUI, 3);
         }
+        assert subsystem != null;
         subsystem.run();
     }
 

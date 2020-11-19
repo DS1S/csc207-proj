@@ -25,11 +25,11 @@ public class EventUI {
      * @param eventList the list of extracted event data for the events to be displayed
      */
     public void displayEvents(List<Map<String, Object>> eventList) {
-        if (eventList.isEmpty()){
+        if (eventList.isEmpty()) {
             System.out.println("There are no events scheduled");
         }
         else {
-            System.out.println("----------Events----------");
+            System.out.println("------------------------Events------------------------");
             StringBuilder sb = new StringBuilder();
             int i = 1;
             for (Map<String, Object> data : eventList) {
@@ -39,8 +39,8 @@ public class EventUI {
                 sb.append(data.get("StartTime") + " to " + data.get("EndTime") + "\n");
                 sb.append("Room: " + data.get("Room") + "\n");
                 sb.append(data.get("Registered") + "/" + data.get("Capacity") + " spots filled" + "\n");
-                System.out.println(sb);
-                System.out.println("----------------------------------");
+                System.out.print(sb);
+                System.out.println("------------------------------------------------------");
                 sb.setLength(0);
                 i += 1;
             }
@@ -51,7 +51,7 @@ public class EventUI {
      * Displays a list of options pertaining to the scheduling of events.
      */
     public void displayScheduleOptions() {
-        System.out.println("What would you like to do?\n");
+        System.out.println("\nWhat would you like to do?");
         System.out.println("1. View all events.");
         System.out.println("2. Schedule a new event.");
         System.out.println("3. Reschedule an existing event.");
@@ -63,7 +63,7 @@ public class EventUI {
      * Displays a list of options pertaining to signing up for events.
      */
     public void displaySignupOptions() {
-        System.out.println("What would you like to do?\n");
+        System.out.println("\nWhat would you like to do?");
         System.out.println("1. View all events.");
         System.out.println("2. Sign up for an event.");
         System.out.println("3. Cancel a registered event.");
@@ -75,7 +75,7 @@ public class EventUI {
      * Displays a list of options pertaining to speaking at events.
      */
     public void displaySpeakerOptions() {
-        System.out.println("What would you like to do?\n");
+        System.out.println("\nWhat would you like to do?");
         System.out.println("1. View all events.");
         System.out.println("2. View events you are speaking at.");
         System.out.println("3. Return to main menu.");
@@ -85,14 +85,14 @@ public class EventUI {
      * Displays a message informing the user that they have successfully registered for an event.
      */
     public void displaySignupSuccess() {
-        System.out.println("You have successfully registered for the event!\n\n");
+        System.out.println("You have successfully registered for the event!");
     }
 
     /**
      * Displays a message informing the user that they have successfully unregistered for an event.
      */
     public void displayCancelSignupSuccess() {
-        System.out.println("You have successfully unregistered from the event!\n\n");
+        System.out.println("You have successfully unregistered from the event!");
     }
 
     /**
@@ -161,7 +161,7 @@ public class EventUI {
      * Displays a message informing the user that they have successfully scheduled an event.
      */
     public void displayScheduleSuccess() {
-        System.out.println("Your event has been successfully scheduled!\n\n");
+        System.out.println("Your event has been successfully scheduled!");
     }
 
     /**
@@ -185,7 +185,7 @@ public class EventUI {
      * Displays a message informing the user that they have successfully rescheduled an event.
      */
     public void displayRescheduleSuccess() {
-        System.out.println("Your event has been successfully rescheduled!\n\n");
+        System.out.println("Your event has been successfully rescheduled!");
     }
 
     /**

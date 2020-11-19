@@ -25,7 +25,7 @@ public class Message implements Serializable {
      * @param body the message body
      * @param timeSent the time the message was sent
      */
-    public Message(UUID msgId, UUID sender, UUID recipient, String body, LocalTime timeSent){
+    public Message(UUID msgId, UUID sender, UUID recipient, String body, LocalTime timeSent) {
         this.msgId = msgId;
         this.sender = sender;
         this.recipient = recipient;
@@ -37,7 +37,7 @@ public class Message implements Serializable {
      * Returns the UUID of the message recipient.
      * @return message recipient UUID
      */
-    public UUID getRecipient(){
+    public UUID getRecipient() {
         return recipient;
     }
 

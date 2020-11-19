@@ -14,7 +14,7 @@ public abstract class IndexProcessor<T> {
      * Creates a new IndexProcessor which uses the provided Scanner for input.
      * @param scanner the Scanner to use for input.
      */
-    public IndexProcessor(Scanner scanner){
+    public IndexProcessor(Scanner scanner) {
         this.scanner = scanner;
     }
 

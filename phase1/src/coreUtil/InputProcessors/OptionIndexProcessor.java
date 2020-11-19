@@ -19,7 +19,7 @@ public class OptionIndexProcessor extends IndexProcessor<Integer> {
      * @param scanner the Scanner to use for input.
      * @param max the max valid integer allowed.
      */
-    public OptionIndexProcessor(Scanner scanner, int max){
+    public OptionIndexProcessor(Scanner scanner, int max) {
         super(scanner);
         this.optionUI = new OptionUI();
         this.max = max;
@@ -36,11 +36,11 @@ public class OptionIndexProcessor extends IndexProcessor<Integer> {
             optionUI.displayIndexPrompt();
             try{
                 option = scanner.nextInt();
-                if(option <= 0 || option > max){
+                if(option <= 0 || option > max) {
                     optionUI.displayInvalidIndex();
                 }
             }
-            catch (InputMismatchException e){
+            catch (InputMismatchException e) {
                 optionUI.displayInvalidIndex();
                 scanner.nextLine();
             }

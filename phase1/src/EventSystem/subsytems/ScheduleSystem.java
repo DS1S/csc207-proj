@@ -20,7 +20,7 @@ public class ScheduleSystem extends EventSubSystem{
      * @param eventUI the EventUI that will be used by the ScheduleSystem
      * @param numOptions the number of menu options given by the ScheduleSystem
      */
-    public ScheduleSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions){
+    public ScheduleSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(eventManager, userManager, eventUI, numOptions);
     }
 
@@ -101,7 +101,7 @@ public class ScheduleSystem extends EventSubSystem{
         eventUI.displayRescheduleStart();
         int index = setupEventList() - 1;
 
-        if(index != -1){
+        if(index != -1) {
             LocalTime startTime = timeProcessor.processInput();
 
             int duration = durationProcessor.processInput();
@@ -119,18 +119,18 @@ public class ScheduleSystem extends EventSubSystem{
     private void cancelEvent() {
         int index = setupEventList() - 1;
 
-        if(index != -1){
+        if(index != -1) {
             eventUI.displayCancelStart();
             eventManager.cancelEvent(index);
             eventUI.displayCancelSuccess();
         }
     }
 
-    private int setupEventList(){
+    private int setupEventList() {
         List<Map<String, Object>> eventsList = eventManager.retrieveAllEvents();
         eventUI.displayEvents(eventsList);
         IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsList.size());
-        if(!eventsList.isEmpty()){
+        if(!eventsList.isEmpty()) {
             eventUI.displayEnterIndexEvent();
             return eventProcessor.processInput();
         }

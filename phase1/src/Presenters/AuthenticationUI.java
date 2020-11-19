@@ -66,9 +66,9 @@ public class AuthenticationUI {
      * Displays a list of user types the user is allowed to create.
      * @param types the list of types to show. Caller's responsibility to display valid types.
      */
-    public void displayUserTypes(List<String> types){
+    public void displayUserTypes(List<String> types) {
         System.out.println("Choose a user type to create: ");
-        for (int i = 0; i < types.size(); i++){
+        for (int i = 0; i < types.size(); i++) {
             System.out.println((i + 1) + ": " + types.get(i));
         }
     }

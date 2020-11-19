@@ -27,7 +27,7 @@ public abstract class EventSubSystem extends SubSystem {
      * @param eventUI the EventUI that will be used by the EventSubSystem
      * @param numOptions the number of menu options given by the EventSubSystem
      */
-    public EventSubSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions){
+    public EventSubSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(numOptions, new OptionIndexProcessor(new Scanner(System.in), numOptions));
         this.eventManager = eventManager;
         this.userManager = userManager;

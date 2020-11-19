@@ -11,12 +11,12 @@ public class Speaker extends User {
      * @param username Username of the speaker.
      * @param password Password of the speaker.
      */
-    public Speaker(String name, String username, String password){
+    public Speaker(String name, String username, String password) {
         super(name, username, password);
         setPermissions();
     }
 
-    protected void setPermissions(){
+    protected void setPermissions() {
         permissions.put(PERMS.canBeMessaged, true);
         permissions.put(PERMS.canMessageTalk, true);
         permissions.put(PERMS.canSchedule, false);

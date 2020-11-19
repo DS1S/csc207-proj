@@ -30,7 +30,6 @@ public class MainMenuUI {
      * @param subsystems the subsystems that implement the actions the users can take
      */
     public void displayMainMenu(Map<Integer, IRunnable> subsystems) {
-        System.out.flush();
         System.out.println(" _________  ____  ____   ______ \n|  _   _  ||_   ||   _|.' ___  | \n|_/ | | " +
                 "\\_|  | |__| | / .'   \\_|  \n    | |      |  __  | | | \n   _| |_    _| |  | |_\\ `.___.'" +
                 "\\  \n  |_____|  |____||____|`.____ .' \nWelcome to TecHConference! Press a number and then " +
@@ -39,7 +38,7 @@ public class MainMenuUI {
     }
 
     /**
-     * Indicates to the user that their inpuit was invalid and prompts them to enter a new input.
+     * Indicates to the user that their input was invalid and prompts them to enter a new input.
      * @param subsystems the subsystems that implement the actions the users can take
      */
     public void displayInvalidInput(Map<Integer, IRunnable> subsystems) {

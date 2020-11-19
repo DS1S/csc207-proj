@@ -16,6 +16,9 @@ public class EventManager implements Serializable {
     private EventSignUp eventSignUp;
     private EventScheduler eventScheduler;
 
+    /**
+     * Constructs an EventManager, with empty schedule and default event components.
+     */
     public EventManager() {
         mainSchedule = new ArrayList<>();
         eventFilterer = new EventFilterer();
@@ -168,14 +171,14 @@ public class EventManager implements Serializable {
      * @param title title of a talk
      * @return A list of attendee UUID for a specific event with param title and hosted by speaker.
      */
-    public List<UUID> retrieveAttendees(String title, UUID speakerUUID){
+    public List<UUID> retrieveAttendees(String title, UUID speakerUUID) {
         List<Event> events = eventFilterer.retrieveEventsBySpeakerAndTitle(mainSchedule, speakerUUID, title);
         return getUUIDSFromEvents(events);
     }
 
-    private List<UUID> getUUIDSFromEvents(List<Event> events){
+    private List<UUID> getUUIDSFromEvents(List<Event> events) {
         List<UUID> attendeeIDS = new ArrayList<>();
-        for (Event event : events){
+        for (Event event : events) {
             attendeeIDS.addAll(event.getAttendees());
         }
         return attendeeIDS;

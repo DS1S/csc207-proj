@@ -23,23 +23,17 @@ public class InboxUI extends ErrorUI {
      * @param inboxData the user's inbox data
      */
     public void displayInbox(List<Map<String, Object>> inboxData) {
-
         int i = 1;
-        for(Map<String, Object> data : inboxData){
+
+        for(Map<String, Object> data : inboxData) {
             StringBuilder sb = new StringBuilder();
             String recipient = userManager.getUsernameWithUUID((UUID) data.get("recipient"));
-            String sender    = userManager.getUsernameWithUUID((UUID) data.get("sender"));
-            data.remove("recipient");
-            data.remove("sender");
-            System.out.println("-------------------------------------------------------");
+            String sender = userManager.getUsernameWithUUID((UUID) data.get("sender"));
+            System.out.println("------------------------------------------------------");
             System.out.println("Message " + i);
-            sb.append("From: " + sender + " To " + recipient + "\n");
-            data.forEach((s, o) -> {
-                sb.append(data.get(s).toString() + "\n");
-            });
-            data.put("recipient", userManager.getUUIDWithUsername(recipient));
-            data.put("sender", userManager.getUUIDWithUsername(sender));
-            System.out.println(sb);
+            sb.append("From: " + sender + "\nTo: " + recipient + "\n\n");
+            sb.append(data.get("body") + "\n");
+            System.out.print(sb);
             System.out.println("------------------------------------------------------");
         }
 
@@ -49,7 +43,7 @@ public class InboxUI extends ErrorUI {
     /**
      * Displays the messaging options available on the menu of an attendee type user.
      */
-    public void displayAttendingMenuOptions(){
+    public void displayAttendingMenuOptions() {
         displayBaseInboxOptions();
         System.out.println("2. Send Message.");
         displayExitOption(3);
@@ -58,7 +52,7 @@ public class InboxUI extends ErrorUI {
     /**
      * Displays the messaging options available on the menu of a speaker type user.
      */
-    public void displayTalkSpeakerMenuOptions(){
+    public void displayTalkSpeakerMenuOptions() {
         displayBaseInboxOptions();
         System.out.println("2. Reply to Attendee.");
         System.out.println("3. Message attendees of your talk(s).");
@@ -68,7 +62,7 @@ public class InboxUI extends ErrorUI {
     /**
      * Displays the messaging options available on the menu of an organizer type user.
      */
-    public void displaySchedulerMenuOptions(){
+    public void displaySchedulerMenuOptions() {
         displayBaseInboxOptions();
         System.out.println("2. Send Message.");
         System.out.println("3. Message all attendees.");
@@ -100,17 +94,14 @@ public class InboxUI extends ErrorUI {
     /**
      * Prompts the user to enter talk(s).
      */
-    public void talksPrompt() {System.out.println("Enter Talks: ");}
+    public void talksPrompt() { System.out.println("Enter Talks: "); }
 
-    private void displayBaseInboxOptions(){
-        System.out.println("What would you like to do?\n");
+    private void displayBaseInboxOptions() {
+        System.out.println("\nWhat would you like to do?");
         System.out.println("1. View Inbox.");
     }
 
-    private void displayExitOption(int index){
-        System.out.println(index + ". Return to main Menu");
+    private void displayExitOption(int index) {
+        System.out.println(index + ". Return to main menu");
     }
-
-
-
 }

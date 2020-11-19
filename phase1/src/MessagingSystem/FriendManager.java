@@ -15,33 +15,33 @@ public class FriendManager {
     private UserManager userManager;
     private Map<UUID, FriendsList> friendLists;
 
-    public FriendManager(UserManager userManager, Map<UUID, FriendsList> friendLists){
+    public FriendManager(UserManager userManager, Map<UUID, FriendsList> friendLists) {
         this.userManager = userManager;
         this.friendLists = friendLists;
     }
 
-    public FriendsList getFriendsList(User user){
+    public FriendsList getFriendsList(User user) {
         return friendLists.get(user.getUUID());
     }
 
-    public void addFriendsList(UUID userId, FriendsList listToAdd){
+    public void addFriendsList(UUID userId, FriendsList listToAdd) {
         friendLists.put(userId, listToAdd);
     }
 
-    public void addMultipleFriendsLists(Map<UUID, FriendsList> toAdd){
+    public void addMultipleFriendsLists(Map<UUID, FriendsList> toAdd) {
         friendLists.putAll(toAdd);
     }
 
-    public void sendFriendRequest(User sender, User recipient){
+    public void sendFriendRequest(User sender, User recipient) {
         friendLists.get(recipient.getUUID()).sendRequest(sender, recipient);
     }
 
-    public void removeFriend(User user, User toRemove){
+    public void removeFriend(User user, User toRemove) {
         friendLists.get(user.getUUID()).deleteFriend(user, toRemove);
     }
 
-    public User searchByUUID(User user, UUID toFind) throws Exception{
-        if (friendLists.get(user.getUUID()).getFriends(user).contains(toFind)){
+    public User searchByUUID(User user, UUID toFind) throws Exception {
+        if (friendLists.get(user.getUUID()).getFriends(user).contains(toFind)) {
             return userManager.getUserWithUUID(toFind);
         }
         else{
@@ -49,26 +49,26 @@ public class FriendManager {
         }
     }
 
-    public List<User> retrieveFriends(User user){
+    public List<User> retrieveFriends(User user) {
         List<UUID> friendUUIDs = friendLists.get(user.getUUID()).getFriends(user);
         List<User> friends = new ArrayList<>();
-        for (UUID id : friendUUIDs){
+        for (UUID id : friendUUIDs) {
             friends.add(userManager.getUserWithUUID(id));
         }
         return friends;
     }
 
-    public List<User> retrieveRequests(User user){
+    public List<User> retrieveRequests(User user) {
         FriendsList userFriendList = friendLists.get(user.getUUID());
         List<UUID> pendingIds = userFriendList.getPendingRequests(user);
         List<User> pending = new ArrayList<>();
-        for (UUID pendingId : pendingIds){
+        for (UUID pendingId : pendingIds) {
             pending.add(userManager.getUserWithUUID(pendingId));
         }
         return pending;
     }
 
-    public void acceptRequest(User user, UUID toAccept){
+    public void acceptRequest(User user, UUID toAccept) {
         FriendsList userFriendList = friendLists.get(user.getUUID());
         userFriendList.acceptRequest(userManager.getUserWithUUID(toAccept), user);
     }
