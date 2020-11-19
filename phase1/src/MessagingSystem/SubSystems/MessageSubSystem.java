@@ -62,7 +62,7 @@ public abstract class MessageSubSystem extends SubSystem {
 
     private List<UUID> askForUsernames(){
         String usernames = askForString("User(s)");
-        List<String> recipients = Arrays.asList(usernames.split(","));
+        String[] recipients = usernames.split(",");
         ArrayList<UUID> recipientUUIDs = new ArrayList<>();
         for (String recipient : recipients) {
             recipientUUIDs.add(userManager.getUUIDWithUsername(recipient));
