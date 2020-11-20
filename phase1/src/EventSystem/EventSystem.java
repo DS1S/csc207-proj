@@ -49,7 +49,7 @@ public class EventSystem implements IRunnable {
         }
 
         // By Default if user does not have access to effect events, just display to them all events at the conference.
-        if (subsystem == null){
+        if (subsystem == null) {
             eventUI.displayEvents(eventManager.retrieveAllEvents());
         }
         else subsystem.run();

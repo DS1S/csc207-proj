@@ -90,7 +90,7 @@ public class SpeakerMessageSubSystem extends MessageSubSystem {
 
         if(index != -1) {
             UUID replierUUID = (UUID)messagesData.get(index).get("sender");
-            if(userManager.hasPermission(replierUUID, PERMS.canBeMessaged)){
+            if(userManager.hasPermission(replierUUID, PERMS.canBeMessaged)) {
                 String message = processMessageBody();
                 messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), replierUUID, message);
                 inboxUI.sentPrompt();

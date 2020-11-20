@@ -51,6 +51,7 @@ public class SignupSystem implements IRunnable {
 
     private void create(String type) {
         String result = "?";
+
         while(!result.isEmpty()) {
             this.authUI.displaySigningUpPage();
 
@@ -70,6 +71,7 @@ public class SignupSystem implements IRunnable {
 
     private String askForString(String attribute) {
         String string = "";
+
         while (string.isEmpty()) {
             string = scanner.nextLine();
             if (string.isEmpty()) authUI.displayError(attribute + " is empty, please input a " + attribute + "!");
@@ -83,6 +85,7 @@ public class SignupSystem implements IRunnable {
      */
     public void run() {
         int option = 0;
+
         while(option <= 0 || option > possibleTypes.size()) {
             authUI.displayUserTypes(possibleTypes);
             try{

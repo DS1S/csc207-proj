@@ -45,8 +45,10 @@ public class LoginSystem implements IRunnable {
             authUI.displayLoginPage();
             authUI.displayUsernamePrompt();
             String username = scanner.nextLine();
+
             authUI.displayPasswordPrompt();
             String password = scanner.nextLine();
+
             response = loginUser(username, password);
             System.out.println(response);
             if (response.isEmpty()) authUI.displayError(response);

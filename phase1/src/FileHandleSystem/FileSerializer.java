@@ -32,7 +32,7 @@ public class FileSerializer<T> {
             OutputStream buffer = new BufferedOutputStream(file);
             ObjectOutput output = new ObjectOutputStream(buffer);
 
-            // serialize the object
+            // Serialize the object.
             output.writeObject(objects);
             output.close();
         }catch (IOException e) {

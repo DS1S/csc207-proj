@@ -112,7 +112,7 @@ public class ScheduleSystem extends EventSubSystem {
         eventUI.displayRescheduleStart();
         int index = processEvents(eventsData) - 1;
 
-        if(index != -1){
+        if(index != -1) {
             LocalTime startTime = timeProcessor.processInput();
 
             int duration = durationProcessor.processInput();
@@ -130,7 +130,7 @@ public class ScheduleSystem extends EventSubSystem {
     private void cancelEvent() {
         int index = processEvents(eventsData) - 1;
 
-        if(index != -1){
+        if(index != -1) {
             eventUI.displayCancelStart();
             eventManager.cancelEvent(index);
             eventUI.displayCancelSuccess();

@@ -12,20 +12,20 @@ public class UserFactory {
     /**
      * Makes a user of a specific type based on the passed in userType string and other details.
      *
-     * @param userType a string representing the type of this user.
-     * @param name the user's real-life name
-     * @param username is presumed to be unique and checked by the caller.
-     * @param password The user's password
-     * @return a User object if the userType is valid, null otherwise.
+     * @param userType A string representing the type of this user.
+     * @param name The user's full name.
+     * @param username The user's user name. Is presumed to be unique and checked by the caller.
+     * @param password The user's password.
+     * @return A User object if the userType is valid, null otherwise.
      */
     public User buildUser(String userType, String name, String username, String password) {
-        if (userType.equals("speaker")) {
-            return new Speaker(name, username, password);
-        } else if (userType.equals("attendee")) {
-            return new Attendee(name, username, password);
-        }
-        else if (userType.equals("organizer")) {
-            return new Organizer(name, username, password);
+        switch (userType) {
+            case "speaker":
+                return new Speaker(name, username, password);
+            case "attendee":
+                return new Attendee(name, username, password);
+            case "organizer":
+                return new Organizer(name, username, password);
         }
         return null;
     }
