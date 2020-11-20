@@ -2,7 +2,7 @@ package FileHandleSystem;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @param <T> the type to serialize.
  */
 public class FileSerializer<T> {
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructs a FileSerializer with type T and filepath to write/read
@@ -46,7 +46,7 @@ public class FileSerializer<T> {
      * @param object The objects to serialize and save.
      */
     public void saveObject(T object) {
-        saveCollection(new ArrayList<>(Arrays.asList(object)));
+        saveCollection(new ArrayList<>(Collections.singletonList(object)));
     }
 
     /**
@@ -67,7 +67,7 @@ public class FileSerializer<T> {
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
 
-            // deserialize the collection
+            // Deserialize the collection.
             List<T> objects = (List<T>)input.readObject();
             input.close();
             return objects;
