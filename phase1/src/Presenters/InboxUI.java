@@ -35,6 +35,7 @@ public class InboxUI extends ErrorUI {
             sb.append(data.get("body") + "\n");
             System.out.print(sb);
             System.out.println("------------------------------------------------------");
+            i += 1;
         }
 
         if (inboxData.size() == 0) { System.out.println("Your inbox is empty! :("); }
