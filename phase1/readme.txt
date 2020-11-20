@@ -32,7 +32,7 @@ Also, when it comes to entering rooms into the system for organizers, we only en
 of the event at the time of scheduling. We didn't see the need for having other than just primitives for rooms in the spec
 for phase1. We do maintain all the required checks in order for room, speaker, and capacity conflicts. We did notice however
 the change in Phase 2 that implies the need for room entities and a room manager/system. In hindsight it would've been
-better to implement those systems in phase1 for Phase 2, but they were unpredicted and as a result left out of our design.
+better to implement those systems in Phase 1 for Phase 2, but they were unpredicted and as a result left out of our design.
 We assumed that when scheduling the organizers would select capable rooms and their capacities which would correlate to
 the room size. For instance how in acorn, section sizes (prior to covid) were relative to the lecture hall capacity.
 
@@ -48,7 +48,7 @@ Without further ado, these are the following steps required to run our program:
             part of our actual "program" so please don't mark it as such. Its main is separated so we
             don't rebuild the data each time on run.
     4. Next, head to the Main Package in src, and run the main method for TechConferenceMain
-    5. As seen in the ModelCreator Class there are three default users u can select to login in with.
+    5. As seen in the ModelCreator Class there are three default users you can select to login in with.
             1. user1 pass1 - attendee
             2. user2 pass2 - speaker
             3. user3 pass3 - organizer
