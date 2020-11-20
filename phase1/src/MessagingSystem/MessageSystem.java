@@ -20,9 +20,9 @@ public class MessageSystem implements IRunnable {
 
     /**
      * Constructs a new messaging system with the information below.
-     * @param messageManager the message manager used by the system
-     * @param userManager the user managed used by the system
-     * @param eventManager the event manager used by the system
+     * @param messageManager The message manager used by the system.
+     * @param userManager The user managed used by the system.
+     * @param eventManager The event manager used by the system.
      */
     public MessageSystem(MessageManager messageManager, UserManager userManager,
                          EventManager eventManager) {
@@ -53,7 +53,7 @@ public class MessageSystem implements IRunnable {
 
     /**
      * An override of the built-in toString method.
-     * @return the string "Messaging"
+     * @return The string "Messaging".
      */
     @Override
     public String toString() {

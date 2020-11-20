@@ -13,16 +13,15 @@ import java.util.*;
  * A MessageSubSystem abstract class that is extended by other Message subsystems
  */
 public abstract class MessageSubSystem extends SubSystem {
-
     protected UserManager userManager;
     protected MessageManager messageManager;
     protected InboxUI inboxUI;
 
     /**
      * Creates an object of MessageSubSystem
-     * @param userManager a UserManager object that is already instantiated at the point this is instantiated
-     * @param messageManager a MessageManager object that is already instantiated at the point this is instantiated
-     * @param numOptions number of options in the menu
+     * @param userManager A UserManager object that is already instantiated at the point this is instantiated.
+     * @param messageManager A MessageManager object that is already instantiated at the point this is instantiated.
+     * @param numOptions The number of options in the menu.
      */
     public MessageSubSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
         super(numOptions, new OptionIndexProcessor(new Scanner(System.in), numOptions));

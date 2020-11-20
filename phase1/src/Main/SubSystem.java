@@ -10,7 +10,6 @@ import java.util.Scanner;
  * Represents an abstract Subsystem.
  */
 public abstract class SubSystem  implements IRunnable {
-
     private int numOptions;
     private IndexProcessor<Integer> indexProcessor;
     protected Scanner input = new Scanner(System.in);

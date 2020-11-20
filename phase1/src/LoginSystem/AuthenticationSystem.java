@@ -17,7 +17,7 @@ public class AuthenticationSystem implements IRunnable {
 
     /**
      * Creates a new AuthenticationSystem to use the input UserManager to do it's duties.
-     * @param userManager the UserManager to work with.
+     * @param userManager The UserManager to work with.
      */
     public AuthenticationSystem(UserManager userManager) {
         authUI = new AuthenticationUI();

@@ -12,12 +12,11 @@ import java.util.UUID;
  * An AdvancedMessageSubSystem that extends MessageSubSystem.
  */
 public class AdvancedMessageSubSystem extends MessageSubSystem {
-
     /**
      * Constructs a new instance of AdvancedMessageSubSystem using the given parameters.
-     * @param userManager the user manager used by the system
-     * @param messageManager the message manager used by the system
-     * @param numOptions the number of options available to the user on the menu
+     * @param userManager The user manager used by the system.
+     * @param messageManager The message manager used by the system.
+     * @param numOptions The number of options available to the user on the menu.
      */
     public AdvancedMessageSubSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
         super(userManager, messageManager, numOptions);

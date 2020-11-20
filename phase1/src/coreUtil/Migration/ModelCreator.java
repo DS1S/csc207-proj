@@ -10,7 +10,8 @@ import MessagingSystem.MessageManager;
  */
 public class ModelCreator {
     /**
-     * A helper class to reset the 'database' of the serialized UserManager, EventManager and MessageManager to a uniform state for testing purposes.
+     * A helper class to reset the 'database' of the serialized UserManager, EventManager and MessageManager to a
+     * uniform state for testing purposes.
      * @param args the command line arguments.
      */
     public static void main(String[] args) {

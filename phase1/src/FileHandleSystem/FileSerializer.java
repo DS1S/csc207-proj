@@ -12,7 +12,6 @@ import java.util.logging.Logger;
  * @param <T> the type to serialize.
  */
 public class FileSerializer<T> {
-
     private String filePath;
 
     /**
@@ -44,7 +43,7 @@ public class FileSerializer<T> {
 
     /**
      * Same as saveCollection, but does so for a single object.
-     * @param object the objects to serialize and save.
+     * @param object The objects to serialize and save.
      */
     public void saveObject(T object) {
         saveCollection(new ArrayList<>(Arrays.asList(object)));
@@ -52,15 +51,15 @@ public class FileSerializer<T> {
 
     /**
      * Deserialize and load an object from the filepath of type T.
-     * @return the loaded object
+     * @return The loaded object.
      */
     public T loadObject() {
         return loadCollection().get(0);
     }
 
     /**
-     * Same as loadObject, but does so with a collection
-     * @return the list of loaded objects.
+     * Same as loadObject, but does so with a collection.
+     * @return The list of loaded objects.
      */
     public List<T> loadCollection() {
         try {

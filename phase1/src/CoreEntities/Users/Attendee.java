@@ -4,7 +4,6 @@ package CoreEntities.Users;
  * Represents an Attendee type User.
  */
 public class Attendee extends User {
-
     /**
      * Creates an Attendee Object and set its permissions accordingly based on its type.
      * @param name Name of the organizer.

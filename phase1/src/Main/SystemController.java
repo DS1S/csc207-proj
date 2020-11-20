@@ -22,7 +22,6 @@ import java.util.Scanner;
  * Class which controls the interaction between all the subsystems.
  */
 public class SystemController implements IRunnable {
-
     private final Map<String, Object> managers = new HashMap<>();
     private final Map<Integer, IRunnable> subSystems = new HashMap<>();
     private final MainMenuUI mainMenu = new MainMenuUI();

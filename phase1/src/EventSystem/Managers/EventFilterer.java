@@ -18,10 +18,10 @@ class EventFilterer implements Serializable {
      *
      * The end points of the interval are not included.
      *
-     * @param events the original list of Events to be filtered
-     * @param start the start time of the interval
-     * @param end the end time of the interval
-     * @return a new list of Events that fall in the given time interval
+     * @param events The original list of Events to be filtered.
+     * @param start The start time of the interval.
+     * @param end The end time of the interval.
+     * @return A new list of Events that fall in the given time interval.
      */
     public List<Event> retrieveEventsByTimeInterval(List<Event> events, LocalTime start, LocalTime end) {
         List<Event> matchedEvents = new ArrayList<>();
@@ -36,9 +36,9 @@ class EventFilterer implements Serializable {
     /**
      * Returns a new list of the Events in a given list that are hosted by the specified speaker.
      *
-     * @param events the original list of Events to be filtered
-     * @param speaker the UUID speaker speaking at the Events
-     * @return a new list of Events that are hosted by the given speaker
+     * @param events The original list of Events to be filtered
+     * @param speaker The UUID of the Speaker speaking at the Events.
+     * @return A new list of Events that are hosted by the given Speaker.
      */
     public List<Event> retrieveEventsBySpeaker(List<Event> events, UUID speaker) {
         List<Event> matchedEvents = new ArrayList<>();
@@ -51,11 +51,11 @@ class EventFilterer implements Serializable {
     }
 
     /**
-     * Returns a new list of the Events in a given list that the specified attendee is attending.
+     * Returns a new list of the Events in a given list that the specified Attendee is attending.
      *
-     * @param events the original list of Events to be filtered
-     * @param attendee the UUID attendee
-     * @return a new list of Events that the given attendee is attending
+     * @param events The original list of Events to be filtered.
+     * @param attendee The UUID of the specified Attendee.
+     * @return A new list of Events that the given Attendee is attending.
      */
     public List<Event> retrieveEventsByAttendee(List<Event> events, UUID attendee) {
         List<Event> matchedEvents = new ArrayList<>();
@@ -73,9 +73,9 @@ class EventFilterer implements Serializable {
      * An attendee can sign up to an Event if they are not already signed up for the Event and the Event is
      * not at capacity.
      *
-     * @param events the original list of Events to be filtered
-     * @param attendee the UUID of the attendee
-     * @return a new list of Events that the given attendee can sign up to
+     * @param events The original list of Events to be filtered.
+     * @param attendee The UUID of the Attendee.
+     * @return A new list of Events that the given attendee can sign up to.
      */
     public List<Event> retrieveSignupAbleEvents(List<Event> events, UUID attendee) {
         List<Event> matchedEvents = new ArrayList<>();
@@ -91,10 +91,10 @@ class EventFilterer implements Serializable {
     /**
      * Returns a new list of the Events in a given list that have the specified title and speaker.
      *
-     * @param events the original list of Events to be filtered
-     * @param speaker the UUID of the speaker
-     * @param title the title of the Events
-     * @return List of events that match criteria of Speaker and title.
+     * @param events The original list of Events to be filtered.
+     * @param speaker The UUID of the specified Speaker.
+     * @param title The desired title of the event(s).
+     * @return A list of events that have both speaker and title.
      */
     public List<Event> retrieveEventsBySpeakerAndTitle(List<Event> events, UUID speaker, String title) {
         List<Event> matchedEvents = new ArrayList<>();

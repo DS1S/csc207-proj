@@ -14,7 +14,6 @@ import java.util.UUID;
  * A class for adding new Events to a schedule of events.
  */
 class EventScheduler implements Serializable {
-
     private final EventFilterer eventFilter;
 
     /** Constructs a new EventScheduler. */

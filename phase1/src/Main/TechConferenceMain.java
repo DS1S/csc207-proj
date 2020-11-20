@@ -5,8 +5,8 @@ package Main;
  */
 public class TechConferenceMain {
     /**
-     * Main method which creates a system controller and runs it
-     * @param args the command line arguments.
+     * Main method which creates a system controller and runs it.
+     * @param args The command line arguments.
      */
     public static void main(String[] args) {
         SystemController techConferenceController = new SystemController();

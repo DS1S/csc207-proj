@@ -14,7 +14,7 @@ public class LoginSystem implements IRunnable {
 
     /**
      * Constructs a LoginSystem to use the given UserManager.
-     * @param um the UserManager to work with.
+     * @param um The UserManager to work with.
      */
     public LoginSystem(UserManager um) {
         this.um = um;

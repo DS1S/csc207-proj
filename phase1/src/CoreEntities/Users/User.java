@@ -16,18 +16,17 @@ import java.lang.String;
  *      - User's Permissions
  */
 public abstract class User implements Serializable {
-
-    private UUID uuid;
-    private String name;
-    private String username;
+    private final UUID uuid;
+    private final String name;
+    private final String username;
     private String password;
     protected Map<PERMS, Boolean> permissions;
 
     /**
-     * Creates a User Object
-     * @param name the name of user being created
-     * @param username the username of the user being created
-     * @param password the password of the user being created
+     * Creates a User Object with a set name, user name, and password.
+     * @param name The name of the user being created.
+     * @param username The user name of the user being created.
+     * @param password The password of the user being created.
      */
     public User(String name, String username, String password) {
         this.uuid = UUID.randomUUID();
@@ -39,7 +38,7 @@ public abstract class User implements Serializable {
 
     /**
      * Checks the user's password against another password.
-     * @param password password to validate against user's password/
+     * @param password The password to validate against the user's password.
      * @return True if the password matches the user's, false otherwise.
      */
     public boolean checkPassword(String password) {
@@ -47,7 +46,7 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Returns the UUID of the user
+     * Gets this user's UUID.
      * @return The UUID of the user.
      */
     public UUID getUUID() {
@@ -55,15 +54,15 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Returns the Username of the user.
-     * @return The Username of the user.
+     * Gets this user's user name.
+     * @return The user name of the user.
      */
     public String getUsername() {
         return this.username;
     }
 
     /**
-     * Returns the full name of the user
+     * Gets this user's full name.
      * @return The full name of the user.
      */
     public String getName() { return this.name; }

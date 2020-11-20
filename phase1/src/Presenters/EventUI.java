@@ -14,7 +14,7 @@ public class EventUI {
 
     /**
      * Constructs a new EventUI that uses the given user manager.
-     * @param userManager the user manager used by the EventUI
+     * @param userManager The user manager used by the EventUI.
      */
     public EventUI(UserManager userManager) {
         this.userManager = userManager;
@@ -22,7 +22,7 @@ public class EventUI {
 
     /**
      * Displays a formatted list of events based on the given list of extracted event data.
-     * @param eventList the list of extracted event data for the events to be displayed
+     * @param eventList The list of extracted event data for the events to be displayed.
      */
     public void displayEvents(List<Map<String, Object>> eventList) {
         if (eventList.isEmpty()) {

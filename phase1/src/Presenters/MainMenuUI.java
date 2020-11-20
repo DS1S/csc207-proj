@@ -16,7 +16,7 @@ public class MainMenuUI {
 
     /**
      * Displays main menu options to the user.
-     * @param subsystems the subsystems that implement the actions the users can take
+     * @param subsystems The subsystems that implement the actions the users can take.
      */
     public void displayOptions(Map<Integer, IRunnable> subsystems) {
         for (int i = 1; i < subsystems.size(); i++) {
@@ -27,7 +27,7 @@ public class MainMenuUI {
 
     /**
      * Displays the main menu to the user.
-     * @param subsystems the subsystems that implement the actions the users can take
+     * @param subsystems The subsystems that implement the actions the users can take.
      */
     public void displayMainMenu(Map<Integer, IRunnable> subsystems) {
         System.out.println(" _________  ____  ____   ______ \n|  _   _  ||_   ||   _|.' ___  | \n|_/ | | " +
@@ -39,7 +39,7 @@ public class MainMenuUI {
 
     /**
      * Indicates to the user that their input was invalid and prompts them to enter a new input.
-     * @param subsystems the subsystems that implement the actions the users can take
+     * @param subsystems The subsystems that implement the actions the users can take.
      */
     public void displayInvalidInput(Map<Integer, IRunnable> subsystems) {
         System.out.flush();

@@ -44,7 +44,7 @@ public class AuthenticationUI {
 
     /**
      * Displays a error of the caller's choosing.
-     * @param e the error to discuss.
+     * @param e The error to discuss.
      */
     public void displayError(String e) { System.out.println(e); }
 
@@ -64,7 +64,7 @@ public class AuthenticationUI {
 
     /**
      * Displays a list of user types the user is allowed to create.
-     * @param types the list of types to show. Caller's responsibility to display valid types.
+     * @param types The list of types to show. Caller's responsibility to display valid types.
      */
     public void displayUserTypes(List<String> types) {
         System.out.println("Choose a user type to create: ");

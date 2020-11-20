@@ -9,13 +9,12 @@ import java.util.Scanner;
  * A class which asks a user for the number of minutes an event should last. Hardwired between 0 and 3 hours.
  */
 public class DurationIndexProcessor extends IndexProcessor<Integer> {
-
     EventUI eventUI;
 
     /**
-     * Creates a DurationIndexProcessor with a new Scanner and eventUI
-     * @param scanner the Scanner to use for input
-     * @param eventUI the UI in which to ask the prompt and display errors in.
+     * Creates a DurationIndexProcessor with a new Scanner and EventUI.
+     * @param scanner The Scanner to use for input.
+     * @param eventUI The UI in which to ask the prompt and display errors in.
      */
     public DurationIndexProcessor(Scanner scanner, EventUI eventUI) {
         super(scanner);
@@ -24,7 +23,7 @@ public class DurationIndexProcessor extends IndexProcessor<Integer> {
 
     /**
      * Asks the user for input until they return a number between 0 and 180.
-     * @return the valid number between 0 and 180 input by the user
+     * @return A valid number between 0 and 180 inputted by the user.
      */
     @Override
     public Integer processInput() {

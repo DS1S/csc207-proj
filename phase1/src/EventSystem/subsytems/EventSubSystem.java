@@ -17,7 +17,6 @@ import java.util.Scanner;
  * of Events.
  */
 public abstract class EventSubSystem extends SubSystem {
-
     protected final EventManager eventManager;
     protected final UserManager userManager;
     protected final EventUI eventUI;
@@ -25,10 +24,10 @@ public abstract class EventSubSystem extends SubSystem {
 
     /**
      * Constructs a new EventSubSystem with the given information.
-     * @param eventManager the EventManager that will be used by the EventSubSystem
-     * @param userManager the UserManager that will be used by the EventSubSystem
-     * @param eventUI the EventUI that will be used by the EventSubSystem
-     * @param numOptions the number of menu options given by the EventSubSystem
+     * @param eventManager The EventManager that will be used by the EventSubSystem.
+     * @param userManager The UserManager that will be used by the EventSubSystem.
+     * @param eventUI The EventUI that will be used by the EventSubSystem.
+     * @param numOptions The number of menu options given by the EventSubSystem.
      */
     public EventSubSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(numOptions, new OptionIndexProcessor(new Scanner(System.in), numOptions));
@@ -38,9 +37,14 @@ public abstract class EventSubSystem extends SubSystem {
         this.numOptions = numOptions;
     }
 
-    protected int processEvents(List<Map<String, Object>> eventsData){
+    /**
+     * Displays the given events using eventsData and takes in an integer input from the user.
+     * @param eventsData The data of the events to be displayed.
+     * @return A valid input from the user if there are events in eventsData. 0 otherwise.
+     */
+    protected int processEvents(List<Map<String, Object>> eventsData) {
         eventUI.displayEvents(eventsData);
-        if(!eventsData.isEmpty()){
+        if (!eventsData.isEmpty()) {
             IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsData.size());
             eventUI.displayEnterIndexEvent();
             return eventProcessor.processInput();

@@ -5,14 +5,13 @@ package FileHandleSystem;
  * @param <T>
  */
 public class TerminationWorker<T> extends Thread{
-
     private T manager;
     private String filePath;
 
     /**
      * Constructs a new TerminationWorker to save manager to filepath.
-     * @param manager the type to save.
-     * @param filePath the filepath to save to.
+     * @param manager The type to save.
+     * @param filePath The file path to save to.
      */
     public TerminationWorker(T manager, String filePath) {
         this.manager = manager;

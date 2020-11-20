@@ -11,7 +11,7 @@ public class MessageManager implements Serializable {
     private final Map<UUID, List<Message>> inboxes;
 
     /** Constructs a new message manager with the information below.
-     * @param userIDs a list of user UUIDs
+     * @param userIDs A list of user UUIDs.
      */
     public MessageManager(List<UUID> userIDs) {
         inboxes = new HashMap<>();
@@ -22,8 +22,8 @@ public class MessageManager implements Serializable {
 
     /**
      * Send a message to recipient by appending it to his list of messages.
-     * @param sender the UUID of the sender.
-     * @param recipient the UUID of the recipient
+     * @param sender The UUID of the sender.
+     * @param recipient The UUID of the recipient.
      * @param msg A string which is the body of the message.
      */
     public void sendMessageToIndividual(UUID sender, UUID recipient, String msg) {
@@ -34,7 +34,7 @@ public class MessageManager implements Serializable {
 
     /**
      * Convenience method to send a message to multiple people at once.
-     * @param sender the UUID of the sender.
+     * @param sender The UUID of the sender.
      * @param recipients A list of UUIDs of the recipients
      * @param msg A string which is the body of the message.
      */
@@ -46,8 +46,8 @@ public class MessageManager implements Serializable {
 
     /**
      * Returns true if a user has an inbox in inboxes, false otherwise.
-     * @param userID UUID of the user
-     * @return true if user has an inbox, else false
+     * @param userID The UUID of the user.
+     * @return True if user has an inbox, false otherwise.
      */
     public boolean userHasInbox(UUID userID) {
         return inboxes.containsKey(userID);
@@ -55,7 +55,7 @@ public class MessageManager implements Serializable {
 
     /**
      * Maps the given UUID to an empty list in inboxes.
-     * @param userID UUID of the user
+     * @param userID The UUID of the user.
      */
     public void addBlankInbox(UUID userID) {
         inboxes.put(userID, new ArrayList<>());

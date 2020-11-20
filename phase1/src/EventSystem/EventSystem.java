@@ -16,14 +16,14 @@ import static CoreEntities.Users.PERMS.*;
  * An EventSystem that allows the user to perform actions related to the sign up and scheduling of Events.
  */
 public class EventSystem implements IRunnable {
-    private EventManager eventManager;
-    private UserManager userManager;
-    private EventUI eventUI;
+    private final EventManager eventManager;
+    private final UserManager userManager;
+    private final EventUI eventUI;
 
     /**
      * Constructs a new EventSystem with the given information.
-     * @param eventManager the EventManager that will be used by the EventSystem
-     * @param userManager the UserManager that will be used by the EventSystem
+     * @param eventManager The EventManager that will be used by the EventSystem.
+     * @param userManager The UserManager that will be used by the EventSystem.
      */
     public EventSystem(EventManager eventManager, UserManager userManager) {
         this.eventManager = eventManager;
@@ -48,7 +48,7 @@ public class EventSystem implements IRunnable {
             subsystem = new EventViewerSystem(eventManager, userManager, eventUI, 3);
         }
 
-        //By Default if user does not have access to effect events, just display to them all events at the conference.
+        // By Default if user does not have access to effect events, just display to them all events at the conference.
         if (subsystem == null){
             eventUI.displayEvents(eventManager.retrieveAllEvents());
         }

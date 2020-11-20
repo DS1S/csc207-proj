@@ -11,7 +11,7 @@ public class InboxUI extends ErrorUI {
 
     /**
      * Constructs a new instance of InboxUI using the given parameters.
-     * @param userManager the user manager used by the UI
+     * @param userManager The user manager used by the UI.
      */
     public InboxUI(UserManager userManager) {
         this.userManager = userManager;
@@ -20,7 +20,7 @@ public class InboxUI extends ErrorUI {
     /**
      * Displays the user's inbox and a message indicating that their inbox is empty if their inbox is
      * empty.
-     * @param inboxData the user's inbox data
+     * @param inboxData The user's inbox data.
      */
     public void displayInbox(List<Map<String, Object>> inboxData) {
         int i = 1;

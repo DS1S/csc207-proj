@@ -4,7 +4,6 @@ package Presenters;
  * A class responsible for options displayed to the user.
  */
 public class OptionUI {
-
     /**
      * Displays a message prompting the user to select an option.
      */

@@ -9,7 +9,6 @@ import java.time.LocalTime;
  * and duration.
  */
 public class Event implements Serializable {
-
     private final int capacity;
     private final List<UUID> attendees;
     private final String room;
@@ -19,13 +18,13 @@ public class Event implements Serializable {
     private int duration;
 
     /**
-     * Constructs a new Event with the given information.
-     * @param capacity the capacity
-     * @param room the room
-     * @param startTime the start time
-     * @param title the title
-     * @param speaker the UUID of the speaker
-     * @param duration the duration in minutes
+     * Constructs a new Event with a capacity, room, start time, its title, its speaker, and duration.
+     * @param capacity The number of people this event can have.
+     * @param room The room in which the event is taking place.
+     * @param startTime The starting time of the event.
+     * @param title The event's title.
+     * @param speaker The UUID of the speaker speaking at this event.
+     * @param duration The duration of the event, in minutes.
      */
     public Event(int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
         this.capacity = capacity;
@@ -39,81 +38,81 @@ public class Event implements Serializable {
 
     /**
      * Returns true iff the Event is at capacity.
-     * @return whether the Event is at capacity
+     * @return Whether the Event is at capacity.
      */
     public boolean atCapacity() { return this.attendees.size() == capacity; }
 
     /**
-     * Returns the Event's list of attendees.
-     * @return the attendees of the event
+     * Gets this Event's list of Attendees.
+     * @return The attendees of the event.
      */
     public List<UUID> getAttendees() { return this.attendees; }
 
     /**
-     * Add an attendee to the Event's list of attendee.
-     * @param attendee the attendee to be added
+     * Add an attendee to the Event's list of Attendees.
+     * @param attendee The attendee to be added.
      */
     public void addAttendee(UUID attendee) { this.attendees.add(attendee); }
 
     /**
-     * Remove an attendee from the Event's list of attendee.
-     * @param attendee the attendee to be removed
+     * Remove an attendee from the Event's list of Attendees.
+     * @param attendee The attendee to be removed.
      */
     public void removeAttendee(UUID attendee) { this.attendees.remove(attendee); }
 
     /**
      * Returns true iff the attendee is attending the Event.
-     * @return whether the attendee is attending the Event
+     * @return Whether the attendee is attending the Event.
      */
     public boolean checkAttendee(UUID attendee) { return this.attendees.contains(attendee); }
 
     /**
-     * Returns this Event's room.
-     * @return the room
+     * Gets this Event's room.
+     * @return This Event's room.
      */
     public String getRoom() { return this.room; }
 
     /**
-     * Returns this Event's start time.
-     * @return the start time
+     * Gets this Event's start time.
+     * @return The start time of the Event.
      */
     public LocalTime getStartTime() { return this.startTime; }
 
     /**
      * Sets this Event's start time to time.
-     * @param time the new start time
+     * @param time The new start time.
      */
     public void setStartTime(LocalTime time) { this.startTime = time; }
 
     /**
-     * Returns this Event's end time.
-     * @return the end time
+     * Gets this Event's end time.
+     * @return The ending time of the event.
      */
     public LocalTime getEndTime() { return startTime.plusMinutes(duration); }
 
     /**
-     * Returns this Event's title.
-     * @return the title
+     * Gets this Event's title.
+     * @return The title of the Event.
      */
     public String getTitle() { return this.title; }
 
     /**
-     * Returns the UUID of this Event's speaker.
-     * @return the speaker
+     * Gets the UUID of this Event's speaker.
+     * @return The speaker of this Event.
      */
     public UUID getSpeaker() { return this.speaker; }
 
     /**
      * Sets this Event's duration to duration.
-     * @param duration the new duration
+     * @param duration The new duration of this Event.
      */
     public void setDuration(int duration) { this.duration = duration; }
 
     /**
-     * Returns the details about this event as a map.
+     * Returns the details about this Event as a map.
      *
-     * The map maps the name of each attribute to the attribute.
-     * @return the details about this event as a map
+     * The map maps the name of each attribute to the attribute itself.
+     * @return The details about this Event as a map.
      */
     public Map<String, Object> extractData() {
         Map<String, Object> data = new HashMap<>();

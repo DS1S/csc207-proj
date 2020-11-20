@@ -19,8 +19,8 @@ public class SignupSystem implements IRunnable {
 
     /**
      * Constructs a SignupSystem using the given UserManager and for the type.
-     * @param um the UserManager to work with.
-     * @param type the type this Signup system is allowed to use.
+     * @param um The UserManager to work with.
+     * @param type The type this Signup system is allowed to use.
      */
     public SignupSystem(UserManager um, String type) {
         this.um = um;
@@ -31,8 +31,8 @@ public class SignupSystem implements IRunnable {
 
     /**
      * Same as the previous constructor, but allows a list of types.
-     * @param um same as before.
-     * @param possibleTypes the list of allowed types.
+     * @param um The UserManager to work with.
+     * @param possibleTypes The list of allowed types.
      */
     public SignupSystem(UserManager um, List<String> possibleTypes) {
         this.um = um;
@@ -82,7 +82,6 @@ public class SignupSystem implements IRunnable {
      * Also runs recursively until valid input.
      */
     public void run() {
-
         int option = 0;
         while(option <= 0 || option > possibleTypes.size()) {
             authUI.displayUserTypes(possibleTypes);

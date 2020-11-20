@@ -118,7 +118,7 @@ public class UserManager implements Serializable {
 
     /**
      * Get the username of a user with a UUID
-     * @param userUUID The UUID of the User
+     * @param userUUID The UUID of the User.
      * @return Return the Username of the User.
      */
     public String getUsernameWithUUID(UUID userUUID) {
@@ -127,7 +127,7 @@ public class UserManager implements Serializable {
 
     /**
      * Get the name of a user with a UUID
-     * @param userUUID The UUID of the User
+     * @param userUUID The UUID of the User.
      * @return Return the name of the User.
      */
     public String getNameWithUUID(UUID userUUID) {

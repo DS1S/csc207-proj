@@ -11,18 +11,17 @@ import java.util.*;
 /**
  * A subsystem of the EventSystem that allows the user to perform actions related to the scheduling of Events.
  */
-public class ScheduleSystem extends EventSubSystem{
-
+public class ScheduleSystem extends EventSubSystem {
     private List<Map<String, Object>> eventsData;
 
     /**
      * Constructs a new ScheduleSystem with the given information.
-     * @param eventManager the EventManager that will be used by the ScheduleSystem
-     * @param userManager the UserManager that will be used by the ScheduleSystem
-     * @param eventUI the EventUI that will be used by the ScheduleSystem
-     * @param numOptions the number of menu options given by the ScheduleSystem
+     * @param eventManager The EventManager that will be used by the ScheduleSystem.
+     * @param userManager The UserManager that will be used by the ScheduleSystem.
+     * @param eventUI The EventUI that will be used by the ScheduleSystem.
+     * @param numOptions The number of menu options given by the ScheduleSystem.
      */
-    public ScheduleSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions){
+    public ScheduleSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(eventManager, userManager, eventUI, numOptions);
         this.eventsData = eventManager.retrieveAllEvents();
     }
@@ -108,7 +107,6 @@ public class ScheduleSystem extends EventSubSystem{
     }
 
     private void rescheduleEvent() {
-
         IndexProcessor<LocalTime> timeProcessor = new TimeIndexProcessor(input, eventUI);
         IndexProcessor<Integer> durationProcessor = new DurationIndexProcessor(input, eventUI);
         eventUI.displayRescheduleStart();

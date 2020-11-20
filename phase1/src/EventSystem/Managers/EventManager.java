@@ -28,7 +28,7 @@ public class EventManager implements Serializable {
 
     /**
      * Returns the list of extracted data of all the Events in the conference's main schedule.
-     * @return the list of extracted data of all the Events in the conference's main schedule
+     * @return The list of extracted data of all the Events in the conference's main schedule.
      */
     public List<Map<String, Object>> retrieveAllEvents() {
         List<Map<String, Object>> dataList = new ArrayList<>();
@@ -42,8 +42,8 @@ public class EventManager implements Serializable {
      * Returns the list of extracted data of the Events in the conference's main schedule that are
      * hosted by the given speaker.
      *
-     * @param speaker the UUID of the speaker speaking at the Events
-     * @return the list of extracted data of Events that are hosted by the given speaker
+     * @param speaker The UUID of the speaker speaking at the Events.
+     * @return The list of extracted data of Events that are hosted by the given speaker.
      */
     public List<Map<String, Object>> retrieveEventsBySpeaker(UUID speaker) {
         List<Map<String, Object>> dataList = new ArrayList<>();
@@ -57,8 +57,8 @@ public class EventManager implements Serializable {
      * Returns the list of extracted data of the Events in the conference's main schedule that the given
      * attendee is attending.
      *
-     * @param attendee the UUID of the attendee
-     * @return the list of extracted data of Events that the given attendee is attending
+     * @param attendee The UUID of the specified Attendee.
+     * @return The list of extracted data of Events that the given Attendee is attending.
      */
     public List<Map<String, Object>> retrieveEventsByAttendee(UUID attendee) {
         List<Map<String, Object>> dataList = new ArrayList<>();
@@ -72,8 +72,8 @@ public class EventManager implements Serializable {
      * Returns the list of extracted data of the Events in the conference's main schedule that the given
      * attendee can sign up to.
      *
-     * @param attendee the UUID of the attendee
-     * @return the list of extracted data of Events that the given attendee can sign up to
+     * @param attendee The UUID of the specified Attendee.
+     * @return The list of extracted data of Events that the given Attendee can sign up for.
      */
     public List<Map<String, Object>> retrieveSignupAbleEvents(UUID attendee) {
         List<Map<String, Object>> dataList = new ArrayList<>();
@@ -89,8 +89,8 @@ public class EventManager implements Serializable {
      * Note that this index is relative to the list of the events in the conference's main schedule that
      * the given attendee can sign up to.
      *
-     * @param attendee the UUID of the attendee to be signed up
-     * @param index the index of the Event, relative to the list of the events that the given attendee can sign up to
+     * @param attendee The UUID of the specified Attendee to be signed up.
+     * @param index The index of the Event, relative to the list of the events that the given Attendee can sign up for.
      */
     public void registerAttendee(UUID attendee, int index) {
         eventSignUp.registerAttendee(attendee, mainSchedule, index);
@@ -102,8 +102,8 @@ public class EventManager implements Serializable {
      * Note that this index is relative to the list of the events in the conference's main schedule that
      * the given attendee is signed up for.
      *
-     * @param attendee the UUID of the attendee to be removed
-     * @param index the index of the Event, relative to the list of the events that the given attendee is signed up for
+     * @param attendee The UUID of the Attendee to be removed.
+     * @param index The index of the Event, relative to the list of the events that the given Attendee is signed up for.
      */
     public void removeAttendee(UUID attendee, int index) {
         eventSignUp.removeAttendee(attendee, mainSchedule, index);
@@ -115,13 +115,13 @@ public class EventManager implements Serializable {
      *
      * Adds the new Event to the conference's main schedule iff there are no conflicting Events.
      *
-     * @param capacity the capacity of the new Event
-     * @param room the room of the new Event
-     * @param startTime the start time of the new Event
-     * @param title the title of the new Event
-     * @param speaker the UUID of the speaker of the new Event
-     * @param duration the duration of the new Event in minutes
-     * @return the list of extracted data of Events that conflict with the scheduling of the new Event
+     * @param capacity The capacity of the new Event.
+     * @param room The room in which the new Event is taking place.
+     * @param startTime The start time of the new Event.
+     * @param title The title of the new Event.
+     * @param speaker The UUID of the Speaker of the new Event.
+     * @param duration The duration of the new Event, in minutes.
+     * @return The list of extracted data of Events that conflict with the scheduling of the new Event.
      */
     public List<Map<String, Object>> scheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker,
                                      int duration) {
@@ -137,7 +137,7 @@ public class EventManager implements Serializable {
     /**
      * Removes the Event at the given index from the conference's main schedule.
      *
-     * @param index the index of the Event to be removed, relative to the main schedule
+     * @param index the index of the Event to be removed, relative to the main schedule.
      */
     public void cancelEvent(int index) {
         eventScheduler.cancelEvent(mainSchedule, index);
@@ -148,12 +148,12 @@ public class EventManager implements Serializable {
      * the rescheduling of the at the specified index.
      *
      * Reschedules the Event so that it has start time newStartTime and duration newDuration iff there are no
-     * conflicting Events
+     * conflicting Events.
      *
-     * @param index the index of the Event to be reschedules
-     * @param newStartTime the new start time for the Event
-     * @param newDuration the new duration of the Event in minutes
-     * @return the string representation of a list of Events that conflict with the rescheduling of the Event
+     * @param index The index of the Event to be rescheduled.
+     * @param newStartTime The new start time for this Event.
+     * @param newDuration The new duration of this Event, in minutes.
+     * @return The string representation of a list of Events that conflict with the rescheduling of the Event.
      */
     public List<Map<String, Object>> rescheduleEvent(int index, LocalTime newStartTime,
                                        int newDuration) {
@@ -167,9 +167,9 @@ public class EventManager implements Serializable {
     /**
      * Returns the list of all UUIDs of attendees attending a specific event.
      *
-     * @param speakerUUID UUID of speaker
+     * @param speakerUUID The UUID of the specified Speaker.
      * @param title title of a talk
-     * @return A list of attendee UUID for a specific event with param title and hosted by speaker.
+     * @return A list of attendee UUIDs for a specific event with param title and hosted by the specified Speaker.
      */
     public List<UUID> retrieveAttendees(String title, UUID speakerUUID) {
         List<Event> events = eventFilterer.retrieveEventsBySpeakerAndTitle(mainSchedule, speakerUUID, title);
