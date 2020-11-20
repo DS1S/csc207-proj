@@ -1,5 +1,6 @@
 package MessagingSystem.SubSystems;
 
+import CoreEntities.Users.PERMS;
 import EventSystem.Managers.EventManager;
 import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
@@ -90,9 +91,14 @@ public class SpeakerMessageSubSystem extends MessageSubSystem {
 
         if(index != -1) {
             UUID replierUUID = (UUID)messagesData.get(index).get("sender");
-            String message = processMessageBody();
-            messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), replierUUID, message);
-            inboxUI.sentPrompt();
+            if(userManager.hasPermission(replierUUID, PERMS.canBeMessaged)){
+                String message = processMessageBody();
+                messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), replierUUID, message);
+                inboxUI.sentPrompt();
+            }
+            else{
+                inboxUI.displayError("That User cannot be messaged.");
+            }
         }
     }
 
