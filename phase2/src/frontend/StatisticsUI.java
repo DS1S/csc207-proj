@@ -38,6 +38,15 @@ public class StatisticsUI {
         System.out.println("This month: " + monthlyLogins);
     }
 
+    public void displaySpeakerStats(List<String> speakerNames) {
+        int i = 1;
+
+        System.out.println("--------------------Top 5 Speakers--------------------");
+        for (String speaker: speakerNames) {
+            System.out.println("#" + i + ": " + speaker);
+        }
+    }
+
     public void displayStatisticsOptions() {
         System.out.println("\nWhat statistics would you like to see?");
         System.out.println("1. Display event statistics");
