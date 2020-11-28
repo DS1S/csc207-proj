@@ -1,5 +1,7 @@
 package backend.systems.events.managers;
 
+import backend.entities.Event;
+
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;

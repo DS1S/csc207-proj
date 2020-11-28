@@ -5,7 +5,7 @@ import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import utility.IRunnable;
 import frontend.InboxUI;
-import static backend.systems.usermangement.managers.users.PERMS.*;
+import static backend.entities.users.PERMS.*;
 
 /**
  * A messaging system with a message manager, a user manager, an event manager, and an inbox UI.

@@ -8,7 +8,7 @@ import utility.IRunnable;
 
 import frontend.EventUI;
 
-import static backend.systems.usermangement.managers.users.PERMS.*;
+import static backend.entities.users.PERMS.*;
 
 /**
  * An EventSystem that allows the user to perform actions related to the sign up and scheduling of Events.

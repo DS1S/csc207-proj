@@ -1,8 +1,7 @@
 package backend.systems.usermangement.managers;
 
-import backend.systems.usermangement.managers.users.PERMS;
-import backend.systems.usermangement.managers.users.User;
-import backend.systems.usermangement.managers.users.UserFactory;
+import backend.entities.users.PERMS;
+import backend.entities.users.User;
 
 import java.io.Serializable;
 import java.util.HashMap;
