@@ -5,6 +5,10 @@ import backend.entities.users.Organizer;
 import backend.entities.users.Speaker;
 import backend.entities.users.User;
 
+import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 /**
  * A Factory class to manufacture a User based on their type.
  */
@@ -21,11 +25,11 @@ public class UserFactory {
     public User buildUser(String userType, String name, String username, String password) {
         switch (userType) {
             case "speaker":
-                return new Speaker(name, username, password);
+                return new Speaker(name, username, password, LocalDateTime.now());
             case "attendee":
-                return new Attendee(name, username, password);
+                return new Attendee(name, username, password, LocalDateTime.now());
             case "organizer":
-                return new Organizer(name, username, password);
+                return new Organizer(name, username, password, LocalDateTime.now());
         }
         return null;
     }
