@@ -27,8 +27,8 @@ public class MessageManager implements Serializable {
      * @param recipient The UUID of the recipient.
      * @param msg A string which is the body of the message.
      */
-    public void sendMessageToIndividual(UUID sender, UUID recipient, String msg) {
-        Message m = new Message(UUID.randomUUID(), sender, recipient, msg, LocalTime.now());
+    public void sendMessageToIndividual(UUID sender, UUID recipient, String msg, String title) {
+        Message m = new Message(UUID.randomUUID(), sender, recipient, msg, LocalTime.now(), title);
         inboxes.get(recipient).add(m);
     }
 
@@ -39,9 +39,9 @@ public class MessageManager implements Serializable {
      * @param recipients A list of UUIDs of the recipients
      * @param msg A string which is the body of the message.
      */
-    public void sendMessageToMultiple(UUID sender, List<UUID> recipients, String msg) {
+    public void sendMessageToMultiple(UUID sender, List<UUID> recipients, String msg, String title) {
         for (UUID recipient : recipients) {
-            sendMessageToIndividual(sender, recipient, msg);
+            sendMessageToIndividual(sender, recipient, msg, title);
         }
     }
 

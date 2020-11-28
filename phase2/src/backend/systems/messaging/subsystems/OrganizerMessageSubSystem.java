@@ -50,15 +50,17 @@ class OrganizerMessageSubSystem extends MessageSubSystem {
 
     private void processMessageAllAttendees() {
         String message = processMessageBody();
-        messageUserWithPerm(message, PERMS.canSpeakAtTalk);
+        String title = processTitle();
+        messageUserWithPerm(message, PERMS.canSpeakAtTalk, title);
     }
 
     private void processMessageAllSpeakers() {
         String message = processMessageBody();
-        messageUserWithPerm(message, PERMS.canSignUpEvent);
+        String title = processTitle();
+        messageUserWithPerm(message, PERMS.canSignUpEvent, title);
     }
 
-    private void messageUserWithPerm(String message, PERMS perm) {
+    private void messageUserWithPerm(String message, PERMS perm, String title) {
         List<UUID> userUUIDs = userManager.getUUIDs();
         List<UUID> targetUUIDs = new ArrayList<>();
         for (UUID id : userUUIDs) {
@@ -66,7 +68,7 @@ class OrganizerMessageSubSystem extends MessageSubSystem {
                 targetUUIDs.add(id);
             }
         }
-        messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), targetUUIDs, message);
+        messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), targetUUIDs, message, title);
         inboxUI.sentPrompt();
     }
 }

@@ -55,6 +55,15 @@ public abstract class MessageSubSystem extends SubSystem {
         return askForString("Message");
     }
 
+    /**
+     * Processes a title when the uses composes a message.
+     * @return The user's input.
+     */
+    protected String processTitle() {
+        inboxUI.displayTitlePrompt();
+        return askForString("Title");
+    }
+
     private void processSendMessage() {
         List<UUID> recipients;
         do {
@@ -63,7 +72,8 @@ public abstract class MessageSubSystem extends SubSystem {
         } while (recipients.contains(null));
 
         String message = processMessageBody();
-        messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), recipients, message);
+        String title = processTitle();
+        messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), recipients, message, title);
         inboxUI.sentPrompt();
     }
 
