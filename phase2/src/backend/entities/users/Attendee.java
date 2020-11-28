@@ -1,9 +1,9 @@
-package backend.systems.usermangement.managers.users;
+package backend.entities.users;
 
 /**
  * Represents an Attendee type User.
  */
-class Attendee extends User {
+public class Attendee extends User {
     /**
      * Creates an Attendee Object and set its permissions accordingly based on its type.
      * @param name Name of the organizer.

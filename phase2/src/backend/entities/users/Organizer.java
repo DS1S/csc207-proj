@@ -1,9 +1,9 @@
-package backend.systems.usermangement.managers.users;
+package backend.entities.users;
 
 /**
  * Represents an organizer type user.
  */
-class Organizer extends User {
+public class Organizer extends User {
     /**
      * Creates an Organizer Object and set its permissions accordingly based on its type.
      * @param name Name of the organizer.

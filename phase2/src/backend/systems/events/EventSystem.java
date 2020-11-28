@@ -8,7 +8,7 @@ import utility.IRunnable;
 
 import frontend.EventUI;
 
-import static backend.entities.users.PERMS.*;
+import backend.entities.users.PERMS;
 
 /**
  * An EventSystem that allows the user to perform actions related to the sign up and scheduling of Events.
@@ -42,15 +42,15 @@ public class EventSystem implements IRunnable {
 
         EventSubSystem subsystem = null;
         EventSubSytemFactory subSystemFactory = new EventSubSytemFactory();
-        if (userManager.loggedInHasPermission(canSchedule)) {
+        if (userManager.loggedInHasPermission(PERMS.canSchedule)) {
             subsystem = subSystemFactory.createEventSubSystem("scheduler", eventManager, userManager,
                     eventUI, 5);
         }
-        else if (userManager.loggedInHasPermission(canSignUpEvent)) {
+        else if (userManager.loggedInHasPermission(PERMS.canSignUpEvent)) {
             subsystem = subSystemFactory.createEventSubSystem("signup", eventManager, userManager,
                     eventUI, 5);
         }
-        else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
+        else if (userManager.loggedInHasPermission(PERMS.canSpeakAtTalk)) {
             subsystem = subSystemFactory.createEventSubSystem("viewer", eventManager,
                     userManager, eventUI, 3);
         }

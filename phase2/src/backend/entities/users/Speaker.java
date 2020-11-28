@@ -1,9 +1,9 @@
-package backend.systems.usermangement.managers.users;
+package backend.entities.users;
 
 /**
  *  Represents a speaker type user.
  */
-class Speaker extends User {
+public class Speaker extends User {
     /**
      * Creates a Speaker object and set its permissions accordingly based on its type.
      * @param name Name of the speaker.

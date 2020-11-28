@@ -1,6 +1,6 @@
 package backend.app;
 
-import backend.systems.usermangement.managers.users.PERMS;
+import backend.entities.users.PERMS;
 import utility.filehandling.FileSerializer;
 import utility.filehandling.TerminationWorker;
 import backend.systems.usermangement.AuthenticationSystem;

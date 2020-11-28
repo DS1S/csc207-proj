@@ -1,4 +1,4 @@
-package backend.systems.usermangement.managers.users;
+package backend.entities.users;
 
 import java.io.Serializable;
 import java.util.HashMap;
