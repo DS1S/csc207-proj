@@ -38,6 +38,22 @@ public class EventManager implements Serializable {
     }
 
     /**
+     * Returns the list of extracted data of all the Events in the conference's main schedule that
+     * are in between start and end time on all days
+     * @param start the start time of Events to filer with
+     * @param end the end time of Events to filer with
+     * @return the list of extracted data of all the Events in the conference's main schedule that
+     * are in between start and end time on all days
+     */
+    public List<Map<String, Object>> retrieveEventsByTimeInterval(LocalTime start, LocalTime end) {
+        List<Map<String, Object>> dataList = new ArrayList<>();
+        for (Event event: eventFilterer.retrieveEventsByTimeInterval(mainSchedule, start, end)) {
+            dataList.add(event.extractData());
+        }
+        return dataList;
+    }
+
+    /**
      * Returns the list of extracted data of the Events in the conference's main schedule that are
      * hosted by the given speaker.
      *

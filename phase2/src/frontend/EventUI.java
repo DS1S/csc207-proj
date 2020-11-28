@@ -82,6 +82,16 @@ public class EventUI extends ErrorUI {
     }
 
     /**
+     *  Displays a list of options pertaining to displaying event categories for printing.
+     */
+    public void displayCategoryRetrieverOptions() {
+        System.out.println("\nWhat would you like to do?");
+        System.out.println("1. View all events for a day.");
+        System.out.println("2. View all events by a speaker.");
+        System.out.println("3. View all the events you have signed up for.");
+    }
+
+    /**
      * Displays a message informing the user that they have successfully registered for an event.
      */
     public void displaySignupSuccess() {
