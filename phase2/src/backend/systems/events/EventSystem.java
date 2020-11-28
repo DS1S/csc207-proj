@@ -35,11 +35,7 @@ public class EventSystem implements IRunnable {
      */
     @Override
     public void run() {
-
-        /**TODO: Change it so EventSystem is actually running subsystems in parallel; otherwise it
-         * is an over gloverified facade at this point.
-        **/
-
+        // TODO: Change it so EventSystem is actually running subsystems in parallel; otherwise it is an over glorified facade at this point.
         EventSubSystem subsystem = null;
         EventSubSytemFactory subSystemFactory = new EventSubSytemFactory();
         if (userManager.loggedInHasPermission(PERMS.canSchedule)) {

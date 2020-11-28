@@ -1,11 +1,11 @@
 package backend.entities.users;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.lang.String;
-
 
 /**
  *  Represents a user entity, contains basic information about a user including:
@@ -21,6 +21,7 @@ public abstract class User implements Serializable {
     private final String username;
     private String password;
     protected Map<PERMS, Boolean> permissions;
+    public LocalDateTime lastLoggedIn;
 
     /**
      * Creates a User Object with a set name, user name, and password.
@@ -28,12 +29,13 @@ public abstract class User implements Serializable {
      * @param username The user name of the user being created.
      * @param password The password of the user being created.
      */
-    public User(String name, String username, String password) {
+    public User(String name, String username, String password, LocalDateTime registeredTime) {
         this.uuid = UUID.randomUUID();
         this.name = name;
         this.username = username;
         this.password = password;
         permissions = new HashMap<>();
+        this.lastLoggedIn = registeredTime;
     }
 
     /**
@@ -81,4 +83,8 @@ public abstract class User implements Serializable {
      */
     protected abstract void setPermissions();
 
+    /**
+     * Sets a new last logged in date for the user.
+     */
+    protected void setLastLoggedIn(LocalDateTime lastLoggedIn) { this.lastLoggedIn = lastLoggedIn; }
 }

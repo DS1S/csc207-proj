@@ -1,5 +1,8 @@
 package backend.entities.users;
 
+
+import java.time.LocalDateTime;
+
 /**
  *  Represents a speaker type user.
  */
@@ -10,8 +13,8 @@ public class Speaker extends User {
      * @param username Username of the speaker.
      * @param password Password of the speaker.
      */
-    public Speaker(String name, String username, String password) {
-        super(name, username, password);
+    public Speaker(String name, String username, String password, LocalDateTime lastLoggedIn) {
+        super(name, username, password, lastLoggedIn);
         setPermissions();
     }
 
@@ -26,5 +29,6 @@ public class Speaker extends User {
         permissions.put(PERMS.canSignUpEvent, false);
         permissions.put(PERMS.canSignUpUser, false);
         permissions.put(PERMS.canSpeakAtTalk, true);
+        permissions.put(PERMS.canViewStats, false);
     }
 }

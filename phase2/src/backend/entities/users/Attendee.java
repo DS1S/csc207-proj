@@ -1,5 +1,7 @@
 package backend.entities.users;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents an Attendee type User.
  */
@@ -10,8 +12,8 @@ public class Attendee extends User {
      * @param username Username of the organizer.
      * @param password Password of the organizer.
      */
-    public Attendee(String name, String username, String password) {
-        super(name, username, password);
+    public Attendee(String name, String username, String password, LocalDateTime lastLoggedIn) {
+        super(name, username, password, lastLoggedIn);
         setPermissions();
     }
 
@@ -26,5 +28,6 @@ public class Attendee extends User {
         permissions.put(PERMS.canSignUpEvent, true);
         permissions.put(PERMS.canSignUpUser, false);
         permissions.put(PERMS.canSpeakAtTalk, false);
+        permissions.put(PERMS.canViewStats, false);
     }
 }

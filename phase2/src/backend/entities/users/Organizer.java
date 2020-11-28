@@ -1,5 +1,7 @@
 package backend.entities.users;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents an organizer type user.
  */
@@ -10,8 +12,8 @@ public class Organizer extends User {
      * @param username Username of the organizer.
      * @param password Password of the organizer.
      */
-    public Organizer(String name, String username, String password) {
-        super(name, username, password);
+    public Organizer(String name, String username, String password, LocalDateTime lastLoggedIn) {
+        super(name, username, password, lastLoggedIn);
         setPermissions();
     }
 
@@ -25,6 +27,7 @@ public class Organizer extends User {
         permissions.put(PERMS.canSignUpEvent, false);
         permissions.put(PERMS.canSignUpUser, true);
         permissions.put(PERMS.canSpeakAtTalk, false);
+        permissions.put(PERMS.canViewStats, true);
     }
 }
 
