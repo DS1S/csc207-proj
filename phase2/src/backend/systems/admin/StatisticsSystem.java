@@ -17,7 +17,7 @@ public class StatisticsSystem extends SubSystem {
         super(numOptions, new OptionIndexProcessor(new Scanner(System.in), numOptions));
         this.eventManager = eventManager;
         this.userManager = userManager;
-        this.statisticsUI = new StatisticsUI();
+        this.statisticsUI = new StatisticsUI(userManager);
     }
 
     protected void displayOptions() { statisticsUI.displayStatisticsOptions(); }
@@ -31,7 +31,10 @@ public class StatisticsSystem extends SubSystem {
                 // Display traffic stats (logged in past day, 7 days, month).
                 break;
             case(3):
-                // do some other thing idk
+                // Display the top 5 speakers who spoke at the most events
+                break;
+            case(4):
+                // go back to main menu
                 break;
         }
     }
