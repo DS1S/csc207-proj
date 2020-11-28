@@ -8,7 +8,8 @@ import java.time.LocalTime;
 import java.io.Serializable;
 
 /**
- * A message with a message id, a sender UUID, a recipient UUID, a body, a timestamp and whether or not it is read.
+ * A message with a message id, a sender UUID, a recipient UUID, a body, a timestamp, a title and whether or not it is
+ * read.
  */
 public class Message implements Serializable {
     private final UUID msgID;
@@ -17,6 +18,7 @@ public class Message implements Serializable {
     private final String body;
     private final LocalTime timeSent;
     private boolean read;
+    private String title;
 
     /**
      * Constructs a new Message with the information below.
@@ -25,14 +27,16 @@ public class Message implements Serializable {
      * @param recipient The UUID of the person who received this Message.
      * @param body The body of this Message as a string.
      * @param timeSent The time this Message was sent.
+     * @param title The title of the Message.
      */
-    public Message(UUID msgID, UUID sender, UUID recipient, String body, LocalTime timeSent) {
+    public Message(UUID msgID, UUID sender, UUID recipient, String body, LocalTime timeSent, String title) {
         this.msgID = msgID;
         this.sender = sender;
         this.recipient = recipient;
         this.body = body;
         this.timeSent = timeSent;
         this.read = false;
+        this.title = title;
     }
 
     /**
@@ -65,6 +69,7 @@ public class Message implements Serializable {
         messageData.put("body", body);
         messageData.put("timeSent", timeSent);
         messageData.put("read", read);
+        messageData.put("title", title);
 
         return messageData;
     }

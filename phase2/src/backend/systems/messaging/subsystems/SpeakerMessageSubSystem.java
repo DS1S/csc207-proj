@@ -69,11 +69,13 @@ class SpeakerMessageSubSystem extends MessageSubSystem {
             String talks = askForString("Talk(s)");
             inboxUI.displayBodyPrompt();
             String message = processMessageBody();
-            sendMessageToTalks(Arrays.asList(talks.split(",")), message);
+            inboxUI.displayTitlePrompt();
+            String title = processTitle();
+            sendMessageToTalks(Arrays.asList(talks.split(",")), message, title);
         }
     }
 
-    private void sendMessageToTalks(List<String> events, String msg) {
+    private void sendMessageToTalks(List<String> events, String msg, String title) {
         List<UUID> attendeeUUIDs = new ArrayList<>();
         for (String event : events) {
             List<UUID> eventUUIDs = eventManager.retrieveAttendees(event, userManager.getLoggedInUserUUID());
@@ -81,7 +83,7 @@ class SpeakerMessageSubSystem extends MessageSubSystem {
         }
         if (attendeeUUIDs.isEmpty()) inboxUI.displayError("No one is attending your talks!");
         else inboxUI.sentPrompt();
-        messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), attendeeUUIDs, msg);
+        messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), attendeeUUIDs, msg, title);
     }
 
     private void replyToAttendee() {
@@ -92,7 +94,8 @@ class SpeakerMessageSubSystem extends MessageSubSystem {
             UUID replierUUID = (UUID)messagesData.get(index).get("sender");
             if(userManager.hasPermission(replierUUID, PERMS.canBeMessaged)) {
                 String message = processMessageBody();
-                messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), replierUUID, message);
+                String title = processTitle();
+                messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), replierUUID, message, title);
                 inboxUI.sentPrompt();
             }
             else{

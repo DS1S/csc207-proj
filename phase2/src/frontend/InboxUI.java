@@ -79,6 +79,13 @@ public class InboxUI extends ErrorUI {
     }
 
     /**
+     * Prompts the user to write their title.
+     */
+    public void displayTitlePrompt() {
+        System.out.println("Write your title: ");
+    }
+
+    /**
      * Prompts the user to indicate the message's intended recipeint(s).
      */
     public void displayUserPrompt() {
