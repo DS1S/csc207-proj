@@ -67,9 +67,7 @@ class SpeakerMessageSubSystem extends MessageSubSystem {
         else{
             inboxUI.talksPrompt();
             String talks = askForString("Talk(s)");
-            inboxUI.displayBodyPrompt();
             String message = processMessageBody();
-            inboxUI.displayTitlePrompt();
             String title = processTitle();
             sendMessageToTalks(Arrays.asList(talks.split(",")), message, title);
         }
