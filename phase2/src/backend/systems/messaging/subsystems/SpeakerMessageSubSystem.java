@@ -15,20 +15,20 @@ import java.util.*;
  */
 class SpeakerMessageSubSystem extends MessageSubSystem {
     private OptionUI optionUI;
-    private EventManager eventManager;
+    private List<EventManager> eventManagers;
 
     /**
      * Creates a SpeakerMessageSubSystem object.
      * @param userManager A UserManager object that is already instantiated at the point this is instantiated.
      * @param messageManager A MessageManager object that is already instantiated at the point this is instantiated.
      * @param numOptions The Number of options in the menu.
-     * @param eventManager A EventManager object that is already instantiated at the point this is instantiated.
+     * @param eventManagers A EventManager object that is already instantiated at the point this is instantiated.
      */
     public SpeakerMessageSubSystem(UserManager userManager, MessageManager messageManager, int numOptions,
-                                   EventManager eventManager) {
+                                   List<EventManager> eventManagers) {
         super(userManager, messageManager, numOptions);
         this.optionUI = new OptionUI();
-        this.eventManager = eventManager;
+        this.eventManagers = eventManagers;
     }
 
     /**
@@ -61,7 +61,12 @@ class SpeakerMessageSubSystem extends MessageSubSystem {
     }
 
     private void processMessageToTalks() {
-        if (eventManager.retrieveEventsBySpeaker(userManager.getLoggedInUserUUID()).isEmpty()) {
+        List<Map<String, Object>> eventsData = new ArrayList<>();
+        for (EventManager eventManager: eventManagers){
+            eventsData.addAll(eventManager.retrieveEventsBySpeaker(userManager.getLoggedInUserUUID()));
+        }
+
+        if (eventsData.isEmpty()) {
             inboxUI.displayError("You aren't hosting any talks!");
         }
         else{
@@ -76,7 +81,10 @@ class SpeakerMessageSubSystem extends MessageSubSystem {
     private void sendMessageToTalks(List<String> events, String msg, String title) {
         List<UUID> attendeeUUIDs = new ArrayList<>();
         for (String event : events) {
-            List<UUID> eventUUIDs = eventManager.retrieveAttendees(event, userManager.getLoggedInUserUUID());
+            List<UUID> eventUUIDs = new ArrayList<>();
+            for(EventManager eventManager: eventManagers){
+                eventManager.retrieveAttendees(event, userManager.getLoggedInUserUUID());
+            }
             attendeeUUIDs.addAll(eventUUIDs);
         }
         if (attendeeUUIDs.isEmpty()) inboxUI.displayError("No one is attending your talks!");

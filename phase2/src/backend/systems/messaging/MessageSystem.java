@@ -5,6 +5,9 @@ import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import utility.IRunnable;
 import frontend.InboxUI;
+
+import java.util.List;
+
 import static backend.entities.users.PERMS.*;
 
 /**
@@ -13,7 +16,7 @@ import static backend.entities.users.PERMS.*;
 public class MessageSystem implements IRunnable {
     private final MessageManager messageManager;
     private final UserManager userManager;
-    private final EventManager eventManager;
+    private final List<EventManager> eventManagers;
     private final InboxUI inboxUI;
 
     /**
@@ -23,10 +26,10 @@ public class MessageSystem implements IRunnable {
      * @param eventManager The event manager used by the system.
      */
     public MessageSystem(MessageManager messageManager, UserManager userManager,
-                         EventManager eventManager) {
+                         List<EventManager> eventManagers) {
         this.messageManager = messageManager;
         this.userManager = userManager;
-        this.eventManager = eventManager;
+        this.eventManagers = eventManagers;
         this.inboxUI = new InboxUI(userManager);
     }
 
@@ -38,21 +41,21 @@ public class MessageSystem implements IRunnable {
 
         //TODO: Refactor so it behaves as a subsystem - I will worry about it no one else has to worry abt imp.
 
-        MessageSubSystem subsystem = null;
+        IRunnable subsystem = null;
         MessageSubSystemFactory messageSubSystemFactory = new MessageSubSystemFactory();
 
         if (userManager.loggedInHasPermission(canSchedule)) {
             subsystem = messageSubSystemFactory.createMessageSubSystem("organizer",
-                    userManager, messageManager, 5, eventManager);
+                    userManager, messageManager, 5, eventManagers);
         }
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
             subsystem = messageSubSystemFactory.createMessageSubSystem("speaker", userManager,
-                    messageManager, 4, eventManager);
+                    messageManager, 4, eventManagers);
         }
 
         //allocate a default message subsystem
         if(subsystem == null) subsystem = messageSubSystemFactory.createMessageSubSystem("regular",
-                userManager, messageManager, 3, eventManager);
+                userManager, messageManager, 3, eventManagers);
         subsystem.run();
     }
 

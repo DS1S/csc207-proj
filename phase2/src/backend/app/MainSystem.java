@@ -1,6 +1,9 @@
 package backend.app;
 
 import backend.entities.users.PERMS;
+import backend.systems.SubSystem;
+import backend.systems.conference.ConferenceManager;
+import backend.systems.conference.ConferenceSystem;
 import utility.filehandling.FileSerializer;
 import utility.filehandling.TerminationWorker;
 import backend.systems.usermangement.AuthenticationSystem;
@@ -13,10 +16,7 @@ import backend.systems.events.managers.EventManager;
 import backend.systems.events.EventSystem;
 import utility.IRunnable;
 
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Class which controls the interaction between all the subsystems.
@@ -25,6 +25,10 @@ class MainSystem implements IRunnable {
     private final Map<String, Object> managers = new HashMap<>();
     private final Map<Integer, IRunnable> subSystems = new HashMap<>();
     private final MainMenuUI mainMenu = new MainMenuUI();
+
+    private final String[] eventManagerFilePaths = {"phase2/database/ESManagerCon1.ser",
+                                                    "phase2/database/ESManagerCon2.ser",
+                                                    "phase2/database/ESManagerCon3.ser"};
 
 
     /**
@@ -54,16 +58,16 @@ class MainSystem implements IRunnable {
 
     private void initializeSubSystems() {
         UserManager userManager = initializeAuthenticationSystem();
-        EventManager eventManager = initializeEventSystem(userManager);
+        List<EventManager> eventManagers = initializeConferenceSystem(userManager);
 
         subSystems.get(0).run();
         initializeUserCreatorSystem(userManager);
-        initializeMessageSystem(userManager, eventManager);
+        initializeMessageSystem(userManager, eventManagers);
         initializeShutDownHook();
     }
 
     private UserManager initializeAuthenticationSystem() {
-        String filePath = "phase1/database/UManager.ser";
+        String filePath = "phase2/database/UManager.ser";
         FileSerializer<UserManager> userManagerLoader = new FileSerializer<>(filePath);
         UserManager uManager = userManagerLoader.loadObject();
         IRunnable authenticationSystem = new AuthenticationSystem(uManager);
@@ -71,23 +75,39 @@ class MainSystem implements IRunnable {
         return uManager;
     }
 
-    private void initializeMessageSystem(UserManager userManager, EventManager eventManager) {
-        String filePath = "phase1/database/MSManager.ser";
+    private void initializeMessageSystem(UserManager userManager, List<EventManager> eventManagers) {
+        String filePath = "phase2/database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
-        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager);
+        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManagers);
         if(!msManager.userHasInbox(userManager.getLoggedInUserUUID()))
             msManager.addBlankInbox(userManager.getLoggedInUserUUID());
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size());
     }
 
-    private EventManager initializeEventSystem(UserManager userManager) {
-        String filePath = "phase1/database/ESManager.ser";
-        FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
-        EventManager eventManager = eventManagerLoader.loadObject();
-        IRunnable eventSystem = new EventSystem(eventManager, userManager);
-        addSystemAndManager(filePath, eventSystem, eventManager, subSystems.size());
-        return eventManager;
+    private List<EventManager> initializeConferenceSystem(UserManager userManager){
+        String filepath = "phase2/database/CCManager.ser";
+        FileSerializer<ConferenceManager> conferenceManagerLoader = new FileSerializer<>(filepath);
+        ConferenceManager conferenceManager = conferenceManagerLoader.loadObject();
+        return initializeEventSystems(userManager, conferenceManager, filepath);
+    }
+
+    private List<EventManager> initializeEventSystems(UserManager userManager, ConferenceManager conferenceManager,
+                                                      String conferenceMangerFilePath) {
+        List<EventManager> eventManagers = new ArrayList<>();
+        List<EventSystem> eventSystems = new ArrayList<>();
+
+        for (String filePath: eventManagerFilePaths){
+            FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
+            EventManager eventManager = eventManagerLoader.loadObject();
+            EventSystem eventSystem = new EventSystem(eventManager, userManager);
+            eventSystems.add(eventSystem);
+            eventManagers.add(eventManager);
+            managers.put(filePath, eventManager);
+        }
+        IRunnable conferenceSystem = new ConferenceSystem(eventSystems, conferenceManager);
+        addSystemAndManager(conferenceMangerFilePath, conferenceSystem, conferenceManager, subSystems.size());
+        return eventManagers;
     }
 
     private void initializeUserCreatorSystem(UserManager userManager) {
@@ -101,6 +121,7 @@ class MainSystem implements IRunnable {
         subSystems.put(index, sys);
         managers.put(filePath, manager);
     }
+
 
     private void initializeShutDownHook() {
         managers.forEach((s, o) -> {
