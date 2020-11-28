@@ -28,7 +28,7 @@ public class AuthenticationSystem implements IRunnable {
     }
 
     /**
-     * The run method implementation required by IRunnable. Handles user input for choosing between login and signup.
+     * The run method implementation required by RunnableSystem. Handles user input for choosing between login and signup.
      */
     @Override
     public void run() {

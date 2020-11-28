@@ -1,20 +1,17 @@
 package backend.systems.admin;
 
-import backend.systems.SubSystem;
+import backend.systems.MenuSystem;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.StatisticsUI;
-import utility.inputprocessors.OptionIndexProcessor;
 
-import java.util.Scanner;
-
-public class StatisticsSystem extends SubSystem {
+public class StatisticsSystem extends MenuSystem {
     private EventManager eventManager;
     private UserManager userManager;
     private StatisticsUI statisticsUI;
 
     public StatisticsSystem(int numOptions, EventManager eventManager, UserManager userManager) {
-        super(numOptions, new OptionIndexProcessor(new Scanner(System.in), numOptions));
+        super(numOptions);
         this.eventManager = eventManager;
         this.userManager = userManager;
         this.statisticsUI = new StatisticsUI(userManager);

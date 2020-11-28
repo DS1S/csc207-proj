@@ -1,28 +1,38 @@
 package backend.systems;
 
-
-import frontend.ErrorUI;
-import utility.IRunnable;
+import frontend.MenuUI;
+import utility.RunnableSystem;
 import utility.inputprocessors.IndexProcessor;
+import utility.inputprocessors.OptionIndexProcessor;
 
 import java.util.Scanner;
 
 /**
  * Represents an abstract Subsystem.
  */
-public abstract class SubSystem implements IRunnable {
-    private int numOptions = 0;
-    private IndexProcessor<Integer> indexProcessor = null;
+public abstract class MenuSystem implements RunnableSystem {
+    private int numOptions;
+    private IndexProcessor<Integer> indexProcessor;
     protected Scanner input = new Scanner(System.in);
 
     /**
      * Constructs a subsystem with a number of options and an IndexProcessor to handle them.
      * @param numOptions the number of options accepted by this system.
-     * @param indexProcessor the IndexProcessor to handle them.
+     *
      */
-    public SubSystem(int numOptions, IndexProcessor<Integer> indexProcessor) {
+    public MenuSystem(int numOptions) {
         this.numOptions = numOptions;
-        this.indexProcessor = indexProcessor;
+        this.indexProcessor = new OptionIndexProcessor(input, numOptions);
+    }
+
+    public MenuSystem(){
+        this.numOptions = 1;
+        this.indexProcessor = new OptionIndexProcessor(input, numOptions);
+    }
+
+    protected void changeNumOptions(int numOptions){
+        this.numOptions = numOptions;
+        this.indexProcessor = new OptionIndexProcessor(input, numOptions);
     }
 
     /**
@@ -55,7 +65,7 @@ public abstract class SubSystem implements IRunnable {
      * @return Whatever the user inputted.
      */
     protected String askForString(String attribute) {
-        ErrorUI errorUI = new ErrorUI();
+        MenuUI errorUI = new MenuUI();
         String string = "";
         while (string.isEmpty()) {
             string = input.nextLine();

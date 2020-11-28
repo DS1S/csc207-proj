@@ -2,14 +2,14 @@ package backend.systems.usermangement;
 
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AuthenticationUI;
-import utility.IRunnable;
+import utility.RunnableSystem;
 
 import java.util.Scanner;
 
 /**
  * A class to handle logging in of users based on input credentials.
  */
-class LoginSystem implements IRunnable {
+class LoginSystem implements RunnableSystem {
     private final UserManager um;
     private final AuthenticationUI authUI;
 

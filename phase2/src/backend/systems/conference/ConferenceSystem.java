@@ -1,30 +1,27 @@
 package backend.systems.conference;
 
-import backend.systems.SubSystem;
+import backend.systems.MenuSystem;
 import backend.systems.events.EventSystem;
-import frontend.ConferenceUI;
-import utility.inputprocessors.OptionIndexProcessor;
+import frontend.MenuUI;
 
 import java.util.List;
-import java.util.Scanner;
 
-public class ConferenceSystem extends SubSystem {
+public class ConferenceSystem extends MenuSystem {
 
     private List<EventSystem> eventSystems;
     private ConferenceManager conferenceManager;
-    private ConferenceUI conferenceUI;
+    private MenuUI conferenceUI;
 
     public ConferenceSystem(List<EventSystem> eventSystems, ConferenceManager conferenceManager){
-        super(conferenceManager.getNumberOfConferences() + 1, new OptionIndexProcessor(new Scanner(System.in),
-                conferenceManager.getNumberOfConferences() + 1));
+        super(conferenceManager.getNumberOfConferences() + 1);
         this.conferenceManager = conferenceManager;
         this.eventSystems = eventSystems;
-        this.conferenceUI = new ConferenceUI();
+        this.conferenceUI = new MenuUI();
     }
 
     @Override
     protected void displayOptions() {
-        conferenceUI.displayConferences(conferenceManager.getConferenceNames());
+        conferenceUI.displayOptions(conferenceManager.getConferenceNames());
     }
 
     @Override

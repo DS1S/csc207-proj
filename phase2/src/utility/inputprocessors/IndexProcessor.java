@@ -19,4 +19,5 @@ public abstract class IndexProcessor<T> {
     }
 
     public abstract T processInput();
+
 }

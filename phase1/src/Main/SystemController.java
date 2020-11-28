@@ -27,7 +27,7 @@ public class SystemController implements IRunnable {
     private final MainMenuUI mainMenu = new MainMenuUI();
 
     /**
-     * Runs all the subsystems by switching between the MainMenuUI and the each subsystem depending on what the user inputs.
+     * Runs all the subsystems by switching between the MainUI and the each subsystem depending on what the user inputs.
      */
     public void run() {
         initializeSubSystems();

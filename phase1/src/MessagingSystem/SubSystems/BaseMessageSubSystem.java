@@ -4,7 +4,7 @@ import LoginSystem.UserManager;
 import MessagingSystem.MessageManager;
 
 /**
- * A BaseMessageSubSystem that extends MessageSubSystem.
+ * A BaseMessageSubSystem that extends MessageMenuSystem.
  */
 public class BaseMessageSubSystem extends MessageSubSystem {
     /**

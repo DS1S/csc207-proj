@@ -9,16 +9,16 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * An AdvancedMessageSubSystem that extends MessageSubSystem.
+ * An AdvancedMessageSubSystem that extends MessageMenuSystem.
  */
-class OrganizerMessageSubSystem extends MessageSubSystem {
+class OrganizerMessageMenuSystem extends MessageMenuSystem {
     /**
      * Constructs a new instance of AdvancedMessageSubSystem using the given parameters.
      * @param userManager The user manager used by the system.
      * @param messageManager The message manager used by the system.
      * @param numOptions The number of options available to the user on the menu.
      */
-    public OrganizerMessageSubSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
+    public OrganizerMessageMenuSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
         super(userManager, messageManager, numOptions);
     }
 

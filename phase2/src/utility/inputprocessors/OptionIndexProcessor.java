@@ -1,6 +1,6 @@
 package utility.inputprocessors;
 
-import frontend.OptionUI;
+import frontend.MenuUI;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -9,8 +9,8 @@ import java.util.Scanner;
  * A class which asks a user for an integer between 0 and a provided number.
  */
 public class OptionIndexProcessor extends IndexProcessor<Integer> {
-    private final OptionUI optionUI;
-    private final int max;
+    private final MenuUI optionUI;
+    private int max;
 
     /**
      * Constructs a OptionIndexProcessor to use scanner to ask a user for an integer between 0 and max.
@@ -19,7 +19,7 @@ public class OptionIndexProcessor extends IndexProcessor<Integer> {
      */
     public OptionIndexProcessor(Scanner scanner, int max) {
         super(scanner);
-        this.optionUI = new OptionUI();
+        this.optionUI = new MenuUI();
         this.max = max;
     }
 
@@ -47,5 +47,4 @@ public class OptionIndexProcessor extends IndexProcessor<Integer> {
         scanner.nextLine();
         return option;
     }
-
 }

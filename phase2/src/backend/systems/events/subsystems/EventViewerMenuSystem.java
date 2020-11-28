@@ -7,7 +7,7 @@ import frontend.EventUI;
 /**
  * A subsystem of the EventSystem that allows the user to perform actions related to the viewing of Events.
  */
-class EventViewerSubSystem extends EventSubSystem {
+class EventViewerMenuSystem extends EventMenuSystem {
     /**
      * Constructs a new EventViewerSystem with the given information.
      * @param eventManager The EventManager that will be used by the EventViewerSystem.
@@ -15,7 +15,7 @@ class EventViewerSubSystem extends EventSubSystem {
      * @param eventUI The EventUI that will be used by the EventViewerSystem.
      * @param numOptions The number of menu options given by the EventViewerSystem.
      */
-    public EventViewerSubSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
+    public EventViewerMenuSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(eventManager, userManager, eventUI, numOptions);
     }
 

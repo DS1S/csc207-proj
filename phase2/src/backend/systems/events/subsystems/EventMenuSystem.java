@@ -1,6 +1,6 @@
 package backend.systems.events.subsystems;
 
-import backend.systems.SubSystem;
+import backend.systems.MenuSystem;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.EventUI;
@@ -10,27 +10,26 @@ import utility.inputprocessors.OptionIndexProcessor;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * An abstract subsystem of EventSystem that allows the user to perform a particular action related to the sign up
  * of Events.
  */
-public abstract class EventSubSystem extends SubSystem {
+public abstract class EventMenuSystem extends MenuSystem {
     protected final EventManager eventManager;
     protected final UserManager userManager;
     protected final EventUI eventUI;
     protected final int numOptions;
 
     /**
-     * Constructs a new EventSubSystem with the given information.
-     * @param eventManager The EventManager that will be used by the EventSubSystem.
-     * @param userManager The UserManager that will be used by the EventSubSystem.
-     * @param eventUI The EventUI that will be used by the EventSubSystem.
-     * @param numOptions The number of menu options given by the EventSubSystem.
+     * Constructs a new EventMenuSystem with the given information.
+     * @param eventManager The EventManager that will be used by the EventMenuSystem.
+     * @param userManager The UserManager that will be used by the EventMenuSystem.
+     * @param eventUI The EventUI that will be used by the EventMenuSystem.
+     * @param numOptions The number of menu options given by the EventMenuSystem.
      */
-    public EventSubSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
-        super(numOptions, new OptionIndexProcessor(new Scanner(System.in), numOptions));
+    public EventMenuSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
+        super(numOptions);
         this.eventManager = eventManager;
         this.userManager = userManager;
         this.eventUI = eventUI;

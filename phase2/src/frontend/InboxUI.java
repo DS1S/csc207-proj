@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * An InboxUI class that extends ErrorUI.*/
-public class InboxUI extends ErrorUI {
+ * Represents a InboxUI used for the message system UI.*/
+public class InboxUI extends MenuUI {
     private UserManager userManager;
 
     /**

@@ -10,7 +10,7 @@ import java.util.Map;
 public class MainMenuUI {
 
     /**
-     * Constructs an instance of MainMenuUI.
+     * Constructs an instance of MainUI.
      */
     public MainMenuUI() { }
 

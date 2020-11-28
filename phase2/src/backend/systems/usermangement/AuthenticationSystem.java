@@ -1,8 +1,11 @@
 package backend.systems.usermangement;
 
+import backend.systems.MenuSystem;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AuthenticationUI;
-import utility.IRunnable;
+import utility.RunnableSystem;
+import utility.inputprocessors.IndexProcessor;
+import utility.inputprocessors.OptionIndexProcessor;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,7 +13,7 @@ import java.util.Scanner;
 /**
  * A class to handle logging in of existing users and signing up of new ones.
  */
-public class AuthenticationSystem implements IRunnable {
+public class AuthenticationSystem implements RunnableSystem {
     private final AuthenticationUI authUI;
     private final LoginSystem loginSystem;
     private final SignupSystem signupSystem;
@@ -29,7 +32,7 @@ public class AuthenticationSystem implements IRunnable {
     }
 
     /**
-     * The run method implementation required by IRunnable. Handles user input for choosing between login and signup.
+     * The run method implementation required by RunnableSystem. Handles user input for choosing between login and signup.
      */
     @Override
     public void run() {
@@ -48,8 +51,9 @@ public class AuthenticationSystem implements IRunnable {
         }
     }
 
-    private void processInput(int input) {
-        switch (input) {
+
+    private void processInput(int index) {
+        switch (index) {
             case (1):
                 loginSystem.run();
                 break;

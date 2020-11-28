@@ -33,7 +33,7 @@ public class MessageSystem implements IRunnable {
     }
 
     /**
-     * Implements the run method from the IRunnable interface in order to run this System.
+     * Implements the run method from the RunnableSystem interface in order to run this System.
      */
     @Override
     public void run() {

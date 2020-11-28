@@ -10,7 +10,7 @@ import coreUtil.InputProcessors.OptionIndexProcessor;
 import java.util.*;
 
 /**
- * A MessageSubSystem abstract class that is extended by other Message subsystems
+ * A MessageMenuSystem abstract class that is extended by other Message subsystems
  */
 public abstract class MessageSubSystem extends SubSystem {
     protected UserManager userManager;
@@ -18,7 +18,7 @@ public abstract class MessageSubSystem extends SubSystem {
     protected InboxUI inboxUI;
 
     /**
-     * Creates an object of MessageSubSystem
+     * Creates an object of MessageMenuSystem
      * @param userManager A UserManager object that is already instantiated at the point this is instantiated.
      * @param messageManager A MessageManager object that is already instantiated at the point this is instantiated.
      * @param numOptions The number of options in the menu.

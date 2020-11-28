@@ -1,5 +1,7 @@
 package backend.app;
 
+import utility.RunnableSystem;
+
 /**
  * Main class which runs the TecHConference program.
  */
@@ -9,7 +11,7 @@ class AppInitializer {
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        MainSystem app = new MainSystem();
+        RunnableSystem app = new MainSystem();
         app.run();
     }
 }

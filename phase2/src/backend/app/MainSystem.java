@@ -1,9 +1,11 @@
 package backend.app;
 
 import backend.entities.users.PERMS;
-import backend.systems.SubSystem;
+import backend.systems.MenuSystem;
 import backend.systems.conference.ConferenceManager;
 import backend.systems.conference.ConferenceSystem;
+import frontend.MainUI;
+import utility.RunnableSystem;
 import utility.filehandling.FileSerializer;
 import utility.filehandling.TerminationWorker;
 import backend.systems.usermangement.AuthenticationSystem;
@@ -11,49 +13,39 @@ import backend.systems.usermangement.SignupSystem;
 import backend.systems.usermangement.managers.UserManager;
 import backend.systems.messaging.managers.MessageManager;
 import backend.systems.messaging.MessageSystem;
-import frontend.MainMenuUI;
 import backend.systems.events.managers.EventManager;
 import backend.systems.events.EventSystem;
-import utility.IRunnable;
 
 import java.util.*;
 
 /**
  * Class which controls the interaction between all the subsystems.
  */
-class MainSystem implements IRunnable {
+class MainSystem extends MenuSystem {
     private final Map<String, Object> managers = new HashMap<>();
-    private final Map<Integer, IRunnable> subSystems = new HashMap<>();
-    private final MainMenuUI mainMenu = new MainMenuUI();
+    private final Map<Integer, RunnableSystem> subSystems = new HashMap<>();
+    private final MainUI mainMenu = new MainUI();
 
     private final String[] eventManagerFilePaths = {"phase2/database/ESManagerCon1.ser",
                                                     "phase2/database/ESManagerCon2.ser",
                                                     "phase2/database/ESManagerCon3.ser"};
+    private final List<String> subSystemNames = new ArrayList<>();
 
-
-    /**
-     * Runs all the subsystems by switching between the MainMenuUI and the each subsystem depending on what the user inputs.
-     */
-    public void run() {
+    public MainSystem(){
         initializeSubSystems();
+        changeNumOptions(subSystems.size());
+    }
 
-        Scanner input = new Scanner(System.in);
-        int option = 0;
-        while (option != subSystems.size()) {
-            mainMenu.displayMainMenu(subSystems);
+    @Override
+    protected void displayOptions() {
+        mainMenu.displayMainMenu(subSystemNames);
+    }
 
-            try{
-                option = input.nextInt();
-                if (subSystems.containsKey(option)) {
-                    subSystems.get(option).run();
-                }
-            }
-            catch (InputMismatchException e) {
-                mainMenu.displayInvalidInput(subSystems);
-                input.nextLine();
-            }
+    @Override
+    protected void processInput(int index) {
+        if (subSystems.containsKey(index)) {
+            subSystems.get(index).run();
         }
-        input.close();
     }
 
     private void initializeSubSystems() {
@@ -63,6 +55,7 @@ class MainSystem implements IRunnable {
         subSystems.get(0).run();
         initializeUserCreatorSystem(userManager);
         initializeMessageSystem(userManager, eventManagers);
+        convertSubSystemsToNames();
         initializeShutDownHook();
     }
 
@@ -70,7 +63,7 @@ class MainSystem implements IRunnable {
         String filePath = "phase2/database/UManager.ser";
         FileSerializer<UserManager> userManagerLoader = new FileSerializer<>(filePath);
         UserManager uManager = userManagerLoader.loadObject();
-        IRunnable authenticationSystem = new AuthenticationSystem(uManager);
+        RunnableSystem authenticationSystem = new AuthenticationSystem(uManager);
         addSystemAndManager(filePath, authenticationSystem, uManager, 0);
         return uManager;
     }
@@ -79,7 +72,7 @@ class MainSystem implements IRunnable {
         String filePath = "phase2/database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
-        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManagers);
+        RunnableSystem messageSystem = new MessageSystem(msManager, userManager, eventManagers);
         if(!msManager.userHasInbox(userManager.getLoggedInUserUUID()))
             msManager.addBlankInbox(userManager.getLoggedInUserUUID());
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size());
@@ -105,19 +98,19 @@ class MainSystem implements IRunnable {
             eventManagers.add(eventManager);
             managers.put(filePath, eventManager);
         }
-        IRunnable conferenceSystem = new ConferenceSystem(eventSystems, conferenceManager);
+        RunnableSystem conferenceSystem = new ConferenceSystem(eventSystems, conferenceManager);
         addSystemAndManager(conferenceMangerFilePath, conferenceSystem, conferenceManager, subSystems.size());
         return eventManagers;
     }
 
     private void initializeUserCreatorSystem(UserManager userManager) {
         if (userManager.loggedInHasPermission(PERMS.canSignUpUser)) {
-            IRunnable signUpSystem = new SignupSystem(userManager, "speaker");
+            RunnableSystem signUpSystem = new SignupSystem(userManager, "speaker");
             subSystems.put(subSystems.size(), signUpSystem);
         }
     }
 
-    private void addSystemAndManager(String filePath, IRunnable sys, Object manager, int index) {
+    private void addSystemAndManager(String filePath, RunnableSystem sys, Object manager, int index) {
         subSystems.put(index, sys);
         managers.put(filePath, manager);
     }
@@ -128,6 +121,11 @@ class MainSystem implements IRunnable {
             TerminationWorker<Object> objSaver = new TerminationWorker<>(o, s);
             Runtime.getRuntime().addShutdownHook(objSaver);
         });
+    }
+
+    private void convertSubSystemsToNames(){
+        subSystems.forEach((integer, runnableSystem) -> subSystemNames.add(runnableSystem.toString()));
+        subSystemNames.remove(0);
     }
 }
 

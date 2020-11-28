@@ -5,15 +5,15 @@ import backend.systems.usermangement.managers.UserManager;
 import frontend.EventUI;
 import java.util.UUID;
 
-public class EventCategoryRetrieverSubSystem extends EventSubSystem {
+public class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
     /**
-     * Constructs a new EventCategoryRetrieverSubSystem with the given information.
-     * @param eventManager The EventManager that will be used by the EventCategoryRetrieverSubSystem.
-     * @param userManager The UserManager that will be used by the EventCategoryRetrieverSubSystem.
-     * @param eventUI The EventUI that will be used by the EventCategoryRetrieverSubSystem.
-     * @param numOptions The number of menu options given by the EventCategoryRetrieverSubSystem.
+     * Constructs a new EventCategoryRetrieverMenuSystem with the given information.
+     * @param eventManager The EventManager that will be used by the EventCategoryRetrieverMenuSystem.
+     * @param userManager The UserManager that will be used by the EventCategoryRetrieverMenuSystem.
+     * @param eventUI The EventUI that will be used by the EventCategoryRetrieverMenuSystem.
+     * @param numOptions The number of menu options given by the EventCategoryRetrieverMenuSystem.
      */
-    public EventCategoryRetrieverSubSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
+    public EventCategoryRetrieverMenuSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(eventManager, userManager, eventUI, numOptions);
     }
 

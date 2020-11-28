@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * A subsystem of the EventSystem that allows the user to perform actions related to the sign up of Events.
  */
-class EventSignUpSubSystem extends EventSubSystem {
+class EventSignUpMenuSystem extends EventMenuSystem {
     /**
      * Constructs a new EventSignUpSystem with the given information.
      * @param eventManager The EventManager that will be used by the EventSignUpSystem.
@@ -18,7 +18,7 @@ class EventSignUpSubSystem extends EventSubSystem {
      * @param eventUI The EventUI that will be used by the EventSignUpSystem.
      * @param numOptions The number of menu options given by the EventSignUpSystem.
      */
-    public EventSignUpSubSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
+    public EventSignUpMenuSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(eventManager, userManager, eventUI, numOptions);
     }
 

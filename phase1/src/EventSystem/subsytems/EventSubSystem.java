@@ -23,11 +23,11 @@ public abstract class EventSubSystem extends SubSystem {
     protected final int numOptions;
 
     /**
-     * Constructs a new EventSubSystem with the given information.
-     * @param eventManager The EventManager that will be used by the EventSubSystem.
-     * @param userManager The UserManager that will be used by the EventSubSystem.
-     * @param eventUI The EventUI that will be used by the EventSubSystem.
-     * @param numOptions The number of menu options given by the EventSubSystem.
+     * Constructs a new EventMenuSystem with the given information.
+     * @param eventManager The EventManager that will be used by the EventMenuSystem.
+     * @param userManager The UserManager that will be used by the EventMenuSystem.
+     * @param eventUI The EventUI that will be used by the EventMenuSystem.
+     * @param numOptions The number of menu options given by the EventMenuSystem.
      */
     public EventSubSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(numOptions, new OptionIndexProcessor(new Scanner(System.in), numOptions));

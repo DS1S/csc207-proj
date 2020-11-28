@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * An AdvancedMessageSubSystem that extends MessageSubSystem.
+ * An AdvancedMessageSubSystem that extends MessageMenuSystem.
  */
 public class AdvancedMessageSubSystem extends MessageSubSystem {
     /**

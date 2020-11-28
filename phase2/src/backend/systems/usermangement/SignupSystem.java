@@ -2,7 +2,7 @@ package backend.systems.usermangement;
 
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AuthenticationUI;
-import utility.IRunnable;
+import utility.RunnableSystem;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * A class which handles the creation of new Users of allowed types.
  */
-public class SignupSystem implements IRunnable {
+public class SignupSystem implements RunnableSystem {
     private final UserManager um;
     private final AuthenticationUI authUI;
     private final List<String> possibleTypes;

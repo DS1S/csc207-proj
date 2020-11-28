@@ -1,30 +1,29 @@
 package backend.systems.messaging.subsystems;
 
-import backend.systems.SubSystem;
+import backend.systems.MenuSystem;
 import backend.entities.users.PERMS;
 import backend.systems.usermangement.managers.UserManager;
 import backend.systems.messaging.managers.MessageManager;
 import frontend.InboxUI;
-import utility.inputprocessors.OptionIndexProcessor;
 
 import java.util.*;
 
 /**
- * A MessageSubSystem abstract class that is extended by other Message subsystems
+ * A MessageMenuSystem abstract class that is extended by other Message subsystems
  */
-public abstract class MessageSubSystem extends SubSystem {
+public abstract class MessageMenuSystem extends MenuSystem {
     protected UserManager userManager;
     protected MessageManager messageManager;
     protected InboxUI inboxUI;
 
     /**
-     * Creates an object of MessageSubSystem
+     * Creates an object of MessageMenuSystem
      * @param userManager A UserManager object that is already instantiated at the point this is instantiated.
      * @param messageManager A MessageManager object that is already instantiated at the point this is instantiated.
      * @param numOptions The number of options in the menu.
      */
-    public MessageSubSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
-        super(numOptions, new OptionIndexProcessor(new Scanner(System.in), numOptions));
+    public MessageMenuSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
+        super(numOptions);
         this.userManager = userManager;
         this.messageManager = messageManager;
         this.inboxUI = new InboxUI(userManager);

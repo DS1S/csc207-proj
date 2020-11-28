@@ -9,7 +9,7 @@ import java.util.UUID;
 /**
  * A class that displays prompts and messages for event related actions.
  */
-public class EventUI extends ErrorUI {
+public class EventUI extends MenuUI {
     private UserManager userManager;
 
     /**

@@ -4,16 +4,16 @@ import backend.systems.usermangement.managers.UserManager;
 import backend.systems.messaging.managers.MessageManager;
 
 /**
- * A BaseMessageSubSystem that extends MessageSubSystem.
+ * A BaseMessageSubSystem that extends MessageMenuSystem.
  */
-class RegularMessageSubSystem extends MessageSubSystem {
+class RegularMessageMenuSystem extends MessageMenuSystem {
     /**
      * Constructs a new instance of BaseMessageSubSystem using the given parameters.
      * @param userManager The user manager used by the system.
      * @param messageManager The message manager used by the system.
      * @param numOptions The number of options available to the user on the menu.
      */
-    public RegularMessageSubSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
+    public RegularMessageMenuSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
         super(userManager, messageManager, numOptions);
     }
 

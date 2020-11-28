@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * A subsystem of the EventSystem that allows the user to perform actions related to the scheduling of Events.
  */
-class EventSchedulerSubSystem extends EventSubSystem {
+class EventSchedulerMenuSystem extends EventMenuSystem {
     private List<Map<String, Object>> eventsData;
 
     /**
@@ -24,7 +24,7 @@ class EventSchedulerSubSystem extends EventSubSystem {
      * @param eventUI The EventUI that will be used by the ScheduleSystem.
      * @param numOptions The number of menu options given by the ScheduleSystem.
      */
-    public EventSchedulerSubSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
+    public EventSchedulerMenuSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
         super(eventManager, userManager, eventUI, numOptions);
         this.eventsData = eventManager.retrieveAllEvents();
     }

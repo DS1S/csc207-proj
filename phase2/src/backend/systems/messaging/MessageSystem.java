@@ -3,7 +3,7 @@ import backend.systems.messaging.subsystems.*;
 import backend.systems.messaging.managers.MessageManager;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
-import utility.IRunnable;
+import utility.RunnableSystem;
 import frontend.InboxUI;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import static backend.entities.users.PERMS.*;
 /**
  * A messaging system with a message manager, a user manager, an event manager, and an inbox UI.
  */
-public class MessageSystem implements IRunnable {
+public class MessageSystem implements RunnableSystem {
     private final MessageManager messageManager;
     private final UserManager userManager;
     private final List<EventManager> eventManagers;
@@ -34,14 +34,14 @@ public class MessageSystem implements IRunnable {
     }
 
     /**
-     * Implements the run method from the IRunnable interface in order to run this System.
+     * Implements the run method from the RunnableSystem interface in order to run this System.
      */
     @Override
     public void run() {
 
         //TODO: Refactor so it behaves as a subsystem - I will worry about it no one else has to worry abt imp.
 
-        IRunnable subsystem = null;
+        RunnableSystem subsystem = null;
         MessageSubSystemFactory messageSubSystemFactory = new MessageSubSystemFactory();
 
         if (userManager.loggedInHasPermission(canSchedule)) {

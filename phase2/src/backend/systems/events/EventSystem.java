@@ -1,10 +1,10 @@
 package backend.systems.events;
 
-import backend.systems.events.subsystems.EventSubSystem;
+import backend.systems.events.subsystems.EventMenuSystem;
 import backend.systems.events.subsystems.EventSubSytemFactory;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
-import utility.IRunnable;
+import utility.RunnableSystem;
 
 import frontend.EventUI;
 
@@ -13,7 +13,7 @@ import backend.entities.users.PERMS;
 /**
  * An EventSystem that allows the user to perform actions related to the sign up and scheduling of Events.
  */
-public class EventSystem implements IRunnable {
+public class EventSystem implements RunnableSystem {
     private final EventManager eventManager;
     private final UserManager userManager;
     private final EventUI eventUI;
@@ -36,7 +36,7 @@ public class EventSystem implements IRunnable {
     @Override
     public void run() {
         // TODO: Change it so EventSystem is actually running subsystems in parallel; otherwise it is an over glorified facade at this point.
-        EventSubSystem subsystem = null;
+        EventMenuSystem subsystem = null;
         EventSubSytemFactory subSystemFactory = new EventSubSytemFactory();
         if (userManager.loggedInHasPermission(PERMS.canSchedule)) {
             subsystem = subSystemFactory.createEventSubSystem("scheduler", eventManager, userManager,
