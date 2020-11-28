@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.io.Serializable;
 
 /**
- * A message with a message id, a sender UUID, a recipient UUID, a body and a timestamp.
+ * A message with a message id, a sender UUID, a recipient UUID, a body, a timestamp and whether or not it is read.
  */
 public class Message implements Serializable {
     private final UUID msgID;
@@ -16,6 +16,7 @@ public class Message implements Serializable {
     private final UUID recipient;
     private final String body;
     private final LocalTime timeSent;
+    private boolean read;
 
     /**
      * Constructs a new Message with the information below.
@@ -31,6 +32,7 @@ public class Message implements Serializable {
         this.recipient = recipient;
         this.body = body;
         this.timeSent = timeSent;
+        this.read = false;
     }
 
     /**
@@ -41,6 +43,13 @@ public class Message implements Serializable {
         return recipient;
     }
 
+    /**
+     * Sets a new boolean value to show whether or not the message has been read.
+     * @param x The boolean value that read gets set to.
+     */
+    public void setRead(boolean x) {
+        this.read = x;
+    }
 
     /**
      * Returns a map whose values are the Message's properties corresponding to those properties in
@@ -55,6 +64,7 @@ public class Message implements Serializable {
         messageData.put("recipient", recipient);
         messageData.put("body", body);
         messageData.put("timeSent", timeSent);
+        messageData.put("read", read);
 
         return messageData;
     }
