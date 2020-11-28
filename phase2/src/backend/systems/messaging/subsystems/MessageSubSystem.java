@@ -1,7 +1,7 @@
 package backend.systems.messaging.subsystems;
 
 import backend.systems.SubSystem;
-import backend.coreentities.users.PERMS;
+import backend.systems.usermangement.managers.users.PERMS;
 import backend.systems.usermangement.managers.UserManager;
 import backend.systems.messaging.managers.MessageManager;
 import frontend.InboxUI;

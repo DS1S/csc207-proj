@@ -1,17 +1,16 @@
 package backend.systems.messaging;
-import backend.systems.SubSystem;
 import backend.systems.messaging.subsystems.*;
 import backend.systems.messaging.managers.MessageManager;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
-import backend.systems.RunnableSystem;
+import utility.IRunnable;
 import frontend.InboxUI;
-import static backend.coreentities.users.PERMS.*;
+import static backend.systems.usermangement.managers.users.PERMS.*;
 
 /**
  * A messaging system with a message manager, a user manager, an event manager, and an inbox UI.
  */
-public class MessageSystem implements RunnableSystem {
+public class MessageSystem implements IRunnable {
     private final MessageManager messageManager;
     private final UserManager userManager;
     private final EventManager eventManager;

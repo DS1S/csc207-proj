@@ -2,6 +2,7 @@ package backend.systems;
 
 
 import frontend.ErrorUI;
+import utility.IRunnable;
 import utility.inputprocessors.IndexProcessor;
 
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 /**
  * Represents an abstract Subsystem.
  */
-public abstract class SubSystem implements RunnableSystem {
+public abstract class SubSystem implements IRunnable {
     private int numOptions = 0;
     private IndexProcessor<Integer> indexProcessor = null;
     protected Scanner input = new Scanner(System.in);

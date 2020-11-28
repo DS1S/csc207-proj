@@ -1,4 +1,4 @@
-package backend.coreentities;
+package backend.systems.messaging.managers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * A message with a message id, a sender UUID, a recipient UUID, a body and a timestamp.
  */
-public class Message implements Serializable {
+class Message implements Serializable {
     private final UUID msgID;
     private final UUID sender;
     private final UUID recipient;

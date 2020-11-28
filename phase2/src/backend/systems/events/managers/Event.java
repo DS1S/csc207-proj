@@ -1,4 +1,4 @@
-package backend.coreentities;
+package backend.systems.events.managers;
 
 import java.io.Serializable;
 import java.util.*;
@@ -8,7 +8,7 @@ import java.time.LocalTime;
  * An Event with capacity, attendees, room, start time, title, speaker
  * and duration.
  */
-public class Event implements Serializable {
+class Event implements Serializable {
     private final int capacity;
     private final List<UUID> attendees;
     private final String room;

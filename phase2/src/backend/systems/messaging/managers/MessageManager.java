@@ -1,5 +1,4 @@
 package backend.systems.messaging.managers;
-import backend.coreentities.Message;
 
 import java.io.Serializable;
 import java.util.*;

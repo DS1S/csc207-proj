@@ -1,6 +1,6 @@
 package frontend;
 
-import backend.systems.RunnableSystem;
+import utility.IRunnable;
 
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class MainMenuUI {
      * Displays main menu options to the user.
      * @param subsystems The subsystems that implement the actions the users can take.
      */
-    public void displayOptions(Map<Integer, RunnableSystem> subsystems) {
+    public void displayOptions(Map<Integer, IRunnable> subsystems) {
         for (int i = 1; i < subsystems.size(); i++) {
             System.out.println(i + ": " + subsystems.get(i).toString());
         }
@@ -29,7 +29,7 @@ public class MainMenuUI {
      * Displays the main menu to the user.
      * @param subsystems The subsystems that implement the actions the users can take.
      */
-    public void displayMainMenu(Map<Integer, RunnableSystem> subsystems) {
+    public void displayMainMenu(Map<Integer, IRunnable> subsystems) {
         System.out.println(" _________  ____  ____   ______ \n|  _   _  ||_   ||   _|.' ___  | \n|_/ | | " +
                 "\\_|  | |__| | / .'   \\_|  \n    | |      |  __  | | | \n   _| |_    _| |  | |_\\ `.___.'" +
                 "\\  \n  |_____|  |____||____|`.____ .' \nWelcome to TecHConference! Press a number and then " +
@@ -41,7 +41,7 @@ public class MainMenuUI {
      * Indicates to the user that their input was invalid and prompts them to enter a new input.
      * @param subsystems The subsystems that implement the actions the users can take.
      */
-    public void displayInvalidInput(Map<Integer, RunnableSystem> subsystems) {
+    public void displayInvalidInput(Map<Integer, IRunnable> subsystems) {
         System.out.flush();
         System.out.println("Invalid input! Try again:");
         displayOptions(subsystems);

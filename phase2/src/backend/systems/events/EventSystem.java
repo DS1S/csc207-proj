@@ -1,20 +1,19 @@
 package backend.systems.events;
 
-import backend.systems.SubSystem;
 import backend.systems.events.subsystems.EventSubSystem;
 import backend.systems.events.subsystems.EventSubSytemFactory;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
-import backend.systems.RunnableSystem;
+import utility.IRunnable;
 
 import frontend.EventUI;
 
-import static backend.coreentities.users.PERMS.*;
+import static backend.systems.usermangement.managers.users.PERMS.*;
 
 /**
  * An EventSystem that allows the user to perform actions related to the sign up and scheduling of Events.
  */
-public class EventSystem implements RunnableSystem {
+public class EventSystem implements IRunnable {
     private final EventManager eventManager;
     private final UserManager userManager;
     private final EventUI eventUI;

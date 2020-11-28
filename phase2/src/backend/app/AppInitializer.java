@@ -9,7 +9,7 @@ class AppInitializer {
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        ConferenceSystem app = new ConferenceSystem();
+        MainSystem app = new MainSystem();
         app.run();
     }
 }

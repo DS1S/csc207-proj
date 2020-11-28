@@ -2,7 +2,7 @@ package backend.systems.usermangement;
 
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AuthenticationUI;
-import backend.systems.RunnableSystem;
+import utility.IRunnable;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * A class to handle logging in of existing users and signing up of new ones.
  */
-public class AuthenticationSystem implements RunnableSystem {
+public class AuthenticationSystem implements IRunnable {
     private final AuthenticationUI authUI;
     private final LoginSystem loginSystem;
     private final SignupSystem signupSystem;

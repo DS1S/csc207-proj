@@ -1,14 +1,9 @@
-package backend.systems.usermangement.managers;
-
-import backend.coreentities.users.Attendee;
-import backend.coreentities.users.Organizer;
-import backend.coreentities.users.Speaker;
-import backend.coreentities.users.User;
+package backend.systems.usermangement.managers.users;
 
 /**
  * A Factory class to manufacture a User based on their type.
  */
-class UserFactory {
+public class UserFactory {
     /**
      * Makes a user of a specific type based on the passed in userType string and other details.
      *

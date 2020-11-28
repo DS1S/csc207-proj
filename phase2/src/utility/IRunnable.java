@@ -1,8 +1,8 @@
-package backend.systems;
+package utility;
 
 /**
  * An interface for all implementing classes to be used as a runnable services.
  */
-public interface RunnableSystem {
+public interface IRunnable {
     void run();
 }

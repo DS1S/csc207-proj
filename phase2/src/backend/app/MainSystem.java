@@ -1,6 +1,6 @@
 package backend.app;
 
-import backend.coreentities.users.PERMS;
+import backend.systems.usermangement.managers.users.PERMS;
 import utility.filehandling.FileSerializer;
 import utility.filehandling.TerminationWorker;
 import backend.systems.usermangement.AuthenticationSystem;
@@ -11,7 +11,7 @@ import backend.systems.messaging.MessageSystem;
 import frontend.MainMenuUI;
 import backend.systems.events.managers.EventManager;
 import backend.systems.events.EventSystem;
-import backend.systems.RunnableSystem;
+import utility.IRunnable;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -21,9 +21,9 @@ import java.util.Scanner;
 /**
  * Class which controls the interaction between all the subsystems.
  */
-class ConferenceSystem implements RunnableSystem {
+class MainSystem implements IRunnable {
     private final Map<String, Object> managers = new HashMap<>();
-    private final Map<Integer, RunnableSystem> subSystems = new HashMap<>();
+    private final Map<Integer, IRunnable> subSystems = new HashMap<>();
     private final MainMenuUI mainMenu = new MainMenuUI();
 
 
@@ -66,7 +66,7 @@ class ConferenceSystem implements RunnableSystem {
         String filePath = "phase1/database/UManager.ser";
         FileSerializer<UserManager> userManagerLoader = new FileSerializer<>(filePath);
         UserManager uManager = userManagerLoader.loadObject();
-        RunnableSystem authenticationSystem = new AuthenticationSystem(uManager);
+        IRunnable authenticationSystem = new AuthenticationSystem(uManager);
         addSystemAndManager(filePath, authenticationSystem, uManager, 0);
         return uManager;
     }
@@ -75,7 +75,7 @@ class ConferenceSystem implements RunnableSystem {
         String filePath = "phase1/database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
-        RunnableSystem messageSystem = new MessageSystem(msManager, userManager, eventManager);
+        IRunnable messageSystem = new MessageSystem(msManager, userManager, eventManager);
         if(!msManager.userHasInbox(userManager.getLoggedInUserUUID()))
             msManager.addBlankInbox(userManager.getLoggedInUserUUID());
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size());
@@ -85,19 +85,19 @@ class ConferenceSystem implements RunnableSystem {
         String filePath = "phase1/database/ESManager.ser";
         FileSerializer<EventManager> eventManagerLoader = new FileSerializer<>(filePath);
         EventManager eventManager = eventManagerLoader.loadObject();
-        RunnableSystem eventSystem = new EventSystem(eventManager, userManager);
+        IRunnable eventSystem = new EventSystem(eventManager, userManager);
         addSystemAndManager(filePath, eventSystem, eventManager, subSystems.size());
         return eventManager;
     }
 
     private void initializeUserCreatorSystem(UserManager userManager) {
         if (userManager.loggedInHasPermission(PERMS.canSignUpUser)) {
-            RunnableSystem signUpSystem = new SignupSystem(userManager, "speaker");
+            IRunnable signUpSystem = new SignupSystem(userManager, "speaker");
             subSystems.put(subSystems.size(), signUpSystem);
         }
     }
 
-    private void addSystemAndManager(String filePath, RunnableSystem sys, Object manager, int index) {
+    private void addSystemAndManager(String filePath, IRunnable sys, Object manager, int index) {
         subSystems.put(index, sys);
         managers.put(filePath, manager);
     }

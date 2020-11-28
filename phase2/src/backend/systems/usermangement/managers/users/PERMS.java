@@ -1,4 +1,4 @@
-package backend.coreentities.users;
+package backend.systems.usermangement.managers.users;
 
 /**
  * Enumeration Set for user permissions.
