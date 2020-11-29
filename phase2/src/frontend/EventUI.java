@@ -175,6 +175,11 @@ public class EventUI extends MenuUI {
     public void displayTimePrompt() { System.out.println("Time (format HH:MM): "); }
 
     /**
+     * Displays a message prompting the user for the event's start time.
+     */
+    public void displayStartTimePrompt() { System.out.println("Enter the start time for your event."); }
+
+    /**
      * Displays a message informing the user that they have entered an invalid time.
      */
     public void displayInvalidTime() { System.out.println("Invalid input: Please use the format HH:MM."); }

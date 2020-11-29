@@ -80,6 +80,7 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
 
         int capacity = capacityProcessor.processInput();
 
+        eventUI.displayStartTimePrompt();
         LocalTime startTime = timeProcessor.processInput();
 
         int duration = durationProcessor.processInput();
@@ -139,6 +140,7 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
         int index = processEvents(eventsData) - 1;
 
         if(index != -1) {
+            eventUI.displayStartTimePrompt();
             LocalTime startTime = timeProcessor.processInput();
 
             int duration = durationProcessor.processInput();
