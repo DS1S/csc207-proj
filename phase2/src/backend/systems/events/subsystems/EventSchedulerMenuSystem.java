@@ -94,7 +94,13 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
             speakers.add(processSingleInputSpeaker());
             eventUI.displayAnotherSpeakerPrompt();
             while (askForBoolean()) {
-                speakers.add(processSingleInputSpeaker());
+                UUID speaker = processSingleInputSpeaker();
+                if (!(speakers.contains(speaker))) {
+                    speakers.add(speaker);
+                }
+                else {
+                    eventUI.displayRepeatSpeakerError();
+                }
                 eventUI.displayAnotherSpeakerPrompt();
             }
         }

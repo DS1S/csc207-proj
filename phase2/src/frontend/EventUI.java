@@ -241,4 +241,11 @@ public class EventUI extends MenuUI {
     public void displayCancelSuccess() {
         System.out.println("The selected event has been cancelled.");
     }
+
+    /**
+     * Displays a message informing the user that the speaker is already added to the event.
+     */
+    public void displayRepeatSpeakerError() {
+        System.out.println("You have already added this speaker to the event!");
+    }
 }
