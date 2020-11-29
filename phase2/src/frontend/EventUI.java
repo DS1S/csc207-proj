@@ -49,8 +49,9 @@ public class EventUI extends MenuUI {
         if (!(speakers.isEmpty())){
             sb.append("Hosted by: ");
             for (Object speakerUUID: speakers) {
-                sb.append(userManager.getNameWithUUID((UUID)speakerUUID));
+                sb.append(userManager.getNameWithUUID((UUID)speakerUUID) + ", ");
             }
+            sb.delete(sb.length() - 2, sb.length() - 1);
             sb.append("\n");
         }
         sb.append(data.get("StartTime") + " to " + data.get("EndTime") + "\n");
