@@ -14,7 +14,7 @@ public class Event implements Serializable {
     private final String room;
     private LocalTime startTime;
     private final String title;
-    private final UUID speaker;
+    private final List<UUID> speakers;
     private int duration;
 
     /**
@@ -23,16 +23,16 @@ public class Event implements Serializable {
      * @param room The room in which the event is taking place.
      * @param startTime The starting time of the event.
      * @param title The event's title.
-     * @param speaker The UUID of the speaker speaking at this event.
+     * @param speakers A list of UUIDs of the speakers speaking at this event.
      * @param duration The duration of the event, in minutes.
      */
-    public Event(int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
+    public Event(int capacity, String room, LocalTime startTime, String title, List<UUID> speakers, int duration) {
         this.capacity = capacity;
         this.attendees = new ArrayList<>();
         this.room = room;
         this.startTime = startTime;
         this.title = title;
-        this.speaker = speaker;
+        this.speakers = speakers;
         this.duration = duration;
     }
 
@@ -97,10 +97,17 @@ public class Event implements Serializable {
     public String getTitle() { return this.title; }
 
     /**
-     * Gets the UUID of this Event's speaker.
+     * Check whether the user with the given UUID is a speaker for this Event.
+     * @param uuid the UUID to be checked
      * @return The speaker of this Event.
      */
-    public UUID getSpeaker() { return this.speaker; }
+    public boolean isSpeaker(UUID uuid) { return this.speakers.contains(uuid); }
+
+    /**
+     * Gets this Event's list of Speakers.
+     * @return The speakers of the event.
+     */
+    public List<UUID> getSpeakers() { return this.speakers; }
 
     /**
      * Sets this Event's duration to duration.
@@ -118,7 +125,7 @@ public class Event implements Serializable {
         Map<String, Object> data = new HashMap<>();
 
         data.put("Title", title);
-        data.put("Speaker", speaker);
+        data.put("Speaker", speakers);
         data.put("StartTime", startTime);
         data.put("EndTime", getEndTime());
         data.put("Room", room);

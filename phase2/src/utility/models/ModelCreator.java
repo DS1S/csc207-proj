@@ -23,6 +23,7 @@ public class ModelCreator {
         userManager.addUser("attendee", "user1", "pass1", "Daniel");
         userManager.addUser("speaker", "user2", "pass2", "Walter");
         userManager.addUser("organizer", "user3", "pass3", "Adil");
+        userManager.addUser("speaker", "user4", "pass4", "Edwin");
 
         MessageManager messageManager = new MessageManager(userManager.getUUIDs());
         EventManager eventManager1 = new EventManager();

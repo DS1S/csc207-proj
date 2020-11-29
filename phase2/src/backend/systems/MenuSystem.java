@@ -73,4 +73,18 @@ public abstract class MenuSystem implements RunnableSystem {
         }
         return string;
     }
+
+    /**
+     * Asks the user for a input that is either Y or N and checks if the input is valid.
+     * @return true if Y was inputted, and false if N was inputted
+     */
+    protected boolean askForBoolean() {
+        MenuUI errorUI = new MenuUI();
+        while (true) {
+            String string = input.nextLine();
+            if (string.equalsIgnoreCase("Y")) return true;
+            else if (string.equalsIgnoreCase("N")) return false;
+            else errorUI.displayError("Invalid entry! Please input Y or N.");
+        }
+    }
 }

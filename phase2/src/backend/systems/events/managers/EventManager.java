@@ -134,14 +134,14 @@ public class EventManager implements Serializable {
      * @param room The room in which the new Event is taking place.
      * @param startTime The start time of the new Event.
      * @param title The title of the new Event.
-     * @param speaker The UUID of the Speaker of the new Event.
+     * @param speakers The list of UUIDs of the Speakers for the new Event.
      * @param duration The duration of the new Event, in minutes.
      * @return The list of extracted data of Events that conflict with the scheduling of the new Event.
      */
-    public List<Map<String, Object>> scheduleEvent(int capacity, String room, LocalTime startTime, String title, UUID speaker,
+    public List<Map<String, Object>> scheduleEvent(int capacity, String room, LocalTime startTime, String title, List<UUID> speakers,
                                      int duration) {
         List<Map<String, Object>> dataList = new ArrayList<>();
-        List<Event> response = eventScheduler.scheduleEvent(mainSchedule, capacity, room, startTime, title, speaker,
+        List<Event> response = eventScheduler.scheduleEvent(mainSchedule, capacity, room, startTime, title, speakers,
                                 duration);
         for (Event event: response) {
             dataList.add(event.extractData());

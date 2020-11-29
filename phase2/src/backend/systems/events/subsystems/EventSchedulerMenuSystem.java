@@ -73,7 +73,7 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
         eventUI.displayTitlePrompt();
         String title = askForString("Title");
 
-        UUID speaker = processInputSpeaker();
+        List<UUID> speakers = processInputSpeakers();
 
         eventUI.displayRoomPrompt();
         String room = askForString("Room");
@@ -84,10 +84,24 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
 
         int duration = durationProcessor.processInput();
 
-        attemptScheduling(capacity, room, startTime, title, speaker, duration);
+        attemptScheduling(capacity, room, startTime, title, speakers, duration);
     }
 
-    private UUID processInputSpeaker() {
+    private List<UUID> processInputSpeakers() {
+        List<UUID> speakers = new ArrayList<>();
+        eventUI.displayFirstSpeakerPrompt();
+        if (askForBoolean()) {
+            speakers.add(processSingleInputSpeaker());
+            eventUI.displayAnotherSpeakerPrompt();
+            while (askForBoolean()) {
+                speakers.add(processSingleInputSpeaker());
+                eventUI.displayAnotherSpeakerPrompt();
+            }
+        }
+        return speakers;
+    }
+
+    private UUID processSingleInputSpeaker() {
         eventUI.displaySpeakerPrompt();
         String username = askForString("Speaker");
         while (!(userManager.containsUserWithUsername(username)) ||
@@ -99,9 +113,9 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
         return userManager.getUUIDWithUsername(username);
     }
 
-    private void attemptScheduling(int capacity, String room, LocalTime startTime, String title, UUID speaker,
+    private void attemptScheduling(int capacity, String room, LocalTime startTime, String title, List<UUID> speakers,
                                    int duration) {
-        List<Map<String, Object>> eventConflicts = eventManager.scheduleEvent(capacity, room, startTime, title, speaker,
+        List<Map<String, Object>> eventConflicts = eventManager.scheduleEvent(capacity, room, startTime, title, speakers,
                 duration);
         if (eventConflicts.isEmpty()) {
             eventsData = eventManager.retrieveAllEvents();

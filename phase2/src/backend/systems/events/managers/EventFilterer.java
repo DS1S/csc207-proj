@@ -42,7 +42,7 @@ class EventFilterer implements Serializable {
     public List<Event> retrieveEventsBySpeaker(List<Event> events, UUID speaker) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
-            if (event.getSpeaker().equals(speaker)) {
+            if (event.isSpeaker(speaker)) {
                 matchedEvents.add(event);
             }
         }
@@ -98,7 +98,7 @@ class EventFilterer implements Serializable {
     public List<Event> retrieveEventsBySpeakerAndTitle(List<Event> events, UUID speaker, String title) {
         List<Event> matchedEvents = new ArrayList<>();
         for (Event event: events) {
-            if (event.getTitle().equals(title) && event.getSpeaker().equals(speaker)) {
+            if (event.getTitle().equals(title) && event.isSpeaker(speaker)) {
                 matchedEvents.add(event);
             }
         }

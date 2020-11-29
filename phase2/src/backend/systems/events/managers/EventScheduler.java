@@ -32,7 +32,7 @@ class EventScheduler implements Serializable {
         List<Event> conflictingEvents = new ArrayList<>();
         List<Event> filteredEvents = eventFilter.retrieveEventsByTimeInterval(events, start, end);
         for (Event event: filteredEvents) {
-            if (event.getSpeaker().equals(speaker)) {
+            if (event.isSpeaker(speaker)) {
                 conflictingEvents.add(event);
             }
         }
@@ -49,17 +49,19 @@ class EventScheduler implements Serializable {
      * @param room the room of the new Event
      * @param startTime the start time of the new Event
      * @param title the title of the new Event
-     * @param speaker the UUID of the speaker of the new Event
+     * @param speakers a list of UUIDs of the speakers for the new Event
      * @param duration the duration of the new Event in minutes
      * @return a list of Events that conflict with the scheduling of the new Event
      */
-    public List<Event> scheduleEvent(List<Event> events, int capacity, String room, LocalTime startTime, String title, UUID speaker, int duration) {
-        List<Event> conflictingEvents = new ArrayList<>();
-        conflictingEvents.addAll(getRoomConflicts(events, room, startTime, startTime.plusMinutes(duration-1)));
-        conflictingEvents.addAll(getSpeakerConflicts(events, speaker, startTime, startTime.plusMinutes(duration-1)));
+    public List<Event> scheduleEvent(List<Event> events, int capacity, String room, LocalTime startTime, String title, List<UUID> speakers, int duration) {
+        List<Event> conflictingEvents = new ArrayList<>(getRoomConflicts(events, room, startTime, startTime.plusMinutes(duration - 1)));
+        for (UUID speaker: speakers) {
+            conflictingEvents.addAll(getSpeakerConflicts(events, speaker, startTime, startTime.plusMinutes(duration - 1)));
+        }
+        removeDuplicateConflictedEvents(conflictingEvents);
 
         if (conflictingEvents.isEmpty()) {
-            events.add(new Event(capacity, room, startTime, title, speaker, duration));
+            events.add(new Event(capacity, room, startTime, title, speakers, duration));
         }
 
         return conflictingEvents;
@@ -94,9 +96,9 @@ class EventScheduler implements Serializable {
                                        int newDuration) throws IndexOutOfBoundsException {
         Event event = events.get(index);
 
-        List<Event> conflictingEvents = new ArrayList<>();
-        conflictingEvents.addAll(getRoomConflicts(events, event.getRoom(), newStartTime, newStartTime.plusMinutes(newDuration)));
-        conflictingEvents.addAll(getSpeakerConflicts(events, event.getSpeaker(), newStartTime, newStartTime.plusMinutes(newDuration)));
+        List<Event> conflictingEvents = new ArrayList<>(getRoomConflicts(events, event.getRoom(), newStartTime, newStartTime.plusMinutes(newDuration)));
+        for (UUID speaker: event.getSpeakers())
+            conflictingEvents.addAll(getSpeakerConflicts(events, speaker, newStartTime, newStartTime.plusMinutes(newDuration)));
         removeDuplicateConflictedEvents(conflictingEvents);
 
         if (conflictingEvents.isEmpty()) {

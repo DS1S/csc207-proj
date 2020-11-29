@@ -26,7 +26,7 @@ public class EventUI extends MenuUI {
      */
     public void displayEvents(List<Map<String, Object>> eventList) {
         if (eventList.isEmpty()) {
-            System.out.println("There are no events scheduled");
+            System.out.println("There are no events to display");
         }
         else {
             System.out.println("------------------------Events------------------------");
@@ -34,17 +34,28 @@ public class EventUI extends MenuUI {
             int i = 1;
             for (Map<String, Object> data : eventList) {
                 sb.append("Event " + i + "\n");
-                sb.append("\"" + data.get("Title") + "\"" + "\n");
-                sb.append("Hosted by: " + userManager.getNameWithUUID((UUID)data.get("Speaker")) + "\n");
-                sb.append(data.get("StartTime") + " to " + data.get("EndTime") + "\n");
-                sb.append("Room: " + data.get("Room") + "\n");
-                sb.append(data.get("Registered") + "/" + data.get("Capacity") + " spots filled" + "\n");
+                formatEventData(sb, data);
                 System.out.print(sb);
                 System.out.println("------------------------------------------------------");
                 sb.setLength(0);
                 i += 1;
             }
         }
+    }
+
+    private void formatEventData(StringBuilder sb, Map<String, Object> data) {
+        sb.append("\"" + data.get("Title") + "\"" + "\n");
+        List<?> speakers = (List<?>) data.get("Speaker");
+        if (!(speakers.isEmpty())){
+            sb.append("Hosted by: ");
+            for (Object speakerUUID: speakers) {
+                sb.append(userManager.getNameWithUUID((UUID)speakerUUID));
+            }
+            sb.append("\n");
+        }
+        sb.append(data.get("StartTime") + " to " + data.get("EndTime") + "\n");
+        sb.append("Room: " + data.get("Room") + "\n");
+        sb.append(data.get("Registered") + "/" + data.get("Capacity") + " spots filled" + "\n");
     }
 
     /**
@@ -121,6 +132,16 @@ public class EventUI extends MenuUI {
      * Displays a message prompting the user for the event's title.
      */
     public void displayTitlePrompt() { System.out.println("Title: "); }
+
+    /**
+     * Displays a message asking whether the user would like to add a speaker to the event.
+     */
+    public void displayFirstSpeakerPrompt() { System.out.println("Add a speaker to this event? (Y/N)"); }
+
+    /**
+     * Displays a message asking whether the user would like to add another speaker to the event.
+     */
+    public void displayAnotherSpeakerPrompt() { System.out.println("Add another speaker to this event? (Y/N)"); }
 
     /**
      * Displays a message prompting the user for the speaker's username.
