@@ -147,6 +147,7 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
 
             List<Map<String, Object>> eventConflicts = eventManager.rescheduleEvent(index, startTime, duration);
             if (eventConflicts.isEmpty()) {
+                eventsData = eventManager.retrieveAllEvents();
                 eventUI.displayRescheduleSuccess();
             }
             else {
@@ -161,6 +162,7 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
         if(index != -1) {
             eventUI.displayCancelStart();
             eventManager.cancelEvent(index);
+            eventsData = eventManager.retrieveAllEvents();
             eventUI.displayCancelSuccess();
         }
     }
