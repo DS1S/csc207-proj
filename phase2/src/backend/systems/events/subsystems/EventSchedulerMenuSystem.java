@@ -49,7 +49,7 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
     protected void processInput(int index) {
         switch (index) {
             case (1):
-                eventUI.displayEvents(eventManager.retrieveAllEvents());
+                eventUI.displayEvents(eventsData);
                 break;
             case (2):
                 scheduleEvent();

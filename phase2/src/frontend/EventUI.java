@@ -26,7 +26,7 @@ public class EventUI extends MenuUI {
      */
     public void displayEvents(List<Map<String, Object>> eventList) {
         if (eventList.isEmpty()) {
-            System.out.println("There are no events to display");
+            System.out.println("\nThere are no events to display");
         }
         else {
             System.out.println("------------------------Events------------------------");

@@ -4,9 +4,7 @@ import backend.entities.Event;
 
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * A class for adding new Events to a schedule of events.
@@ -117,15 +115,8 @@ class EventScheduler implements Serializable {
     }
 
     private void removeDuplicateConflictedEvents(List<Event> events) {
-        List<Integer> dupPositions = new ArrayList<>();
-        for(int i = 0; i < events.size() - 1; i++) {
-            for(int j = i + 1; j < events.size(); j++) {
-                if (events.get(i).equals(events.get(j))) dupPositions.add(j);
-            }
-        }
-
-        for (int dupPos: dupPositions) {
-            events.remove(dupPos);
-        }
+        Set<Event> set = new LinkedHashSet<>(events);
+        events.clear();
+        events.addAll(set);
     }
 }
