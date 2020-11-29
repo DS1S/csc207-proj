@@ -3,6 +3,10 @@ package backend.systems.events.subsystems;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.EventUI;
+import utility.inputprocessors.IndexProcessor;
+import utility.inputprocessors.TimeIndexProcessor;
+
+import java.time.LocalTime;
 import java.util.UUID;
 
 public class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
@@ -37,7 +41,10 @@ public class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
     protected void processInput(int index) {
         switch (index) {
             case(1):
-                // TODO: Add event retrieval by time.
+                IndexProcessor<LocalTime> timeProcessor = new TimeIndexProcessor(input, eventUI);
+                LocalTime startTime = timeProcessor.processInput();
+                LocalTime endTime = timeProcessor.processInput();
+                eventUI.displayEvents(this.eventManager.retrieveEventsByTimeInterval(startTime, endTime));
                 break;
             case(2):
                 eventUI.displayEvents(this.eventManager.retrieveEventsBySpeaker(this.getSpeakerUUID()));

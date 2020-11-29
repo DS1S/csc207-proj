@@ -148,9 +148,9 @@ public class EventUI extends MenuUI {
     public void displayInvalidCapacity() { System.out.println("Invalid input: Capacity must be a number!"); }
 
     /**
-     * Displays a message prompting the user for the event's start time.
+     * Displays a message prompting the user for the event's time.
      */
-    public void displayTimePrompt() { System.out.println("Start Time (format HH:MM): "); }
+    public void displayTimePrompt() { System.out.println("Time (format HH:MM): "); }
 
     /**
      * Displays a message informing the user that they have entered an invalid time.
