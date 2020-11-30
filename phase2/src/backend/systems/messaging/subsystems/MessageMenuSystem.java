@@ -70,8 +70,8 @@ public abstract class MessageMenuSystem extends MenuSystem {
             recipients = askForUsernames();
         } while (recipients.contains(null));
 
-        String message = processMessageBody();
         String title = processTitle();
+        String message = processMessageBody();
         messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), recipients, message, title);
         inboxUI.sentPrompt();
     }
