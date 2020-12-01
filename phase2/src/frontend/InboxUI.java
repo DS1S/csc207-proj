@@ -32,7 +32,7 @@ public class InboxUI extends MenuUI {
             System.out.println("------------------------------------------------------");
             System.out.println("Message " + i);
             sb.append("From: " + sender + "\nTo: " + recipient + "\n\n");
-            sb.append(data.get("body") + "\n");
+            sb.append(data.get("title") + "\n");
             System.out.print(sb);
             System.out.println("------------------------------------------------------");
             i += 1;
