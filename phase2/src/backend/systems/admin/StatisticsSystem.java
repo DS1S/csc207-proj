@@ -22,6 +22,7 @@ public class StatisticsSystem extends MenuSystem {
     protected void processInput(int input) {
         switch (input) {
             case(1):
+
                 // Display top 5 most attended events, average number of people participating at events,
                 break;
             case(2):
@@ -31,12 +32,21 @@ public class StatisticsSystem extends MenuSystem {
                 // Display the top 5 speakers who spoke at the most events
                 break;
             case(4):
-                // go back to main menu
+                displayOptions();
                 break;
         }
     }
 
     //TODO: functions here to calculate stats, pass ints to UI
+    //Daily Logins
+    //Weekly Logins
+    //Monthly Logins
+    //topspeaker (5 array)
+    //topevent (5 array)
+    public List<Map<String, Object>> TopEventList() {
+        eventManager
+    }
+
 
     @Override
     public String toString() { return "Statistics"; }
