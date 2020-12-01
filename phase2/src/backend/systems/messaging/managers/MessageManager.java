@@ -89,18 +89,38 @@ public class MessageManager implements Serializable {
         return null;
     }
 
+    /**
+     * Sets the status of a message to read.
+     * @param userId UUID of the user whose inbox contains the message
+     * @param messageId UUID of the message
+     */
     public void setRead(UUID userId, UUID messageId){
         getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.read);
     }
 
+    /**
+     * Sets the status of a message to unread.
+     * @param userId UUID of the user whose inbox contains the message
+     * @param messageId UUID of the message
+     */
     public void setUnread(UUID userId, UUID messageId){
         getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.unread);
     }
 
+    /**
+     * Sets the status of a message to deleted.
+     * @param userId UUID of the user whose inbox contains the message
+     * @param messageId UUID of the message
+     */
     public void setDeleted(UUID userId, UUID messageId){
         getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.deleted);
     }
 
+    /**
+     * Sets the status of a message to archived.
+     * @param userId UUID of the user whose inbox contains the message
+     * @param messageId UUID of the message
+     */
     public void SetArchived(UUID userId, UUID messageId){
         getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.archived);
     }
