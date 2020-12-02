@@ -91,6 +91,6 @@ public abstract class User implements Serializable {
     /**
      * Gets the last logged in date for the user.
      */
-    protected LocalDateTime getLastLoggedIn(LocalDateTime lastLoggedIn) { return lastLoggedIn;}
+    public LocalDateTime getLastLoggedIn(LocalDateTime lastLoggedIn) { return lastLoggedIn;}
 
 }
