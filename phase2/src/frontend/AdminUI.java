@@ -34,7 +34,15 @@ public class AdminUI extends MenuUI{
     }
 
     public void displayMessageViewOptions(){
+        ArrayList<String> options = new ArrayList<>(){
+            {
+                add("View all messages sent by a user");
+                add("View all messages received by a user");
+            }
+        };
 
+        displayIndexPrompt();
+        displayOptions(options);
     }
 
     private List<String> getOptions(boolean[] perms){

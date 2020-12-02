@@ -25,6 +25,7 @@ public class AdminSystem extends MenuSystem {
         super();
         this.um = um;
         changeNumOptions(readyPerms());
+        adminUI = new AdminUI();
     }
 
     private int readyPerms(){

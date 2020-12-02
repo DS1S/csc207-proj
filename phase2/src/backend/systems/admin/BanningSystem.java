@@ -13,6 +13,7 @@ public class BanningSystem extends MenuSystem {
 
     public BanningSystem(UserManager um){
         super(2);
+        adminUI = new AdminUI();
         this.um = um;
     }
 
@@ -30,5 +31,6 @@ public class BanningSystem extends MenuSystem {
             return;
         }
         um.setUserBan(um.getUUIDWithUsername(username), index==1);
+        adminUI.displayBanSuccess(index==1, username);
     }
 }

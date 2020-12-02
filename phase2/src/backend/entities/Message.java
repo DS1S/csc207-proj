@@ -62,6 +62,12 @@ public class Message implements Serializable {
     }
 
     /**
+     * Gets the UUID of the message sender.
+     * @return The UUID of the person who sent this Message.
+     */
+    public UUID getSender() { return sender; }
+
+    /**
      * Returns a map whose values are the Message's properties corresponding to those properties in
      * string format.
      * @return A map whose values are Message properties.

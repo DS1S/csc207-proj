@@ -125,6 +125,23 @@ public class MessageManager implements Serializable {
         getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.archived);
     }
 
+    /**
+     * A method to get all a user's sent messages and parse them into a generic format for the caller.
+     * @param userID the UUID of the user whose sent messages are desired
+     * @return A list of message representations (maps) with all message info
+     */
+    public List<Map<String, Object>> getSentMessageData(UUID userID) {
+        List<Map<String, Object>> inboxData = new ArrayList<>();
+        for (List<Message> inbox : inboxes.values()) {
+            for (Message msg : inbox) {
+                if (msg.getSender() == userID) {
+                    inboxData.add(msg.extractData());
+                }
+            }
+        }
+        return inboxData;
+    }
+
     /*
     Potential use in phase 2
 
