@@ -113,6 +113,7 @@ public class UserManager implements Serializable {
      */
     public void setLoggedInUser(UUID userID) {
         this.loggedInUser = this.users.get(userID);
+        users.get(userID).setLastLoggedIn(LocalDateTime.now());
     }
 
     /**
