@@ -22,13 +22,13 @@ public class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
     }
 
     private UUID getSpeakerUUID() {
-        String username = this.askForString("This speaker's username");
-        UUID uuid = this.userManager.getUUIDWithUsername(username);
-        while (uuid == null) {
-            eventUI.displayInvalidSpeaker();
-            username = this.askForString("This speaker's username");
+        String username;
+        UUID uuid;
+        do{
+            eventUI.displaySpeakerPrompt();
+            username = this.askForString("Speaker's Username");
             uuid = this.userManager.getUUIDWithUsername(username);
-        }
+        }while(uuid == null);
         return uuid;
     }
 
@@ -53,5 +53,10 @@ public class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
                 eventUI.displayEvents(this.eventManager.retrieveEventsByAttendee(this.userManager.getLoggedInUserUUID()));
                 break;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Retrieve Events Based on Category";
     }
 }

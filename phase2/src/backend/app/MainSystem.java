@@ -16,6 +16,7 @@ import backend.systems.messaging.MessageSystem;
 import backend.systems.events.managers.EventManager;
 import backend.systems.events.EventSystem;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -29,7 +30,7 @@ class MainSystem extends MenuSystem {
     private final String[] eventManagerFilePaths = {"phase2/database/ESManagerCon1.ser",
                                                     "phase2/database/ESManagerCon2.ser",
                                                     "phase2/database/ESManagerCon3.ser"};
-    private final List<String> subSystemNames = new ArrayList<>();
+    private List<String> subSystemNames = new ArrayList<>();
 
     public MainSystem(){
         initializeSubSystems();
@@ -50,13 +51,15 @@ class MainSystem extends MenuSystem {
 
     private void initializeSubSystems() {
         UserManager userManager = initializeAuthenticationSystem();
-        List<EventManager> eventManagers = initializeConferenceSystem(userManager);
-
         subSystems.get(0).run();
+
+        List<EventManager> eventManagers = initializeConferenceSystem(userManager);
         initializeUserCreatorSystem(userManager);
         initializeMessageSystem(userManager, eventManagers);
-        convertSubSystemsToNames();
         initializeShutDownHook();
+
+        subSystemNames = convertSubSystemsToNames(subSystems);
+        subSystemNames.remove(0);
     }
 
     private UserManager initializeAuthenticationSystem() {
@@ -121,11 +124,6 @@ class MainSystem extends MenuSystem {
             TerminationWorker<Object> objSaver = new TerminationWorker<>(o, s);
             Runtime.getRuntime().addShutdownHook(objSaver);
         });
-    }
-
-    private void convertSubSystemsToNames(){
-        subSystems.forEach((integer, runnableSystem) -> subSystemNames.add(runnableSystem.toString()));
-        subSystemNames.remove(0);
     }
 }
 

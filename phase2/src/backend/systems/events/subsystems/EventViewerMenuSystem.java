@@ -43,4 +43,9 @@ class EventViewerMenuSystem extends EventMenuSystem {
                 break;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Event Viewer";
+    }
 }

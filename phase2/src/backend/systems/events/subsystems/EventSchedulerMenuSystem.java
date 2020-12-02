@@ -166,4 +166,9 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
             eventUI.displayCancelSuccess();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Event Scheduler";
+    }
 }
