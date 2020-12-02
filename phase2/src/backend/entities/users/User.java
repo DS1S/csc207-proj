@@ -94,7 +94,7 @@ public abstract class User implements Serializable {
     /**
      * Sets a new last logged in date for the user.
      */
-    protected void setLastLoggedIn(LocalDateTime lastLoggedIn) { this.lastLoggedIn = lastLoggedIn; }
+    public void setLastLoggedIn(LocalDateTime lastLoggedIn) { this.lastLoggedIn = lastLoggedIn; }
 
     /**
      * Gets the last logged in date for the user.
