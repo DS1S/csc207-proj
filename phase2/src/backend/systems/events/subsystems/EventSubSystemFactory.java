@@ -4,7 +4,7 @@ import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.EventUI;
 
-public class EventSubSytemFactory {
+public class EventSubSystemFactory {
 
     public EventMenuSystem createEventSubSystem(String systemName, EventManager eventManager, UserManager userManager,
                                                 EventUI eventUI, int numOptions){

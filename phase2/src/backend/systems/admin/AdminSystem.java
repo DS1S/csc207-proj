@@ -51,6 +51,16 @@ public class AdminSystem extends MenuSystem {
 
     @Override
     protected void processInput(int index) {
-
+        // TODO: maybe use subsystems?
+        switch (optionToPerm.get(index)){
+            case CAN_VIEW_STATS:
+                //StatisticsSystem statSys = new StatisticsSystem();
+                //statSys.run();
+                break;
+            case CAN_BAN_USERS:
+                break;
+            case CAN_SEE_ALL_MESSAGES:
+                break;
+        }
     }
 }

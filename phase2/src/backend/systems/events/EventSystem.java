@@ -1,7 +1,7 @@
 package backend.systems.events;
 
 import backend.systems.events.subsystems.EventMenuSystem;
-import backend.systems.events.subsystems.EventSubSytemFactory;
+import backend.systems.events.subsystems.EventSubSystemFactory;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import utility.RunnableSystem;
@@ -37,7 +37,7 @@ public class EventSystem implements RunnableSystem {
     public void run() {
         // TODO: Change it so EventSystem is actually running subsystems in parallel; otherwise it is an over glorified facade at this point.
         EventMenuSystem subsystem = null;
-        EventSubSytemFactory subSystemFactory = new EventSubSytemFactory();
+        EventSubSystemFactory subSystemFactory = new EventSubSystemFactory();
         if (userManager.loggedInHasPermission(PERMS.canSchedule)) {
             subsystem = subSystemFactory.createEventSubSystem("scheduler", eventManager, userManager,
                     eventUI, 5);

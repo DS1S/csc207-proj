@@ -35,6 +35,8 @@ public abstract class MenuSystem implements RunnableSystem {
         this.indexProcessor = new OptionIndexProcessor(input, numOptions);
     }
 
+    protected int getNumOptions(){ return numOptions; }
+
     /**
      * Runs a subsystem by asking for the required number of options and processing them.
      */
