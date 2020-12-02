@@ -16,11 +16,12 @@ public class MessageViewingSystem extends MenuSystem {
     private final Scanner scanner = new Scanner(System.in);
     private MessageManager messageManager;
 
-    public MessageViewingSystem(UserManager um){
+    public MessageViewingSystem(UserManager um, MessageManager messageManager){
         super(2);
         adminUI = new AdminUI();
         inboxUI = new InboxUI(um);
         this.um = um;
+        this.messageManager = messageManager;
     }
 
     @Override
