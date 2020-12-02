@@ -38,15 +38,12 @@ public class StatisticsSystem extends MenuSystem {
     }
 
     //TODO: functions here to calculate stats, pass ints to UI
+    //TODO: functions will be called from StatisticsCalculator use case class.
     //Daily Logins
     //Weekly Logins
     //Monthly Logins
     //topspeaker (5 array)
     //topevent (5 array)
-    public List<Map<String, Object>> TopEventList() {
-        eventManager
-    }
-
 
     @Override
     public String toString() { return "Statistics"; }
