@@ -1,5 +1,6 @@
 package backend.systems.messaging.managers;
 
+import backend.entities.STATUSES;
 import backend.entities.Message;
 
 import java.io.Serializable;
@@ -78,6 +79,51 @@ public class MessageManager implements Serializable {
         return inboxData;
     }
 
+
+    private Message getMessageById(UUID messageId, List<Message> messages){
+        for (Message message : messages){
+            if (message.getMessageId() == messageId){
+                return message;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Sets the status of a message to read.
+     * @param userId UUID of the user whose inbox contains the message
+     * @param messageId UUID of the message
+     */
+    public void setRead(UUID userId, UUID messageId){
+        getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.read);
+    }
+
+    /**
+     * Sets the status of a message to unread.
+     * @param userId UUID of the user whose inbox contains the message
+     * @param messageId UUID of the message
+     */
+    public void setUnread(UUID userId, UUID messageId){
+        getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.unread);
+    }
+
+    /**
+     * Sets the status of a message to deleted.
+     * @param userId UUID of the user whose inbox contains the message
+     * @param messageId UUID of the message
+     */
+    public void setDeleted(UUID userId, UUID messageId){
+        getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.deleted);
+    }
+
+    /**
+     * Sets the status of a message to archived.
+     * @param userId UUID of the user whose inbox contains the message
+     * @param messageId UUID of the message
+     */
+    public void SetArchived(UUID userId, UUID messageId){
+        getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.archived);
+    }
 
     /*
     Potential use in phase 2

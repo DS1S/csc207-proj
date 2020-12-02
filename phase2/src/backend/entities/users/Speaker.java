@@ -30,5 +30,7 @@ public class Speaker extends User {
         permissions.put(PERMS.canSignUpUser, false);
         permissions.put(PERMS.canSpeakAtTalk, true);
         permissions.put(PERMS.canViewStats, false);
+        permissions.put(PERMS.canBanUsers, false);
+        permissions.put(PERMS.canSeeAllMessages, false);
     }
 }

@@ -17,8 +17,8 @@ public class Message implements Serializable {
     private final UUID recipient;
     private final String body;
     private final LocalTime timeSent;
-    private boolean read;
-    private String title;
+    private STATUSES status;
+    private final String title;
 
     /**
      * Constructs a new Message with the information below.
@@ -35,9 +35,23 @@ public class Message implements Serializable {
         this.recipient = recipient;
         this.body = body;
         this.timeSent = timeSent;
-        this.read = false;
         this.title = title;
+        this.status = STATUSES.unread;
     }
+
+    /**
+     * Sets the status of a message.
+     * @param status message status from the STATUSES enum
+     */
+    public void setStatus(STATUSES status){
+        this.status = status;
+    }
+
+    /**
+     * Returns the UUID of a message.
+     * @return UUID of message
+     */
+    public UUID getMessageId(){return this.msgID;}
 
     /**
      * Gets the UUID of the message recipient.
@@ -45,14 +59,6 @@ public class Message implements Serializable {
      */
     public UUID getRecipient() {
         return recipient;
-    }
-
-    /**
-     * Sets a new boolean value to show whether or not the message has been read.
-     * @param x The boolean value that read gets set to.
-     */
-    public void setRead(boolean x) {
-        this.read = x;
     }
 
     /**
@@ -68,7 +74,6 @@ public class Message implements Serializable {
         messageData.put("recipient", recipient);
         messageData.put("body", body);
         messageData.put("timeSent", timeSent);
-        messageData.put("read", read);
         messageData.put("title", title);
 
         return messageData;

@@ -77,6 +77,9 @@ public class UserManager implements Serializable {
         return users.get(id).checkPassword(password);
     }
 
+    //TODO: doc
+    public boolean checkBannedWithUUID(UUID id) {return users.get(id).getIsBanned();}
+
     /**
      * Gets the UUID of a user with a username <username>
      * @param username The Username of the user.

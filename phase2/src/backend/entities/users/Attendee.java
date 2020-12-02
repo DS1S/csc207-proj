@@ -29,5 +29,7 @@ public class Attendee extends User {
         permissions.put(PERMS.canSignUpUser, false);
         permissions.put(PERMS.canSpeakAtTalk, false);
         permissions.put(PERMS.canViewStats, false);
+        permissions.put(PERMS.canBanUsers, false);
+        permissions.put(PERMS.canSeeAllMessages, false);
     }
 }

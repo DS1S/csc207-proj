@@ -9,8 +9,6 @@ import java.util.Map;
  * The class responsible for the main menu displayed to the user.
  */
 public class MainUI extends MenuUI{
-
-
     /**
      * Displays the main menu to the user.
      * @param subsystemNames The subsystems that implement the actions the users can take.
