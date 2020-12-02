@@ -42,6 +42,12 @@ public abstract class MessageMenuSystem extends MenuSystem {
             case(2):
                 processSendMessage();
                 break;
+            case(5):
+            case(6):
+            case(7):
+            case(8):
+                processMessageDeletion();
+                break;
         }
     }
 
@@ -74,6 +80,15 @@ public abstract class MessageMenuSystem extends MenuSystem {
         String message = processMessageBody();
         messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), recipients, message, title);
         inboxUI.sentPrompt();
+    }
+
+    private void processMessageDeletion() {
+        inboxUI.deletionPrompt();
+        String title = askForString("Title");
+        messageManager.deleteMessage(messageManager.getMessageIdByTitle(title,
+                messageManager.getInboxByUserId(userManager.getLoggedInUserUUID())),
+                messageManager.getInboxByUserId(userManager.getLoggedInUserUUID()));
+        inboxUI.deletedPrompt();
     }
 
     private List<UUID> askForUsernames() {

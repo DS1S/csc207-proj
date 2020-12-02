@@ -54,6 +54,12 @@ public class Message implements Serializable {
     public UUID getMessageId(){return this.msgID;}
 
     /**
+     * Returns the title of a message.
+     * @return title of message
+     */
+    public String getMessageTitle(){return this.title;}
+
+    /**
      * Gets the UUID of the message recipient.
      * @return The UUID of the person who received this Message.
      */

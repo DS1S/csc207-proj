@@ -106,10 +106,27 @@ public class InboxUI extends MenuUI {
 
     private void displayBaseInboxOptions() {
         System.out.println("\nWhat would you like to do?");
-        System.out.println("1. View Inbox.");
+        System.out.println("1. View inbox.");
+        System.out.println("5. View read messages.");
+        System.out.println("6. View unread messages.");
+        System.out.println("7. View archived messages.");
+        System.out.println("8. Delete a message.");
     }
+
+    /**
+     * Prompts the user to enter the title of the message they want to delete.
+     */
+    public void deletionPrompt() {
+        System.out.println("Enter the title of the message you wish to delete: "); }
 
     private void displayExitOption(int index) {
         System.out.println(index + ". Return to main menu");
+    }
+
+    /**
+     * Informs the user that their message was successfully deleted.
+     */
+    public void deletedPrompt() {
+        System.out.println("Message deleted!");
     }
 }

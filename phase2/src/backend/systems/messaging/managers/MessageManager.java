@@ -83,16 +83,47 @@ public class MessageManager implements Serializable {
      * Gets a message given the UUID of the message and a list of messages that contains the message.
      * @param messageId UUID of the message
      * @param messages a list of messages containing the desired message
-     * @return
+     * @return message corresponding to the UUID
      */
-    private Message getMessageById(UUID messageId, List<Message> messages){
-        for (Message message : messages){
-            if (message.getMessageId() == messageId){
+    public Message getMessageById(UUID messageId, List<Message> messages) {
+        for (Message message : messages) {
+            if (message.getMessageId() == messageId) {
                 return message;
             }
         }
         return null;
     }
+
+    /**
+     * Gets the UUID of a message given the message title.
+     * @param title title of the message
+     * @param messages list of messages containing the message
+     * @return UUID of the message
+     */
+    public UUID getMessageIdByTitle(String title, List<Message> messages) {
+        for (Message message : messages) {
+            if (message.getMessageTitle().equals(title)){
+                return message.getMessageId();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the inbox of a user given the user UUID.
+     * @param userId UUID of the user
+     * @return user's inbox
+     */
+    public List<Message> getInboxByUserId(UUID userId){ return inboxes.get(userId); }
+
+    /**
+     * Deletes a message from a list of messages.
+     * @param messageId UUID of the message to delete
+     * @param messages a list of messages containing the message to delete
+     */
+    public void deleteMessage(UUID messageId, List<Message> messages){
+            messages.remove(getMessageById(messageId, messages));
+        }
 
     /**
      * Sets the status of a message to read.
@@ -110,15 +141,6 @@ public class MessageManager implements Serializable {
      */
     public void setUnread(UUID userId, UUID messageId){
         getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.unread);
-    }
-
-    /**
-     * Sets the status of a message to deleted.
-     * @param userId UUID of the user whose inbox contains the message
-     * @param messageId UUID of the message
-     */
-    public void setDeleted(UUID userId, UUID messageId){
-        getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.deleted);
     }
 
     /**
