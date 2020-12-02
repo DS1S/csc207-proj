@@ -5,6 +5,5 @@ package backend.entities;
 public enum STATUSES {
     read,
     unread,
-    archived,
-    deleted
+    archived
 }

@@ -23,7 +23,7 @@ public class MessageSystem implements RunnableSystem {
      * Constructs a new messaging system with the information below.
      * @param messageManager The message manager used by the system.
      * @param userManager The user managed used by the system.
-     * @param eventManager The event manager used by the system.
+     * @param eventManagers The list of event managers used by the system.
      */
     public MessageSystem(MessageManager messageManager, UserManager userManager,
                          List<EventManager> eventManagers) {
