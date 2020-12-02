@@ -9,6 +9,34 @@ public class AdminUI extends MenuUI{
         displayOptions(getOptions(perms));
     }
 
+    public void displayBanOptions(){
+        ArrayList<String> options = new ArrayList<>(){
+            {
+                add("Unban user");
+                add("Ban user");
+            }
+        };
+
+        displayIndexPrompt();
+        displayOptions(options);
+    }
+
+    public void promptUserName(){
+        System.out.println("Please enter the name of the user:");
+    }
+
+    public void displayInvalidUser(){
+        System.out.println("A user by that name was not found!");
+    }
+
+    public void displayBanSuccess(boolean banned, String username){
+        System.out.println(username +  " has been successfully " + (banned?"banned":"unbanned"));
+    }
+
+    public void displayMessageViewOptions(){
+
+    }
+
     private List<String> getOptions(boolean[] perms){
         final int CAN_VIEW_STATS = 0;
         final int CAN_BAN_USERS = 1;

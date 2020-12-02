@@ -75,6 +75,7 @@ public abstract class User implements Serializable {
     // TODO: doc
     public boolean getIsBanned(){ return this.isBanned;}
 
+    public void setBanned(boolean banned){ this.isBanned = banned; }
 
     /**
      * Returns the hashmap of permissions of a user; permission keys are based on the
