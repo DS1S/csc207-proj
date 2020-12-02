@@ -108,7 +108,14 @@ class MainSystem extends MenuSystem {
 
     private void initializeUserCreatorSystem(UserManager userManager) {
         if (userManager.loggedInHasPermission(PERMS.canSignUpUser)) {
-            RunnableSystem signUpSystem = new SignupSystem(userManager, "speaker");
+            ArrayList<String> types = new ArrayList<>(){
+                {
+                    add("speaker");
+                    add("organizer");
+                    add("attendee");
+                }
+            };
+            RunnableSystem signUpSystem = new SignupSystem(userManager, types);
             subSystems.put(subSystems.size(), signUpSystem);
         }
     }
