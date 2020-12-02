@@ -27,15 +27,10 @@ public class LoginSystem implements IRunnable {
         }
 
         if (um.checkPasswordWithUUID(um.getUUIDWithUsername(username), password.trim())) {
-            if(um.checkBannedWithUUID(um.getUUIDWithUsername(username))){
-                return "Banned User!";
-            }
-
             um.setLoggedInUser(um.getUUIDWithUsername(username));
         } else {
             return "Invalid Password!";
         }
-
         return "";
     }
 

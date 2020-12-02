@@ -20,7 +20,6 @@ public abstract class User implements Serializable {
     private final String name;
     private final String username;
     private String password;
-    private Boolean isBanned;
     protected Map<PERMS, Boolean> permissions;
 
     /**
@@ -35,7 +34,6 @@ public abstract class User implements Serializable {
         this.username = username;
         this.password = password;
         permissions = new HashMap<>();
-        this.isBanned = false;
     }
 
     /**
@@ -74,10 +72,6 @@ public abstract class User implements Serializable {
      * PERMS Enum.
      * @return The mapping of permissions for the user.
      */
-
-    // TODO: doc
-    public boolean getIsBanned(){ return this.isBanned;}
-
     public Map<PERMS, Boolean> getPermissions() {
         return permissions;
     }
