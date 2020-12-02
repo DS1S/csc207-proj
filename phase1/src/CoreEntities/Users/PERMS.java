@@ -9,5 +9,8 @@ public enum PERMS {
     canSignUpUser,
     canBeMessaged,
     canSpeakAtTalk,
-    canSignUpEvent
+    canSignUpEvent,
+    canBanUsers,
+    canViewStats,
+    canSeeAllMessages
 }
