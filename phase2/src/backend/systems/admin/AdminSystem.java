@@ -1,5 +1,6 @@
 package backend.systems.admin;
 
+import backend.systems.events.managers.EventManager;
 import backend.systems.messaging.managers.MessageManager;
 import backend.entities.users.PERMS;
 import backend.systems.MenuSystem;
@@ -12,6 +13,7 @@ import java.util.Map;
 public class AdminSystem extends MenuSystem {
     private UserManager um;
     private MessageManager messageManager;
+    private EventManager em;
     private AdminUI adminUI;
     private boolean[] perms;
     private Map<Integer, Integer> optionToPerm;
@@ -21,10 +23,11 @@ public class AdminSystem extends MenuSystem {
     private final int CAN_BAN_USERS = 1;
     private final int CAN_SEE_ALL_MESSAGES = 2;
 
-    public AdminSystem(UserManager um, MessageManager messageManager){
+    public AdminSystem(UserManager um, MessageManager messageManager, EventManager eventManager){
         super();
         this.um = um;
         this.messageManager = messageManager;
+        this.em = eventManager;
         changeNumOptions(readyPerms());
         adminUI = new AdminUI();
         optionToPerm = new HashMap<>();
@@ -56,9 +59,8 @@ public class AdminSystem extends MenuSystem {
     protected void processInput(int index) {
         switch (optionToPerm.get(index)){
             case CAN_VIEW_STATS:
-                // TODO: statistics system
-                //StatisticsSystem statSys = new StatisticsSystem();
-                //statSys.run();
+                StatisticsSystem statSys = new StatisticsSystem(em, um);
+                statSys.run();
                 break;
             case CAN_BAN_USERS:
                 BanningSystem banSys = new BanningSystem(um);
