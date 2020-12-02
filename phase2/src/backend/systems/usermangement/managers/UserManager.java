@@ -4,6 +4,7 @@ import backend.entities.users.PERMS;
 import backend.entities.users.User;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,10 @@ public class UserManager implements Serializable {
     //TODO: doc
     public boolean checkBannedWithUUID(UUID id) {return users.get(id).getIsBanned();}
 
+    public void setUserBan(UUID id, boolean banned) {
+        users.get(id).setBanned(banned);
+    }
+
     /**
      * Gets the UUID of a user with a username <username>
      * @param username The Username of the user.
@@ -153,6 +158,18 @@ public class UserManager implements Serializable {
      */
     public List<UUID> getUUIDs() {
         return new ArrayList<>(this.users.keySet());
+    }
+
+    /**
+     * Check if a User has logged in between the time stated
+     * @param userID The UUID of the User to check.
+     * @param StartTime The earliest time someone has logged in
+     * @param EndTime The latest time someone has logged in
+     * @return Boolean True if User has logged in between StartTime and EndTime inclusively
+     */
+    public boolean checkUserLoggedIn(UUID userID, LocalDateTime StartTime, LocalDateTime EndTime) {
+        LocalDateTime time = this.users.get(userID).getLastLoggedIn();
+        return !StartTime.isBefore(time) && !EndTime.isAfter(time);
     }
 
 }

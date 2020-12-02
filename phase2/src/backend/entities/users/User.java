@@ -75,6 +75,7 @@ public abstract class User implements Serializable {
     // TODO: doc
     public boolean getIsBanned(){ return this.isBanned;}
 
+    public void setBanned(boolean banned){ this.isBanned = banned; }
 
     /**
      * Returns the hashmap of permissions of a user; permission keys are based on the
@@ -94,4 +95,10 @@ public abstract class User implements Serializable {
      * Sets a new last logged in date for the user.
      */
     protected void setLastLoggedIn(LocalDateTime lastLoggedIn) { this.lastLoggedIn = lastLoggedIn; }
+
+    /**
+     * Gets the last logged in date for the user.
+     */
+    public LocalDateTime getLastLoggedIn() { return lastLoggedIn;}
+
 }

@@ -1,17 +1,17 @@
 package backend.systems.admin;
 
+import backend.systems.messaging.managers.MessageManager;
 import backend.entities.users.PERMS;
 import backend.systems.MenuSystem;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AdminUI;
-import utility.inputprocessors.OptionIndexProcessor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AdminSystem extends MenuSystem {
     private UserManager um;
+    private MessageManager messageManager;
     private AdminUI adminUI;
     private boolean[] perms;
     private Map<Integer, Integer> optionToPerm;
@@ -21,10 +21,13 @@ public class AdminSystem extends MenuSystem {
     private final int CAN_BAN_USERS = 1;
     private final int CAN_SEE_ALL_MESSAGES = 2;
 
-    public AdminSystem(UserManager um){
+    public AdminSystem(UserManager um, MessageManager messageManager){
         super();
         this.um = um;
+        this.messageManager = messageManager;
         changeNumOptions(readyPerms());
+        adminUI = new AdminUI();
+        optionToPerm = new HashMap<>();
     }
 
     private int readyPerms(){
@@ -51,15 +54,19 @@ public class AdminSystem extends MenuSystem {
 
     @Override
     protected void processInput(int index) {
-        // TODO: maybe use subsystems?
         switch (optionToPerm.get(index)){
             case CAN_VIEW_STATS:
+                // TODO: statistics system
                 //StatisticsSystem statSys = new StatisticsSystem();
                 //statSys.run();
                 break;
             case CAN_BAN_USERS:
+                BanningSystem banSys = new BanningSystem(um);
+                banSys.run();
                 break;
             case CAN_SEE_ALL_MESSAGES:
+                MessageViewingSystem msgViewSys = new MessageViewingSystem(um, messageManager);
+                msgViewSys.run();
                 break;
         }
     }
