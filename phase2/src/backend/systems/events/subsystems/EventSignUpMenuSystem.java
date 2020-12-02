@@ -71,4 +71,9 @@ class EventSignUpMenuSystem extends EventMenuSystem {
             eventUI.displayCancelSignupSuccess();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Event Sign Up";
+    }
 }

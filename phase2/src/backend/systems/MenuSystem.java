@@ -5,6 +5,9 @@ import utility.RunnableSystem;
 import utility.inputprocessors.IndexProcessor;
 import utility.inputprocessors.OptionIndexProcessor;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -26,8 +29,7 @@ public abstract class MenuSystem implements RunnableSystem {
     }
 
     public MenuSystem(){
-        this.numOptions = 1;
-        this.indexProcessor = new OptionIndexProcessor(input, numOptions);
+        this(1);
     }
 
     protected void changeNumOptions(int numOptions){
@@ -88,5 +90,11 @@ public abstract class MenuSystem implements RunnableSystem {
             else if (string.equalsIgnoreCase("N")) return false;
             else errorUI.displayError("Invalid entry! Please input Y or N.");
         }
+    }
+
+    protected List<String> convertSubSystemsToNames(Map<Integer, RunnableSystem> subSystems){
+        List<String> subSystemNames = new ArrayList<>();
+        subSystems.forEach((integer, runnableSystem) -> subSystemNames.add(runnableSystem.toString()));
+        return subSystemNames;
     }
 }

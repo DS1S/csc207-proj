@@ -1,6 +1,5 @@
 package utility.models;
 
-import backend.entities.Conference;
 import backend.systems.conference.ConferenceManager;
 import backend.systems.events.managers.EventManager;
 import utility.filehandling.FileSerializer;
@@ -50,5 +49,6 @@ public class ModelCreator {
         eventManagerFileSerializer2.saveObject(eventManager2);
         eventManagerFileSerializer3.saveObject(eventManager3);
         messageManagerFileSerializer.saveObject(messageManager);
+
     }
 }

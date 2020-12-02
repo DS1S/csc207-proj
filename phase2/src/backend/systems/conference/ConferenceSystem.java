@@ -8,9 +8,9 @@ import java.util.List;
 
 public class ConferenceSystem extends MenuSystem {
 
-    private List<EventSystem> eventSystems;
-    private ConferenceManager conferenceManager;
-    private MenuUI conferenceUI;
+    private final List<EventSystem> eventSystems;
+    private final ConferenceManager conferenceManager;
+    private final MenuUI conferenceUI;
 
     public ConferenceSystem(List<EventSystem> eventSystems, ConferenceManager conferenceManager){
         super(conferenceManager.getNumberOfConferences() + 1);
