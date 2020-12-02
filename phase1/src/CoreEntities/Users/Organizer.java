@@ -25,9 +25,6 @@ public class Organizer extends User {
         permissions.put(PERMS.canSignUpEvent, false);
         permissions.put(PERMS.canSignUpUser, true);
         permissions.put(PERMS.canSpeakAtTalk, false);
-        permissions.put(PERMS.canBanUsers, false);
-        permissions.put(PERMS.canViewStats, true);
-        permissions.put(PERMS.canSeeAllMessages, false);
     }
 }
 
