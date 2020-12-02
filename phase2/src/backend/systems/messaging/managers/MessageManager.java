@@ -79,7 +79,12 @@ public class MessageManager implements Serializable {
         return inboxData;
     }
 
-
+    /**
+     * Gets a message given the UUID of the message and a list of messages that contains the message.
+     * @param messageId UUID of the message
+     * @param messages a list of messages containing the desired message
+     * @return
+     */
     private Message getMessageById(UUID messageId, List<Message> messages){
         for (Message message : messages){
             if (message.getMessageId() == messageId){
