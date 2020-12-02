@@ -10,5 +10,7 @@ public enum PERMS {
     canBeMessaged,
     canSpeakAtTalk,
     canSignUpEvent,
-    canViewStats
+    canViewStats,
+    canBanUsers,
+    canSeeAllMessages
 }

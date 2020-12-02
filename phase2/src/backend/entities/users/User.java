@@ -22,6 +22,7 @@ public abstract class User implements Serializable {
     private String password;
     protected Map<PERMS, Boolean> permissions;
     public LocalDateTime lastLoggedIn;
+    private Boolean isBanned;
 
     /**
      * Creates a User Object with a set name, user name, and password.
@@ -36,6 +37,7 @@ public abstract class User implements Serializable {
         this.password = password;
         permissions = new HashMap<>();
         this.lastLoggedIn = registeredTime;
+        this.isBanned = false;
     }
 
     /**
@@ -68,6 +70,11 @@ public abstract class User implements Serializable {
      * @return The full name of the user.
      */
     public String getName() { return this.name; }
+
+
+    // TODO: doc
+    public boolean getIsBanned(){ return this.isBanned;}
+
 
     /**
      * Returns the hashmap of permissions of a user; permission keys are based on the
