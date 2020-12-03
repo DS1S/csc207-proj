@@ -36,10 +36,19 @@ public class AdminUI extends MenuUI{
             {
                 add("View all messages sent by a user");
                 add("View all messages received by a user");
+                add("Delete a user's message");
             }
         };
 
         displayOptions(options);
+    }
+
+    public void displayDeleteFailure(){
+        System.out.println("Message was not found!");
+    }
+
+    public void displayNoMail(){
+        System.out.println("User has no mail!");
     }
 
     private List<String> getOptions(boolean[] perms){
@@ -56,7 +65,7 @@ public class AdminUI extends MenuUI{
             options.add("Ban a User");
         }
         if (perms[CAN_SEE_ALL_MESSAGES]) {
-            options.add("View a User's Messages");
+            options.add("View/Manage a User's Messages");
         }
         return options;
     }

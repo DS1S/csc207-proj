@@ -55,6 +55,10 @@ public class MessageManager implements Serializable {
         return inboxes.containsKey(userID);
     }
 
+    public boolean userHasMail(UUID userID) {
+        return userHasInbox(userID) && (!inboxes.get(userID).isEmpty());
+    }
+
     /**
      * Maps the given UUID to an empty list in inboxes.
      * @param userID The UUID of the user.
@@ -109,6 +113,15 @@ public class MessageManager implements Serializable {
         return null;
     }
 
+    public UUID getMessageIdByTitle(String title, UUID userID) {
+        for (Message message : inboxes.get(userID)) {
+            if (message.getMessageTitle().equals(title)){
+                return message.getMessageId();
+            }
+        }
+        return null;
+    }
+
     /**
      * Gets the inbox of a user given the user UUID.
      * @param userId UUID of the user
@@ -124,6 +137,14 @@ public class MessageManager implements Serializable {
     public void deleteMessage(UUID messageId, List<Message> messages){
             messages.remove(getMessageById(messageId, messages));
         }
+
+    public boolean deleteMessage(UUID messageId, UUID userid){
+        if (inboxes.get(userid).contains(getMessageById(messageId, inboxes.get(userid)))){
+            inboxes.get(userid).remove(getMessageById(messageId, inboxes.get(userid)));
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Sets the status of a message to read.
