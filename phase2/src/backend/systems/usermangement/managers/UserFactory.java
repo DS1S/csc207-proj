@@ -1,11 +1,9 @@
 package backend.systems.usermangement.managers;
 
-import backend.entities.users.Attendee;
-import backend.entities.users.Organizer;
-import backend.entities.users.Speaker;
-import backend.entities.users.User;
+import backend.entities.users.*;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -30,6 +28,8 @@ public class UserFactory {
                 return new Attendee(name, username, password, LocalDateTime.now());
             case "organizer":
                 return new Organizer(name, username, password, LocalDateTime.now());
+            case "admin":
+                return new Admin(name, username, password, LocalDateTime.now());
         }
         return null;
     }

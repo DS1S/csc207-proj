@@ -28,9 +28,9 @@ public class AdminSystem extends MenuSystem {
         this.um = um;
         this.messageManager = messageManager;
         this.em = eventManager;
-        changeNumOptions(readyPerms());
         adminUI = new AdminUI();
         optionToPerm = new HashMap<>();
+        changeNumOptions(readyPerms() + 1);
     }
 
     private int readyPerms(){

@@ -15,6 +15,8 @@ public class EventSubSystemFactory {
                 return new EventSignUpMenuSystem(eventManager, userManager, eventUI, numOptions);
             case "viewer":
                 return new EventViewerMenuSystem(eventManager, userManager, eventUI, numOptions);
+            case "retriever":
+                return new EventCategoryRetrieverMenuSystem(eventManager, userManager, eventUI, numOptions);
             default:
                 return null;
         }

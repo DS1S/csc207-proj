@@ -2,6 +2,7 @@ package backend.app;
 
 import backend.entities.users.PERMS;
 import backend.systems.MenuSystem;
+import backend.systems.admin.AdminSystem;
 import backend.systems.conference.ConferenceManager;
 import backend.systems.conference.ConferenceSystem;
 import frontend.MainUI;
@@ -55,7 +56,8 @@ class MainSystem extends MenuSystem {
 
         List<EventManager> eventManagers = initializeConferenceSystem(userManager);
         initializeUserCreatorSystem(userManager);
-        initializeMessageSystem(userManager, eventManagers);
+        MessageManager messageManager = initializeMessageSystem(userManager, eventManagers);
+        initializeAdminSystem(userManager, eventManagers.get(0), messageManager);
         initializeShutDownHook();
 
         subSystemNames = convertSubSystemsToNames(subSystems);
@@ -71,7 +73,7 @@ class MainSystem extends MenuSystem {
         return uManager;
     }
 
-    private void initializeMessageSystem(UserManager userManager, List<EventManager> eventManagers) {
+    private MessageManager initializeMessageSystem(UserManager userManager, List<EventManager> eventManagers) {
         String filePath = "phase2/database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
@@ -79,6 +81,7 @@ class MainSystem extends MenuSystem {
         if(!msManager.userHasInbox(userManager.getLoggedInUserUUID()))
             msManager.addBlankInbox(userManager.getLoggedInUserUUID());
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size());
+        return msManager;
     }
 
     private List<EventManager> initializeConferenceSystem(UserManager userManager){
@@ -108,7 +111,7 @@ class MainSystem extends MenuSystem {
 
     private void initializeUserCreatorSystem(UserManager userManager) {
         if (userManager.loggedInHasPermission(PERMS.canSignUpUser)) {
-            ArrayList<String> types = new ArrayList<>(){
+            ArrayList<String> types = new ArrayList(){
                 {
                     add("speaker");
                     add("organizer");
@@ -117,6 +120,14 @@ class MainSystem extends MenuSystem {
             };
             RunnableSystem signUpSystem = new SignupSystem(userManager, types);
             subSystems.put(subSystems.size(), signUpSystem);
+        }
+    }
+
+    private void initializeAdminSystem(UserManager userManager, EventManager eventManager,
+                                       MessageManager messageManager){
+        if(userManager.loggedInHasPermission(PERMS.canBanUsers) || userManager.loggedInHasPermission(PERMS.canViewStats)){
+            RunnableSystem adminSystem = new AdminSystem(userManager, messageManager, eventManager);
+            subSystems.put(subSystems.size(), adminSystem);
         }
     }
 

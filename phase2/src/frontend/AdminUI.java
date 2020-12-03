@@ -10,7 +10,7 @@ public class AdminUI extends MenuUI{
     }
 
     public void displayBanOptions(){
-        ArrayList<String> options = new ArrayList<>(){
+        ArrayList<String> options = new ArrayList(){
             {
                 add("Unban user");
                 add("Ban user");
@@ -34,7 +34,7 @@ public class AdminUI extends MenuUI{
     }
 
     public void displayMessageViewOptions(){
-        ArrayList<String> options = new ArrayList<>(){
+        ArrayList<String> options = new ArrayList(){
             {
                 add("View all messages sent by a user");
                 add("View all messages received by a user");
