@@ -24,6 +24,8 @@ public class BanningSystem extends MenuSystem {
 
     @Override
     protected void processInput(int index) {
+        if (index == getNumOptions()) { return; }
+
         index--;
         adminUI.promptUserName();
         String username = scanner.nextLine();
