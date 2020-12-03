@@ -5,7 +5,6 @@ import java.util.List;
 
 public class AdminUI extends MenuUI{
     public void displayAdminOptions(boolean[] perms){
-        displayIndexPrompt();
         displayOptions(getOptions(perms));
     }
 
@@ -17,7 +16,6 @@ public class AdminUI extends MenuUI{
             }
         };
 
-        displayIndexPrompt();
         displayOptions(options);
     }
 
@@ -41,7 +39,6 @@ public class AdminUI extends MenuUI{
             }
         };
 
-        displayIndexPrompt();
         displayOptions(options);
     }
 
