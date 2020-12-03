@@ -12,7 +12,7 @@ public class BanningSystem extends MenuSystem {
     private final Scanner scanner = new Scanner(System.in);
 
     public BanningSystem(UserManager um){
-        super(2);
+        super(3);
         adminUI = new AdminUI();
         this.um = um;
     }
@@ -24,6 +24,7 @@ public class BanningSystem extends MenuSystem {
 
     @Override
     protected void processInput(int index) {
+        index--;
         adminUI.promptUserName();
         String username = scanner.nextLine();
         if (um.getUUIDWithUsername(username) == null){

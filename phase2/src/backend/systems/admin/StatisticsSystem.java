@@ -12,7 +12,7 @@ public class StatisticsSystem extends MenuSystem {
     private final StatisticsCalculator statisticsCalculator;
 
     public StatisticsSystem(EventManager eventManager, UserManager userManager) {
-        super(3);
+        super(4);
         this.statisticsUI = new StatisticsUI(userManager);
         this.statisticsCalculator = new StatisticsCalculator(eventManager, userManager);
     }

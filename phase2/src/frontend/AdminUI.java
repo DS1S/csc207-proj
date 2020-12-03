@@ -12,8 +12,8 @@ public class AdminUI extends MenuUI{
     public void displayBanOptions(){
         ArrayList<String> options = new ArrayList(){
             {
-                add("Ban user");
                 add("Unban user");
+                add("Ban user");
             }
         };
 

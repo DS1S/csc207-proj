@@ -17,7 +17,7 @@ public class MessageViewingSystem extends MenuSystem {
     private MessageManager messageManager;
 
     public MessageViewingSystem(UserManager um, MessageManager messageManager){
-        super(2);
+        super(3);
         adminUI = new AdminUI();
         inboxUI = new InboxUI(um);
         this.um = um;
