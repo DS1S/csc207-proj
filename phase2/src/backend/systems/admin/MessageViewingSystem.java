@@ -39,10 +39,10 @@ public class MessageViewingSystem extends MenuSystem {
         }
 
         switch(index){
-            case 0:
+            case 1:
                 inboxUI.displayInbox(messageManager.getSentMessageData(um.getUUIDWithUsername(username)));
                 break;
-            case 1:
+            case 2:
                 inboxUI.displayInbox(messageManager.getInboxData(um.getUUIDWithUsername(username)));
                 break;
         }

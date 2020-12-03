@@ -57,7 +57,7 @@ public class AdminSystem extends MenuSystem {
 
     @Override
     protected void processInput(int index) {
-        switch (optionToPerm.get(index)){
+        switch (optionToPerm.get(index-1)){
             case CAN_VIEW_STATS:
                 StatisticsSystem statSys = new StatisticsSystem(em, um);
                 statSys.run();
