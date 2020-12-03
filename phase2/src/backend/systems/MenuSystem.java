@@ -48,7 +48,8 @@ public abstract class MenuSystem implements RunnableSystem {
         do{
             displayOptions();
             option = indexProcessor.processInput();
-            processInput(option);
+            if(option != numOptions)
+                processInput(option);
         }while(option != numOptions);
     }
 
