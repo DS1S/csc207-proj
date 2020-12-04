@@ -1,5 +1,6 @@
 package frontend;
 import backend.systems.usermangement.managers.UserManager;
+import backend.systems.messaging.managers.MessageManager;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -8,24 +9,28 @@ import java.util.UUID;
  * Represents a InboxUI used for the message system UI.*/
 public class InboxUI extends MenuUI {
     private UserManager userManager;
+    private MessageManager messageManager;
 
     /**
      * Constructs a new instance of InboxUI using the given parameters.
+     *
      * @param userManager The user manager used by the UI.
      */
-    public InboxUI(UserManager userManager) {
+    public InboxUI(UserManager userManager, MessageManager messageManager) {
         this.userManager = userManager;
+        this.messageManager = messageManager;
     }
 
     /**
      * Displays the user's inbox and a message indicating that their inbox is empty if their inbox is
      * empty.
+     *
      * @param inboxData The user's inbox data.
      */
     public void displayInbox(List<Map<String, Object>> inboxData) {
         int i = 1;
 
-        for(Map<String, Object> data : inboxData) {
+        for (Map<String, Object> data : inboxData) {
             StringBuilder sb = new StringBuilder();
             String recipient = userManager.getUsernameWithUUID((UUID) data.get("recipient"));
             String sender = userManager.getUsernameWithUUID((UUID) data.get("sender"));
@@ -38,7 +43,9 @@ public class InboxUI extends MenuUI {
             i += 1;
         }
 
-        if (inboxData.size() == 0) { System.out.println("Your inbox is empty! :("); }
+        if (inboxData.size() == 0) {
+            System.out.println("Your inbox is empty! :(");
+        }
     }
 
     /**
@@ -102,31 +109,58 @@ public class InboxUI extends MenuUI {
     /**
      * Prompts the user to enter talk(s).
      */
-    public void talksPrompt() { System.out.println("Enter Talks: "); }
+    public void talksPrompt() {
+        System.out.println("Enter Talks: ");
+    }
 
     private void displayBaseInboxOptions() {
         System.out.println("\nWhat would you like to do?");
         System.out.println("1. View inbox.");
-        System.out.println("5. View read messages.");
-        System.out.println("6. View unread messages.");
-        System.out.println("7. View archived messages.");
+        System.out.println("5. View a message.");
+        System.out.println("6. Mark a message as unread.");
+        System.out.println("7. Archive a message..");
         System.out.println("8. Delete a message.");
+        System.out.println("9. View archived messages.");
     }
 
     /**
      * Prompts the user to enter the title of the message they want to delete.
      */
     public void deletionPrompt() {
-        System.out.println("Enter the title of the message you wish to delete: "); }
-
-    private void displayExitOption(int index) {
-        System.out.println(index + ". Return to main menu");
+        System.out.println("Enter the title of the message you wish to delete: ");
     }
 
     /**
-     * Informs the user that their message was successfully deleted.
+     * Prompts the user to enter the title of the message they want to view.
      */
-    public void deletedPrompt() {
-        System.out.println("Message deleted!");
+    public void viewMessagePrompt() {
+        System.out.println("Enter the title of the message you wish to view: ");
     }
-}
+
+    /**
+     * Displays to the user the message that they wanted to view.
+     */
+    public void displayMessage() {
+        String body = messageManager.getToDisplay();
+        System.out.println(body);
+    }
+
+    public void markMessageUnreadPrompt(){
+        System.out.println("Enter the title of the message you wish to mark as unread: ");
+    }
+
+    public void archiveMessagePrompt() {
+        System.out.println("Enter the title of the message you wish to archive: ");
+    }
+
+    private void displayExitOption ( int index){
+        System.out.println(index + ". Return to main menu");
+    }
+
+        /**
+         * Informs the user that their message was successfully deleted.
+         */
+        public void deletedPrompt(){
+            System.out.println("Message deleted!");
+        }
+    }

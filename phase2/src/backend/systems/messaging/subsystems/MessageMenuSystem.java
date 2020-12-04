@@ -26,7 +26,7 @@ public abstract class MessageMenuSystem extends MenuSystem {
         super(numOptions);
         this.userManager = userManager;
         this.messageManager = messageManager;
-        this.inboxUI = new InboxUI(userManager);
+        this.inboxUI = new InboxUI(userManager, messageManager);
     }
 
     /**
@@ -43,6 +43,10 @@ public abstract class MessageMenuSystem extends MenuSystem {
                 processSendMessage();
                 break;
             case(5):
+                processMessageViewing();
+                inboxUI.displayMessage();
+                messageManager.setToDisplay("");
+                break;
             case(6):
             case(7):
             case(8):
@@ -89,6 +93,16 @@ public abstract class MessageMenuSystem extends MenuSystem {
                 messageManager.getInboxByUserId(userManager.getLoggedInUserUUID())),
                 messageManager.getInboxByUserId(userManager.getLoggedInUserUUID()));
         inboxUI.deletedPrompt();
+    }
+
+    private void processMessageViewing() {
+        inboxUI.viewMessagePrompt();
+        String title = askForString("Title");
+        UUID userId = userManager.getLoggedInUserUUID();
+        messageManager.setRead(userId, messageManager.getMessageIdByTitle(title,
+                        messageManager.getInboxByUserId(userId)));
+        String body = messageManager.getBodyByTitle(title, messageManager.getInboxByUserId(userId));
+        messageManager.setToDisplay(body);
     }
 
     private List<UUID> askForUsernames() {
