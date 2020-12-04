@@ -49,8 +49,8 @@ public class MessageViewingSystem extends MenuSystem {
                 break;
             case 3:
                 inboxUI.displayInbox(messageManager.getInboxData(um.getUUIDWithUsername(username)));
+
                 if (!messageManager.userHasMail(um.getUUIDWithUsername(username))) {
-                    adminUI.displayNoMail();
                     return;
                 }
 

@@ -72,4 +72,9 @@ public class AdminSystem extends MenuSystem {
                 break;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Admin Panel";
+    }
 }

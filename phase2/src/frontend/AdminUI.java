@@ -47,10 +47,6 @@ public class AdminUI extends MenuUI{
         System.out.println("Message was not found!");
     }
 
-    public void displayNoMail(){
-        System.out.println("User has no mail!");
-    }
-
     private List<String> getOptions(boolean[] perms){
         final int CAN_VIEW_STATS = 0;
         final int CAN_BAN_USERS = 1;

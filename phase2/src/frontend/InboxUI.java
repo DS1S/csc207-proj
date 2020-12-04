@@ -44,7 +44,7 @@ public class InboxUI extends MenuUI {
         }
 
         if (inboxData.size() == 0) {
-            System.out.println("Your inbox is empty! :(");
+            System.out.println("No mail in inbox! :(");
         }
     }
 

@@ -44,6 +44,7 @@ public class StatisticsUI {
         System.out.println("--------------------Top 5 Speakers--------------------");
         for (String speaker: speakerNames) {
             System.out.println("#" + i + ": " + speaker);
+            i += 1;
         }
     }
 

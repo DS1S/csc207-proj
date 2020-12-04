@@ -16,7 +16,7 @@ public class StatisticsCalculator{
         this.userManager = userManager;
     }
 
-    public void bubbleSort(List<Integer> arr, List<Object> arr1) {
+    private void ParallelSort(List<Integer> arr, List<Object> arr1) {
         int n = arr.size();
         for (int i = 0; i < n-1; i++)
             for (int j = 0; j < n-i-1; j++)
@@ -37,7 +37,9 @@ public class StatisticsCalculator{
         for (Map<String, Object> eventData : eventsData) {
             numberofAttendees.add((int) eventData.get("Registered"));
         }
-        return numberofAttendees.stream().mapToInt(Integer::intValue).sum() / numberofAttendees.size();
+        if(numberofAttendees.size() != 0)
+            return numberofAttendees.stream().mapToInt(Integer::intValue).sum() / numberofAttendees.size();
+        return 0;
     }
 
     public List<Map<String, Object>> Top5Events() {
@@ -49,7 +51,7 @@ public class StatisticsCalculator{
             numberofAttendees.add((int)eventData.get("Registered"));
             topEvents.add(eventData);
         }
-        bubbleSort(numberofAttendees, Collections.singletonList(topEvents));
+        ParallelSort(numberofAttendees, Collections.singletonList(topEvents));
         for (int i = 0; i < Math.min(topEvents.size(), 5); i++) {
             top5Events.add(topEvents.get(i));
         }
@@ -70,19 +72,19 @@ public class StatisticsCalculator{
     public List<String> Top5Speaker() {
         List<String> top5Speaker = new ArrayList<>();
         List<String> speakers = new ArrayList<>();
-        List<Integer> speakersNumberofEvents = new ArrayList<>();
-        List<UUID> user_list = userManager.getUUIDs();
-        for (UUID UserID : user_list) {
+        List<Integer> speakersNumberOfEvents = new ArrayList<>();
+        List<UUID> userList = userManager.getUUIDs();
+        for (UUID UserID : userList) {
             if (userManager.hasPermission(UserID, PERMS.canSpeakAtTalk)) {
-                int numberofEvents = eventManager.retrieveEventsBySpeaker(UserID).size();
+                int numberOfEvents = eventManager.retrieveEventsBySpeaker(UserID).size();
                 String speakerName = userManager.getNameWithUUID(UserID);
                 speakers.add(speakerName);
-                speakersNumberofEvents.add(numberofEvents);
+                speakersNumberOfEvents.add(numberOfEvents);
             }
-            bubbleSort(speakersNumberofEvents, Collections.singletonList(speakers));
-            for (int i = 0; i < Math.min(speakers.size(), 5); i++) {
-                top5Speaker.add(speakers.get(i) + " : " + speakersNumberofEvents.get(i));
-            }
+        }
+        ParallelSort(speakersNumberOfEvents, Collections.singletonList(speakers));
+        for (int i = 0; i < Math.min(speakers.size(), 5); i++) {
+            top5Speaker.add(speakers.get(i) + " : " + speakersNumberOfEvents.get(i));
         }
         return top5Speaker;
     }

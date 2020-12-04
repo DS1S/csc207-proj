@@ -170,7 +170,7 @@ public class UserManager implements Serializable {
      */
     public boolean checkUserLoggedIn(UUID userID, LocalDateTime StartTime, LocalDateTime EndTime) {
         LocalDateTime time = this.users.get(userID).getLastLoggedIn();
-        return !StartTime.isBefore(time) && !EndTime.isAfter(time);
+        return StartTime.isBefore(time) && EndTime.isAfter(time);
     }
 
 }
