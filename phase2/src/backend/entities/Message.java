@@ -48,6 +48,12 @@ public class Message implements Serializable {
     }
 
     /**
+     * Gets the status of a message.
+     * @return message status from the STATUSES enum
+     */
+    public STATUSES getStatus() {return this.status;}
+
+    /**
      * Returns the UUID of a message.
      * @return UUID of message
      */

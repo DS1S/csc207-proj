@@ -1,6 +1,5 @@
 package frontend;
 import backend.systems.usermangement.managers.UserManager;
-import backend.systems.messaging.managers.MessageManager;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -9,22 +8,19 @@ import java.util.UUID;
  * Represents a InboxUI used for the message system UI.*/
 public class InboxUI extends MenuUI {
     private UserManager userManager;
-    private MessageManager messageManager;
 
     /**
      * Constructs a new instance of InboxUI using the given parameters.
      *
      * @param userManager The user manager used by the UI.
      */
-    public InboxUI(UserManager userManager, MessageManager messageManager) {
+    public InboxUI(UserManager userManager) {
         this.userManager = userManager;
-        this.messageManager = messageManager;
     }
 
     /**
      * Displays the user's inbox and a message indicating that their inbox is empty if their inbox is
      * empty.
-     *
      * @param inboxData The user's inbox data.
      */
     public void displayInbox(List<Map<String, Object>> inboxData) {
@@ -37,7 +33,8 @@ public class InboxUI extends MenuUI {
             System.out.println("------------------------------------------------------");
             System.out.println("Message " + i);
             sb.append("From: " + sender + "\nTo: " + recipient + "\n\n");
-            sb.append(data.get("title") + "\n");
+            sb.append(data.get("title") + "\n\n");
+            sb.append(data.get("status") + "\n");
             System.out.print(sb);
             System.out.println("------------------------------------------------------");
             i += 1;
@@ -137,14 +134,6 @@ public class InboxUI extends MenuUI {
         System.out.println("Enter the title of the message you wish to view: ");
     }
 
-    /**
-     * Displays to the user the message that they wanted to view.
-     */
-    public void displayMessage() {
-        String body = messageManager.getToDisplay();
-        System.out.println(body);
-    }
-
     public void markMessageUnreadPrompt(){
         System.out.println("Enter the title of the message you wish to mark as unread: ");
     }
@@ -165,10 +154,10 @@ public class InboxUI extends MenuUI {
         System.out.println(index + ". Return to main menu");
     }
 
-        /**
-         * Informs the user that their message was successfully deleted.
-         */
-        public void deletedPrompt(){
-            System.out.println("Message deleted!");
-        }
+    /**
+     * Informs the user that their message was successfully deleted.
+     */
+    public void deletedPrompt(){
+        System.out.println("Message deleted!");
     }
+}
