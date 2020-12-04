@@ -26,7 +26,7 @@ public abstract class MessageMenuSystem extends MenuSystem {
         super(numOptions);
         this.userManager = userManager;
         this.messageManager = messageManager;
-        this.inboxUI = new InboxUI(userManager, messageManager);
+        this.inboxUI = new InboxUI(userManager);
     }
 
     /**
@@ -43,17 +43,8 @@ public abstract class MessageMenuSystem extends MenuSystem {
                 processSendMessage();
                 break;
             case(5):
-                processMessageViewing();
-                inboxUI.displayMessage();
-                messageManager.setToDisplay("");
                 break;
             case(6):
-                processMessageUnreadMark();
-                break;
-            case(7):
-                processMessageArchiving();
-                break;
-            case(8):
                 processMessageDeletion();
                 break;
         }
@@ -105,8 +96,8 @@ public abstract class MessageMenuSystem extends MenuSystem {
         UUID userId = userManager.getLoggedInUserUUID();
         messageManager.setRead(userId, messageManager.getMessageIdByTitle(title,
                         messageManager.getInboxByUserId(userId)));
-        String body = messageManager.getBodyByTitle(title, messageManager.getInboxByUserId(userId));
-        messageManager.setToDisplay(body);
+        //* commented out for now because getBodyByTitle is bugged
+        // String body = messageManager.getBodyByTitle(title, messageManager.getInboxByUserId(userId));
     }
 
     private void processMessageUnreadMark(){
