@@ -11,11 +11,13 @@ import java.time.LocalTime;
  * Class to manage messages.*/
 public class MessageManager implements Serializable {
     private final Map<UUID, List<Message>> inboxes;
+    String toDisplay;
 
     /** Constructs a new message manager with the information below.
      * @param userIDs A list of user UUIDs.
      */
     public MessageManager(List<UUID> userIDs) {
+        toDisplay = "";
         inboxes = new HashMap<>();
         for (UUID id : userIDs) {
             inboxes.put(id, new ArrayList<>());
@@ -33,6 +35,17 @@ public class MessageManager implements Serializable {
         inboxes.get(recipient).add(m);
     }
 
+    /**
+     * Sets the string toDisplay to the input string.
+     * @param string a string that toDisplay will be set to
+     */
+    public void setToDisplay(String string){toDisplay = string;}
+
+    /**
+     * Gets the string toDisplay.
+     * @return the string toDisplay
+     */
+    public String getToDisplay(){return toDisplay;}
 
     /**
      * Convenience method to send a message to multiple people at once.
@@ -53,6 +66,10 @@ public class MessageManager implements Serializable {
      */
     public boolean userHasInbox(UUID userID) {
         return inboxes.containsKey(userID);
+    }
+
+    public boolean userHasMail(UUID userID) {
+        return userHasInbox(userID) && (!inboxes.get(userID).isEmpty());
     }
 
     /**
@@ -109,6 +126,30 @@ public class MessageManager implements Serializable {
         return null;
     }
 
+    public UUID getMessageIdByTitle(String title, UUID userID) {
+        for (Message message : inboxes.get(userID)) {
+            if (message.getMessageTitle().equals(title)){
+                return message.getMessageId();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the body of a message given its title and a list of messages containing the message.
+     * @param title title of the message
+     * @param messages a list of messages containing the messages
+     * @return body of the message
+     */
+    public String getBodyByTitle(String title, List<Message> messages) {
+        for (Message message : messages) {
+            if (message.getMessageTitle().equals(title)) {
+                return message.getBody();
+            }
+        }
+        return null;
+    }
+
     /**
      * Gets the inbox of a user given the user UUID.
      * @param userId UUID of the user
@@ -124,6 +165,14 @@ public class MessageManager implements Serializable {
     public void deleteMessage(UUID messageId, List<Message> messages){
             messages.remove(getMessageById(messageId, messages));
         }
+
+    public boolean deleteMessage(UUID messageId, UUID userid){
+        if (inboxes.get(userid).contains(getMessageById(messageId, inboxes.get(userid)))){
+            inboxes.get(userid).remove(getMessageById(messageId, inboxes.get(userid)));
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Sets the status of a message to read.
@@ -148,7 +197,7 @@ public class MessageManager implements Serializable {
      * @param userId UUID of the user whose inbox contains the message
      * @param messageId UUID of the message
      */
-    public void SetArchived(UUID userId, UUID messageId){
+    public void setArchived(UUID userId, UUID messageId){
         getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.archived);
     }
 

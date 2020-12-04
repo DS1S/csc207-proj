@@ -30,7 +30,7 @@ public class MessageSystem implements RunnableSystem {
         this.messageManager = messageManager;
         this.userManager = userManager;
         this.eventManagers = eventManagers;
-        this.inboxUI = new InboxUI(userManager);
+        this.inboxUI = new InboxUI(userManager, messageManager);
     }
 
     /**

@@ -26,7 +26,7 @@ public abstract class MessageMenuSystem extends MenuSystem {
         super(numOptions);
         this.userManager = userManager;
         this.messageManager = messageManager;
-        this.inboxUI = new InboxUI(userManager);
+        this.inboxUI = new InboxUI(userManager, messageManager);
     }
 
     /**
@@ -43,8 +43,16 @@ public abstract class MessageMenuSystem extends MenuSystem {
                 processSendMessage();
                 break;
             case(5):
+                processMessageViewing();
+                inboxUI.displayMessage();
+                messageManager.setToDisplay("");
+                break;
             case(6):
+                processMessageUnreadMark();
+                break;
             case(7):
+                processMessageArchiving();
+                break;
             case(8):
                 processMessageDeletion();
                 break;
@@ -89,6 +97,34 @@ public abstract class MessageMenuSystem extends MenuSystem {
                 messageManager.getInboxByUserId(userManager.getLoggedInUserUUID())),
                 messageManager.getInboxByUserId(userManager.getLoggedInUserUUID()));
         inboxUI.deletedPrompt();
+    }
+
+    private void processMessageViewing() {
+        inboxUI.viewMessagePrompt();
+        String title = askForString("Title");
+        UUID userId = userManager.getLoggedInUserUUID();
+        messageManager.setRead(userId, messageManager.getMessageIdByTitle(title,
+                        messageManager.getInboxByUserId(userId)));
+        String body = messageManager.getBodyByTitle(title, messageManager.getInboxByUserId(userId));
+        messageManager.setToDisplay(body);
+    }
+
+    private void processMessageUnreadMark(){
+        inboxUI.markMessageUnreadPrompt();
+        UUID userId = userManager.getLoggedInUserUUID();
+        String title = askForString("Title");
+        messageManager.setUnread(userId, messageManager.getMessageIdByTitle(title,
+                messageManager.getInboxByUserId(userId)));
+        inboxUI.markedAsUnreadPrompt();
+    }
+
+    private void processMessageArchiving(){
+        inboxUI.archiveMessagePrompt();
+        UUID userId = userManager.getLoggedInUserUUID();
+        String title = askForString("Title");
+        messageManager.setArchived(userId, messageManager.getMessageIdByTitle(title,
+                messageManager.getInboxByUserId(userId)));
+        inboxUI.messageArchivedPrompt();
     }
 
     private List<UUID> askForUsernames() {

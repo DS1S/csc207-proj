@@ -74,6 +74,12 @@ public class Message implements Serializable {
     public UUID getSender() { return sender; }
 
     /**
+     * Gets the body of the message.
+     * @return the body of the message
+     */
+    public String getBody() {return this.body;}
+
+    /**
      * Returns a map whose values are the Message's properties corresponding to those properties in
      * string format.
      * @return A map whose values are Message properties.
