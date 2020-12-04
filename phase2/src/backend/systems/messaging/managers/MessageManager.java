@@ -11,7 +11,7 @@ import java.time.LocalTime;
  * Class to manage messages.*/
 public class MessageManager implements Serializable {
     private final Map<UUID, List<Message>> inboxes;
-    String toDisplay = "";
+    String toDisplay;
 
     /** Constructs a new message manager with the information below.
      * @param userIDs A list of user UUIDs.
@@ -197,7 +197,7 @@ public class MessageManager implements Serializable {
      * @param userId UUID of the user whose inbox contains the message
      * @param messageId UUID of the message
      */
-    public void SetArchived(UUID userId, UUID messageId){
+    public void setArchived(UUID userId, UUID messageId){
         getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.archived);
     }
 

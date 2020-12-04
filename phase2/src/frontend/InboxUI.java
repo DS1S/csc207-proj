@@ -118,7 +118,7 @@ public class InboxUI extends MenuUI {
         System.out.println("1. View inbox.");
         System.out.println("5. View a message.");
         System.out.println("6. Mark a message as unread.");
-        System.out.println("7. Archive a message..");
+        System.out.println("7. Archive a message.");
         System.out.println("8. Delete a message.");
         System.out.println("9. View archived messages.");
     }
@@ -149,8 +149,16 @@ public class InboxUI extends MenuUI {
         System.out.println("Enter the title of the message you wish to mark as unread: ");
     }
 
+    public void markedAsUnreadPrompt(){
+        System.out.println("Message marked unread!");
+    }
+
     public void archiveMessagePrompt() {
         System.out.println("Enter the title of the message you wish to archive: ");
+    }
+
+    public void messageArchivedPrompt(){
+        System.out.println("Message archived!");
     }
 
     private void displayExitOption ( int index){

@@ -48,7 +48,11 @@ public abstract class MessageMenuSystem extends MenuSystem {
                 messageManager.setToDisplay("");
                 break;
             case(6):
+                processMessageUnreadMark();
+                break;
             case(7):
+                processMessageArchiving();
+                break;
             case(8):
                 processMessageDeletion();
                 break;
@@ -103,6 +107,24 @@ public abstract class MessageMenuSystem extends MenuSystem {
                         messageManager.getInboxByUserId(userId)));
         String body = messageManager.getBodyByTitle(title, messageManager.getInboxByUserId(userId));
         messageManager.setToDisplay(body);
+    }
+
+    private void processMessageUnreadMark(){
+        inboxUI.markMessageUnreadPrompt();
+        UUID userId = userManager.getLoggedInUserUUID();
+        String title = askForString("Title");
+        messageManager.setUnread(userId, messageManager.getMessageIdByTitle(title,
+                messageManager.getInboxByUserId(userId)));
+        inboxUI.markedAsUnreadPrompt();
+    }
+
+    private void processMessageArchiving(){
+        inboxUI.archiveMessagePrompt();
+        UUID userId = userManager.getLoggedInUserUUID();
+        String title = askForString("Title");
+        messageManager.setArchived(userId, messageManager.getMessageIdByTitle(title,
+                messageManager.getInboxByUserId(userId)));
+        inboxUI.messageArchivedPrompt();
     }
 
     private List<UUID> askForUsernames() {
