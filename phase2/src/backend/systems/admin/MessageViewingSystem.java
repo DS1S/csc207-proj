@@ -54,15 +54,15 @@ public class MessageViewingSystem extends MenuSystem {
                     return;
                 }
 
-                inboxUI.deletionPrompt();
+                //inboxUI.deletionPrompt();
                 String title = askForString("Title");
 
-                if (messageManager.deleteMessage(messageManager.getMessageIdByTitle(title,
-                        um.getUUIDWithUsername(username)),
-                        um.getUUIDWithUsername(username))){
-                    inboxUI.deletedPrompt();
-                }
-                else { adminUI.displayDeleteFailure(); }
+//                if (messageManager.deleteMessage(messageManager.getMessageIdByTitle(title,
+//                        um.getUUIDWithUsername(username)),
+//                        um.getUUIDWithUsername(username))){
+//                    inboxUI.deletedPrompt();
+//                }
+//                else { adminUI.displayDeleteFailure(); }
                 break;
         }
     }

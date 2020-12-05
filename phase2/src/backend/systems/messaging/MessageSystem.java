@@ -47,17 +47,17 @@ public class MessageSystem extends MenuSystem {
 
         if (userManager.loggedInHasPermission(canSchedule)) {
             subSystems.put(subSystems.size() + 1, messageSubSystemFactory.createMessageSubSystem("organizer",
-                    userManager, messageManager, 5, eventManagers));
+                    userManager, messageManager, 8, eventManagers));
         }
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
             subSystems.put(subSystems.size() + 1, messageSubSystemFactory.createMessageSubSystem("speaker", userManager,
-                    messageManager, 4, eventManagers));
+                    messageManager, 7, eventManagers));
         }
 
         // Allocate a default message subsystem
         if (subSystems.size() == 0) subSystems.put(subSystems.size() + 1,
                 messageSubSystemFactory.createMessageSubSystem("regular",
-                        userManager, messageManager, 3, eventManagers));
+                        userManager, messageManager, 6, eventManagers));
 
         subSystems.put(subSystems.size() + 1,
                 messageSubSystemFactory.createMessageSubSystem("linker", userManager, messageManager,

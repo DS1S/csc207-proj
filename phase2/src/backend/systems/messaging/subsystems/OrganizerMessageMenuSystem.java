@@ -39,10 +39,10 @@ class OrganizerMessageMenuSystem extends MessageMenuSystem {
     protected void processInput(int index) {
         processBaseInput(index);
         switch (index) {
-            case(3):
+            case(6):
                 processMessageAllAttendees();
                 break;
-            case(4):
+            case(7):
                 processMessageAllSpeakers();
                 break;
         }

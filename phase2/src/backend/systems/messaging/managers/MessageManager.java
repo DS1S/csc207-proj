@@ -76,117 +76,24 @@ public class MessageManager implements Serializable {
         List<Map<String, Object>> inboxData = new ArrayList<>();
 
         for (Message message : inbox) {
-            inboxData.add(message.extractData());
+            if (message.getStatus().equals(STATUSES.read) || message.getStatus().equals(STATUSES.unread)) {
+                inboxData.add(message.extractData());
+            }
         }
 
         return inboxData;
     }
 
-    /**
-     * Gets a message given the UUID of the message and a list of messages that contains the message.
-     * @param messageId UUID of the message
-     * @param messages a list of messages containing the desired message
-     * @return message corresponding to the UUID
-     */
-    public Message getMessageById(UUID messageId, List<Message> messages) {
-        for (Message message : messages) {
-            if (message.getMessageId() == messageId) {
-                return message;
+    public List<Map<String, Object>> getInboxData(UUID userID, List<STATUSES> statuses) {
+        List<Message> inbox = inboxes.get(userID);
+        List<Map<String, Object>> inboxData = new ArrayList<>();
+
+        for (Message message : inbox) {
+            if (statuses.contains(message.getStatus())) {
+                inboxData.add(message.extractData());
             }
         }
-        return null;
-    }
-
-    /**
-     * Gets the UUID of a message given the message title.
-     * @param title title of the message
-     * @param messages list of messages containing the message
-     * @return UUID of the message
-     */
-    public UUID getMessageIdByTitle(String title, List<Message> messages) {
-        for (Message message : messages) {
-            if (message.getMessageTitle().equals(title)){
-                return message.getMessageId();
-            }
-        }
-        return null;
-    }
-
-    public UUID getMessageIdByTitle(String title, UUID userID) {
-        for (Message message : inboxes.get(userID)) {
-            if (message.getMessageTitle().equals(title)){
-                return message.getMessageId();
-            }
-        }
-        return null;
-    }
-
-    /* Method is currently bugged; does not account for the fact that message title is not unique
-    /**
-     * Gets the body of a message given its title and a list of messages containing the message.
-     * @param title title of the message
-     * @param messages a list of messages containing the messages
-     * @return body of the message
-
-    public String getBodyByTitle(String title, List<Message> messages) {
-        for (Message message : messages) {
-            if (message.getMessageTitle().equals(title)) {
-                return message.getBody();
-            }
-        }
-        return null;
-    }
-     */
-
-    /**
-     * Gets the inbox of a user given the user UUID.
-     * @param userId UUID of the user
-     * @return user's inbox
-     */
-    public List<Message> getInboxByUserId(UUID userId){ return inboxes.get(userId); }
-
-    /**
-     * Deletes a message from a list of messages.
-     * @param messageId UUID of the message to delete
-     * @param messages a list of messages containing the message to delete
-     */
-    public void deleteMessage(UUID messageId, List<Message> messages){
-            messages.remove(getMessageById(messageId, messages));
-        }
-
-    public boolean deleteMessage(UUID messageId, UUID userid){
-        if (inboxes.get(userid).contains(getMessageById(messageId, inboxes.get(userid)))){
-            inboxes.get(userid).remove(getMessageById(messageId, inboxes.get(userid)));
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Sets the status of a message to read.
-     * @param userId UUID of the user whose inbox contains the message
-     * @param messageId UUID of the message
-     */
-    public void setRead(UUID userId, UUID messageId){
-        getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.read);
-    }
-
-    /**
-     * Sets the status of a message to unread.
-     * @param userId UUID of the user whose inbox contains the message
-     * @param messageId UUID of the message
-     */
-    public void setUnread(UUID userId, UUID messageId){
-        getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.unread);
-    }
-
-    /**
-     * Sets the status of a message to archived.
-     * @param userId UUID of the user whose inbox contains the message
-     * @param messageId UUID of the message
-     */
-    public void setArchived(UUID userId, UUID messageId){
-        getMessageById(messageId, inboxes.get(userId)).setStatus(STATUSES.archived);
+        return inboxData;
     }
 
     /**
@@ -206,35 +113,18 @@ public class MessageManager implements Serializable {
         return inboxData;
     }
 
-    /*
-    Potential use in phase 2
-
-    public String toString(String Criterion, Object value, UUID userID) {
-        List<Message> searchedMessages = retrieveMessageByCriterion(Criterion, value, userID);
-        StringBuilder searchedMsgStr = new StringBuilder();
-        for(Message msg : searchedMessages) {
-            searchedMsgStr.append(msg.toString() + "\n");
-        }
-        if (searchedMsgStr.toString().isEmpty()) return "Search results: 0";
-        return searchedMsgStr.toString();
+    public void deleteMessage(UUID userID, int index) {
+        inboxes.get(userID).remove(index);
     }
 
-    private List<Message> retrieveMessageByCriterion(String criterion, Object value, UUID userID) {
-        List<Message> matchedMessages = new ArrayList<>();
-        List<Message> inbox = tempInbox.get(userID);
-        try{
-            for (Message msg : inbox) {
-                Class<?> msgType = msg.getClass();
-                Method desiredMethod = msgType.getMethod("get"+criterion);
-                if(desiredMethod.invoke(msgType).equals(value)) {
-                    matchedMessages.add(msg);
-                }
-            }
-        } catch (ReflectiveOperationException e) {
-            return new ArrayList<>();
-        }
-
-        return matchedMessages;
+    public void changeMessageState(UUID userID, int index, STATUSES status) {
+        inboxes.get(userID).get(index).setStatus(status);
     }
-    */
+
+    public STATUSES getStatusOverwrite(STATUSES status) {
+        if (!status.isOverReadable()) {
+            return status;
+        }
+        return STATUSES.read;
+    }
 }

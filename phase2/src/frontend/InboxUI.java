@@ -1,4 +1,5 @@
 package frontend;
+import backend.entities.STATUSES;
 import backend.systems.usermangement.managers.UserManager;
 import java.util.List;
 import java.util.Map;
@@ -31,48 +32,58 @@ public class InboxUI extends MenuUI {
             String recipient = userManager.getUsernameWithUUID((UUID) data.get("recipient"));
             String sender = userManager.getUsernameWithUUID((UUID) data.get("sender"));
             System.out.println("------------------------------------------------------");
-            System.out.println("Message " + i);
-            sb.append("From: " + sender + "\nTo: " + recipient + "\n\n");
-            sb.append(data.get("title") + "\n\n");
-            sb.append(data.get("status") + "\n");
-            System.out.print(sb);
-            System.out.println("------------------------------------------------------");
+            System.out.print("Message " + i + ": ");
+            sb.append(data.get("title") + " | ");
+            sb.append("From " + sender + " To " + recipient + " | ");
+            sb.append(data.get("status"));
+            System.out.println(sb);
             i += 1;
         }
+        System.out.println("------------------------------------------------------");
 
         if (inboxData.size() == 0) {
             System.out.println("No mail in inbox! :(");
         }
     }
 
+    public void displayMessage(Map<String, Object> messageData) {
+        StringBuilder sb = new StringBuilder();
+        String recipient = userManager.getUsernameWithUUID((UUID) messageData.get("recipient"));
+        String sender = userManager.getUsernameWithUUID((UUID) messageData.get("sender"));
+        System.out.println("------------------------------------------------------");
+        sb.append("Title: " + messageData.get("title") + "\n");
+        sb.append("Sent by " + sender + " To " + recipient  + " | " + messageData.get("timeSent") + "\n");
+        sb.append("Body: " + messageData.get("body"));
+        System.out.println(sb);
+        System.out.println("------------------------------------------------------");
+    }
+
     /**
      * Displays the messaging options available on the menu of an attendee type user.
      */
     public void displayAttendingMenuOptions() {
-        displayBaseInboxOptions();
-        System.out.println("2. Send Message.");
-        displayExitOption(3);
+        displayMainOptions(true);
+        displayExitOption(6);
     }
 
     /**
      * Displays the messaging options available on the menu of a speaker type user.
      */
     public void displayTalkSpeakerMenuOptions() {
-        displayBaseInboxOptions();
-        System.out.println("2. Reply to Attendee.");
-        System.out.println("3. Message attendees of your talk(s).");
-        displayExitOption(4);
+        displayMainOptions(false);
+        System.out.println("5. Reply to Attendee.");
+        System.out.println("6. Message attendees of your talk(s).");
+        displayExitOption(7);
     }
 
     /**
      * Displays the messaging options available on the menu of an organizer type user.
      */
     public void displaySchedulerMenuOptions() {
-        displayBaseInboxOptions();
-        System.out.println("2. Send Message.");
-        System.out.println("3. Message all attendees.");
-        System.out.println("4. Message all speakers.");
-        displayExitOption(5);
+        displayMainOptions(true);
+        System.out.println("6. Message all attendees.");
+        System.out.println("7. Message all speakers.");
+        displayExitOption(8);
     }
 
     /**
@@ -110,54 +121,31 @@ public class InboxUI extends MenuUI {
         System.out.println("Enter Talks: ");
     }
 
-    private void displayBaseInboxOptions() {
-        System.out.println("\nWhat would you like to do?");
-        System.out.println("1. View inbox.");
-        System.out.println("5. View a message.");
-        System.out.println("6. Mark a message as unread.");
-        System.out.println("7. Archive a message.");
-        System.out.println("8. Delete a message.");
-        System.out.println("9. View archived messages.");
+    public void displayStatusChanged(STATUSES status) {
+        System.out.println("Message has changed to: " + status);
     }
 
-    /**
-     * Prompts the user to enter the title of the message they want to delete.
-     */
-    public void deletionPrompt() {
-        System.out.println("Enter the title of the message you wish to delete: ");
-    }
-
-    /**
-     * Prompts the user to enter the title of the message they want to view.
-     */
-    public void viewMessagePrompt() {
-        System.out.println("Enter the title of the message you wish to view: ");
-    }
-
-    public void markMessageUnreadPrompt(){
-        System.out.println("Enter the title of the message you wish to mark as unread: ");
-    }
-
-    public void markedAsUnreadPrompt(){
-        System.out.println("Message marked unread!");
-    }
-
-    public void archiveMessagePrompt() {
-        System.out.println("Enter the title of the message you wish to archive: ");
-    }
-
-    public void messageArchivedPrompt(){
-        System.out.println("Message archived!");
+    public void displayMessageDeleted() {
+        System.out.println("Message has been deleted!");
     }
 
     private void displayExitOption ( int index){
         System.out.println(index + ". Return to main menu");
     }
 
-    /**
-     * Informs the user that their message was successfully deleted.
-     */
-    public void deletedPrompt(){
-        System.out.println("Message deleted!");
+    private void displayMainOptions(boolean canSendMessage) {
+        System.out.println("\nWhat would you like to do?");
+        System.out.println("1. View inbox.");
+        if (canSendMessage) {
+            System.out.println("2. View inbox by category.");
+            System.out.println("3. Send message.");
+            System.out.println("4. Change status of your messages.");
+            System.out.println("5. Delete a message.");
+        } else {
+            System.out.println("2. View inbox by category.");
+            System.out.println("3. Change status of your messages.");
+            System.out.println("4. Delete a message.");
+        }
+
     }
 }

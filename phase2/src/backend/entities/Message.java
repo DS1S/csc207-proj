@@ -99,6 +99,7 @@ public class Message implements Serializable {
         messageData.put("body", body);
         messageData.put("timeSent", timeSent);
         messageData.put("title", title);
+        messageData.put("status", status);
 
         return messageData;
     }

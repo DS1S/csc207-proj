@@ -1,10 +1,13 @@
 package backend.systems.messaging.subsystems;
 
+import backend.entities.STATUSES;
 import backend.systems.MenuSystem;
 import backend.entities.users.PERMS;
 import backend.systems.usermangement.managers.UserManager;
 import backend.systems.messaging.managers.MessageManager;
 import frontend.InboxUI;
+import utility.inputprocessors.IndexProcessor;
+import utility.inputprocessors.OptionIndexProcessor;
 
 import java.util.*;
 
@@ -37,14 +40,18 @@ public abstract class MessageMenuSystem extends MenuSystem {
     protected void processBaseInput(int option) {
         switch (option) {
             case(1):
-                inboxUI.displayInbox(messageManager.getInboxData(userManager.getLoggedInUserUUID()));
+                viewMessages(messageManager.getInboxData(userManager.getLoggedInUserUUID()), STATUSES.read);
                 break;
             case(2):
+                viewMessagesByStatus();
+                break;
+            case(3):
                 processSendMessage();
                 break;
-            case(5):
+            case(4):
+                setMessageStates();
                 break;
-            case(6):
+            case(5):
                 processMessageDeletion();
                 break;
         }
@@ -81,43 +88,6 @@ public abstract class MessageMenuSystem extends MenuSystem {
         inboxUI.sentPrompt();
     }
 
-    private void processMessageDeletion() {
-        inboxUI.deletionPrompt();
-        String title = askForString("Title");
-        messageManager.deleteMessage(messageManager.getMessageIdByTitle(title,
-                messageManager.getInboxByUserId(userManager.getLoggedInUserUUID())),
-                messageManager.getInboxByUserId(userManager.getLoggedInUserUUID()));
-        inboxUI.deletedPrompt();
-    }
-
-    private void processMessageViewing() {
-        inboxUI.viewMessagePrompt();
-        String title = askForString("Title");
-        UUID userId = userManager.getLoggedInUserUUID();
-        messageManager.setRead(userId, messageManager.getMessageIdByTitle(title,
-                        messageManager.getInboxByUserId(userId)));
-        //* commented out for now because getBodyByTitle is bugged
-        // String body = messageManager.getBodyByTitle(title, messageManager.getInboxByUserId(userId));
-    }
-
-    private void processMessageUnreadMark(){
-        inboxUI.markMessageUnreadPrompt();
-        UUID userId = userManager.getLoggedInUserUUID();
-        String title = askForString("Title");
-        messageManager.setUnread(userId, messageManager.getMessageIdByTitle(title,
-                messageManager.getInboxByUserId(userId)));
-        inboxUI.markedAsUnreadPrompt();
-    }
-
-    private void processMessageArchiving(){
-        inboxUI.archiveMessagePrompt();
-        UUID userId = userManager.getLoggedInUserUUID();
-        String title = askForString("Title");
-        messageManager.setArchived(userId, messageManager.getMessageIdByTitle(title,
-                messageManager.getInboxByUserId(userId)));
-        inboxUI.messageArchivedPrompt();
-    }
-
     private List<UUID> askForUsernames() {
         String usernames = askForString("User(s)");
         String[] recipients = usernames.split(",");
@@ -132,7 +102,8 @@ public abstract class MessageMenuSystem extends MenuSystem {
         }
 
         for (UUID recipient : recipientUUIDs) {
-            if (!userManager.hasPermission(recipient, PERMS.canBeMessaged)) {
+            if (!userManager.hasPermission(recipient, PERMS.canBeMessaged) &&
+                    !userManager.loggedInHasPermission(PERMS.canSchedule)) {
                 inboxUI.displayError("One or more recipients are not able to be messaged! " +
                                         "Please Try to send again.");
                 recipientUUIDs.add(null);
@@ -142,4 +113,59 @@ public abstract class MessageMenuSystem extends MenuSystem {
         return recipientUUIDs;
     }
 
+    private void viewMessages(List<Map<String, Object>> inboxData, STATUSES status) {
+        int index = selectMessage(inboxData);
+        if (index != -1) {
+            inboxUI.displayMessage(inboxData.get(index));
+            messageManager.changeMessageState(userManager.getLoggedInUserUUID(), index, status);
+        }
+    }
+
+    private void viewMessagesByStatus() {
+        int index = processStatusInput();
+        List<STATUSES> status = Collections.singletonList(STATUSES.values()[index]);
+        STATUSES targetStatus = messageManager.getStatusOverwrite(status.get(0));
+        viewMessages(messageManager.getInboxData(userManager.getLoggedInUserUUID(), status), targetStatus);
+    }
+
+    private List<String> statusesToString(STATUSES[] statuses) {
+        List<String> statusNames = new ArrayList<>();
+        for (STATUSES status : statuses) {
+            statusNames.add(status.toString());
+        }
+        return statusNames;
+    }
+
+    private int processStatusInput() {
+        STATUSES[] statuses = STATUSES.values();
+        List<String> optionNames = statusesToString(statuses);
+        inboxUI.displayOptions(optionNames, false);
+        IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in), statuses.length);
+        return optionProcessor.processInput() - 1;
+    }
+
+    private void setMessageStates() {
+       int index = processStatusInput();
+       List<STATUSES> statuses = Arrays.asList(STATUSES.values());
+       viewMessages(messageManager.getInboxData(userManager.getLoggedInUserUUID(), statuses), STATUSES.values()[index]);
+       inboxUI.displayStatusChanged(STATUSES.values()[index]);
+    }
+
+    private void processMessageDeletion() {
+        List<Map<String, Object>> inboxData = messageManager.getInboxData(userManager.getLoggedInUserUUID());
+        int index = selectMessage(inboxData);
+        if (index != -1) {
+            messageManager.deleteMessage(userManager.getLoggedInUserUUID(), index);
+            inboxUI.displayMessageDeleted();
+        }
+    }
+
+    private int selectMessage(List<Map<String, Object>> inboxData) {
+        inboxUI.displayInbox(inboxData);
+        if (inboxData.isEmpty()) {
+            return -1;
+        }
+        IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in), inboxData.size());
+        return optionProcessor.processInput() - 1;
+    }
 }

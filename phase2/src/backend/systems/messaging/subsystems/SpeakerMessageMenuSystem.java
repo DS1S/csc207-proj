@@ -46,12 +46,21 @@ class SpeakerMessageMenuSystem extends MessageMenuSystem {
     protected void processInput(int index) {
         switch (index) {
             case(1):
-                processBaseInput(index);
+                processBaseInput(1);
                 break;
             case(2):
-                replyToAttendee();
+                processBaseInput(2);
                 break;
             case(3):
+                processBaseInput(4);
+                break;
+            case(4):
+                processBaseInput(5);
+                break;
+            case(5):
+                replyToAttendee();
+                break;
+            case(6):
                 processMessageToTalks();
                 break;
         }
