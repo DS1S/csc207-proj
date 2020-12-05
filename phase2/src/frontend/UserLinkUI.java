@@ -16,6 +16,10 @@ public class UserLinkUI extends MenuUI {
         System.out.println("What link would you like to add?");
     }
 
+    public void displayLinkPrompt(String linkType) {
+        System.out.println("Enter a " + linkType + " link.");
+    }
+
     public void displayExploreLinksPrompt() {
         System.out.println("Enter the user name of whom you would like to explore.");
     }

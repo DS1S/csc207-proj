@@ -44,5 +44,6 @@ public class WebValidator {
         public final String YOUTUBE_REGEX = "^(https:\\/\\/)?(www\\.)?youtube\\.com\\/channel\\/.*(\\/)?$";
         public final String FACEBOOK_REGEX = "^(https:\\/\\/)?(www\\.)?facebook\\.com\\/.*(\\/)?$";
         public final String GITHUB_REGEX = "^(https:\\/\\/)?(www\\.)?github\\.com\\/.*(\\/)?$";
+        public final String REDDIT_REGEX = "^(https:\\/\\/)?(www\\.)?reddit.com/user/.*(\\/)?$";
     }
 }

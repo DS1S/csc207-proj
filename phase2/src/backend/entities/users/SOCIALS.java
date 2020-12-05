@@ -1,7 +1,7 @@
 package backend.entities.users;
 
 public enum SOCIALS {
-    linkedin("LinkedIn"), instagram("Instagram"), youtube("YouTube"), facebook("Facebook"), github("Github");
+    linkedin("LinkedIn"), instagram("Instagram"), youtube("YouTube"), facebook("Facebook"), github("Github"), reddit("Reddit");
 
     private String social;
 

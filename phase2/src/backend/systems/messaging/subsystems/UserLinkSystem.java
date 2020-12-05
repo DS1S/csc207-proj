@@ -57,6 +57,7 @@ public class UserLinkSystem extends MenuSystem {
         int index = optionProcessor.processInput() - 1;
         SOCIALS social = SOCIALS.values()[index];
 
+        userLinkUI.displayLinkPrompt(social.toString());
         String link = askForString(social + " link");
         while (!webValidator.validateLink(social, link)) {
             userLinkUI.displayError("Invalid " + social + " link! Please enter a valid link.");
