@@ -1,15 +1,12 @@
 package backend.systems.usermangement.managers;
 
 import backend.entities.users.PERMS;
+import backend.entities.users.SOCIALS;
 import backend.entities.users.User;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Represents a UserManager, handles the management of a collection of users.
@@ -173,4 +170,19 @@ public class UserManager implements Serializable {
         return StartTime.isBefore(time) && EndTime.isAfter(time);
     }
 
+    public boolean userHasLinks(UUID uuid) {
+        return getUserLinks(uuid).size() > 0;
+    }
+
+    public List<String> getUserLinks(UUID uuid) {
+        List<String> links = users.get(uuid).getProfileLinks();
+        if (links.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return users.get(uuid).getProfileLinks();
+    }
+
+    public void setLoggedInUserLink(SOCIALS social, String link) {
+        loggedInUser.setProfileLink(social, link);
+    }
 }

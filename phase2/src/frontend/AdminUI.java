@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AdminUI extends MenuUI{
     public void displayAdminOptions(boolean[] perms){
-        displayOptions(getOptions(perms));
+        displayOptions(getOptions(perms), true);
     }
 
     public void displayBanOptions(){
@@ -16,7 +16,7 @@ public class AdminUI extends MenuUI{
             }
         };
 
-        displayOptions(options);
+        displayOptions(options, true);
     }
 
     public void promptUserName(){
@@ -40,7 +40,7 @@ public class AdminUI extends MenuUI{
             }
         };
 
-        displayOptions(options);
+        displayOptions(options, true);
     }
 
     public void displayDeleteFailure(){

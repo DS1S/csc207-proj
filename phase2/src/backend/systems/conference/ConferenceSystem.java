@@ -21,7 +21,7 @@ public class ConferenceSystem extends MenuSystem {
 
     @Override
     protected void displayOptions() {
-        conferenceUI.displayOptions(conferenceManager.getConferenceNames());
+        conferenceUI.displayOptions(conferenceManager.getConferenceNames(), true);
     }
 
     @Override

@@ -2,9 +2,7 @@ package backend.entities.users;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.lang.String;
 
 /**
@@ -14,6 +12,7 @@ import java.lang.String;
  *      - Username
  *      - Password
  *      - User's Permissions
+ *      - The user's last logged in date
  */
 public abstract class User implements Serializable {
     private final UUID uuid;
@@ -21,8 +20,9 @@ public abstract class User implements Serializable {
     private final String username;
     private String password;
     protected Map<PERMS, Boolean> permissions;
-    public LocalDateTime lastLoggedIn;
+    private LocalDateTime lastLoggedIn;
     private Boolean isBanned;
+    private Map<SOCIALS, String> profileLinks;
 
     /**
      * Creates a User Object with a set name, user name, and password.
@@ -38,6 +38,15 @@ public abstract class User implements Serializable {
         permissions = new HashMap<>();
         this.lastLoggedIn = registeredTime;
         this.isBanned = false;
+        this.profileLinks = new HashMap<>();
+    }
+
+    public void setProfileLink(SOCIALS social, String link) {
+        profileLinks.put(social, link);
+    }
+
+    public List<String> getProfileLinks() {
+        return new ArrayList<>(profileLinks.values());
     }
 
     /**

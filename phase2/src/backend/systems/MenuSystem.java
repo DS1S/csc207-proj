@@ -74,7 +74,7 @@ public abstract class MenuSystem implements RunnableSystem {
         String string = "";
         while (string.isEmpty()) {
             string = input.nextLine();
-            if (string.isEmpty()) errorUI.displayError(attribute + " is invalid, please input a " + attribute + "!");
+            if (string.isEmpty()) errorUI.displayError(attribute + " is empty, please input a " + attribute + "!");
         }
         return string;
     }

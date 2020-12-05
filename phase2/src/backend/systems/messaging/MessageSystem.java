@@ -1,23 +1,29 @@
 package backend.systems.messaging;
+import backend.entities.users.User;
+import backend.systems.MenuSystem;
 import backend.systems.messaging.subsystems.*;
 import backend.systems.messaging.managers.MessageManager;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
+import frontend.MenuUI;
 import utility.RunnableSystem;
 import frontend.InboxUI;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static backend.entities.users.PERMS.*;
 
 /**
  * A messaging system with a message manager, a user manager, an event manager, and an inbox UI.
  */
-public class MessageSystem implements RunnableSystem {
+public class MessageSystem extends MenuSystem {
     private final MessageManager messageManager;
     private final UserManager userManager;
     private final List<EventManager> eventManagers;
-    private final InboxUI inboxUI;
+    private final Map<Integer, RunnableSystem> subSystems;
+    private final MenuUI menuUI;
 
     /**
      * Constructs a new messaging system with the information below.
@@ -30,33 +36,44 @@ public class MessageSystem implements RunnableSystem {
         this.messageManager = messageManager;
         this.userManager = userManager;
         this.eventManagers = eventManagers;
-        this.inboxUI = new InboxUI(userManager);
+        this.subSystems = new HashMap<>();
+        this.menuUI = new MenuUI();
+        initializeSubSystems();
+        changeNumOptions(subSystems.size() + 1);
     }
 
-    /**
-     * Implements the run method from the RunnableSystem interface in order to run this System.
-     */
-    @Override
-    public void run() {
-
-        //TODO: Refactor so it behaves as a subsystem - I will worry about it no one else has to worry abt imp.
-
-        RunnableSystem subsystem = null;
+    public void initializeSubSystems() {
         MessageSubSystemFactory messageSubSystemFactory = new MessageSubSystemFactory();
 
         if (userManager.loggedInHasPermission(canSchedule)) {
-            subsystem = messageSubSystemFactory.createMessageSubSystem("organizer",
-                    userManager, messageManager, 5, eventManagers);
+            subSystems.put(subSystems.size() + 1, messageSubSystemFactory.createMessageSubSystem("organizer",
+                    userManager, messageManager, 5, eventManagers));
         }
         else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
-            subsystem = messageSubSystemFactory.createMessageSubSystem("speaker", userManager,
-                    messageManager, 4, eventManagers);
+            subSystems.put(subSystems.size() + 1, messageSubSystemFactory.createMessageSubSystem("speaker", userManager,
+                    messageManager, 4, eventManagers));
         }
 
-        //allocate a default message subsystem
-        if(subsystem == null) subsystem = messageSubSystemFactory.createMessageSubSystem("regular",
-                userManager, messageManager, 3, eventManagers);
-        subsystem.run();
+        // Allocate a default message subsystem
+        if (subSystems.size() == 0) subSystems.put(subSystems.size() + 1,
+                messageSubSystemFactory.createMessageSubSystem("regular",
+                        userManager, messageManager, 3, eventManagers));
+
+        subSystems.put(subSystems.size() + 1,
+                messageSubSystemFactory.createMessageSubSystem("linker", userManager, messageManager,
+                        4, eventManagers));
+    }
+
+    @Override
+    protected void displayOptions() {
+        menuUI.displayOptions(convertSubSystemsToNames(subSystems), true);
+    }
+
+    @Override
+    protected void processInput(int index) {
+        if (subSystems.containsKey(index)) {
+            subSystems.get(index).run();
+        }
     }
 
     /**

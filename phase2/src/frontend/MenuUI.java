@@ -18,17 +18,17 @@ public class MenuUI {
      */
     public void displayInvalidIndex() { System.out.println("You have entered an invalid number."); }
 
-
     /**
      * Displays main menu options to the user.
      * @param optionNames the options of the menu to be displayed.
+     * @param displayExit Whether the exit option will be displayed in this list of options.
      */
-    public void displayOptions(List<String> optionNames){
-        System.out.println("Please choose an option or return to main menu.");
+    public void displayOptions(List<String> optionNames, boolean displayExit) {
+        System.out.println("Please choose an option or return to previous menu.");
         for(int i = 0; i < optionNames.size(); i++){
             System.out.println((i + 1) + ". " + optionNames.get(i));
         }
-        System.out.println(optionNames.size() + 1 + ": Return/Exit.");
+        if (displayExit) { System.out.println(optionNames.size() + 1 + ": Return/Exit."); }
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////

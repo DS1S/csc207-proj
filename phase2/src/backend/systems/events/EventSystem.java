@@ -1,7 +1,6 @@
 package backend.systems.events;
 
 import backend.systems.MenuSystem;
-import backend.systems.events.subsystems.EventMenuSystem;
 import backend.systems.events.subsystems.EventSubSystemFactory;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
@@ -44,7 +43,7 @@ public class EventSystem extends MenuSystem {
 
     @Override
     protected void displayOptions() {
-        eventUI.displayOptions(optionNames);
+        eventUI.displayOptions(optionNames, true);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class EventSystem extends MenuSystem {
         }
     }
 
-    private void initializeSubSystems(){
+    private void initializeSubSystems() {
         EventSubSystemFactory subSystemFactory = new EventSubSystemFactory();
         if (userManager.loggedInHasPermission(PERMS.canSchedule)) {
             subSystems.put(1, subSystemFactory.createEventSubSystem("scheduler", eventManager, userManager,
