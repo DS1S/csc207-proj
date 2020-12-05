@@ -1,16 +1,17 @@
 package backend.systems.admin;
 
+import backend.entities.Statuses;
 import backend.systems.MenuSystem;
 import backend.systems.messaging.managers.MessageManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AdminUI;
 import frontend.InboxUI;
+import utility.inputprocessors.IndexProcessor;
+import utility.inputprocessors.OptionIndexProcessor;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
-public class MessageViewingSystem extends MenuSystem {
+public class AdminMessageViewerSystem extends MenuSystem {
 
     UserManager um;
     private AdminUI adminUI;
@@ -18,7 +19,7 @@ public class MessageViewingSystem extends MenuSystem {
     private final Scanner scanner = new Scanner(System.in);
     private MessageManager messageManager;
 
-    public MessageViewingSystem(UserManager um, MessageManager messageManager){
+    public AdminMessageViewerSystem(UserManager um, MessageManager messageManager){
         super(4);
         adminUI = new AdminUI();
         inboxUI = new InboxUI(um);
@@ -54,15 +55,13 @@ public class MessageViewingSystem extends MenuSystem {
                     return;
                 }
 
-                //inboxUI.deletionPrompt();
-                String title = askForString("Title");
-
-//                if (messageManager.deleteMessage(messageManager.getMessageIdByTitle(title,
-//                        um.getUUIDWithUsername(username)),
-//                        um.getUUIDWithUsername(username))){
-//                    inboxUI.deletedPrompt();
-//                }
-//                else { adminUI.displayDeleteFailure(); }
+                List<Map<String, Object>> inboxData = messageManager.getInboxData(um.getUUIDWithUsername(username),
+                        Arrays.asList(Statuses.values()));
+                inboxUI.displayInbox(inboxData);
+                IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in),
+                        inboxData.size());
+                int msgNumber = optionProcessor.processInput() - 1;
+                messageManager.deleteMessage(um.getUUIDWithUsername(username), msgNumber);
                 break;
         }
     }

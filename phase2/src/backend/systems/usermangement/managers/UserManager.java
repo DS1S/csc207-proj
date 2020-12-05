@@ -1,7 +1,7 @@
 package backend.systems.usermangement.managers;
 
-import backend.entities.users.PERMS;
-import backend.entities.users.SOCIALS;
+import backend.entities.users.Perms;
+import backend.entities.users.Socials;
 import backend.entities.users.User;
 
 import java.io.Serializable;
@@ -118,7 +118,7 @@ public class UserManager implements Serializable {
      * @param permission Permission Key to check the user has.
      * @return True IFF the user has the permission.
      */
-    public boolean loggedInHasPermission(PERMS permission) {
+    public boolean loggedInHasPermission(Perms permission) {
         return this.loggedInUser.getPermissions().get(permission);
     }
 
@@ -146,7 +146,7 @@ public class UserManager implements Serializable {
      * @param permission The permission key to check.
      * @return True IFF the User has the permission.
      */
-    public boolean hasPermission(UUID userID, PERMS permission) {
+    public boolean hasPermission(UUID userID, Perms permission) {
         return this.users.get(userID).getPermissions().get(permission);
     }
 
@@ -182,7 +182,7 @@ public class UserManager implements Serializable {
         return users.get(uuid).getProfileLinks();
     }
 
-    public void setLoggedInUserLink(SOCIALS social, String link) {
+    public void setLoggedInUserLink(Socials social, String link) {
         loggedInUser.setProfileLink(social, link);
     }
 }

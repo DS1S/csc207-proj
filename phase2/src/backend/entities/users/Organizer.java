@@ -21,15 +21,15 @@ public class Organizer extends User {
      * Sets the permissions of an Organizer. Organizers can schedule events and create users.
      */
     protected void setPermissions() {
-        permissions.put(PERMS.canBeMessaged, false);
-        permissions.put(PERMS.canMessageTalk, false);
-        permissions.put(PERMS.canSchedule, true);
-        permissions.put(PERMS.canSignUpEvent, false);
-        permissions.put(PERMS.canSignUpUser, true);
-        permissions.put(PERMS.canSpeakAtTalk, false);
-        permissions.put(PERMS.canViewStats, true);
-        permissions.put(PERMS.canBanUsers, false);
-        permissions.put(PERMS.canSeeAllMessages, false);
+        permissions.put(Perms.CAN_BE_MESSAGED, false);
+        permissions.put(Perms.CAN_MESSAGE_TALK, false);
+        permissions.put(Perms.CAN_SCHEDULE, true);
+        permissions.put(Perms.CAN_SIGN_UP_EVENT, false);
+        permissions.put(Perms.CAN_SIGN_UP_USER, true);
+        permissions.put(Perms.CAN_SPEAK_AT_TALK, false);
+        permissions.put(Perms.CAN_VIEW_STATS, true);
+        permissions.put(Perms.CAN_BAN_USERS, false);
+        permissions.put(Perms.CAN_SEE_ALL_MESSAGES, false);
     }
 }
 

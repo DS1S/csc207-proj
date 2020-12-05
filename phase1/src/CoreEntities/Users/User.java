@@ -69,7 +69,7 @@ public abstract class User implements Serializable {
 
     /**
      * Returns the hashmap of permissions of a user; permission keys are based on the
-     * PERMS Enum.
+     * Perms Enum.
      * @return The mapping of permissions for the user.
      */
     public Map<PERMS, Boolean> getPermissions() {

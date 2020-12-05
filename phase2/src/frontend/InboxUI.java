@@ -1,5 +1,5 @@
 package frontend;
-import backend.entities.STATUSES;
+import backend.entities.Statuses;
 import backend.systems.usermangement.managers.UserManager;
 import java.util.List;
 import java.util.Map;
@@ -121,7 +121,7 @@ public class InboxUI extends MenuUI {
         System.out.println("Enter Talks: ");
     }
 
-    public void displayStatusChanged(STATUSES status) {
+    public void displayStatusChanged(Statuses status) {
         System.out.println("Message has changed to: " + status);
     }
 

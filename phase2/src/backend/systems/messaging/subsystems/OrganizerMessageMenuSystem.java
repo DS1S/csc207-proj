@@ -1,6 +1,6 @@
 package backend.systems.messaging.subsystems;
 
-import backend.entities.users.PERMS;
+import backend.entities.users.Perms;
 import backend.systems.usermangement.managers.UserManager;
 import backend.systems.messaging.managers.MessageManager;
 
@@ -51,16 +51,16 @@ class OrganizerMessageMenuSystem extends MessageMenuSystem {
     private void processMessageAllAttendees() {
         String message = processMessageBody();
         String title = processTitle();
-        messageUserWithPerm(message, PERMS.canSpeakAtTalk, title);
+        messageUserWithPerm(message, Perms.CAN_SPEAK_AT_TALK, title);
     }
 
     private void processMessageAllSpeakers() {
         String message = processMessageBody();
         String title = processTitle();
-        messageUserWithPerm(message, PERMS.canSignUpEvent, title);
+        messageUserWithPerm(message, Perms.CAN_SIGN_UP_EVENT, title);
     }
 
-    private void messageUserWithPerm(String message, PERMS perm, String title) {
+    private void messageUserWithPerm(String message, Perms perm, String title) {
         List<UUID> userUUIDs = userManager.getUUIDs();
         List<UUID> targetUUIDs = new ArrayList<>();
         for (UUID id : userUUIDs) {

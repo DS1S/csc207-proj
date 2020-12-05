@@ -17,7 +17,7 @@ public class Message implements Serializable {
     private final UUID recipient;
     private final String body;
     private final LocalTime timeSent;
-    private STATUSES status;
+    private Statuses status;
     private final String title;
 
     /**
@@ -36,22 +36,22 @@ public class Message implements Serializable {
         this.body = body;
         this.timeSent = timeSent;
         this.title = title;
-        this.status = STATUSES.unread;
+        this.status = Statuses.UNREAD;
     }
 
     /**
      * Sets the status of a message.
-     * @param status message status from the STATUSES enum
+     * @param status message status from the Statuses enum
      */
-    public void setStatus(STATUSES status){
+    public void setStatus(Statuses status){
         this.status = status;
     }
 
     /**
      * Gets the status of a message.
-     * @return message status from the STATUSES enum
+     * @return message status from the Statuses enum
      */
-    public STATUSES getStatus() {return this.status;}
+    public Statuses getStatus() {return this.status;}
 
     /**
      * Returns the UUID of a message.

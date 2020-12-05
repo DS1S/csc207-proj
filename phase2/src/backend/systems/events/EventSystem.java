@@ -1,5 +1,6 @@
 package backend.systems.events;
 
+import backend.entities.users.Perms;
 import backend.systems.MenuSystem;
 import backend.systems.events.subsystems.EventSubSystemFactory;
 import backend.systems.events.managers.EventManager;
@@ -7,8 +8,6 @@ import backend.systems.usermangement.managers.UserManager;
 import utility.RunnableSystem;
 
 import frontend.EventUI;
-
-import backend.entities.users.PERMS;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,15 +54,15 @@ public class EventSystem extends MenuSystem {
 
     private void initializeSubSystems() {
         EventSubSystemFactory subSystemFactory = new EventSubSystemFactory();
-        if (userManager.loggedInHasPermission(PERMS.canSchedule)) {
+        if (userManager.loggedInHasPermission(Perms.CAN_SCHEDULE)) {
             subSystems.put(1, subSystemFactory.createEventSubSystem("scheduler", eventManager, userManager,
                     eventUI, 5));
         }
-        else if (userManager.loggedInHasPermission(PERMS.canSignUpEvent)) {
+        else if (userManager.loggedInHasPermission(Perms.CAN_SIGN_UP_EVENT)) {
             subSystems.put(1, subSystemFactory.createEventSubSystem("signup", eventManager, userManager,
                     eventUI, 5));
         }
-        else if (userManager.loggedInHasPermission(PERMS.canSpeakAtTalk)) {
+        else if (userManager.loggedInHasPermission(Perms.CAN_SPEAK_AT_TALK)) {
             subSystems.put(1, subSystemFactory.createEventSubSystem("viewer", eventManager,
                     userManager, eventUI, 3));
         }

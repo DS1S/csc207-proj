@@ -18,11 +18,11 @@ public abstract class User implements Serializable {
     private final UUID uuid;
     private final String name;
     private final String username;
-    private String password;
-    protected Map<PERMS, Boolean> permissions;
+    private final String password;
+    protected Map<Perms, Boolean> permissions;
     private LocalDateTime lastLoggedIn;
     private Boolean isBanned;
-    private Map<SOCIALS, String> profileLinks;
+    private Map<Socials, String> profileLinks;
 
     /**
      * Creates a User Object with a set name, user name, and password.
@@ -41,7 +41,7 @@ public abstract class User implements Serializable {
         this.profileLinks = new HashMap<>();
     }
 
-    public void setProfileLink(SOCIALS social, String link) {
+    public void setProfileLink(Socials social, String link) {
         profileLinks.put(social, link);
     }
 
@@ -88,10 +88,10 @@ public abstract class User implements Serializable {
 
     /**
      * Returns the hashmap of permissions of a user; permission keys are based on the
-     * PERMS Enum.
+     * Perms Enum.
      * @return The mapping of permissions for the user.
      */
-    public Map<PERMS, Boolean> getPermissions() {
+    public Map<Perms, Boolean> getPermissions() {
         return permissions;
     }
 

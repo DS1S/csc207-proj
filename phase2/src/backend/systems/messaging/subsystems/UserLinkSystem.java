@@ -1,6 +1,6 @@
 package backend.systems.messaging.subsystems;
 
-import backend.entities.users.SOCIALS;
+import backend.entities.users.Socials;
 import backend.systems.MenuSystem;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.UserLinkUI;
@@ -55,7 +55,7 @@ public class UserLinkSystem extends MenuSystem {
         userLinkUI.displayAddLinksPrompt();
         userLinkUI.displayOptions(socials, false);
         int index = optionProcessor.processInput() - 1;
-        SOCIALS social = SOCIALS.values()[index];
+        Socials social = Socials.values()[index];
 
         userLinkUI.displayLinkPrompt(social.toString());
         String link = askForString(social + " link");
@@ -73,7 +73,7 @@ public class UserLinkSystem extends MenuSystem {
 
     private List<String> socialsToStrings() {
         List<String> socials = new ArrayList<>();
-        for (SOCIALS social : SOCIALS.values()) {
+        for (Socials social : Socials.values()) {
             socials.add(social.toString());
         }
         return socials;

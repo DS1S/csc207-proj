@@ -22,20 +22,20 @@ public class StatisticsSystem extends MenuSystem {
     protected void processInput(int input) {
         switch (input) {
             case(1):
-                // Display top 5 most attended events, average number of people participating at events.
-                statisticsUI.displayEventStats(statisticsCalculator.Top5Events(),
-                        statisticsCalculator.AverageNumberOfAttendees());
+                statisticsUI.displayEventStats(statisticsCalculator.top5Events(),
+                        statisticsCalculator.getAverageNumberOfAttendees());
+                // Display top 5 most attended events, average number of people participating at events,
                 break;
             case(2):
-                // Display traffic stats (logged in past day, 7 days, month).
-                statisticsUI.displayTrafficStats(statisticsCalculator.TrafficNumber(LocalDateTime.now().minusDays(1),
-                        LocalDateTime.now()),statisticsCalculator.TrafficNumber(LocalDateTime.now().minusDays(7),
-                        LocalDateTime.now()),statisticsCalculator.TrafficNumber(LocalDateTime.now().minusDays(30),
+                statisticsUI.displayTrafficStats(statisticsCalculator.getUserTrafficNumber(LocalDateTime.now().minusDays(1),
+                        LocalDateTime.now()),statisticsCalculator.getUserTrafficNumber(LocalDateTime.now().minusDays(7),
+                        LocalDateTime.now()),statisticsCalculator.getUserTrafficNumber(LocalDateTime.now().minusDays(30),
                         LocalDateTime.now()));
+                // Display traffic stats (logged in past day, 7 days, month).
                 break;
             case(3):
+                statisticsUI.displaySpeakerStats(statisticsCalculator.top5Speaker());
                 // Display the top 5 speakers who spoke at the most events
-                statisticsUI.displaySpeakerStats(statisticsCalculator.Top5Speaker());
                 break;
         }
     }

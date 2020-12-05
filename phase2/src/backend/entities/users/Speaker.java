@@ -23,14 +23,14 @@ public class Speaker extends User {
      * talk(s), and can speak at a talk.
      */
     protected void setPermissions() {
-        permissions.put(PERMS.canBeMessaged, true);
-        permissions.put(PERMS.canMessageTalk, true);
-        permissions.put(PERMS.canSchedule, false);
-        permissions.put(PERMS.canSignUpEvent, false);
-        permissions.put(PERMS.canSignUpUser, false);
-        permissions.put(PERMS.canSpeakAtTalk, true);
-        permissions.put(PERMS.canViewStats, false);
-        permissions.put(PERMS.canBanUsers, false);
-        permissions.put(PERMS.canSeeAllMessages, false);
+        permissions.put(Perms.CAN_BE_MESSAGED, true);
+        permissions.put(Perms.CAN_MESSAGE_TALK, true);
+        permissions.put(Perms.CAN_SCHEDULE, false);
+        permissions.put(Perms.CAN_SIGN_UP_EVENT, false);
+        permissions.put(Perms.CAN_SIGN_UP_USER, false);
+        permissions.put(Perms.CAN_SPEAK_AT_TALK, true);
+        permissions.put(Perms.CAN_VIEW_STATS, false);
+        permissions.put(Perms.CAN_BAN_USERS, false);
+        permissions.put(Perms.CAN_SEE_ALL_MESSAGES, false);
     }
 }

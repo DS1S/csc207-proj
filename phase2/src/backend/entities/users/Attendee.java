@@ -22,14 +22,14 @@ public class Attendee extends User {
      * sign up for events.
      */
     protected void setPermissions() {
-        permissions.put(PERMS.canBeMessaged, true);
-        permissions.put(PERMS.canMessageTalk, false);
-        permissions.put(PERMS.canSchedule, false);
-        permissions.put(PERMS.canSignUpEvent, true);
-        permissions.put(PERMS.canSignUpUser, false);
-        permissions.put(PERMS.canSpeakAtTalk, false);
-        permissions.put(PERMS.canViewStats, false);
-        permissions.put(PERMS.canBanUsers, false);
-        permissions.put(PERMS.canSeeAllMessages, false);
+        permissions.put(Perms.CAN_BE_MESSAGED, true);
+        permissions.put(Perms.CAN_MESSAGE_TALK, false);
+        permissions.put(Perms.CAN_SCHEDULE, false);
+        permissions.put(Perms.CAN_SIGN_UP_EVENT, true);
+        permissions.put(Perms.CAN_SIGN_UP_USER, false);
+        permissions.put(Perms.CAN_SPEAK_AT_TALK, false);
+        permissions.put(Perms.CAN_VIEW_STATS, false);
+        permissions.put(Perms.CAN_BAN_USERS, false);
+        permissions.put(Perms.CAN_SEE_ALL_MESSAGES, false);
     }
 }

@@ -1,6 +1,6 @@
 package backend.systems.messaging.subsystems;
 
-import backend.entities.users.PERMS;
+import backend.entities.users.Perms;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import backend.systems.messaging.managers.MessageManager;
@@ -104,7 +104,7 @@ class SpeakerMessageMenuSystem extends MessageMenuSystem {
 
         if(index != -1) {
             UUID replierUUID = (UUID)messagesData.get(index).get("sender");
-            if(userManager.hasPermission(replierUUID, PERMS.canBeMessaged)) {
+            if(userManager.hasPermission(replierUUID, Perms.CAN_BE_MESSAGED)) {
                 String message = processMessageBody();
                 String title = processTitle();
                 messageManager.sendMessageToIndividual(userManager.getLoggedInUserUUID(), replierUUID, message, title);

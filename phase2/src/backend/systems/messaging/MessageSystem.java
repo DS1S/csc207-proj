@@ -1,5 +1,4 @@
 package backend.systems.messaging;
-import backend.entities.users.User;
 import backend.systems.MenuSystem;
 import backend.systems.messaging.subsystems.*;
 import backend.systems.messaging.managers.MessageManager;
@@ -7,13 +6,12 @@ import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.MenuUI;
 import utility.RunnableSystem;
-import frontend.InboxUI;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static backend.entities.users.PERMS.*;
+import static backend.entities.users.Perms.*;
 
 /**
  * A messaging system with a message manager, a user manager, an event manager, and an inbox UI.
@@ -45,11 +43,11 @@ public class MessageSystem extends MenuSystem {
     public void initializeSubSystems() {
         MessageSubSystemFactory messageSubSystemFactory = new MessageSubSystemFactory();
 
-        if (userManager.loggedInHasPermission(canSchedule)) {
+        if (userManager.loggedInHasPermission(CAN_SCHEDULE)) {
             subSystems.put(subSystems.size() + 1, messageSubSystemFactory.createMessageSubSystem("organizer",
                     userManager, messageManager, 8, eventManagers));
         }
-        else if (userManager.loggedInHasPermission(canSpeakAtTalk)) {
+        else if (userManager.loggedInHasPermission(CAN_SPEAK_AT_TALK)) {
             subSystems.put(subSystems.size() + 1, messageSubSystemFactory.createMessageSubSystem("speaker", userManager,
                     messageManager, 7, eventManagers));
         }

@@ -1,6 +1,6 @@
 package backend.systems.messaging.managers;
 
-import backend.entities.STATUSES;
+import backend.entities.Statuses;
 import backend.entities.Message;
 
 import java.io.Serializable;
@@ -76,7 +76,7 @@ public class MessageManager implements Serializable {
         List<Map<String, Object>> inboxData = new ArrayList<>();
 
         for (Message message : inbox) {
-            if (message.getStatus().equals(STATUSES.read) || message.getStatus().equals(STATUSES.unread)) {
+            if (message.getStatus().equals(Statuses.READ) || message.getStatus().equals(Statuses.UNREAD)) {
                 inboxData.add(message.extractData());
             }
         }
@@ -84,7 +84,7 @@ public class MessageManager implements Serializable {
         return inboxData;
     }
 
-    public List<Map<String, Object>> getInboxData(UUID userID, List<STATUSES> statuses) {
+    public List<Map<String, Object>> getInboxData(UUID userID, List<Statuses> statuses) {
         List<Message> inbox = inboxes.get(userID);
         List<Map<String, Object>> inboxData = new ArrayList<>();
 
@@ -117,14 +117,14 @@ public class MessageManager implements Serializable {
         inboxes.get(userID).remove(index);
     }
 
-    public void changeMessageState(UUID userID, int index, STATUSES status) {
+    public void changeMessageState(UUID userID, int index, Statuses status) {
         inboxes.get(userID).get(index).setStatus(status);
     }
 
-    public STATUSES getStatusOverwrite(STATUSES status) {
+    public Statuses getStatusOverwrite(Statuses status) {
         if (!status.isOverReadable()) {
             return status;
         }
-        return STATUSES.read;
+        return Statuses.READ;
     }
 }

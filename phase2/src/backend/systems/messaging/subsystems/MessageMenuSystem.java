@@ -1,8 +1,8 @@
 package backend.systems.messaging.subsystems;
 
-import backend.entities.STATUSES;
+import backend.entities.Statuses;
 import backend.systems.MenuSystem;
-import backend.entities.users.PERMS;
+import backend.entities.users.Perms;
 import backend.systems.usermangement.managers.UserManager;
 import backend.systems.messaging.managers.MessageManager;
 import frontend.InboxUI;
@@ -40,7 +40,7 @@ public abstract class MessageMenuSystem extends MenuSystem {
     protected void processBaseInput(int option) {
         switch (option) {
             case(1):
-                viewMessages(messageManager.getInboxData(userManager.getLoggedInUserUUID()), STATUSES.read);
+                viewMessages(messageManager.getInboxData(userManager.getLoggedInUserUUID()), Statuses.READ);
                 break;
             case(2):
                 viewMessagesByStatus();
@@ -102,8 +102,8 @@ public abstract class MessageMenuSystem extends MenuSystem {
         }
 
         for (UUID recipient : recipientUUIDs) {
-            if (!userManager.hasPermission(recipient, PERMS.canBeMessaged) &&
-                    !userManager.loggedInHasPermission(PERMS.canSchedule)) {
+            if (!userManager.hasPermission(recipient, Perms.CAN_BE_MESSAGED) &&
+                    !userManager.loggedInHasPermission(Perms.CAN_SCHEDULE)) {
                 inboxUI.displayError("One or more recipients are not able to be messaged! " +
                                         "Please Try to send again.");
                 recipientUUIDs.add(null);
@@ -113,7 +113,7 @@ public abstract class MessageMenuSystem extends MenuSystem {
         return recipientUUIDs;
     }
 
-    private void viewMessages(List<Map<String, Object>> inboxData, STATUSES status) {
+    private void viewMessages(List<Map<String, Object>> inboxData, Statuses status) {
         int index = selectMessage(inboxData);
         if (index != -1) {
             inboxUI.displayMessage(inboxData.get(index));
@@ -123,21 +123,21 @@ public abstract class MessageMenuSystem extends MenuSystem {
 
     private void viewMessagesByStatus() {
         int index = processStatusInput();
-        List<STATUSES> status = Collections.singletonList(STATUSES.values()[index]);
-        STATUSES targetStatus = messageManager.getStatusOverwrite(status.get(0));
+        List<Statuses> status = Collections.singletonList(Statuses.values()[index]);
+        Statuses targetStatus = messageManager.getStatusOverwrite(status.get(0));
         viewMessages(messageManager.getInboxData(userManager.getLoggedInUserUUID(), status), targetStatus);
     }
 
-    private List<String> statusesToString(STATUSES[] statuses) {
+    private List<String> statusesToString(Statuses[] statuses) {
         List<String> statusNames = new ArrayList<>();
-        for (STATUSES status : statuses) {
+        for (Statuses status : statuses) {
             statusNames.add(status.toString());
         }
         return statusNames;
     }
 
     private int processStatusInput() {
-        STATUSES[] statuses = STATUSES.values();
+        Statuses[] statuses = Statuses.values();
         List<String> optionNames = statusesToString(statuses);
         inboxUI.displayOptions(optionNames, false);
         IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in), statuses.length);
@@ -146,9 +146,9 @@ public abstract class MessageMenuSystem extends MenuSystem {
 
     private void setMessageStates() {
        int index = processStatusInput();
-       List<STATUSES> statuses = Arrays.asList(STATUSES.values());
-       viewMessages(messageManager.getInboxData(userManager.getLoggedInUserUUID(), statuses), STATUSES.values()[index]);
-       inboxUI.displayStatusChanged(STATUSES.values()[index]);
+       List<Statuses> statuses = Arrays.asList(Statuses.values());
+       viewMessages(messageManager.getInboxData(userManager.getLoggedInUserUUID(), statuses), Statuses.values()[index]);
+       inboxUI.displayStatusChanged(Statuses.values()[index]);
     }
 
     private void processMessageDeletion() {

@@ -1,6 +1,6 @@
 package backend.app;
 
-import backend.entities.users.PERMS;
+import backend.entities.users.Perms;
 import backend.systems.MenuSystem;
 import backend.systems.admin.AdminSystem;
 import backend.systems.conference.ConferenceManager;
@@ -17,7 +17,6 @@ import backend.systems.messaging.MessageSystem;
 import backend.systems.events.managers.EventManager;
 import backend.systems.events.EventSystem;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -110,7 +109,7 @@ class MainSystem extends MenuSystem {
     }
 
     private void initializeUserCreatorSystem(UserManager userManager) {
-        if (userManager.loggedInHasPermission(PERMS.canSignUpUser)) {
+        if (userManager.loggedInHasPermission(Perms.CAN_SIGN_UP_USER)) {
             ArrayList<String> types = new ArrayList(){
                 {
                     add("speaker");
@@ -125,7 +124,7 @@ class MainSystem extends MenuSystem {
 
     private void initializeAdminSystem(UserManager userManager, EventManager eventManager,
                                        MessageManager messageManager){
-        if(userManager.loggedInHasPermission(PERMS.canBanUsers) || userManager.loggedInHasPermission(PERMS.canViewStats)){
+        if(userManager.loggedInHasPermission(Perms.CAN_BAN_USERS) || userManager.loggedInHasPermission(Perms.CAN_VIEW_STATS)){
             RunnableSystem adminSystem = new AdminSystem(userManager, messageManager, eventManager);
             subSystems.put(subSystems.size(), adminSystem);
         }

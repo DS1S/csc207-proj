@@ -11,7 +11,7 @@ import utility.inputprocessors.TimeIndexProcessor;
 import java.time.LocalTime;
 import java.util.*;
 
-import static backend.entities.users.PERMS.canSpeakAtTalk;
+import static backend.entities.users.Perms.CAN_SPEAK_AT_TALK;
 
 /**
  * A subsystem of the EventSystem that allows the user to perform actions related to the scheduling of Events.
@@ -112,7 +112,7 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
         eventUI.displaySpeakerPrompt();
         String username = askForString("Speaker");
         while (!(userManager.containsUserWithUsername(username)) ||
-                !(userManager.hasPermission(userManager.getUUIDWithUsername(username), canSpeakAtTalk))) {
+                !(userManager.hasPermission(userManager.getUUIDWithUsername(username), CAN_SPEAK_AT_TALK))) {
             eventUI.displayInvalidSpeaker();
             eventUI.displaySpeakerPrompt();
             username = input.nextLine();

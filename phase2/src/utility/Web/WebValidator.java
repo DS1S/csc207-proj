@@ -1,6 +1,6 @@
 package utility.Web;
 
-import backend.entities.users.SOCIALS;
+import backend.entities.users.Socials;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -9,10 +9,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WebValidator {
-    private Map<SOCIALS, String> socialsToRegex = new HashMap<>();
+    private Map<Socials, String> socialsToRegex = new HashMap<>();
 
     public WebValidator() {
-        SOCIALS[] socials = SOCIALS.values();
+        Socials[] socials = Socials.values();
         Class<LinksRegexContainer> classType = LinksRegexContainer.class;
         Field[] fields = classType.getDeclaredFields();
         LinksRegexContainer linksRegexContainer = new LinksRegexContainer();
@@ -34,7 +34,7 @@ public class WebValidator {
         }
     }
 
-    public boolean validateLink(SOCIALS social, String link) {
+    public boolean validateLink(Socials social, String link) {
         return link.matches(socialsToRegex.get(social));
     }
 

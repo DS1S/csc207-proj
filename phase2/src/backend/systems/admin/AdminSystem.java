@@ -1,8 +1,8 @@
 package backend.systems.admin;
 
+import backend.entities.users.Perms;
 import backend.systems.events.managers.EventManager;
 import backend.systems.messaging.managers.MessageManager;
-import backend.entities.users.PERMS;
 import backend.systems.MenuSystem;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AdminUI;
@@ -35,9 +35,9 @@ public class AdminSystem extends MenuSystem {
 
     private int readyPerms(){
         perms = new boolean[NUM_PERMS];
-        perms[CAN_VIEW_STATS] = um.hasPermission(um.getLoggedInUserUUID(), PERMS.canViewStats);
-        perms[CAN_BAN_USERS] = um.hasPermission(um.getLoggedInUserUUID(), PERMS.canBanUsers);
-        perms[CAN_SEE_ALL_MESSAGES] = um.hasPermission(um.getLoggedInUserUUID(), PERMS.canSeeAllMessages);
+        perms[CAN_VIEW_STATS] = um.hasPermission(um.getLoggedInUserUUID(), Perms.CAN_VIEW_STATS);
+        perms[CAN_BAN_USERS] = um.hasPermission(um.getLoggedInUserUUID(), Perms.CAN_BAN_USERS);
+        perms[CAN_SEE_ALL_MESSAGES] = um.hasPermission(um.getLoggedInUserUUID(), Perms.CAN_SEE_ALL_MESSAGES);
 
         int numOptions = 0;
         for (int i = 0; i < NUM_PERMS; i++){
@@ -67,7 +67,7 @@ public class AdminSystem extends MenuSystem {
                 banSys.run();
                 break;
             case CAN_SEE_ALL_MESSAGES:
-                MessageViewingSystem msgViewSys = new MessageViewingSystem(um, messageManager);
+                AdminMessageViewerSystem msgViewSys = new AdminMessageViewerSystem(um, messageManager);
                 msgViewSys.run();
                 break;
         }
