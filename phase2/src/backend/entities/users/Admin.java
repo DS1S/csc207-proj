@@ -2,13 +2,26 @@ package backend.entities.users;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an Admin type User.
+ */
 public class Admin extends User{
 
+    /**
+     * Creates an Admin Object and set its permissions accordingly based on its type.
+     * @param name Name of the Admin.
+     * @param username Username of the Admin.
+     * @param password Password of the Admin.
+     */
     public Admin(String name, String username, String password, LocalDateTime lastLoggedIn){
         super(name, username, password, lastLoggedIn);
         setPermissions();
     }
 
+    /**
+     * Sets the permissions of an Admin. Admins can schedule events, create users, ban users, manage messages,
+     * and view statistics
+     */
     @Override
     protected void setPermissions() {
         permissions.put(Perms.CAN_BE_MESSAGED, false);

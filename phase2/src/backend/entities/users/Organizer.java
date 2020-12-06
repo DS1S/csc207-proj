@@ -18,7 +18,7 @@ public class Organizer extends User {
     }
 
     /**
-     * Sets the permissions of an Organizer. Organizers can schedule events and create users.
+     * Sets the permissions of an Organizer. Organizers can schedule events, create users, and view statistics.
      */
     protected void setPermissions() {
         permissions.put(Perms.CAN_BE_MESSAGED, false);

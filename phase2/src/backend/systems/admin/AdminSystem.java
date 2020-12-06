@@ -10,6 +10,9 @@ import frontend.AdminUI;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A class to handle an Admin's actions.
+ */
 public class AdminSystem extends MenuSystem {
     private UserManager um;
     private MessageManager messageManager;
@@ -23,6 +26,12 @@ public class AdminSystem extends MenuSystem {
     private final int CAN_BAN_USERS = 1;
     private final int CAN_SEE_ALL_MESSAGES = 2;
 
+    /**
+     * Constructs a new AdminSystem with the given information.
+     * @param eventManager The EventManager that will be used by the AdminSystem
+     * @param um The UserManager that will be used by the AdminSystem
+     * @param messageManager The MessageManager that will be used by the AdminSystem
+     */
     public AdminSystem(UserManager um, MessageManager messageManager, EventManager eventManager){
         super();
         this.um = um;
@@ -50,11 +59,18 @@ public class AdminSystem extends MenuSystem {
     }
 
 
+    /**
+     * Displays admin options for the user to choose.
+     */
     @Override
     protected void displayOptions() {
         adminUI.displayAdminOptions(perms);
     }
 
+    /**
+     * Processes input for the selection of an admin option.
+     * @param index the index of the option chosen.
+     */
     @Override
     protected void processInput(int index) {
         switch (optionToPerm.get(index-1)){
@@ -73,6 +89,10 @@ public class AdminSystem extends MenuSystem {
         }
     }
 
+    /**
+     * An override of the built-in toString method, detailing this System.
+     * @return the string "Admin Panel"
+     */
     @Override
     public String toString() {
         return "Admin Panel";

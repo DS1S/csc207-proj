@@ -19,6 +19,11 @@ public class AdminMessageViewerSystem extends MenuSystem {
     private final Scanner scanner = new Scanner(System.in);
     private MessageManager messageManager;
 
+    /**
+     * Constructs a new AdminMessageViewerSystem with the given information.
+     * @param um The UserManager that will be used by the AdminSystem
+     * @param messageManager The MessageManager that will be used by the AdminSystem
+     */
     public AdminMessageViewerSystem(UserManager um, MessageManager messageManager){
         super(4);
         adminUI = new AdminUI();
@@ -27,11 +32,18 @@ public class AdminMessageViewerSystem extends MenuSystem {
         this.messageManager = messageManager;
     }
 
+    /**
+     * Displays message managing options for the user to choose.
+     */
     @Override
     protected void displayOptions() {
         adminUI.displayMessageViewOptions();
     }
 
+    /**
+     * Processes input for the selection of a message managing option.
+     * @param index the index of the option chosen.
+     */
     @Override
     protected void processInput(int index) {
         adminUI.promptUserName();
