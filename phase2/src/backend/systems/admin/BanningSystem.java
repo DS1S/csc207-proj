@@ -6,6 +6,9 @@ import frontend.AdminUI;
 
 import java.util.Scanner;
 
+/**
+ * An extension of MenuSystem that displays an Admin their banning options and processes their input.
+ */
 public class BanningSystem extends MenuSystem {
     private UserManager um;
     private AdminUI adminUI;

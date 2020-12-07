@@ -11,6 +11,10 @@ import utility.inputprocessors.OptionIndexProcessor;
 
 import java.util.*;
 
+/**
+ * An extension of MenuSystem that displays an Admin their individual and administrative messaging
+ * options and processes their input.
+ */
 public class AdminMessageViewerSystem extends MenuSystem {
 
     UserManager um;

@@ -7,10 +7,18 @@ import backend.systems.usermangement.managers.UserManager;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * The class responsible for generating useful statistics that can be viewed by Admins.
+ */
 public class StatisticsCalculator{
     private final EventManager eventManager;
     private final UserManager userManager;
 
+    /**
+     * Constructs a new instance of StatisticsCalculator given an eventManager and a userManager.
+     * @param eventManager eventManager used by the StatisticsCalculator
+     * @param userManager usermanager used by the StatisticsCalculator
+     */
     public StatisticsCalculator (EventManager eventManager, UserManager userManager) {
         this.eventManager = eventManager;
         this.userManager = userManager;
@@ -31,6 +39,10 @@ public class StatisticsCalculator{
                 }
     }
 
+    /**
+     * Gets the average number of all attendees of all events in the eventManager.
+     * @return average number of all attendees of all events
+     */
     public int getAverageNumberOfAttendees() {
         List<Integer> numberofAttendees = new ArrayList<>();
         List<Map<String, Object>> eventsData = eventManager.retrieveAllEvents();
@@ -42,6 +54,10 @@ public class StatisticsCalculator{
         return 0;
     }
 
+    /**
+     * Gets the top five events in the eventManager based on number of attendees.
+     * @return a list of the names of the five most popular events
+     */
     public List<Map<String, Object>> top5Events() {
         List<Map<String, Object>> top5Events = new ArrayList<>();
         List<Map<String, Object>> topEvents = new ArrayList<>();
@@ -58,6 +74,12 @@ public class StatisticsCalculator{
         return top5Events;
     }
 
+    /**
+     * Gets the number of users that log into the system over a certain time interval.
+     * @param StartTime starting time of the interval
+     * @param EndTime ending time of the interval
+     * @return number of users that log in at any time over the specified interval
+     */
     public int getUserTrafficNumber(LocalDateTime StartTime, LocalDateTime EndTime) {
         int trafficCount = 0;
         List<UUID> user_list = userManager.getUUIDs();
@@ -69,6 +91,11 @@ public class StatisticsCalculator{
         return trafficCount;
     }
 
+    /**
+     * Gets the top five speakers ranked by the number of events spoken at.
+     * @return a list of the names of the top five speakers based on the number of events they
+     * have spoken at
+     */
     public List<String> top5Speaker() {
         List<String> top5Speaker = new ArrayList<>();
         List<String> speakers = new ArrayList<>();

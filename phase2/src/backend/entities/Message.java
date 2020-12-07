@@ -54,18 +54,6 @@ public class Message implements Serializable {
     public Statuses getStatus() {return this.status;}
 
     /**
-     * Returns the UUID of a message.
-     * @return UUID of message
-     */
-    public UUID getMessageId(){return this.msgID;}
-
-    /**
-     * Returns the title of a message.
-     * @return title of message
-     */
-    public String getMessageTitle(){return this.title;}
-
-    /**
      * Gets the UUID of the message recipient.
      * @return The UUID of the person who received this Message.
      */
@@ -79,11 +67,6 @@ public class Message implements Serializable {
      */
     public UUID getSender() { return sender; }
 
-    /**
-     * Gets the body of the message.
-     * @return the body of the message
-     */
-    public String getBody() {return this.body;}
 
     /**
      * Returns a map whose values are the Message's properties corresponding to those properties in
