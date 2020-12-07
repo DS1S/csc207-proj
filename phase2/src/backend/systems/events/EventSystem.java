@@ -39,12 +39,18 @@ public class EventSystem extends MenuSystem {
         changeNumOptions(subSystems.size() + 1);
     }
 
-
+    /**
+     * Overrides the displayOptions method.
+     */
     @Override
     protected void displayOptions() {
         eventUI.displayOptions(optionNames, true);
     }
 
+    /**
+     * Overrides the processInput method.
+     * @param index The input to be processed.
+     */
     @Override
     protected void processInput(int index) {
         if (subSystems.containsKey(index)) {

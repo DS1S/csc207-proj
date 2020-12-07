@@ -9,6 +9,9 @@ import utility.inputprocessors.TimeIndexProcessor;
 import java.time.LocalTime;
 import java.util.UUID;
 
+/**
+ * An extension of the EventMenuSystem used to retrieve event categories.
+ */
 public class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
     /**
      * Constructs a new EventCategoryRetrieverMenuSystem with the given information.
@@ -32,11 +35,18 @@ public class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
         return uuid;
     }
 
+    /**
+     * Overrides the displayOptions method, displays category retriever options.
+     */
     @Override
     protected void displayOptions() {
         eventUI.displayCategoryRetrieverOptions();
     }
 
+    /**
+     * Overrides the processInput method.
+     * @param index The input to be processed.
+     */
     @Override
     protected void processInput(int index) {
         switch (index) {
@@ -55,6 +65,10 @@ public class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
         }
     }
 
+    /**
+     * Overrides the built-in toString method.
+     * @return the string "Retrieve Events Based on Category"
+     */
     @Override
     public String toString() {
         return "Retrieve Events Based on Category";

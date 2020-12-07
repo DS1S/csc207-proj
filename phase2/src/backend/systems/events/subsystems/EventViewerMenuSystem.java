@@ -44,6 +44,10 @@ class EventViewerMenuSystem extends EventMenuSystem {
         }
     }
 
+    /**
+     * Overrides the built-in toString method.
+     * @return the string "Event Viewer"
+     */
     @Override
     public String toString() {
         return "Event Viewer";

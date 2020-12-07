@@ -72,6 +72,10 @@ class EventSignUpMenuSystem extends EventMenuSystem {
         }
     }
 
+    /**
+     * Overrides the built-in toString method.
+     * @return the string "Event Sign Up"
+     */
     @Override
     public String toString() {
         return "Event Sign Up";

@@ -167,6 +167,10 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
         }
     }
 
+    /**
+     * Overrides the built-in toString method.
+     * @return the string "Event Scheduler"
+     */
     @Override
     public String toString() {
         return "Event Scheduler";
