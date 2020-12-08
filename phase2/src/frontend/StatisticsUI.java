@@ -28,10 +28,8 @@ public class StatisticsUI {
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Map<String, Object> data: eventList) {
-            sb.append("#" + i + ":");
-            sb.append(data.get("Title") + "\n");
-            sb.append("Hosted by: " + userManager.getNameWithUUID((UUID)data.get("Speaker")) + "\n");
-            sb.append(data.get("Registered") + " people registered + \n");
+            sb.append("#" + i + ": ");
+            formatEventData(sb, data);
             System.out.print(sb);
             sb.setLength(0);
             i += 1;
@@ -41,6 +39,20 @@ public class StatisticsUI {
             System.out.println("An average of " + average + " people attend any event.");
         }
         else { System.out.println("No events have taken place!"); }
+    }
+
+    private void formatEventData(StringBuilder sb, Map<String, Object> data) {
+        sb.append("\"" + data.get("Title") + "\"" + "\n");
+        List<?> speakers = (List<?>) data.get("Speaker");
+        if (!(speakers.isEmpty())){
+            sb.append("Hosted by: ");
+            for (Object speakerUUID: speakers) {
+                sb.append(userManager.getNameWithUUID((UUID)speakerUUID) + ", ");
+            }
+            sb.delete(sb.length() - 2, sb.length() - 1);
+            sb.append("\n");
+        }
+        sb.append(data.get("Registered") + "/" + data.get("Capacity") + " spots filled" + "\n");
     }
 
     /**

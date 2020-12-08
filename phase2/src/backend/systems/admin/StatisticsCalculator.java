@@ -111,7 +111,13 @@ class StatisticsCalculator{
         }
         parallelSort(speakersNumberOfEvents, Collections.singletonList(speakers));
         for (int i = 0; i < Math.min(speakers.size(), 5); i++) {
-            top5Speaker.add(speakers.get(i) + " : " + speakersNumberOfEvents.get(i));
+            if (speakersNumberOfEvents.get(i) == 1) {
+                top5Speaker.add(speakers.get(i) + " : " + speakersNumberOfEvents.get(i) + " event");
+            }
+            else {
+                top5Speaker.add(speakers.get(i) + " : " + speakersNumberOfEvents.get(i) + " events");
+            }
+
         }
         return top5Speaker;
     }

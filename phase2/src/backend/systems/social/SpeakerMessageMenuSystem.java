@@ -1,5 +1,6 @@
 package backend.systems.social;
 
+import backend.entities.Event;
 import backend.entities.users.Perms;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
@@ -86,14 +87,16 @@ class SpeakerMessageMenuSystem extends MessageMenuSystem {
     private void sendMessageToTalks(List<String> events, String msg, String title) {
         List<UUID> attendeeUUIDs = new ArrayList<>();
         for (String event : events) {
-            List<UUID> eventUUIDs = new ArrayList<>();
             for(EventManager eventManager: eventManagers){
-                eventManager.retrieveAttendees(event, userManager.getLoggedInUserUUID());
+                attendeeUUIDs.addAll(eventManager.retrieveAttendees(event, userManager.getLoggedInUserUUID()));
             }
-            attendeeUUIDs.addAll(eventUUIDs);
         }
         if (attendeeUUIDs.isEmpty()) inboxUI.displayError("No one is attending your talks!");
         else inboxUI.sentPrompt();
+        // Remove duplicate attendee UUIDs
+        Set<UUID> set = new LinkedHashSet<>(attendeeUUIDs);
+        attendeeUUIDs.clear();
+        attendeeUUIDs.addAll(set);
         messageManager.sendMessageToMultiple(userManager.getLoggedInUserUUID(), attendeeUUIDs, msg, title);
     }
 
@@ -123,11 +126,4 @@ class SpeakerMessageMenuSystem extends MessageMenuSystem {
         }
         return 0;
     }
-
-    /**
-     * Returns the string representation of this system.
-     * @return The string "Speaker Inbox/Messaging".
-     */
-    @Override
-    public String toString() { return "Speaker Inbox/Messaging"; }
 }
