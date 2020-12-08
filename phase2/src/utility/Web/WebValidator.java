@@ -15,8 +15,9 @@ public class WebValidator {
     private Map<Socials, String> socialsToRegex = new HashMap<>();
 
     /**
-     * Constructs a WebValitator, and builds a map from a Socials enum to its corresponding regex (website
-     * format). The map will be used to validate links given a Socials enum.
+     * Constructs a WebValidator object and then validates each of the user's social
+     * media links by checking the against a regex. Places valid lnks into a map
+     * and anonymously logs invalid ones.
      */
     public WebValidator() {
         Socials[] socials = Socials.values();

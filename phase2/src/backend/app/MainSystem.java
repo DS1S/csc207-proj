@@ -32,16 +32,26 @@ class MainSystem extends MenuSystem {
                                                     "phase2/database/ESManagerCon3.ser"};
     private List<String> subSystemNames = new ArrayList<>();
 
-    public MainSystem(){
+    /**
+     * Constructs a MainSystem by initializing all subsystems and then running the first one
+     */
+    public MainSystem() {
         initializeSubSystems();
         changeNumOptions(subSystems.size());
     }
 
+    /**
+     * Displays the options for the main menu
+     */
     @Override
     protected void displayOptions() {
         mainMenu.displayMainMenu(subSystemNames);
     }
 
+    /**
+     * Processes a user input by passing it to the appropriate subsystem
+     * @param index The input to be processed.
+     */
     @Override
     protected void processInput(int index) {
         if (subSystems.containsKey(index)) {
