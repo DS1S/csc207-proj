@@ -27,6 +27,9 @@ public abstract class MenuSystem implements RunnableSystem {
         this.indexProcessor = new OptionIndexProcessor(input, numOptions);
     }
 
+    /**
+     * Constructs a MenuSystem with one option if no number of options is given.
+     */
     public MenuSystem(){
         this(1);
     }

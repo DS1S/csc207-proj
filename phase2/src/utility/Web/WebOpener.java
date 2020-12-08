@@ -5,13 +5,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Class which handles opening of the user's web browser
+ * A WebAccessible class used for opening valid URIs on a browser.
  */
 public class WebOpener implements WebAccessible {
     /**
-     * Tries to open the given link in the user's web browser. Returns true on success, false otherwise
-     * @param link the website link to be opened
-     * @return true on success, false otherwise
+     * Attempts to open the given link (as a string) on a browser.
+     * @param link The given URI in a string format.
+     * @return True if the link was opened, false otherwise.
      */
     public boolean openWeb(String link) {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {

@@ -13,6 +13,8 @@ import java.lang.String;
  *      - Password
  *      - User's Permissions
  *      - The user's last logged in date
+ *      - Whether the User is banned
+ *      - The User's profile social media links.
  */
 public abstract class User implements Serializable {
     private final UUID uuid;
@@ -41,12 +43,33 @@ public abstract class User implements Serializable {
         this.profileLinks = new HashMap<>();
     }
 
+    /**
+     * Sets a User's profile link to link given a social media platform.
+     * @param social The social media platform of the link.
+     * @param link The link to be set on the profile.
+     */
     public void setProfileLink(Socials social, String link) {
         profileLinks.put(social, link);
     }
 
+    /**
+     * Removes a User's profile link from a particular social media platform.
+     * @param social The social media platform of the link to be removed.
+     */
+    public void removeProfileLink(Socials social) { profileLinks.remove(social); }
+
+    /**
+     * Gets this user's profile links.
+     * @return The values of each Socials key in the map of profile links.
+     */
     public List<String> getProfileLinks() {
-        return new ArrayList<>(profileLinks.values());
+        List<String> links = new ArrayList<>();
+
+        for (Socials social : profileLinks.keySet()) {
+            links.add(social.toString() + ": " + profileLinks.get(social));
+        }
+
+        return links;
     }
 
     /**
@@ -80,10 +103,16 @@ public abstract class User implements Serializable {
      */
     public String getName() { return this.name; }
 
+    /**
+     * Returns whether the user is banned.
+     * @return True if the user is banned, false otherwise.
+     */
+    public boolean getIsBanned() { return this.isBanned; }
 
-    // TODO: doc
-    public boolean getIsBanned(){ return this.isBanned;}
-
+    /**
+     * Sets the ban status of the user.
+     * @param banned True if and only if the user is banned.
+     */
     public void setBanned(boolean banned){ this.isBanned = banned; }
 
     /**
@@ -101,7 +130,8 @@ public abstract class User implements Serializable {
     protected abstract void setPermissions();
 
     /**
-     * Sets a new last logged in date for the user.
+     * Sets the last logged in time user to the date lastLoggedIn.
+     * @param lastLoggedIn The new last logged in date.
      */
     public void setLastLoggedIn(LocalDateTime lastLoggedIn) { this.lastLoggedIn = lastLoggedIn; }
 

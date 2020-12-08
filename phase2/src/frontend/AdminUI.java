@@ -14,7 +14,7 @@ public class AdminUI extends MenuUI{
      *              In order, CAN_VIEW_STATS, CAN_BAN_USERS, CAN_SEE_ALL_MESSAGES
      */
     public void displayAdminOptions(boolean[] perms){
-        displayOptions(getOptions(perms), true);
+        displayOptions(getOptions(perms), true, true);
     }
 
     /**
@@ -28,7 +28,7 @@ public class AdminUI extends MenuUI{
             }
         };
 
-        displayOptions(options, true);
+        displayOptions(options, true, true);
     }
 
     /**
@@ -64,7 +64,7 @@ public class AdminUI extends MenuUI{
             }
         };
 
-        displayOptions(options, true);
+        displayOptions(options, true, true);
     }
 
     /**

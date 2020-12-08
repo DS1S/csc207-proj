@@ -33,4 +33,11 @@ class RegularMessageMenuSystem extends MessageMenuSystem {
     protected void processInput(int index) {
         processBaseInput(index);
     }
+
+    /**
+     * Returns the string representation of this system.
+     * @return The string "Inbox/Messaging".
+     */
+    @Override
+    public String toString() { return "Inbox/Messaging"; }
 }

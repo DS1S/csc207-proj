@@ -102,14 +102,14 @@ public class InboxUI extends MenuUI {
      * Prompts the user to write their title.
      */
     public void displayTitlePrompt() {
-        System.out.println("Write your title: ");
+        System.out.print("Write your title: ");
     }
 
     /**
      * Prompts the user to indicate the message's intended recipeint(s).
      */
     public void displayUserPrompt() {
-        System.out.print("Enter Recipient(s), comma separated:");
+        System.out.print("Enter Recipient(s), comma separated: ");
     }
 
     /**

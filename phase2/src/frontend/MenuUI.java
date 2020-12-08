@@ -24,13 +24,16 @@ public class MenuUI {
     /**
      * Displays main menu options to the user.
      * @param optionNames the options of the menu to be displayed.
+     * @param displayReturnPrompt
      * @param displayExit Whether the exit option will be displayed in this list of options.
      */
-    public void displayOptions(List<String> optionNames, boolean displayExit) {
-        System.out.println("Please choose an option or return to previous menu.");
+    public void displayOptions(List<String> optionNames, boolean displayReturnPrompt, boolean displayExit) {
+        if (displayReturnPrompt) { System.out.println("\nPlease choose an option or return to previous menu."); }
+
         for(int i = 0; i < optionNames.size(); i++){
             System.out.println((i + 1) + ". " + optionNames.get(i));
         }
+
         if (displayExit) { System.out.println(optionNames.size() + 1 + ": Return/Exit."); }
     }
 

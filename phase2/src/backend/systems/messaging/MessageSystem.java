@@ -62,7 +62,7 @@ public class MessageSystem extends MenuSystem {
 
         subSystems.put(subSystems.size() + 1,
                 messageSubSystemFactory.createMessageSubSystem("linker", userManager, messageManager,
-                        4, eventManagers));
+                        5, eventManagers));
     }
 
     /**
@@ -70,7 +70,7 @@ public class MessageSystem extends MenuSystem {
      */
     @Override
     protected void displayOptions() {
-        menuUI.displayOptions(convertSubSystemsToNames(subSystems), true);
+        menuUI.displayOptions(convertSubSystemsToNames(subSystems), true, true);
     }
 
     /**
