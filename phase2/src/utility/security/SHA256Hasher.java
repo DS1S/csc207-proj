@@ -6,9 +6,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 
+// TODO: add javadocs
 /**
  * A Hasher class which uses SHA256
- * Note: Not in use right now, for phase 2.
  */
 public class SHA256Hasher implements Hasher {
 

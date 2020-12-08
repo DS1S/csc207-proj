@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// TODO : add javadocs
 public class WebValidator {
     private Map<Socials, String> socialsToRegex = new HashMap<>();
 
