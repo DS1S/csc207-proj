@@ -154,11 +154,13 @@ We did try to extend some UI with each other when there was commonality like dis
 Lastly,
 For when organizers schedule the events, we leave it to them when they want to schedule between 00:00 - 23:59. We don't
 restrict the times, as we assume they are competent enough schedule properly since they are organizers of the event.
+Same goes for the rooms, we assume the organizers are competent enough to add valid rooms in their conference and valid
+capacities. (Otherwise, they should reconsider who they hire).
 
 
 Without further ado, these are the following steps required to run our program:
-    1. Enter the coreUtil Package
-    2. Open up Migration package
+    1. Enter the utility Package
+    2. Open up models package
     3. Run ModelCreator (This class just rebuilds the ser files with default data) its not intended to be
             part of our actual "program" so please don't mark it as such. Its main is separated so we
             don't rebuild the data each time on run.
@@ -167,6 +169,7 @@ Without further ado, these are the following steps required to run our program:
             1. user1 pass1 - attendee
             2. user2 pass2 - speaker
             3. user3 pass3 - organizer
+            4. user5 pass5 - admin
             ** You can also create your own attendee through sign up on run, or create a speaker from
             user3 when you log in. **
     6. In order for data to persist, you need to have a "clean termination".
