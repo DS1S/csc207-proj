@@ -1,5 +1,8 @@
 package backend.entities.users;
 
+/**
+ * Enumeration set for different social media.
+ */
 public enum Socials {
     LINKEDIN("LinkedIn"),
     INSTAGRAM("Instagram"),
@@ -14,6 +17,10 @@ public enum Socials {
         this.social = social;
     }
 
+    /**
+     * Overrides the built-in toString method.
+     * @return the social platform name in string format
+     */
     @Override
     public String toString() {
         return social;

@@ -59,7 +59,7 @@ public class StatisticsSystem extends MenuSystem {
 
     /**
      * Overrides the built-in toString method.
-     * @return a set of desired statistics in string format
+     * @return the string "Statistics"
      */
     @Override
     public String toString() { return "Statistics"; }

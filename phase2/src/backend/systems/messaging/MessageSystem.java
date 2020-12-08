@@ -40,6 +40,9 @@ public class MessageSystem extends MenuSystem {
         changeNumOptions(subSystems.size() + 1);
     }
 
+    /**
+     * Calls the message subsystem factory to initialize the message subsystems.
+     */
     public void initializeSubSystems() {
         MessageSubSystemFactory messageSubSystemFactory = new MessageSubSystemFactory();
 
@@ -62,11 +65,18 @@ public class MessageSystem extends MenuSystem {
                         4, eventManagers));
     }
 
+    /**
+     * Overrides the displayOptions method.
+     */
     @Override
     protected void displayOptions() {
         menuUI.displayOptions(convertSubSystemsToNames(subSystems), true);
     }
 
+    /**
+     * Overrides the processInput method.
+     * @param index The input to be processed.
+     */
     @Override
     protected void processInput(int index) {
         if (subSystems.containsKey(index)) {

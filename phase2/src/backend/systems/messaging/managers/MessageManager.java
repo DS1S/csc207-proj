@@ -54,6 +54,11 @@ public class MessageManager implements Serializable {
         return inboxes.containsKey(userID);
     }
 
+    /**
+     * Returns true if a user has an inbox that is non-empty, false otherwise.
+     * @param userID UUID of the user
+     * @return true if the user's inbox is non-empty, false otherwise
+     */
     public boolean userHasMail(UUID userID) {
         return userHasInbox(userID) && (!inboxes.get(userID).isEmpty());
     }
@@ -113,14 +118,31 @@ public class MessageManager implements Serializable {
         return inboxData;
     }
 
+    /**
+     * Removes a message at a specific index from a user's inbox.
+     * @param userID UUID of the user
+     * @param index index of the message to remove
+     */
     public void deleteMessage(UUID userID, int index) {
         inboxes.get(userID).remove(index);
     }
 
+    /**
+     * Changes the status of a message.
+     * @param userID UUID of the user whose inbox contains the message
+     * @param index index of the message in the inbox
+     * @param status the new message status
+     */
     public void changeMessageState(UUID userID, int index, Statuses status) {
         inboxes.get(userID).get(index).setStatus(status);
     }
 
+    /**
+     * Gets the overwriting status of a status.
+     * @param status the status whose overwriting status will be retrieved
+     * @return read if the status is overwritten when the message is read, otherwise returns
+     * the status itself
+     */
     public Statuses getStatusOverwrite(Statuses status) {
         if (!status.isOverReadable()) {
             return status;

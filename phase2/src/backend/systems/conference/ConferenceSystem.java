@@ -47,7 +47,7 @@ public class ConferenceSystem extends MenuSystem {
 
     /**
      * Overrides the built-in toString method.
-     * @return conference names in string format
+     * @return the string "Conferences"
      */
     @Override
     public String toString() {

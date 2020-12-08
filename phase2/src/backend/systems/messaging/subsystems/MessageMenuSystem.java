@@ -34,8 +34,10 @@ public abstract class MessageMenuSystem extends MenuSystem {
 
     /**
      * Processes an integer input in any messaging page.
-     * @param option The input to be processed. 1 allows for displaying all messages to the logged in user.
-     *               2 allows for sending a message.
+     * @param option The input to be processed. 1 allows for displaying all read messages
+     * to the logged in user, 2 allows for displaying all messages by a specific status,
+     * 3 allows for sending a message, 4 allows for modifying message statuses, and 5 allows for
+     * message deletion.
      */
     protected void processBaseInput(int option) {
         switch (option) {

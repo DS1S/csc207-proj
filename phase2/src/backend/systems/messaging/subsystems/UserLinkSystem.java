@@ -11,12 +11,22 @@ import utility.inputprocessors.OptionIndexProcessor;
 
 import java.util.*;
 
+/**
+ * The class responsible for linking a user's profile to other social media services.
+ */
 public class UserLinkSystem extends MenuSystem {
     private WebValidator webValidator;
     private WebAccessible webOpener;
     private UserLinkUI userLinkUI;
     private UserManager userManager;
 
+    /**
+     * Constructs a new instance of UserLinkSystem using the given parameters.
+     * @param webValidator the web validator used by the system
+     * @param webOpener the web opener used by the system
+     * @param userManager the user manager used by the system
+     * @param numOptions the number of link options available to the user
+     */
     public UserLinkSystem(WebValidator webValidator, WebAccessible webOpener, UserManager userManager, int numOptions) {
         super(numOptions);
         this.webValidator = webValidator;
@@ -25,11 +35,18 @@ public class UserLinkSystem extends MenuSystem {
         this.userManager = userManager;
     }
 
+    /**
+     * An override of the displayOptions method.
+     */
     @Override
     protected void displayOptions() {
         userLinkUI.displayUserLinkMenu();
     }
 
+    /**
+     * An override of the processInput method.
+     * @param index The input to be processed.
+     */
     @Override
     protected void processInput(int index) {
         switch (index) {
@@ -102,6 +119,10 @@ public class UserLinkSystem extends MenuSystem {
         }
     }
 
+    /**
+     * Overrides the built-in toString method.
+     * @return the string "Social Media Links"
+     */
     @Override
     public String toString() {
         return "Social Media Links";

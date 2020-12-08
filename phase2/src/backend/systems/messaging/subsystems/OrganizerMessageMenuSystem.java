@@ -9,11 +9,12 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * An AdvancedMessageSubSystem that extends MessageMenuSystem.
+ * An extension of MessageMenuSystem responsible for the message menu available to organizers.
  */
 class OrganizerMessageMenuSystem extends MessageMenuSystem {
+
     /**
-     * Constructs a new instance of AdvancedMessageSubSystem using the given parameters.
+     * Constructs a new instance of OrganizerMessageMenuSystem using the given parameters.
      * @param userManager The user manager used by the system.
      * @param messageManager The message manager used by the system.
      * @param numOptions The number of options available to the user on the menu.

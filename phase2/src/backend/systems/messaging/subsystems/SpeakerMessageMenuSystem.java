@@ -10,7 +10,7 @@ import utility.inputprocessors.OptionIndexProcessor;
 import java.util.*;
 
 /**
- * A subsystem of the MessageSystem that allows the user to perform actions related to a Speaker sending messages.
+ * An extension of MessageMenuSystem responsible for the message menu available to speakers.
  */
 class SpeakerMessageMenuSystem extends MessageMenuSystem {
     private List<EventManager> eventManagers;

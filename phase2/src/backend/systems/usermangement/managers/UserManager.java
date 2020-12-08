@@ -75,9 +75,18 @@ public class UserManager implements Serializable {
         return users.get(id).checkPassword(password);
     }
 
-    //TODO: doc
+    /**
+     * Checks if the user corresponding to a UUID is banned.
+     * @param id the UUID of the user to check
+     * @return true if the user is banned, false otherwise
+     */
     public boolean checkBannedWithUUID(UUID id) {return users.get(id).getIsBanned();}
 
+    /**
+     * Bans a user.
+     * @param id the UUID of the user to ban
+     * @param banned the banned status of the user
+     */
     public void setUserBan(UUID id, boolean banned) {
         users.get(id).setBanned(banned);
     }
@@ -170,18 +179,32 @@ public class UserManager implements Serializable {
         return StartTime.isBefore(time) && EndTime.isAfter(time);
     }
 
+    /**
+     * Checks if a user has other social media links.
+     * @param uuid UUID of the user
+     * @return true if the user has at least one social media link, false otherwise
+     */
     public boolean userHasLinks(UUID uuid) {
         return getUserLinks(uuid).size() > 0;
     }
 
+    /**
+     * Gets a list of a user's social media links.
+     * @param uuid UUID of the user
+     * @return an empty list if the user does not have any links, otherwise returns a list of their links
+     */
     public List<String> getUserLinks(UUID uuid) {
-        List<String> links = users.get(uuid).getProfileLinks();
-        if (links.isEmpty()) {
+        if (!userHasLinks(uuid)) {
             return new ArrayList<>();
         }
         return users.get(uuid).getProfileLinks();
     }
 
+    /**
+     * Sets a logged in user's link to a specific social media platform.
+     * @param social the social media platform to link to
+     * @param link the link to the platform
+     */
     public void setLoggedInUserLink(Socials social, String link) {
         loggedInUser.setProfileLink(social, link);
     }

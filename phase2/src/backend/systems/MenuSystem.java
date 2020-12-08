@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * Represents an abstract Subsystem.
+ * Represents an abstract MenuSystem.
  */
 public abstract class MenuSystem implements RunnableSystem {
     private int numOptions;
@@ -19,9 +19,8 @@ public abstract class MenuSystem implements RunnableSystem {
     protected Scanner input = new Scanner(System.in);
 
     /**
-     * Constructs a subsystem with a number of options and an IndexProcessor to handle them.
+     * Constructs a MenuSystem with a number of options and an IndexProcessor to handle them.
      * @param numOptions the number of options accepted by this system.
-     *
      */
     public MenuSystem(int numOptions) {
         this.numOptions = numOptions;
@@ -32,12 +31,14 @@ public abstract class MenuSystem implements RunnableSystem {
         this(1);
     }
 
+    /**
+     * Changes the number of options available on the menu.
+     * @param numOptions the new number of options to be available on the menu
+     */
     protected void changeNumOptions(int numOptions){
         this.numOptions = numOptions;
         this.indexProcessor = new OptionIndexProcessor(input, numOptions);
     }
-
-    protected int getNumOptions(){ return numOptions; }
 
     /**
      * Runs a subsystem by asking for the required number of options and processing them.
@@ -93,6 +94,11 @@ public abstract class MenuSystem implements RunnableSystem {
         }
     }
 
+    /**
+     * Gets the names of a collection of subsystems.
+     * @param subSystems a collection that maps an index to a subsystem
+     * @return a list of names of the subsystems in the collection
+     */
     protected List<String> convertSubSystemsToNames(Map<Integer, RunnableSystem> subSystems){
         List<String> subSystemNames = new ArrayList<>();
         subSystems.forEach((integer, runnableSystem) -> subSystemNames.add(runnableSystem.toString()));
