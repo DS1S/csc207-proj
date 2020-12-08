@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Represents a InboxUI used for the message system UI.*/
+ * Represents a InboxUI used for the message system UI.
+ */
 public class InboxUI extends MenuUI {
     private UserManager userManager;
 
@@ -20,7 +21,7 @@ public class InboxUI extends MenuUI {
     }
 
     /**
-     * Displays the user's inbox and a message indicating that their inbox is empty if their inbox is
+     * Displays the user's inbox or a message indicating that their inbox is empty if their inbox is
      * empty.
      * @param inboxData The user's inbox data.
      */
@@ -46,6 +47,10 @@ public class InboxUI extends MenuUI {
         }
     }
 
+    /**
+     * Displays the formatted details and body of the message represented by the given messageData.
+     * @param messageData the data of the message to be displayed
+     */
     public void displayMessage(Map<String, Object> messageData) {
         StringBuilder sb = new StringBuilder();
         String recipient = userManager.getUsernameWithUUID((UUID) messageData.get("recipient"));
@@ -121,10 +126,17 @@ public class InboxUI extends MenuUI {
         System.out.println("Enter Talks: ");
     }
 
+    /**
+     * Informs the user that the status of a message has changed.
+     * @param status the new status of the message
+     */
     public void displayStatusChanged(Statuses status) {
         System.out.println("Message has changed to: " + status);
     }
 
+    /**
+     * Informs the user that the message has been successfully deleted.
+     */
     public void displayMessageDeleted() {
         System.out.println("Message has been deleted!");
     }

@@ -6,11 +6,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * A class that displays prompts and messages for statistics related actions.
+ */
 public class StatisticsUI {
     private UserManager userManager;
 
+    /**
+     * Constructs a new StatisticsUI that uses the given user manager.
+     * @param userManager The user manager used by the EventUI.
+     */
     public StatisticsUI(UserManager userManager) { this.userManager = userManager; }
 
+    /**
+     * Displays the available statistics related to events.
+     * @param eventList The list of extracted event data for the top 5 most attended events
+     * @param average The average number of attendees per event
+     */
     public void displayEventStats(List<Map<String, Object>> eventList, int average) {
         System.out.println("--------------Top 5 most attended Events--------------");
         StringBuilder sb = new StringBuilder();
@@ -31,6 +43,12 @@ public class StatisticsUI {
         else { System.out.println("No events have taken place!"); }
     }
 
+    /**
+     * Displays the available statistics related to app traffic and use activity.
+     * @param dailyLogins the number of logins for the day
+     * @param weeklyLogins the number of logins for the week
+     * @param monthlyLogins the number of logins for the month
+     */
     public void displayTrafficStats(int dailyLogins, int weeklyLogins, int monthlyLogins) {
         System.out.println("\nUsers that have been logged in:");
         System.out.println("Today: " + dailyLogins);
@@ -38,6 +56,10 @@ public class StatisticsUI {
         System.out.println("This month: " + monthlyLogins);
     }
 
+    /**
+     * Displays the available statistics related to speakers.
+     * @param speakerNames The list of names of the top 5 speakers
+     */
     public void displaySpeakerStats(List<String> speakerNames) {
         int i = 1;
 
@@ -48,6 +70,9 @@ public class StatisticsUI {
         }
     }
 
+    /**
+     * Displays a list of options pertaining to the viewing of statistics.
+     */
     public void displayStatisticsOptions() {
         System.out.println("\nWhat statistics would you like to see?");
         System.out.println("1. Display event statistics");

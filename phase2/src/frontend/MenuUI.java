@@ -2,6 +2,9 @@ package frontend;
 
 import java.util.List;
 
+/**
+ * A class that displays prompts and messages pertaining to a menu with various options.
+ */
 public class MenuUI {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
