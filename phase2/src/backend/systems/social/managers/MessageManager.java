@@ -110,7 +110,7 @@ public class MessageManager implements Serializable {
         List<Map<String, Object>> inboxData = new ArrayList<>();
         for (List<Message> inbox : inboxes.values()) {
             for (Message msg : inbox) {
-                if (msg.getSender() == userID) {
+                if (msg.getSender().equals(userID)) {
                     inboxData.add(msg.extractData());
                 }
             }
