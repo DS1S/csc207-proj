@@ -1,9 +1,9 @@
-package backend.systems.messaging.subsystems;
+package backend.systems.social;
 
 import backend.entities.users.Perms;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
-import backend.systems.messaging.managers.MessageManager;
+import backend.systems.social.managers.MessageManager;
 import utility.inputprocessors.IndexProcessor;
 import utility.inputprocessors.OptionIndexProcessor;
 
@@ -19,12 +19,11 @@ class SpeakerMessageMenuSystem extends MessageMenuSystem {
      * Creates a SpeakerMessageMenuSystem object.
      * @param userManager A UserManager object that is already instantiated at the point this is instantiated.
      * @param messageManager A MessageManager object that is already instantiated at the point this is instantiated.
-     * @param numOptions The Number of options in the menu.
      * @param eventManagers A EventManager object that is already instantiated at the point this is instantiated.
      */
-    public SpeakerMessageMenuSystem(UserManager userManager, MessageManager messageManager, int numOptions,
+    public SpeakerMessageMenuSystem(UserManager userManager, MessageManager messageManager,
                                     List<EventManager> eventManagers) {
-        super(userManager, messageManager, numOptions);
+        super(userManager, messageManager, 7);
         this.eventManagers = eventManagers;
     }
 

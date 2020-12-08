@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * An extension of MenuSystem that displays an Admin options to view certain statistics and processes
  * their input.
  */
-public class StatisticsSystem extends MenuSystem {
+class StatisticsSystem extends MenuSystem {
     private final StatisticsUI statisticsUI;
     private final StatisticsCalculator statisticsCalculator;
 

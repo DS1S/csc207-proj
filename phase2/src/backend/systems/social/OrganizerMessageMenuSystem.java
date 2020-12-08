@@ -1,8 +1,8 @@
-package backend.systems.messaging.subsystems;
+package backend.systems.social;
 
 import backend.entities.users.Perms;
 import backend.systems.usermangement.managers.UserManager;
-import backend.systems.messaging.managers.MessageManager;
+import backend.systems.social.managers.MessageManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,9 @@ class OrganizerMessageMenuSystem extends MessageMenuSystem {
      * Constructs a new instance of OrganizerMessageMenuSystem using the given parameters.
      * @param userManager The user manager used by the system.
      * @param messageManager The message manager used by the system.
-     * @param numOptions The number of options available to the user on the menu.
      */
-    public OrganizerMessageMenuSystem(UserManager userManager, MessageManager messageManager, int numOptions) {
-        super(userManager, messageManager, numOptions);
+    public OrganizerMessageMenuSystem(UserManager userManager, MessageManager messageManager) {
+        super(userManager, messageManager, 8);
     }
 
     /**

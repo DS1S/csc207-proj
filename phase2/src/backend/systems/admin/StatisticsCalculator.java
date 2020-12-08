@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * The class responsible for generating useful statistics that can be viewed by Admins.
  */
-public class StatisticsCalculator{
+class StatisticsCalculator{
     private final EventManager eventManager;
     private final UserManager userManager;
 

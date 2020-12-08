@@ -11,7 +11,7 @@ import coreUtil.InputProcessors.OptionIndexProcessor;
 import java.util.*;
 
 /**
- * A subsystem of the MessageSystem that allows the user to perform actions related to a Speaker sending messages.
+ * A subsystem of the SocialSystem that allows the user to perform actions related to a Speaker sending messages.
  */
 public class SpeakerMessageSubSystem extends MessageSubSystem {
     private OptionUI optionUI;

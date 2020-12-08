@@ -2,7 +2,7 @@ package backend.systems.admin;
 
 import backend.entities.users.Perms;
 import backend.systems.events.managers.EventManager;
-import backend.systems.messaging.managers.MessageManager;
+import backend.systems.social.managers.MessageManager;
 import backend.systems.MenuSystem;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AdminUI;

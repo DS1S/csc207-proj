@@ -4,7 +4,7 @@ import backend.systems.conference.ConferenceManager;
 import backend.systems.events.managers.EventManager;
 import utility.filehandling.FileSerializer;
 import backend.systems.usermangement.managers.UserManager;
-import backend.systems.messaging.managers.MessageManager;
+import backend.systems.social.managers.MessageManager;
 
 import java.time.LocalDate;
 

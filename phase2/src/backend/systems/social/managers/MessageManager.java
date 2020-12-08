@@ -1,4 +1,4 @@
-package backend.systems.messaging.managers;
+package backend.systems.social.managers;
 
 import backend.entities.Statuses;
 import backend.entities.Message;

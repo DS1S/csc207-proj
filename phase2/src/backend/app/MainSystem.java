@@ -12,8 +12,8 @@ import utility.filehandling.TerminationWorker;
 import backend.systems.usermangement.AuthenticationSystem;
 import backend.systems.usermangement.SignupSystem;
 import backend.systems.usermangement.managers.UserManager;
-import backend.systems.messaging.managers.MessageManager;
-import backend.systems.messaging.MessageSystem;
+import backend.systems.social.managers.MessageManager;
+import backend.systems.social.SocialSystem;
 import backend.systems.events.managers.EventManager;
 import backend.systems.events.EventSystem;
 
@@ -86,7 +86,7 @@ class MainSystem extends MenuSystem {
         String filePath = "phase2/database/MSManager.ser";
         FileSerializer<MessageManager> messageManagerLoader = new FileSerializer<>(filePath);
         MessageManager msManager = messageManagerLoader.loadObject();
-        RunnableSystem messageSystem = new MessageSystem(msManager, userManager, eventManagers);
+        RunnableSystem messageSystem = new SocialSystem(msManager, userManager, eventManagers);
         if(!msManager.userHasInbox(userManager.getLoggedInUserUUID()))
             msManager.addBlankInbox(userManager.getLoggedInUserUUID());
         addSystemAndManager(filePath, messageSystem, msManager, subSystems.size());

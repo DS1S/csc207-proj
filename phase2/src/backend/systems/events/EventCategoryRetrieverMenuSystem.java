@@ -1,4 +1,4 @@
-package backend.systems.events.subsystems;
+package backend.systems.events;
 
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
@@ -12,16 +12,15 @@ import java.util.UUID;
 /**
  * An extension of the EventMenuSystem used to retrieve event categories.
  */
-public class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
+class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
     /**
      * Constructs a new EventCategoryRetrieverMenuSystem with the given information.
      * @param eventManager The EventManager that will be used by the EventCategoryRetrieverMenuSystem.
      * @param userManager The UserManager that will be used by the EventCategoryRetrieverMenuSystem.
      * @param eventUI The EventUI that will be used by the EventCategoryRetrieverMenuSystem.
-     * @param numOptions The number of menu options given by the EventCategoryRetrieverMenuSystem.
      */
-    public EventCategoryRetrieverMenuSystem(EventManager eventManager, UserManager userManager, EventUI eventUI, int numOptions) {
-        super(eventManager, userManager, eventUI, numOptions);
+    public EventCategoryRetrieverMenuSystem(EventManager eventManager, UserManager userManager, EventUI eventUI) {
+        super(eventManager, userManager, eventUI, 4);
     }
 
     private UUID getSpeakerUUID() {

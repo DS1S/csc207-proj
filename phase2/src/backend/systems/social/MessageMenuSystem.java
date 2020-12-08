@@ -1,10 +1,10 @@
-package backend.systems.messaging.subsystems;
+package backend.systems.social;
 
 import backend.entities.Statuses;
 import backend.systems.MenuSystem;
 import backend.entities.users.Perms;
 import backend.systems.usermangement.managers.UserManager;
-import backend.systems.messaging.managers.MessageManager;
+import backend.systems.social.managers.MessageManager;
 import frontend.InboxUI;
 import utility.inputprocessors.IndexProcessor;
 import utility.inputprocessors.OptionIndexProcessor;
@@ -169,5 +169,15 @@ public abstract class MessageMenuSystem extends MenuSystem {
         }
         IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in), inboxData.size());
         return optionProcessor.processInput() - 1;
+    }
+
+
+    /**
+     * Denotes the name of all message menu systems
+     * @return The name of message menu systems.
+     */
+    @Override
+    public String toString() {
+        return "Messaging";
     }
 }

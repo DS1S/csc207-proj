@@ -1,4 +1,4 @@
-package backend.systems.messaging.subsystems;
+package backend.systems.social;
 
 import backend.entities.users.Socials;
 import backend.systems.MenuSystem;
@@ -25,10 +25,9 @@ public class UserLinkSystem extends MenuSystem {
      * @param webValidator the web validator used by the system
      * @param webOpener the web opener used by the system
      * @param userManager the user manager used by the system
-     * @param numOptions the number of link options available to the user
      */
-    public UserLinkSystem(WebValidator webValidator, WebAccessible webOpener, UserManager userManager, int numOptions) {
-        super(numOptions);
+    public UserLinkSystem(WebValidator webValidator, WebAccessible webOpener, UserManager userManager) {
+        super(5);
         this.webValidator = webValidator;
         this.webOpener = webOpener;
         this.userLinkUI = new UserLinkUI();

@@ -2,7 +2,7 @@ package backend.systems.admin;
 
 import backend.entities.Statuses;
 import backend.systems.MenuSystem;
-import backend.systems.messaging.managers.MessageManager;
+import backend.systems.social.managers.MessageManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AdminUI;
 import frontend.InboxUI;
@@ -15,7 +15,7 @@ import java.util.*;
  * An extension of MenuSystem that displays an Admin their individual and administrative messaging
  * options and processes their input.
  */
-public class AdminMessageViewerSystem extends MenuSystem {
+class AdminMessageViewerSystem extends MenuSystem {
 
     UserManager um;
     private AdminUI adminUI;

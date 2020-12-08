@@ -2,7 +2,6 @@ package backend.systems.events;
 
 import backend.entities.users.Perms;
 import backend.systems.MenuSystem;
-import backend.systems.events.subsystems.EventSubSystemFactory;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import utility.RunnableSystem;
@@ -62,19 +61,19 @@ public class EventSystem extends MenuSystem {
         EventSubSystemFactory subSystemFactory = new EventSubSystemFactory();
         if (userManager.loggedInHasPermission(Perms.CAN_SCHEDULE)) {
             subSystems.put(1, subSystemFactory.createEventSubSystem("scheduler", eventManager, userManager,
-                    eventUI, 5));
+                    eventUI));
         }
         else if (userManager.loggedInHasPermission(Perms.CAN_SIGN_UP_EVENT)) {
             subSystems.put(1, subSystemFactory.createEventSubSystem("signup", eventManager, userManager,
-                    eventUI, 5));
+                    eventUI));
         }
         else if (userManager.loggedInHasPermission(Perms.CAN_SPEAK_AT_TALK)) {
             subSystems.put(1, subSystemFactory.createEventSubSystem("viewer", eventManager,
-                    userManager, eventUI, 3));
+                    userManager, eventUI));
         }
 
         subSystems.put(2, subSystemFactory.createEventSubSystem("retriever", eventManager, userManager,
-                    eventUI, 4));
+                    eventUI));
 
         optionNames = convertSubSystemsToNames(subSystems);
     }

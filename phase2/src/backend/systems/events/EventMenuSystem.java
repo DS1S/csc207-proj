@@ -1,4 +1,4 @@
-package backend.systems.events.subsystems;
+package backend.systems.events;
 
 import backend.systems.MenuSystem;
 import backend.systems.events.managers.EventManager;
