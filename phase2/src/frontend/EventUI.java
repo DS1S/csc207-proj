@@ -98,7 +98,7 @@ public class EventUI extends MenuUI {
      */
     public void displayCategoryRetrieverOptions() {
         System.out.println("\nWhat would you like to do?");
-        System.out.println("1. View all events for a day.");
+        System.out.println("1. View all events by time.");
         System.out.println("2. View all events by a speaker.");
         System.out.println("3. View all the events you have signed up for.");
         System.out.println("4. Return to main menu.");

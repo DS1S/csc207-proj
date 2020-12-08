@@ -12,7 +12,7 @@ public class CapacityIndexProcessor extends IndexProcessor<Integer> {
     EventUI eventUI;
 
     /**
-     * Creates a DurationIndexProcessor with a new Scanner and EventUI.
+     * Creates a DurationInputProcessor with a new Scanner and EventUI.
      * @param scanner The Scanner to use for input.
      * @param eventUI The UI in which to ask the prompt and display errors in.
      */

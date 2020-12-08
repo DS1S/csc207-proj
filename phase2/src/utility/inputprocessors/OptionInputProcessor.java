@@ -8,16 +8,16 @@ import java.util.Scanner;
 /**
  * A class which asks a user for an integer between 0 and a provided number.
  */
-public class OptionIndexProcessor extends IndexProcessor<Integer> {
+public class OptionInputProcessor extends InputProcessor<Integer> {
     private final MenuUI optionUI;
     private int max;
 
     /**
-     * Constructs a OptionIndexProcessor to use scanner to ask a user for an integer between 0 and max.
+     * Constructs a OptionInputProcessor to use scanner to ask a user for an integer between 0 and max.
      * @param scanner The Scanner to use for input.
      * @param max The max valid integer allowed.
      */
-    public OptionIndexProcessor(Scanner scanner, int max) {
+    public OptionInputProcessor(Scanner scanner, int max) {
         super(scanner);
         this.optionUI = new MenuUI();
         this.max = max;

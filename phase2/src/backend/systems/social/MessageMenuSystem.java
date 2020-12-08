@@ -6,8 +6,8 @@ import backend.entities.users.Perms;
 import backend.systems.usermangement.managers.UserManager;
 import backend.systems.social.managers.MessageManager;
 import frontend.InboxUI;
-import utility.inputprocessors.IndexProcessor;
-import utility.inputprocessors.OptionIndexProcessor;
+import utility.inputprocessors.InputProcessor;
+import utility.inputprocessors.OptionInputProcessor;
 
 import java.util.*;
 
@@ -142,7 +142,7 @@ public abstract class MessageMenuSystem extends MenuSystem {
         Statuses[] statuses = Statuses.values();
         List<String> optionNames = statusesToString(statuses);
         inboxUI.displayOptions(optionNames, true, false);
-        IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in), statuses.length);
+        InputProcessor<Integer> optionProcessor = new OptionInputProcessor(new Scanner(System.in), statuses.length);
         return optionProcessor.processInput() - 1;
     }
 
@@ -167,7 +167,7 @@ public abstract class MessageMenuSystem extends MenuSystem {
         if (inboxData.isEmpty()) {
             return -1;
         }
-        IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in), inboxData.size());
+        InputProcessor<Integer> optionProcessor = new OptionInputProcessor(new Scanner(System.in), inboxData.size());
         return optionProcessor.processInput() - 1;
     }
 

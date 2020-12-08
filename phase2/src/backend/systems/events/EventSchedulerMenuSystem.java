@@ -3,10 +3,7 @@ package backend.systems.events;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.EventUI;
-import utility.inputprocessors.CapacityIndexProcessor;
-import utility.inputprocessors.DurationIndexProcessor;
-import utility.inputprocessors.IndexProcessor;
-import utility.inputprocessors.TimeIndexProcessor;
+import utility.inputprocessors.*;
 
 import java.time.LocalTime;
 import java.util.*;
@@ -63,9 +60,7 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
     }
 
     private void scheduleEvent() {
-        IndexProcessor<LocalTime> timeProcessor = new TimeIndexProcessor(input, eventUI);
-        IndexProcessor<Integer> durationProcessor = new DurationIndexProcessor(input, eventUI);
-        IndexProcessor<Integer> capacityProcessor = new CapacityIndexProcessor(input, eventUI);
+        EventFieldsProcessor eventFieldsProcessor = new EventFieldsProcessor(input, eventUI);
 
         eventUI.displayScheduleStart();
 
@@ -77,12 +72,12 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
         eventUI.displayRoomPrompt();
         String room = askForString("Room");
 
-        int capacity = capacityProcessor.processInput();
+        int capacity = eventFieldsProcessor.processCapacityInput();
 
         eventUI.displayStartTimePrompt();
-        LocalTime startTime = timeProcessor.processInput();
+        LocalTime startTime = eventFieldsProcessor.processTimeInput();
 
-        int duration = durationProcessor.processInput();
+        int duration = eventFieldsProcessor.processDurationInput();
 
         attemptScheduling(capacity, room, startTime, title, speakers, duration);
     }
@@ -133,16 +128,15 @@ class EventSchedulerMenuSystem extends EventMenuSystem {
     }
 
     private void rescheduleEvent() {
-        IndexProcessor<LocalTime> timeProcessor = new TimeIndexProcessor(input, eventUI);
-        IndexProcessor<Integer> durationProcessor = new DurationIndexProcessor(input, eventUI);
+        EventFieldsProcessor eventFieldsProcessor = new EventFieldsProcessor(input, eventUI);
         eventUI.displayRescheduleStart();
         int index = processEvents(eventsData) - 1;
 
         if(index != -1) {
             eventUI.displayStartTimePrompt();
-            LocalTime startTime = timeProcessor.processInput();
+            LocalTime startTime = eventFieldsProcessor.processTimeInput();
 
-            int duration = durationProcessor.processInput();
+            int duration = eventFieldsProcessor.processDurationInput();
 
             List<Map<String, Object>> eventConflicts = eventManager.rescheduleEvent(index, startTime, duration);
             if (eventConflicts.isEmpty()) {

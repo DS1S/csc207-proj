@@ -2,8 +2,8 @@ package backend.systems;
 
 import frontend.MenuUI;
 import utility.RunnableSystem;
-import utility.inputprocessors.IndexProcessor;
-import utility.inputprocessors.OptionIndexProcessor;
+import utility.inputprocessors.InputProcessor;
+import utility.inputprocessors.OptionInputProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +15,16 @@ import java.util.Scanner;
  */
 public abstract class MenuSystem implements RunnableSystem {
     private int numOptions;
-    private IndexProcessor<Integer> indexProcessor;
+    private InputProcessor<Integer> inputProcessor;
     protected Scanner input = new Scanner(System.in);
 
     /**
-     * Constructs a MenuSystem with a number of options and an IndexProcessor to handle them.
+     * Constructs a MenuSystem with a number of options and an InputProcessor to handle them.
      * @param numOptions the number of options accepted by this system.
      */
     public MenuSystem(int numOptions) {
         this.numOptions = numOptions;
-        this.indexProcessor = new OptionIndexProcessor(input, numOptions);
+        this.inputProcessor = new OptionInputProcessor(input, numOptions);
     }
 
     /**
@@ -40,7 +40,7 @@ public abstract class MenuSystem implements RunnableSystem {
      */
     protected void changeNumOptions(int numOptions){
         this.numOptions = numOptions;
-        this.indexProcessor = new OptionIndexProcessor(input, numOptions);
+        this.inputProcessor = new OptionInputProcessor(input, numOptions);
     }
 
     /**
@@ -51,7 +51,7 @@ public abstract class MenuSystem implements RunnableSystem {
         int option;
         do{
             displayOptions();
-            option = indexProcessor.processInput();
+            option = inputProcessor.processInput();
             if(option != numOptions)
                 processInput(option);
         }while(option != numOptions);

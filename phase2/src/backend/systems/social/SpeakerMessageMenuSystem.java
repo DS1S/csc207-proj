@@ -4,8 +4,8 @@ import backend.entities.users.Perms;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import backend.systems.social.managers.MessageManager;
-import utility.inputprocessors.IndexProcessor;
-import utility.inputprocessors.OptionIndexProcessor;
+import utility.inputprocessors.InputProcessor;
+import utility.inputprocessors.OptionInputProcessor;
 
 import java.util.*;
 
@@ -118,8 +118,8 @@ class SpeakerMessageMenuSystem extends MessageMenuSystem {
     private int processMessages(List<Map<String, Object>> messagesData) {
         inboxUI.displayInbox(messagesData);
         if(!messagesData.isEmpty()) {
-            IndexProcessor<Integer> optionIndexProcessor = new OptionIndexProcessor(input, messagesData.size());
-            return optionIndexProcessor.processInput();
+            InputProcessor<Integer> optionInputProcessor = new OptionInputProcessor(input, messagesData.size());
+            return optionInputProcessor.processInput();
         }
         return 0;
     }

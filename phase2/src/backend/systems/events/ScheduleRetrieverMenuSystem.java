@@ -3,8 +3,7 @@ package backend.systems.events;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.EventUI;
-import utility.inputprocessors.IndexProcessor;
-import utility.inputprocessors.TimeIndexProcessor;
+import utility.inputprocessors.EventFieldsProcessor;
 
 import java.time.LocalTime;
 import java.util.UUID;
@@ -12,14 +11,14 @@ import java.util.UUID;
 /**
  * An extension of the EventMenuSystem used to retrieve event categories.
  */
-class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
+class ScheduleRetrieverMenuSystem extends EventMenuSystem {
     /**
-     * Constructs a new EventCategoryRetrieverMenuSystem with the given information.
-     * @param eventManager The EventManager that will be used by the EventCategoryRetrieverMenuSystem.
-     * @param userManager The UserManager that will be used by the EventCategoryRetrieverMenuSystem.
-     * @param eventUI The EventUI that will be used by the EventCategoryRetrieverMenuSystem.
+     * Constructs a new ScheduleRetrieverMenuSystem with the given information.
+     * @param eventManager The EventManager that will be used by the ScheduleRetrieverMenuSystem.
+     * @param userManager The UserManager that will be used by the ScheduleRetrieverMenuSystem.
+     * @param eventUI The EventUI that will be used by the ScheduleRetrieverMenuSystem.
      */
-    public EventCategoryRetrieverMenuSystem(EventManager eventManager, UserManager userManager, EventUI eventUI) {
+    public ScheduleRetrieverMenuSystem(EventManager eventManager, UserManager userManager, EventUI eventUI) {
         super(eventManager, userManager, eventUI, 4);
     }
 
@@ -50,9 +49,9 @@ class EventCategoryRetrieverMenuSystem extends EventMenuSystem {
     protected void processInput(int index) {
         switch (index) {
             case(1):
-                IndexProcessor<LocalTime> timeProcessor = new TimeIndexProcessor(input, eventUI);
-                LocalTime startTime = timeProcessor.processInput();
-                LocalTime endTime = timeProcessor.processInput();
+                EventFieldsProcessor timeProcessor = new EventFieldsProcessor(input, eventUI);
+                LocalTime startTime = timeProcessor.processTimeInput();
+                LocalTime endTime = timeProcessor.processTimeInput();
                 eventUI.displayEvents(this.eventManager.retrieveEventsByTimeInterval(startTime, endTime));
                 break;
             case(2):

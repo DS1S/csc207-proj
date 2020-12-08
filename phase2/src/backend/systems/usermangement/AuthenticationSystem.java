@@ -1,11 +1,8 @@
 package backend.systems.usermangement;
 
-import backend.systems.MenuSystem;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AuthenticationUI;
 import utility.RunnableSystem;
-import utility.inputprocessors.IndexProcessor;
-import utility.inputprocessors.OptionIndexProcessor;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

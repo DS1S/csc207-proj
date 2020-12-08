@@ -6,8 +6,8 @@ import backend.systems.usermangement.managers.UserManager;
 import frontend.UserLinkUI;
 import utility.Web.WebAccessible;
 import utility.Web.WebValidator;
-import utility.inputprocessors.IndexProcessor;
-import utility.inputprocessors.OptionIndexProcessor;
+import utility.inputprocessors.InputProcessor;
+import utility.inputprocessors.OptionInputProcessor;
 
 import java.util.*;
 
@@ -78,7 +78,7 @@ public class UserLinkSystem extends MenuSystem {
     private void addLink() {
         List<String> socials = socialsToStrings();
 
-        IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in), socials.size());
+        InputProcessor<Integer> optionProcessor = new OptionInputProcessor(new Scanner(System.in), socials.size());
         userLinkUI.displayAddLinksPrompt();
         userLinkUI.displayOptions(socials, false, false);
         int index = optionProcessor.processInput() - 1;
@@ -91,7 +91,7 @@ public class UserLinkSystem extends MenuSystem {
             link = askForString(social + " link");
         }
 
-        if (!link.contains("https://www.") && !link.contains("www.")) {
+        if (!link.contains("https://www.") && !link.contains("www.") && !link.contains("https://")) {
             link = "https://www." + link;
         }
 
@@ -122,7 +122,7 @@ public class UserLinkSystem extends MenuSystem {
             List<String> userLinks = userManager.getUserLinks(uuid);
             userLinkUI.displayExploreChoicesPrompt(userManager.getNameWithUUID(uuid));
             userLinkUI.displayOptions(userLinks, false, false);
-            IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in),
+            InputProcessor<Integer> optionProcessor = new OptionInputProcessor(new Scanner(System.in),
                     userLinks.size());
             int index = optionProcessor.processInput() - 1;
 
@@ -141,7 +141,7 @@ public class UserLinkSystem extends MenuSystem {
 
             List<String> userLinks = userManager.getUserLinks(uuid);
             userLinkUI.displayOptions(userLinks, false, false);
-            IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in),
+            InputProcessor<Integer> optionProcessor = new OptionInputProcessor(new Scanner(System.in),
                     userLinks.size());
             int index = optionProcessor.processInput() - 1;
 

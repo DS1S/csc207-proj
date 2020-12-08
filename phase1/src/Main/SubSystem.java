@@ -15,9 +15,9 @@ public abstract class SubSystem  implements IRunnable {
     protected Scanner input = new Scanner(System.in);
 
     /**
-     * Constructs a subsystem with a number of options and an IndexProcessor to handle them.
+     * Constructs a subsystem with a number of options and an InputProcessor to handle them.
      * @param numOptions the number of options accepted by this system.
-     * @param indexProcessor the IndexProcessor to handle them.
+     * @param indexProcessor the InputProcessor to handle them.
      */
     public SubSystem(int numOptions, IndexProcessor<Integer> indexProcessor) {
         this.numOptions = numOptions;

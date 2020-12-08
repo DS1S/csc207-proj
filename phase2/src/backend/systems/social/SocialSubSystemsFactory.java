@@ -14,7 +14,7 @@ import java.util.List;
  * We use this factory to further encapsulate what class is used to implement
  * the specified system.
  */
-class MessageSubSystemFactory {
+class SocialSubSystemsFactory {
 
     /**
      * Creates a new message subsystem using the given parameters.

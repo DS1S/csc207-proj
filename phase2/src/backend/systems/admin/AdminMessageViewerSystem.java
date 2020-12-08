@@ -6,8 +6,8 @@ import backend.systems.social.managers.MessageManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.AdminUI;
 import frontend.InboxUI;
-import utility.inputprocessors.IndexProcessor;
-import utility.inputprocessors.OptionIndexProcessor;
+import utility.inputprocessors.InputProcessor;
+import utility.inputprocessors.OptionInputProcessor;
 
 import java.util.*;
 
@@ -74,7 +74,7 @@ class AdminMessageViewerSystem extends MenuSystem {
                 List<Map<String, Object>> inboxData = messageManager.getInboxData(um.getUUIDWithUsername(username),
                         Arrays.asList(Statuses.values()));
                 inboxUI.displayInbox(inboxData);
-                IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in),
+                InputProcessor<Integer> optionProcessor = new OptionInputProcessor(new Scanner(System.in),
                         inboxData.size());
                 int msgNumber = optionProcessor.processInput() - 1;
                 messageManager.deleteMessage(um.getUUIDWithUsername(username), msgNumber);

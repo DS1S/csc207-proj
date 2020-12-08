@@ -16,9 +16,11 @@ public class WebOpener implements WebAccessible {
     public boolean openWeb(String link) {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             try {
-                Desktop.getDesktop().browse(new URI(link));
+                String splitLink = link.substring(link.indexOf(":") + 1).trim();
+                Desktop.getDesktop().browse(new URI(splitLink));
                 return true;
             } catch (IOException | URISyntaxException e) {
+                System.out.println(e.getMessage());
                 return false;
             }
         }

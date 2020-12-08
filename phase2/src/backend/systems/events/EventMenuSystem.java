@@ -4,8 +4,8 @@ import backend.systems.MenuSystem;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.EventUI;
-import utility.inputprocessors.IndexProcessor;
-import utility.inputprocessors.OptionIndexProcessor;
+import utility.inputprocessors.InputProcessor;
+import utility.inputprocessors.OptionInputProcessor;
 
 
 import java.util.List;
@@ -44,7 +44,7 @@ public abstract class EventMenuSystem extends MenuSystem {
     protected int processEvents(List<Map<String, Object>> eventsData) {
         eventUI.displayEvents(eventsData);
         if (!eventsData.isEmpty()) {
-            IndexProcessor<Integer> eventProcessor = new OptionIndexProcessor(input, eventsData.size());
+            InputProcessor<Integer> eventProcessor = new OptionInputProcessor(input, eventsData.size());
             eventUI.displayEnterIndexEvent();
             return eventProcessor.processInput();
         }

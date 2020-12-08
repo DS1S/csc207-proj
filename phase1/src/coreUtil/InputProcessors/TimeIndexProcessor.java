@@ -13,7 +13,7 @@ public class TimeIndexProcessor extends IndexProcessor<LocalTime> {
     EventUI eventUI;
 
     /**
-     * Constructs a TimeIndexProcessor which uses scanner to ask for input and displays prompts in eventUI.
+     * Constructs a TimeInputProcessor which uses scanner to ask for input and displays prompts in eventUI.
      * @param scanner The Scanner to use for input.
      * @param eventUI The EventUI to display prompts on.
      */

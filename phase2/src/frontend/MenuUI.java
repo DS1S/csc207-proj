@@ -28,7 +28,7 @@ public class MenuUI {
      * @param displayExit Whether the exit option will be displayed in this list of options.
      */
     public void displayOptions(List<String> optionNames, boolean displayReturnPrompt, boolean displayExit) {
-        if (displayReturnPrompt) { System.out.println("\nPlease choose an option or return to previous menu."); }
+        if (displayReturnPrompt) { System.out.println("\nPlease choose an option."); }
 
         for(int i = 0; i < optionNames.size(); i++){
             System.out.println((i + 1) + ". " + optionNames.get(i));

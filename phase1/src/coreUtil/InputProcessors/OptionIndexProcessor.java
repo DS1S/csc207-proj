@@ -14,7 +14,7 @@ public class OptionIndexProcessor extends IndexProcessor<Integer> {
     private final int max;
 
     /**
-     * Constructs a OptionIndexProcessor to use scanner to ask a user for an integer between 0 and max.
+     * Constructs a OptionInputProcessor to use scanner to ask a user for an integer between 0 and max.
      * @param scanner The Scanner to use for input.
      * @param max The max valid integer allowed.
      */

@@ -11,7 +11,7 @@ public abstract class IndexProcessor<T> {
     protected Scanner scanner;
 
     /**
-     * Creates a new IndexProcessor which uses the provided Scanner for input.
+     * Creates a new InputProcessor which uses the provided Scanner for input.
      * @param scanner The Scanner to use for input.
      */
     public IndexProcessor(Scanner scanner) {

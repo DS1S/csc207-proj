@@ -29,7 +29,7 @@ class EventSubSystemFactory {
             case "viewer":
                 return new EventViewerMenuSystem(eventManager, userManager, eventUI);
             case "retriever":
-                return new EventCategoryRetrieverMenuSystem(eventManager, userManager, eventUI);
+                return new ScheduleRetrieverMenuSystem(eventManager, userManager, eventUI);
             default:
                 return null;
         }

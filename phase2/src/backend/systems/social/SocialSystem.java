@@ -43,24 +43,24 @@ public class SocialSystem extends MenuSystem {
      * Calls the message subsystem factory to initialize the message subsystems.
      */
     public void initializeSubSystems() {
-        MessageSubSystemFactory messageSubSystemFactory = new MessageSubSystemFactory();
+        SocialSubSystemsFactory socialSubSystemsFactory = new SocialSubSystemsFactory();
 
         if (userManager.loggedInHasPermission(CAN_SCHEDULE)) {
-            subSystems.put(subSystems.size() + 1, messageSubSystemFactory.createMessageSubSystem("organizer",
+            subSystems.put(subSystems.size() + 1, socialSubSystemsFactory.createMessageSubSystem("organizer",
                     userManager, messageManager, eventManagers));
         }
         else if (userManager.loggedInHasPermission(CAN_SPEAK_AT_TALK)) {
-            subSystems.put(subSystems.size() + 1, messageSubSystemFactory.createMessageSubSystem("speaker", userManager,
+            subSystems.put(subSystems.size() + 1, socialSubSystemsFactory.createMessageSubSystem("speaker", userManager,
                     messageManager, eventManagers));
         }
 
         // Allocate a default message subsystem
         if (subSystems.size() == 0) subSystems.put(subSystems.size() + 1,
-                messageSubSystemFactory.createMessageSubSystem("regular",
+                socialSubSystemsFactory.createMessageSubSystem("regular",
                         userManager, messageManager, eventManagers));
 
         subSystems.put(subSystems.size() + 1,
-                messageSubSystemFactory.createMessageSubSystem("linker", userManager, messageManager
+                socialSubSystemsFactory.createMessageSubSystem("linker", userManager, messageManager
                         , eventManagers));
     }
 
