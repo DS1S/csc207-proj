@@ -8,10 +8,17 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-// TODO : add javadocs
+/**
+ * Class which validates website links as valid social media websites
+ */
 public class WebValidator {
     private Map<Socials, String> socialsToRegex = new HashMap<>();
 
+    /**
+     * Constructs a WebValidator object and then validates each of the user's social
+     * media links by checking the against a regex. Places valid lnks into a map
+     * and anonymously logs invalid ones.
+     */
     public WebValidator() {
         Socials[] socials = Socials.values();
         Class<LinksRegexContainer> classType = LinksRegexContainer.class;
@@ -35,6 +42,12 @@ public class WebValidator {
         }
     }
 
+    /**
+     * Checks whether a given link is a valid social media link of this user's.
+     * @param social the social to check against
+     * @param link the link to check
+     * @return true if it's valid, false otherwise
+     */
     public boolean validateLink(Socials social, String link) {
         return link.matches(socialsToRegex.get(social));
     }
