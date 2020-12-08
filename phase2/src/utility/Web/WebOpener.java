@@ -4,8 +4,15 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-// TODO: add javadocs
+/**
+ * A WebAccessible class used for opening valid URIs on a browser.
+ */
 public class WebOpener implements WebAccessible {
+    /**
+     * Attempts to open the given link (as a string) on a browser.
+     * @param link The given URI in a string format.
+     * @return True if the link was opened, false otherwise.
+     */
     public boolean openWeb(String link) {
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             try {

@@ -141,7 +141,7 @@ public abstract class MessageMenuSystem extends MenuSystem {
     private int processStatusInput() {
         Statuses[] statuses = Statuses.values();
         List<String> optionNames = statusesToString(statuses);
-        inboxUI.displayOptions(optionNames, false);
+        inboxUI.displayOptions(optionNames, true, false);
         IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in), statuses.length);
         return optionProcessor.processInput() - 1;
     }

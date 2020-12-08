@@ -124,4 +124,11 @@ class SpeakerMessageMenuSystem extends MessageMenuSystem {
         }
         return 0;
     }
+
+    /**
+     * Returns the string representation of this system.
+     * @return The string "Speaker Inbox/Messaging".
+     */
+    @Override
+    public String toString() { return "Speaker Inbox/Messaging"; }
 }

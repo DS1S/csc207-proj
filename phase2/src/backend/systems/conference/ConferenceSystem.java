@@ -32,7 +32,7 @@ public class ConferenceSystem extends MenuSystem {
      */
     @Override
     protected void displayOptions() {
-        conferenceUI.displayOptions(conferenceManager.getConferenceNames(), true);
+        conferenceUI.displayOptions(conferenceManager.getConferenceNames(), true, true);
     }
 
     /**

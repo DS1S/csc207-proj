@@ -194,10 +194,16 @@ public class UserManager implements Serializable {
      * @return an empty list if the user does not have any links, otherwise returns a list of their links
      */
     public List<String> getUserLinks(UUID uuid) {
-        if (!userHasLinks(uuid)) {
-            return new ArrayList<>();
-        }
         return users.get(uuid).getProfileLinks();
+    }
+
+    /**
+     * Removes a link to a particular social media platform from a User's profile.
+     * @param uuid The UUID of the User whose link is going to be removed.
+     * @param social The social media platform of the link to be removed.
+     */
+    public void removeUserLink(UUID uuid, Socials social) {
+        users.get(uuid).removeProfileLink(social);
     }
 
     /**

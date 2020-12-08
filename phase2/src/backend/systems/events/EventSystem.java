@@ -44,7 +44,7 @@ public class EventSystem extends MenuSystem {
      */
     @Override
     protected void displayOptions() {
-        eventUI.displayOptions(optionNames, true);
+        eventUI.displayOptions(optionNames, true, true);
     }
 
     /**

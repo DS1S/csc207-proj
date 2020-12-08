@@ -8,16 +8,24 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-// TODO : add javadocs
+/**
+ * A class that is used to validate web links given a Socials enum.
+ */
 public class WebValidator {
     private Map<Socials, String> socialsToRegex = new HashMap<>();
 
+    /**
+     * Constructs a WebValitator, and builds a map from a Socials enum to its corresponding regex (website
+     * format). The map will be used to validate links given a Socials enum.
+     */
     public WebValidator() {
         Socials[] socials = Socials.values();
         Class<LinksRegexContainer> classType = LinksRegexContainer.class;
         Field[] fields = classType.getDeclaredFields();
         LinksRegexContainer linksRegexContainer = new LinksRegexContainer();
 
+        // Access the fields of LinksRegexContainer, and maps each SOCIALS enum to those fields (i.e. the
+        // corresponding regex/website format for each social media platform.
         for (int i = 0; i < socials.length; ++i) {
             String fieldName = fields[i].getName();
 
@@ -35,10 +43,20 @@ public class WebValidator {
         }
     }
 
+    /**
+     * Determines if a given link is a valid link in a given social media platform.
+     * @param social The given social media platform in the form of a Socials enum.
+     * @param link The given link to be validated
+     * @return True, if and only if the link is valid for the given social media platform.
+     */
     public boolean validateLink(Socials social, String link) {
         return link.matches(socialsToRegex.get(social));
     }
 
+    /**
+     * A container for the corresponding regexes (website formats) of each social media platform represented
+     * by the Socials enum.
+     */
     private class LinksRegexContainer {
         public final String LINKEDIN_REGEX = "^(https:\\/\\/)?(www\\.)?linkedin\\.com\\/in\\/[-a-zA-Z0-9]*(\\/)?$";
         public final String INSTAGRAM_REGEX = "^(https:\\/\\/)?(www\\.)?instagram.com\\/.*(\\/)?$";

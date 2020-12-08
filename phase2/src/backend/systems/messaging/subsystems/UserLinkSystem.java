@@ -51,16 +51,27 @@ public class UserLinkSystem extends MenuSystem {
     protected void processInput(int index) {
         switch (index) {
             case(1):
-                // Add a link to your profile
+                // Add a link to your profile.
                 addLink();
                 break;
             case(2):
-                // Explore other user's links
-                accessLinks();
+                // Remove a link from your profile.
+                removeLink();
                 break;
             case(3):
-                // See your own links
-                userLinkUI.displayOptions(userManager.getUserLinks(userManager.getLoggedInUserUUID()), false);
+                // Explore other user's links.
+                accessLinks();
+                break;
+            case(4):
+                // See your own links.
+                List<String> links = userManager.getUserLinks(userManager.getLoggedInUserUUID());
+
+                if (links.size() > 0) {
+                    userLinkUI.displayOwnLinksPrompt();
+                    userLinkUI.displayOptions(links, false, false);
+                }
+                else { userLinkUI.displayNoLinksPrompt(); }
+
                 break;
         }
     }
@@ -70,7 +81,7 @@ public class UserLinkSystem extends MenuSystem {
 
         IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in), socials.size());
         userLinkUI.displayAddLinksPrompt();
-        userLinkUI.displayOptions(socials, false);
+        userLinkUI.displayOptions(socials, false, false);
         int index = optionProcessor.processInput() - 1;
         Socials social = Socials.values()[index];
 
@@ -86,6 +97,8 @@ public class UserLinkSystem extends MenuSystem {
         }
 
         userManager.setLoggedInUserLink(social, link);
+
+        userLinkUI.displayLinkAddedPrompt(social.toString());
     }
 
     private List<String> socialsToStrings() {
@@ -108,11 +121,35 @@ public class UserLinkSystem extends MenuSystem {
         UUID uuid = userManager.getUUIDWithUsername(userName);
         if (userManager.userHasLinks(uuid)) {
             List<String> userLinks = userManager.getUserLinks(uuid);
-            userLinkUI.displayOptions(userLinks, false);
+            userLinkUI.displayExploreChoicesPrompt(userManager.getNameWithUUID(uuid));
+            userLinkUI.displayOptions(userLinks, false, false);
             IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in),
                     userLinks.size());
             int index = optionProcessor.processInput() - 1;
+
             webOpener.openWeb(userLinks.get(index));
+        }
+        else {
+            userLinkUI.displayEmptyLinksError();
+        }
+    }
+
+    private void removeLink() {
+        UUID uuid = userManager.getLoggedInUserUUID();
+
+        if (userManager.userHasLinks(uuid)) {
+            userLinkUI.displayLinkRemovalPrompt();
+
+            List<String> userLinks = userManager.getUserLinks(uuid);
+            userLinkUI.displayOptions(userLinks, false, false);
+            IndexProcessor<Integer> optionProcessor = new OptionIndexProcessor(new Scanner(System.in),
+                    userLinks.size());
+            int index = optionProcessor.processInput() - 1;
+
+            String social = userLinks.get(index).split(":")[0];
+            userManager.removeUserLink(uuid, Socials.valueOf(social.toUpperCase()));
+
+            userLinkUI.displayLinkRemovedPrompt(social);
         }
         else {
             userLinkUI.displayEmptyLinksError();

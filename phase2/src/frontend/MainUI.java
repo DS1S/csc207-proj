@@ -15,7 +15,7 @@ public class MainUI extends MenuUI{
                 "\\_|  | |__| | / .'   \\_|  \n    | |      |  __  | | | \n   _| |_    _| |  | |_\\ `.___.'" +
                 "\\  \n  |_____|  |____||____|`.____ .' \nWelcome to TecHConference! Press a number and then " +
                 "ENTER to get started:");
-        displayOptions(subsystemNames, true);
+        displayOptions(subsystemNames, true, true);
     }
 
     /**
@@ -25,6 +25,6 @@ public class MainUI extends MenuUI{
     public void displayInvalidInput(List<String> subsystemNames) {
         System.out.flush();
         System.out.println("Invalid input! Try again:");
-        displayOptions(subsystemNames, true);
+        displayOptions(subsystemNames, true, true);
     }
 }
