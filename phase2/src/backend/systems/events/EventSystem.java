@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * An EventSystem that allows the user to perform actions related to the sign up and scheduling of Events.
+ * An EventSystem that allows the user to perform actions related to the sign up and scheduling of events.
  */
 public class EventSystem extends MenuSystem {
     private final EventManager eventManager;
@@ -39,7 +39,7 @@ public class EventSystem extends MenuSystem {
     }
 
     /**
-     * Overrides the displayOptions method.
+     * Displays available menu options for actions pertaining to the sign up and scheduling of events.
      */
     @Override
     protected void displayOptions() {
@@ -47,8 +47,8 @@ public class EventSystem extends MenuSystem {
     }
 
     /**
-     * Overrides the processInput method.
-     * @param index The input to be processed.
+     * Runs the subsystem of this system corresponding to the given index, if such a subsystem exists.
+     * @param index The index of the subsystem.
      */
     @Override
     protected void processInput(int index) {

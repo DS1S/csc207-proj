@@ -35,7 +35,8 @@ public class UserLinkSystem extends MenuSystem {
     }
 
     /**
-     * An override of the displayOptions method.
+     * Displays available menu options for actions pertaining to linking a user's profile
+     * to other social media services.
      */
     @Override
     protected void displayOptions() {
@@ -43,8 +44,8 @@ public class UserLinkSystem extends MenuSystem {
     }
 
     /**
-     * An override of the processInput method.
-     * @param index The input to be processed.
+     * Performs the action corresponding to the specified index in the menu of available actions.
+     * @param index The index of the action in the menu
      */
     @Override
     protected void processInput(int index) {

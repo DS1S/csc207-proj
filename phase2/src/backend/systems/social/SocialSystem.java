@@ -13,7 +13,8 @@ import java.util.Map;
 import static backend.entities.users.Perms.*;
 
 /**
- * A messaging system with a message manager, a user manager, an event manager, and an inbox UI.
+ * A social system that allows the user to perform actions pertaining to user interaction, such as
+ * messaging and social links.
  */
 public class SocialSystem extends MenuSystem {
     private final MessageManager messageManager;
@@ -23,7 +24,7 @@ public class SocialSystem extends MenuSystem {
     private final MenuUI menuUI;
 
     /**
-     * Constructs a new messaging system with the information below.
+     * Constructs a new social system with the information below.
      * @param messageManager The message manager used by the system.
      * @param userManager The user managed used by the system.
      * @param eventManagers The list of event managers used by the system.
@@ -40,7 +41,7 @@ public class SocialSystem extends MenuSystem {
     }
 
     /**
-     * Calls the message subsystem factory to initialize the message subsystems.
+     * Calls the social subsystem factory to initialize the social subsystems.
      */
     public void initializeSubSystems() {
         SocialSubSystemsFactory socialSubSystemsFactory = new SocialSubSystemsFactory();
@@ -65,7 +66,7 @@ public class SocialSystem extends MenuSystem {
     }
 
     /**
-     * Overrides the displayOptions method.
+     * Displays available menu options for actions pertaining to user interactions.
      */
     @Override
     protected void displayOptions() {
@@ -73,8 +74,8 @@ public class SocialSystem extends MenuSystem {
     }
 
     /**
-     * Overrides the processInput method.
-     * @param index The input to be processed.
+     * Runs the subsystem of this system corresponding to the given index, if such a subsystem exists.
+     * @param index The index of the subsystem
      */
     @Override
     protected void processInput(int index) {
