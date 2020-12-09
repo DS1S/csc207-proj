@@ -1,6 +1,5 @@
 package backend.systems.social;
 
-import backend.entities.Event;
 import backend.entities.users.Perms;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
