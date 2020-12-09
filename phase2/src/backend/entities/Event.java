@@ -61,6 +61,11 @@ public class Event implements Serializable {
     public void removeAttendee(UUID attendee) { this.attendees.remove(attendee); }
 
     /**
+     * Remove all attendees from the Event's list of Attendees
+     */
+    public void removeAllAttendees() { this.attendees.clear(); }
+
+    /**
      * Returns true iff the attendee is attending the Event.
      * @return Whether the attendee is attending the Event.
      */

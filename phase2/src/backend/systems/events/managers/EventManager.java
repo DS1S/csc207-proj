@@ -160,7 +160,7 @@ public class EventManager implements Serializable {
 
     /**
      * Returns the list of extracted data of Events from the conference's main schedule that conflict with
-     * the rescheduling of the at the specified index.
+     * the rescheduling of the event at the specified index.
      *
      * Reschedules the Event so that it has start time newStartTime and duration newDuration iff there are no
      * conflicting Events.

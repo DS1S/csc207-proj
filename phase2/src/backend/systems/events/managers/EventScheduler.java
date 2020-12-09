@@ -80,8 +80,8 @@ class EventScheduler implements Serializable {
      * Returns the list of Events that conflict with the rescheduling of the Event from a given list of Events
      * that is at the specified index.
      *
-     * Reschedules the Event so that it has start time newStartTime and duration newDuration iff there are no
-     * conflicting Events
+     * Reschedules the Event so that it has start time newStartTime and duration newDuration and removes all
+     * its attendees iff there are no conflicting Events
      *
      * @param events the list of Events
      * @param index the index of the Event to be reschedules
@@ -102,6 +102,7 @@ class EventScheduler implements Serializable {
         if (conflictingEvents.isEmpty()) {
             event.setStartTime(newStartTime);
             event.setDuration(newDuration);
+            event.removeAllAttendees();
         }
         else if(conflictingEvents.size() == 1) {
             if (conflictingEvents.get(0).equals(event)) {
