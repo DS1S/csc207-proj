@@ -32,7 +32,7 @@ class OrganizerMessageMenuSystem extends MessageMenuSystem {
 
     /**
      * Processes an integer input in the organizer's messaging subsystem.
-     * @param index The input to be processed. 3 allows for messaging all attendees. 4 allows
+     * @param index The input to be processed. 6 allows for messaging all attendees. 7 allows
      *              for messaging all speakers.
      */
     @Override

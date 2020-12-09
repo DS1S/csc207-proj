@@ -38,9 +38,10 @@ class SpeakerMessageMenuSystem extends MessageMenuSystem {
 
     /**
      * Processes an integer input in the speaker's messaging page.
-     * @param index The input to be processed. 1 allows for displaying all messages to the speaker.
-     *              2 allows for replying to an attendee. 3 allows for making an announcement to the
-     *              speaker's talk(s).
+     * @param index The input to be processed. 1 allows for viewing messages. 2 allows for viewing
+     * messages by status. 3 allows for setting the status of message(s). 4 allows for message
+     * deletion. 5 allows for replying to an attendee message. 6 allows for messaging all attendees
+     * of specified talk(s).
      */
     @Override
     protected void processInput(int index) {

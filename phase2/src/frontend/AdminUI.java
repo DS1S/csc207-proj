@@ -67,13 +67,6 @@ public class AdminUI extends MenuUI{
         displayOptions(options, true, true);
     }
 
-    /**
-     * Displays error for an invalid message being input
-     */
-    public void displayDeleteFailure(){
-        System.out.println("Message was not found!");
-    }
-
     private List<String> getOptions(boolean[] perms){
         final int CAN_VIEW_STATS = 0;
         final int CAN_BAN_USERS = 1;
