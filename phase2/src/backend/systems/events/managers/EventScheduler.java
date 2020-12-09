@@ -109,6 +109,7 @@ class EventScheduler implements Serializable {
                 event.setStartTime(newStartTime);
                 event.setDuration(newDuration);
                 conflictingEvents.remove(0);
+                event.removeAllAttendees();
             }
         }
 
