@@ -32,9 +32,9 @@ public class ModelCreator {
         ConferenceManager conferenceManager = new ConferenceManager();
 
 
-        conferenceManager.addConference("Saw Con", LocalDate.of(2020, 11, 28));
-        conferenceManager.addConference("Li  Con", LocalDate.of(2020, 11, 29));
-        conferenceManager.addConference("Cho Con", LocalDate.of(2020, 11, 30));
+        conferenceManager.addConference("Elias Con", LocalDate.of(2020, 11, 28));
+        conferenceManager.addConference("Dick's Sporting Goods Con", LocalDate.of(2020, 11, 29));
+        conferenceManager.addConference("Loli Con", LocalDate.of(2020, 11, 30));
 
         FileSerializer<UserManager> userManagerFileSerializer = new FileSerializer<>("phase2/database/UManager.ser");
         FileSerializer<MessageManager> messageManagerFileSerializer = new FileSerializer<>("phase2/database/MSManager.ser");

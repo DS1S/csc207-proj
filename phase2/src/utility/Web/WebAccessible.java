@@ -1,6 +1,8 @@
 package utility.Web;
 
-// TODO: add docstrings
+/**
+ * Serviceable for opening Web URIS
+ */
 public interface WebAccessible {
     boolean openWeb(String link);
 }

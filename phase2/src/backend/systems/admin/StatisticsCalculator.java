@@ -3,6 +3,7 @@ package backend.systems.admin;
 import backend.entities.users.Perms;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
+import utility.ParallelSorter;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -13,6 +14,7 @@ import java.util.*;
 class StatisticsCalculator{
     private final List<EventManager> eventManagers;
     private final UserManager userManager;
+    private final ParallelSorter parallelSorter;
 
     /**
      * Constructs a new instance of StatisticsCalculator given an eventManager and a userManager.
@@ -22,22 +24,9 @@ class StatisticsCalculator{
     public StatisticsCalculator (List<EventManager> eventManagers, UserManager userManager) {
         this.eventManagers = eventManagers;
         this.userManager = userManager;
+        this.parallelSorter = new ParallelSorter();
     }
 
-    private void parallelSortEvents(List<Integer> arr, List<Map<String, Object>> arr1) {
-        int n = arr.size();
-        for (int i = 0; i < n-1; i++)
-            for (int j = 0; j < n-i-1; j++)
-                if (arr.get(j) < arr.get(j+1))
-                {
-                    int temp = arr.get(j);
-                    arr.set(j,arr.get(j+1));
-                    arr.set(j+1,temp);
-                    Map<String, Object> temp1 = arr1.get(j);
-                    arr1.set(j,arr1.get(j+1));
-                    arr1.set(j+1,temp1);
-                }
-    }
 
     /**
      * Gets the average number of all attendees of all events in the eventManager.
@@ -73,7 +62,7 @@ class StatisticsCalculator{
             numberofAttendees.add((int)eventData.get("Registered"));
             topEvents.add(eventData);
         }
-        parallelSortEvents(numberofAttendees, topEvents);
+        parallelSorter.parallelSortListMap(numberofAttendees, topEvents);
         for (int i = 0; i < Math.min(topEvents.size(), 5); i++) {
             top5Events.add(topEvents.get(i));
         }
@@ -97,21 +86,6 @@ class StatisticsCalculator{
         return trafficCount;
     }
 
-    private void parallelSortSpeakers(List<Integer> arr, List<String> arr1) {
-        int n = arr.size();
-        for (int i = 0; i < n-1; i++)
-            for (int j = 0; j < n-i-1; j++)
-                if (arr.get(j) < arr.get(j+1))
-                {
-                    int temp = arr.get(j);
-                    arr.set(j,arr.get(j+1));
-                    arr.set(j+1,temp);
-                    String temp1 = arr1.get(j);
-                    arr1.set(j,arr1.get(j+1));
-                    arr1.set(j+1,temp1);
-                }
-    }
-
     /**
      * Gets the top five speakers ranked by the number of events spoken at.
      * @return a list of the names of the top five speakers based on the number of events they
@@ -133,7 +107,7 @@ class StatisticsCalculator{
                 speakersNumberOfEvents.add(numberOfEvents);
             }
         }
-        parallelSortSpeakers(speakersNumberOfEvents, speakers);
+        parallelSorter.parallelSortListString(speakersNumberOfEvents, speakers);
         for (int i = 0; i < Math.min(speakers.size(), 5); i++) {
             if (speakersNumberOfEvents.get(i) == 1) {
                 top5Speaker.add(speakers.get(i) + " : " + speakersNumberOfEvents.get(i) + " event");

@@ -43,7 +43,6 @@ public class AuthenticationSystem implements RunnableSystem {
             catch (InputMismatchException e) {
                 this.authUI.displayOptionError();
                 scanner.nextLine();
-
             }
         }
     }
