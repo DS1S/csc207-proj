@@ -3,8 +3,16 @@ package utility;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Utility Sorter for sorting two lists in parallel to one another.
+ */
 public class ParallelSorter {
 
+    /**
+     * Sorts arr and arr1 relative to each other, arr is in decreasing order.
+     * @param arr Integer list that is sorted
+     * @param arr1 List of Maps sorted in parallel to arr
+     */
     public void parallelSortListMap(List<Integer> arr, List<Map<String, Object>> arr1) {
         int n = arr.size();
         for (int i = 0; i < n-1; i++){
@@ -22,6 +30,11 @@ public class ParallelSorter {
         }
     }
 
+    /**
+     * Sorts arr and arr1 relative to each other, arr is in decreasing order.
+     * @param arr Integer list that is sorted
+     * @param arr1 List of Strings sorted in parallel to arr
+     */
     public void parallelSortListString(List<Integer> arr, List<String> arr1) {
         int n = arr.size();
         for (int i = 0; i < n-1; i++){
