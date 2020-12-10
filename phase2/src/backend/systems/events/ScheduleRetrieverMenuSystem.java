@@ -1,5 +1,6 @@
 package backend.systems.events;
 
+import backend.entities.users.Perms;
 import backend.systems.events.managers.EventManager;
 import backend.systems.usermangement.managers.UserManager;
 import frontend.EventUI;
@@ -29,6 +30,10 @@ class ScheduleRetrieverMenuSystem extends EventMenuSystem {
             eventUI.displaySpeakerPrompt();
             username = this.askForString("Speaker's Username");
             uuid = this.userManager.getUUIDWithUsername(username);
+            if (!userManager.hasPermission(uuid, Perms.CAN_SPEAK_AT_TALK)){
+                uuid = null;
+                eventUI.displayInvalidSpeaker();
+            }
         }while(uuid == null);
         return uuid;
     }
