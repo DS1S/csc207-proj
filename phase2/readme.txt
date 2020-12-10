@@ -164,7 +164,7 @@ Without further ado, these are the following steps required to run our program:
     3. Run ModelCreator (This class just rebuilds the ser files with default data) its not intended to be
             part of our actual "program" so please don't mark it as such. Its main is separated so we
             don't rebuild the data each time on run.
-    4. Next, head to the Main Package in src, and run the main method for TechConferenceMain
+    4. Next, head to the Backend/app Package in src, and run the main method for AppInitializer
     5. As seen in the ModelCreator Class there are three default users you can select to login in with.
             1. user1 pass1 - attendee
             2. user2 pass2 - speaker
