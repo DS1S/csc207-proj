@@ -24,18 +24,18 @@ class StatisticsCalculator{
         this.userManager = userManager;
     }
 
-    private void parallelSort(List<Integer> arr, List<Object> arr1) {
+    private void parallelSortEvents(List<Integer> arr, List<Map<String, Object>> arr1) {
         int n = arr.size();
         for (int i = 0; i < n-1; i++)
             for (int j = 0; j < n-i-1; j++)
-                if (arr.get(j) > arr.get(j+1))
+                if (arr.get(j) < arr.get(j+1))
                 {
                     int temp = arr.get(j);
-                    arr.add(j,arr.get(j+1));
-                    arr.add(j+1,temp);
-                    Object temp1 = arr1.get(j);
-                    arr1.add(j,arr1.get(j+1));
-                    arr1.add(j+1,temp1);
+                    arr.set(j,arr.get(j+1));
+                    arr.set(j+1,temp);
+                    Map<String, Object> temp1 = arr1.get(j);
+                    arr1.set(j,arr1.get(j+1));
+                    arr1.set(j+1,temp1);
                 }
     }
 
@@ -67,7 +67,7 @@ class StatisticsCalculator{
             numberofAttendees.add((int)eventData.get("Registered"));
             topEvents.add(eventData);
         }
-        parallelSort(numberofAttendees, Collections.singletonList(topEvents));
+        parallelSortEvents(numberofAttendees, topEvents);
         for (int i = 0; i < Math.min(topEvents.size(), 5); i++) {
             top5Events.add(topEvents.get(i));
         }
@@ -91,6 +91,21 @@ class StatisticsCalculator{
         return trafficCount;
     }
 
+    private void parallelSortSpeakers(List<Integer> arr, List<String> arr1) {
+        int n = arr.size();
+        for (int i = 0; i < n-1; i++)
+            for (int j = 0; j < n-i-1; j++)
+                if (arr.get(j) < arr.get(j+1))
+                {
+                    int temp = arr.get(j);
+                    arr.set(j,arr.get(j+1));
+                    arr.set(j+1,temp);
+                    String temp1 = arr1.get(j);
+                    arr1.set(j,arr1.get(j+1));
+                    arr1.set(j+1,temp1);
+                }
+    }
+
     /**
      * Gets the top five speakers ranked by the number of events spoken at.
      * @return a list of the names of the top five speakers based on the number of events they
@@ -109,7 +124,7 @@ class StatisticsCalculator{
                 speakersNumberOfEvents.add(numberOfEvents);
             }
         }
-        parallelSort(speakersNumberOfEvents, Collections.singletonList(speakers));
+        parallelSortSpeakers(speakersNumberOfEvents, speakers);
         for (int i = 0; i < Math.min(speakers.size(), 5); i++) {
             if (speakersNumberOfEvents.get(i) == 1) {
                 top5Speaker.add(speakers.get(i) + " : " + speakersNumberOfEvents.get(i) + " event");
