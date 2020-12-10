@@ -66,7 +66,7 @@ class MainSystem extends MenuSystem {
         List<EventManager> eventManagers = initializeConferenceSystem(userManager);
         initializeUserCreatorSystem(userManager);
         MessageManager messageManager = initializeMessageSystem(userManager, eventManagers);
-        initializeAdminSystem(userManager, eventManagers.get(0), messageManager);
+        initializeAdminSystem(userManager, eventManagers, messageManager);
         initializeShutDownHook();
 
         subSystemNames = convertSubSystemsToNames(subSystems);
@@ -132,7 +132,7 @@ class MainSystem extends MenuSystem {
         }
     }
 
-    private void initializeAdminSystem(UserManager userManager, EventManager eventManager,
+    private void initializeAdminSystem(UserManager userManager, List<EventManager> eventManager,
                                        MessageManager messageManager){
         if(userManager.loggedInHasPermission(Perms.CAN_BAN_USERS) || userManager.loggedInHasPermission(Perms.CAN_VIEW_STATS)){
             RunnableSystem adminSystem = new AdminSystem(userManager, messageManager, eventManager);

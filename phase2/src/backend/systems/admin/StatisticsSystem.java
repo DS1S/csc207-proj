@@ -6,6 +6,7 @@ import backend.systems.usermangement.managers.UserManager;
 import frontend.StatisticsUI;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * An extension of MenuSystem that displays an Admin options to view certain statistics and processes
@@ -17,13 +18,13 @@ class StatisticsSystem extends MenuSystem {
 
     /**
      * Constructs a new instance of StatisticsSystem given an eventManager and a userManager.
-     * @param eventManager the event manager used by the system
+     * @param eventManagers the event managers used by the system
      * @param userManager the user manager used by the system
      */
-    public StatisticsSystem(EventManager eventManager, UserManager userManager) {
+    public StatisticsSystem(List<EventManager> eventManagers, UserManager userManager) {
         super(4);
         this.statisticsUI = new StatisticsUI(userManager);
-        this.statisticsCalculator = new StatisticsCalculator(eventManager, userManager);
+        this.statisticsCalculator = new StatisticsCalculator(eventManagers, userManager);
     }
 
     /**

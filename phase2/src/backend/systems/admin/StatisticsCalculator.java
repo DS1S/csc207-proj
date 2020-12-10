@@ -11,16 +11,16 @@ import java.util.*;
  * The class responsible for generating useful statistics that can be viewed by Admins.
  */
 class StatisticsCalculator{
-    private final EventManager eventManager;
+    private final List<EventManager> eventManagers;
     private final UserManager userManager;
 
     /**
      * Constructs a new instance of StatisticsCalculator given an eventManager and a userManager.
-     * @param eventManager eventManager used by the StatisticsCalculator
+     * @param eventManagers eventManagers used by the StatisticsCalculator
      * @param userManager usermanager used by the StatisticsCalculator
      */
-    public StatisticsCalculator (EventManager eventManager, UserManager userManager) {
-        this.eventManager = eventManager;
+    public StatisticsCalculator (List<EventManager> eventManagers, UserManager userManager) {
+        this.eventManagers = eventManagers;
         this.userManager = userManager;
     }
 
@@ -45,7 +45,10 @@ class StatisticsCalculator{
      */
     public int getAverageNumberOfAttendees() {
         List<Integer> numberofAttendees = new ArrayList<>();
-        List<Map<String, Object>> eventsData = eventManager.retrieveAllEvents();
+        List<Map<String, Object>> eventsData = new ArrayList<>();
+        for (EventManager eventManager: eventManagers) {
+            eventsData.addAll(eventManager.retrieveAllEvents());
+        }
         for (Map<String, Object> eventData : eventsData) {
             numberofAttendees.add((int) eventData.get("Registered"));
         }
@@ -62,7 +65,10 @@ class StatisticsCalculator{
         List<Map<String, Object>> top5Events = new ArrayList<>();
         List<Map<String, Object>> topEvents = new ArrayList<>();
         List<Integer> numberofAttendees = new ArrayList<>();
-        List<Map<String, Object>> eventsData = eventManager.retrieveAllEvents();
+        List<Map<String, Object>> eventsData = new ArrayList<>();
+        for (EventManager eventManager: eventManagers) {
+            eventsData.addAll(eventManager.retrieveAllEvents());
+        }
         for (Map<String, Object> eventData : eventsData) {
             numberofAttendees.add((int)eventData.get("Registered"));
             topEvents.add(eventData);
@@ -118,7 +124,10 @@ class StatisticsCalculator{
         List<UUID> userList = userManager.getUUIDs();
         for (UUID UserID : userList) {
             if (userManager.hasPermission(UserID, Perms.CAN_SPEAK_AT_TALK)) {
-                int numberOfEvents = eventManager.retrieveEventsBySpeaker(UserID).size();
+                int numberOfEvents = 0;
+                for (EventManager eventManager: eventManagers) {
+                    numberOfEvents += eventManager.retrieveEventsBySpeaker(UserID).size();
+                }
                 String speakerName = userManager.getNameWithUUID(UserID);
                 speakers.add(speakerName);
                 speakersNumberOfEvents.add(numberOfEvents);

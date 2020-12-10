@@ -8,6 +8,7 @@ import backend.systems.usermangement.managers.UserManager;
 import frontend.AdminUI;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Map;
 public class AdminSystem extends MenuSystem {
     private UserManager um;
     private MessageManager messageManager;
-    private EventManager em;
+    private List<EventManager> em;
     private AdminUI adminUI;
     private boolean[] perms;
     private Map<Integer, Integer> optionToPerm;
@@ -28,15 +29,15 @@ public class AdminSystem extends MenuSystem {
 
     /**
      * Constructs a new AdminSystem with the given information.
-     * @param eventManager The EventManager that will be used by the AdminSystem
+     * @param eventManagers The EventManagers that will be used by the AdminSystem
      * @param um The UserManager that will be used by the AdminSystem
      * @param messageManager The MessageManager that will be used by the AdminSystem
      */
-    public AdminSystem(UserManager um, MessageManager messageManager, EventManager eventManager){
+    public AdminSystem(UserManager um, MessageManager messageManager, List<EventManager> eventManagers){
         super();
         this.um = um;
         this.messageManager = messageManager;
-        this.em = eventManager;
+        this.em = eventManagers;
         adminUI = new AdminUI();
         optionToPerm = new HashMap<>();
         changeNumOptions(readyPerms() + 1);

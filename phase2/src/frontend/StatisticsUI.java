@@ -52,7 +52,7 @@ public class StatisticsUI {
             sb.delete(sb.length() - 2, sb.length() - 1);
             sb.append("\n");
         }
-        sb.append(data.get("Registered") + "/" + data.get("Capacity") + " spots filled" + "\n");
+        sb.append(data.get("Registered") + "/" + data.get("Capacity") + " spots filled" + "\n\n");
     }
 
     /**
